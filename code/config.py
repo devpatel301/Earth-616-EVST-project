@@ -5,14 +5,14 @@ RAW_DIR = os.path.join(ROOT_DIR, "data", "raw")
 PROCESSED_DIR = os.path.join(ROOT_DIR, "data", "processed")
 WORK_DIR = os.path.join(ROOT_DIR, "data", "work")
 FIGURES_DIR = os.path.join(ROOT_DIR, "figures")
-LATEX_DIR = os.path.join(ROOT_DIR, "latex")
+DOCS_DIR = os.path.join(ROOT_DIR, "docs")
 
 PROC = PROCESSED_DIR
 WORK = WORK_DIR
 FIG = FIGURES_DIR
-TEX = LATEX_DIR
+TEX = DOCS_DIR
 
-for directory_path in (PROCESSED_DIR, WORK_DIR, FIGURES_DIR, LATEX_DIR):
+for directory_path in (PROCESSED_DIR, WORK_DIR, FIGURES_DIR, os.path.join(DOCS_DIR, "generated")):
     os.makedirs(directory_path, exist_ok=True)
 
 BASELINE_PERIOD = (1971, 2000)
