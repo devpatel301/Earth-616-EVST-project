@@ -1,0 +1,81 @@
+test,form,weighting,order,top,rank_rice,rank_wheat,rank_maize,rank_soybean
+"main (x/max, exposure = stress level, lit+emp S)",F1_multiplicative,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+"main (x/max, exposure = stress level, lit+emp S)",F1_multiplicative,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+"main (x/max, exposure = stress level, lit+emp S)",F2_geometric,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+"main (x/max, exposure = stress level, lit+emp S)",F2_geometric,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+"main (x/max, exposure = stress level, lit+emp S)",F3_additive,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+"main (x/max, exposure = stress level, lit+emp S)",F3_additive,pw,wheat > soybean > rice > maize,wheat,3,1,4,2
+"main (x/max, exposure = stress level, lit+emp S)",F4_hazard_paired,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+"main (x/max, exposure = stress level, lit+emp S)",F4_hazard_paired,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+min-max normalisation,F1_multiplicative,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+min-max normalisation,F1_multiplicative,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+min-max normalisation,F2_geometric,eq,wheat > soybean > maize > rice,wheat,4,1,3,2
+min-max normalisation,F2_geometric,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+min-max normalisation,F3_additive,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+min-max normalisation,F3_additive,pw,wheat > soybean > rice > maize,wheat,3,1,4,2
+min-max normalisation,F4_hazard_paired,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+min-max normalisation,F4_hazard_paired,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+exposure = level + change (average),F1_multiplicative,eq,wheat > maize > rice > soybean,wheat,3,1,2,4
+exposure = level + change (average),F1_multiplicative,pw,wheat > rice > soybean > maize,wheat,2,1,4,3
+exposure = level + change (average),F2_geometric,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+exposure = level + change (average),F2_geometric,pw,wheat > rice > soybean > maize,wheat,2,1,4,3
+exposure = level + change (average),F3_additive,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+exposure = level + change (average),F3_additive,pw,wheat > rice > soybean > maize,wheat,2,1,4,3
+exposure = level + change (average),F4_hazard_paired,eq,wheat > maize > rice > soybean,wheat,3,1,2,4
+exposure = level + change (average),F4_hazard_paired,pw,wheat > rice > soybean > maize,wheat,2,1,4,3
+exposure = change only,F1_multiplicative,eq,wheat > maize > rice > soybean,wheat,3,1,2,4
+exposure = change only,F1_multiplicative,pw,wheat > rice > soybean > maize,wheat,2,1,4,3
+exposure = change only,F2_geometric,eq,wheat > rice > maize > soybean,wheat,2,1,3,4
+exposure = change only,F2_geometric,pw,wheat > rice > soybean > maize,wheat,2,1,4,3
+exposure = change only,F3_additive,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+exposure = change only,F3_additive,pw,wheat > rice > soybean > maize,wheat,2,1,4,3
+exposure = change only,F4_hazard_paired,eq,wheat > maize > rice > soybean,wheat,3,1,2,4
+exposure = change only,F4_hazard_paired,pw,wheat > rice > soybean > maize,wheat,2,1,4,3
+sensitivity = literature only,F1_multiplicative,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+sensitivity = literature only,F1_multiplicative,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+sensitivity = literature only,F2_geometric,eq,wheat > soybean > maize > rice,wheat,4,1,3,2
+sensitivity = literature only,F2_geometric,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+sensitivity = literature only,F3_additive,eq,wheat > soybean > maize > rice,wheat,4,1,3,2
+sensitivity = literature only,F3_additive,pw,wheat > soybean > rice > maize,wheat,3,1,4,2
+sensitivity = literature only,F4_hazard_paired,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+sensitivity = literature only,F4_hazard_paired,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+sensitivity = empirical only,F1_multiplicative,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+sensitivity = empirical only,F1_multiplicative,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+sensitivity = empirical only,F2_geometric,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+sensitivity = empirical only,F2_geometric,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+sensitivity = empirical only,F3_additive,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+sensitivity = empirical only,F3_additive,pw,wheat > soybean > rice > maize,wheat,3,1,4,2
+sensitivity = empirical only,F4_hazard_paired,eq,wheat > soybean > maize > rice,wheat,4,1,3,2
+sensitivity = empirical only,F4_hazard_paired,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+rice Ky = 1.0,F1_multiplicative,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+rice Ky = 1.0,F1_multiplicative,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+rice Ky = 1.0,F2_geometric,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+rice Ky = 1.0,F2_geometric,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+rice Ky = 1.0,F3_additive,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+rice Ky = 1.0,F3_additive,pw,wheat > soybean > rice > maize,wheat,3,1,4,2
+rice Ky = 1.0,F4_hazard_paired,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+rice Ky = 1.0,F4_hazard_paired,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+rice Ky = 1.5,F1_multiplicative,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+rice Ky = 1.5,F1_multiplicative,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+rice Ky = 1.5,F2_geometric,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+rice Ky = 1.5,F2_geometric,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+rice Ky = 1.5,F3_additive,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+rice Ky = 1.5,F3_additive,pw,wheat > soybean > rice > maize,wheat,3,1,4,2
+rice Ky = 1.5,F4_hazard_paired,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+rice Ky = 1.5,F4_hazard_paired,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+importance = kcal share only,F1_multiplicative,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+importance = kcal share only,F1_multiplicative,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+importance = kcal share only,F2_geometric,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+importance = kcal share only,F2_geometric,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+importance = kcal share only,F3_additive,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+importance = kcal share only,F3_additive,pw,wheat > rice > soybean > maize,wheat,2,1,4,3
+importance = kcal share only,F4_hazard_paired,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+importance = kcal share only,F4_hazard_paired,pw,wheat > soybean > maize > rice,wheat,4,1,3,2
+importance = Zn+Fe+protein only,F1_multiplicative,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+importance = Zn+Fe+protein only,F1_multiplicative,pw,wheat > maize > rice > soybean,wheat,3,1,2,4
+importance = Zn+Fe+protein only,F2_geometric,eq,wheat > maize > rice > soybean,wheat,3,1,2,4
+importance = Zn+Fe+protein only,F2_geometric,pw,wheat > maize > rice > soybean,wheat,3,1,2,4
+importance = Zn+Fe+protein only,F3_additive,eq,wheat > maize > soybean > rice,wheat,4,1,2,3
+importance = Zn+Fe+protein only,F3_additive,pw,wheat > rice > maize > soybean,wheat,2,1,3,4
+importance = Zn+Fe+protein only,F4_hazard_paired,eq,wheat > maize > rice > soybean,wheat,3,1,2,4
+importance = Zn+Fe+protein only,F4_hazard_paired,pw,wheat > maize > rice > soybean,wheat,3,1,2,4

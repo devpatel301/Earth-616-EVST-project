@@ -1,0 +1,7 @@
+a,b,tau
+F1_multiplicative,F2_geometric,1.0
+F1_multiplicative,F3_additive,0.5815384615384616
+F1_multiplicative,F4_hazard_paired,0.9076923076923077
+F2_geometric,F3_additive,0.5815384615384616
+F2_geometric,F4_hazard_paired,0.9076923076923077
+F3_additive,F4_hazard_paired,0.5261538461538462

@@ -1,0 +1,17 @@
+form,crop,1,2,3,4
+F1_multiplicative,maize,0.01,0.8175,0.162,0.0105
+F1_multiplicative,rice,0.0,0.0505,0.573,0.3765
+F1_multiplicative,soybean,0.013,0.111,0.263,0.613
+F1_multiplicative,wheat,0.977,0.021,0.002,0.0
+F2_geometric,maize,0.0,0.4475,0.4165,0.136
+F2_geometric,rice,0.0,0.1755,0.372,0.4525
+F2_geometric,soybean,0.0105,0.3665,0.2115,0.4115
+F2_geometric,wheat,0.9895,0.0105,0.0,0.0
+F3_additive,maize,0.0165,0.7495,0.234,0.0
+F3_additive,rice,0.0,0.0,0.0995,0.9005
+F3_additive,soybean,0.0345,0.202,0.664,0.0995
+F3_additive,wheat,0.949,0.0485,0.0025,0.0
+F4_hazard_paired,maize,0.01,0.841,0.142,0.007
+F4_hazard_paired,rice,0.0,0.022,0.57,0.408
+F4_hazard_paired,soybean,0.0145,0.114,0.2865,0.585
+F4_hazard_paired,wheat,0.9755,0.023,0.0015,0.0

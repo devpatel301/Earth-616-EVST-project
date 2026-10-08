@@ -1,0 +1,224 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\makeatletter
+\def\input@path{{.}{docs/}{./docs/}{../docs/}}
+\makeatother
+\input{common.tex}
+
+\usepackage[round]{natbib}
+\usepackage{booktabs}
+\bibliographystyle{plainnat}
+\let\parencite\citep
+\let\textcite\citet
+\hypersetup{colorlinks=true,linkcolor=paddy,citecolor=paddy,urlcolor=paddy}
+\captionsetup{font=small,labelfont=bf}
+\setstretch{1.07}
+\setlength{\parskip}{0.45em}
+\setlength{\parindent}{0pt}
+\newcommand{\TT}{\mathrm{T}}   % temperature
+\newcommand{\PP}{\mathrm{P}}   % precipitation
+
+\title{\textbf{Appendix to the Climate--Nutrition Vulnerability Study}\\[0.3em]
+\large Detailed methodology, robustness tests, and supplementary tables for rice, wheat, maize and soybean}
+\author{Arpit Mahtele \and Dev Patel \and Navey Puri \and Shreyash Lohare}
+\date{Earth 616}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Calculation methodology}\label{sec:calc}
+\subsection{Where each ingredient comes from}
+This table summarizes the literature basis and methodological role of each analytical component. The individual ingredients are grounded in peer-reviewed and international agency sources (FAO, WHO, IPCC), while the hazard-paired combination (F4) is our specific index design.
+
+\begin{table}[H]\centering\footnotesize
+\begin{tabular}{p{4.2cm}p{5.6cm}p{4.6cm}}
+\toprule
+Ingredient & Literature backing & Status / Role in project\\
+\midrule
+Heat limit $T_{crit}$, $T_{lim}$ \& flowering window (45--70\% of season) & \textcite{deryng2014}; rice: \textcite{yoshida1981}, \textcite{jagadish2007} & Published values\\
+Water need $ET_c = K_c \times ET_0$; Hargreaves $ET_0$ & \textcite{fao56}, Eq.~52 & Published method\\
+Water factor $K_y$ & \textcite{fao66}, Table~1; \textcite{brouwer1986} & Published values\\
+Signal-to-noise shift & \textcite{hawkins2012} & Published idea (robustness check only)\\
+Observed yield regressions & \textcite{lobell2007}; \textcite{ray2015} & Out-of-sample data check / validation\\
+Literature sensitivity $S^{\TT}, S^{\PP}$ & \textcite{deryng2014}; \textcite{fao66} & Primary sensitivity scale\\
+Importance $I = \tfrac15\sum(\text{share of 5 nutrients})$ & FAO FBS and USDA FoodData Central & Core index ingredient\\
+Mean Adequacy Ratio (MAR) & \textcite{who2003}, \textcite{whofao2004} requirements; \textcite{torheim2004} & Published adequacy metric\\
+Multiplying E, S, I & IPCC risk framework adapted for nutrition & Methodological framing\\
+Hazard-pairing in F4 & --- & Our design (Section~\ref{sec:f4})\\
+\bottomrule
+\end{tabular}
+\caption{Methodological backing of ingredients.}\label{tab:ingredients}
+\end{table}
+
+\subsection{Country panels}
+Country panels were constructed following fixed rules: USA, Brazil, India, and China for all four crops; one European country (Russia, top-3 in Europe for all four crops); one African producer (Nigeria for rice, Egypt for wheat, South Africa for maize and soybean); and global top-3 producers (Bangladesh for rice, Argentina for soybean). Panels represent \panelShareRice\% (rice), \panelShareWheat\% (wheat), \panelShareMaize\% (maize), and \panelShareSoybean\% (soybean) of global output.
+
+\begin{table}[H]\centering\scriptsize
+\input{generated/tab_panels.tex}
+\caption{Panels. Rank: global production rank; Share: \% of world production; Class: primary K\"oppen group (+M for mountain elevation $\ge 1000$\,m).}
+\end{table}
+
+\subsection{Exposure}
+\paragraph{Temperature Exposure ($E^{\TT}$).} Heat stress is evaluated over 2001--2024 using effective temperature $T_{eff} = \tfrac12(T_{mean}+T_{max})$ within the flowering window (45--70\% of the season length; \citealt{deryng2014}):
+\begin{equation}
+E^{\TT} = \frac{L^{\TT}}{\max L^{\TT}},\qquad L^{\TT} = \operatorname*{mean}_{2001\text{--}24}\ \frac{\sum_m w_m \max(0,\; T_{eff,m} - T_{crit})}{\sum_m w_m}
+\end{equation}
+where $w_m$ is the fractional month inside the flowering period. Critical thresholds $T_{crit}$ are: wheat \SI{25}{\celsius}, maize \SI{32}{\celsius}, soybean \SI{35}{\celsius}, rice \SI{35}{\celsius}.
+
+\paragraph{Precipitation Exposure ($E^{\PP}$).} Water stress measures the unfulfilled crop water demand on rainfed land:
+\begin{equation}
+E^{\PP} = \frac{L^{\PP}}{\max L^{\PP}},\qquad L^{\PP} = \operatorname*{mean}_{2001\text{--}24}\ \frac{\sum_{cells} R\,\max(0,\; 1 - P/ET_c)}{\sum_{cells} A}
+\end{equation}
+where $P$ is growing-season precipitation, $ET_c = \bar{K}_c ET_0$, $R$ is rainfed area, and $A$ is total harvested area. Reference evapotranspiration $ET_0$ is calculated with the Hargreaves equation \parencite{fao56} driven by extraterrestrial radiation $R_a$.
+
+\subsection{Sensitivity}
+\paragraph{Temperature Sensitivity ($S^{\TT}$).} Based on the linear damage function of \textcite{deryng2014}, normalized by the maximum slope across crops:
+\begin{equation}
+S^{\TT} = \frac{s^{\TT}}{\max s^{\TT}},\qquad s^{\TT} = \frac{1}{T_{lim} - T_{crit}}
+\end{equation}
+For rice, $s^{\TT} = 0.07$ per \si{\celsius} above $T_{crit}=\SI{35}{\celsius}$ from \textcite{jagadish2007} and \textcite{yoshida1981}.
+
+\paragraph{Precipitation Sensitivity ($S^{\PP}$).} Based on FAO-66 seasonal yield response factor $K_y$:
+\begin{equation}
+S^{\PP} = \frac{K_y}{\max K_y}
+\end{equation}
+with $K_y$: maize 1.25, wheat 1.10, soybean 0.85, rice 1.25. Sensitivity parameters are invariant across countries for a given crop.
+
+\begin{table}[H]\centering\small
+\input{generated/tab_params.tex}
+\caption{Literature parameters used in Exposure and Sensitivity.}
+\end{table}
+
+\subsection{Importance and Nutrient Adequacy}
+Dietary Importance ($I$) is the unweighted average national supply share of five essential nutrients:
+\begin{equation}
+I_{kc} = \frac{1}{5}\sum_{n \in \{\mathrm{kcal,\,protein,\,fat,\,Zn,\,Fe}\}} \frac{\text{supply}_n\text{ from crop }k}{\text{total supply}_n},\qquad (\text{FBS 2021--23})
+\end{equation}
+Zinc and iron supply is derived by multiplying item-level food quantities by USDA FoodData Central composition values. Adequacy is calculated as $\mathrm{NAR}_n = \min(1, \text{supply}_n / \text{requirement}_n)$ and $\mathrm{MAR} = \tfrac15 \sum_n \mathrm{NAR}_n$.
+
+\subsection{Candidate Formulas and Choice of F4}\label{sec:f4}
+Four candidate aggregation forms were evaluated:
+\begin{align}
+\text{F1 Multiplicative:}&\quad V = E \cdot S \cdot I, & E &= \tfrac12(E^{\TT}+E^{\PP}),\quad S = \tfrac12(S^{\TT}+S^{\PP})\\
+\text{F2 Geometric:}&\quad V = (E \cdot S \cdot I)^{1/3}\\
+\text{F3 Additive:}&\quad V = (E + S + I)/3\\
+\textbf{F4 Hazard-Paired:}&\quad V = \tfrac12\big(E^{\TT}S^{\TT} + E^{\PP}S^{\PP}\big)\,I
+\end{align}
+
+Formula F4 is chosen because:
+\begin{itemize}
+\item It prevents cross-hazard mismatch (e.g. heat exposure multiplying water sensitivity).
+\item Crops with near-zero direct food use ($I \approx 0$) correctly receive near-zero nutritional vulnerability scores.
+\item Its climate component reflects the expected relative yield loss under observed hazards.
+\end{itemize}
+
+\begin{table}[H]\centering\small
+\input{generated/tab_crop_index.tex}
+\caption{Crop vulnerability index across formulas and weighting methods.}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{F08_index_forms.pdf}
+\caption{Crop vulnerability across candidate formulas relative to the maximum crop score.}
+\end{figure}
+
+% =====================================================================
+\section{Supplementary tables}
+\begin{table}[H]\centering\tiny
+\adjustbox{max width=\linewidth}{\input{generated/tab_components.tex}}
+\caption{Index components for each crop--country pair ($L$: level 2001--24; $\Delta$: shift in SDs; $E^{\TT}, E^{\PP}$ scaled 0--1; $S^{\TT}, S^{\PP}$ scaled 0--1; $I$: nutritional share; $V_{F4}$: vulnerability index).}
+\end{table}
+
+\begin{table}[H]\centering\tiny
+\adjustbox{max width=\linewidth}{\input{generated/tab_country_crop_index.tex}}
+\caption{Country-by-crop F4 vulnerability index values ($V_{F4}$).}
+\end{table}
+
+\begin{table}[H]\centering\tiny
+\adjustbox{max width=\linewidth}{\input{generated/tab_sensitivity.tex}}
+\caption{Out-of-sample empirical yield regressions over 1971--2000 (lin/quad/FD detrending; used: coefficient entering the data check; $R^2$ of linear model).}
+\end{table}
+
+\begin{table}[H]\centering\tiny
+\adjustbox{max width=\linewidth}{\input{generated/tab_passthrough.tex}}
+\caption{Yield pass-through to food supply and MAR (FBS 1961--2013 and 2010--2023).}
+\end{table}
+
+\begin{table}[H]\centering\tiny
+\adjustbox{max width=\linewidth}{\input{generated/tab_scenario.tex}}
+\caption{Nutritional impact under yield shock scenarios (S1 observed shift, S2 1-in-10 shock, S3 $-10$\% standard shock).}
+\end{table}
+
+% =====================================================================
+\section{Supplementary figures}
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{F02a_heat_shift_map.png}
+\caption{Warming of the flowering season (2001--2024 vs 1971--2000 baseline SDs).}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{F02b_water_shift_map.png}
+\caption{Drying of the rainfed growing season (shift in moisture ratio $P/ET_c$ in baseline SDs).}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{F05_sensitivity_coefficients.pdf}
+\caption{Observed yield sensitivity coefficients by crop and country.}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.7\linewidth]{F06_importance_heatmap.pdf}
+\caption{Nutritional supply share heatmap across all 5 nutrients by crop and country.}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.85\linewidth]{F13_yield_supply_passthrough.pdf}
+\caption{Yield-to-supply pass-through regression coefficients across countries.}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{F14_scenario_shock.pdf}
+\caption{Impact of a $-10$\% yield shock on calories and Mean Adequacy Ratio (MAR).}
+\end{figure}
+
+% =====================================================================
+\section{Robustness and validation}\label{sec:robust}
+\subsection{Robustness}
+A series of 10 one-at-a-time modifications was evaluated (min--max normalization, level vs shift exposure, literature vs empirical sensitivity modes, rice $K_y$ proxies, and calorie-only vs micronutrient-only importance). Across all \robN\ tests, \textbf{wheat is ranked \#1 in \robWheatTopAll\ cases}. Monte Carlo simulation (2,000 Dirichlet draws) places wheat first in \mcFourWheatFirst\% of iterations under F4.
+
+\begin{table}[H]\centering\scriptsize
+\adjustbox{max width=\linewidth}{\input{generated/tab_robust.tex}}
+\caption{Crop ranking under each one-at-a-time robustness test.}\label{tab:robust}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.85\linewidth]{F10_montecarlo_ranks.pdf}
+\caption{Rank distribution from 2,000 Monte Carlo draws of component sub-weights.}
+\end{figure}
+
+\subsection{Validation Benchmarks}
+\begin{itemize}
+\item \textbf{Zhao et al. (2017):} Comparison against published multi-model warming yield loss shows rank agreement $\rho=\rhoZhaoFour$.
+\item \textbf{Myers et al. (2014):} Elevated CO$_2$ declines in zinc, iron, and protein disproportionately impact wheat and rice, confirming their vulnerability in our nutritional weighting.
+\item \textbf{Ray et al. (2015):} Climate-explained yield variability checks confirm that rice exhibits the lowest climate variability share among the four crops.
+\end{itemize}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{F11_zhao_validation.pdf}
+\caption{Crop vulnerability index scores compared with Zhao et al. (2017) global yield loss per \si{\celsius}.}
+\end{figure}
+
+\bibliography{refs}
+
+\end{document}
+
+

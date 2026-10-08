@@ -1,0 +1,42 @@
+# LaTeX build artifacts and temporary files
+*.aux
+*.bbl
+*.blg
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.dvi
+*.ps
+
+# Python caches and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Intermediate download and scratch caches
+data/raw/
+data/work/
+*.part
+*.chunks/
+
