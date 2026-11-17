@@ -4,7 +4,11 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-from config import ALL_YEARS, ALPHA, CROPS, FIT, METHODS, PROC, WORK
+from config import ALL_YEARS, ALPHA, CROPS, FIT, METHODS, PROC, WORK, QCL_PKL
+
+# a fit needs at least this many years with yield and climate (new crops: some series start after 1971,
+# e.g. Ethiopia from 1993); with fewer, the empirical estimate is recorded as not available (NaN, n = years)
+MIN_FIT_YEARS = 15
 
 
 def detrend_series(input_series, year_array, detrend_method, is_yield=False):
@@ -31,7 +35,7 @@ def fit_ols_hc3(design_matrix, response_vector):
 
 
 def load_merged_yield_and_climate_data():
-    qcl_dataframe = pd.read_pickle(os.path.join(WORK, "qcl_4crops.pkl"))
+    qcl_dataframe = pd.read_pickle(QCL_PKL)
     yield_dataframe = qcl_dataframe[qcl_dataframe.Element == "Yield"][["crop", "m49", "Year", "Value"]].rename(
         columns={"Year": "year", "Value": "yield"}
     )
@@ -54,7 +58,15 @@ def prepare_regression_variables(country_crop_dataframe, start_year, end_year, d
     return detrended_yield, detrended_temperature, detrended_moisture
 
 
+def n_years(df, start_year, end_year):
+    d = df[(df.year >= start_year) & (df.year <= end_year)].dropna(subset=["yield", "teff_flow"])
+    return int((d["yield"] > 0).sum())
+
+
 def fit_single_country_model(country_crop_dataframe, start_year, end_year, detrend_method):
+    n = n_years(country_crop_dataframe, start_year, end_year)
+    if n < MIN_FIT_YEARS:
+        return {"b_T": np.nan, "se_T": np.nan, "p_T": np.nan, "b_W": np.nan, "p_W": np.nan, "r2": np.nan, "n": n}
     detrended_y, detrended_T, detrended_W = prepare_regression_variables(
         country_crop_dataframe, start_year, end_year, detrend_method
     )
@@ -75,6 +87,8 @@ def fit_single_country_model(country_crop_dataframe, start_year, end_year, detre
 def fit_pooled_panel_model(panel_dataframe, start_year, end_year, detrend_method):
     yield_list, temp_list, water_list = [], [], []
     for _, country_group in panel_dataframe.groupby("m49"):
+        if n_years(country_group, start_year, end_year) < MIN_FIT_YEARS:
+            continue
         y_country, T_country, W_country = prepare_regression_variables(
             country_group, start_year, end_year, detrend_method
         )
@@ -82,6 +96,8 @@ def fit_pooled_panel_model(panel_dataframe, start_year, end_year, detrend_method
         temp_list.append(T_country - T_country.mean())
         water_list.append(W_country - W_country.mean())
         
+    if not yield_list:
+        return {"b_T": np.nan, "p_T": np.nan, "b_W": np.nan, "p_W": np.nan, "r2": np.nan, "n": 0}
     stacked_y, stacked_T, stacked_W = map(np.concatenate, (yield_list, temp_list, water_list))
     beta_coeffs, standard_errs, p_vals, r_sq = fit_ols_hc3(np.column_stack([stacked_T, stacked_W]), stacked_y)
     return {
@@ -95,6 +111,8 @@ def fit_pooled_panel_model(panel_dataframe, start_year, end_year, detrend_method
 
 
 def check_estimate_robustness(fits_list, coeff_key, pvalue_key):
+    if any(not np.isfinite(f[coeff_key]) for f in fits_list):
+        return False
     coefficient_signs = [np.sign(fit_dict[coeff_key]) for fit_dict in fits_list]
     all_significant = all(fit_dict[pvalue_key] < ALPHA for fit_dict in fits_list)
     consistent_sign = len(set(coefficient_signs)) == 1

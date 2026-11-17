@@ -1,0 +1,7 @@
+run,weighting,order,order_original_four,wheat,maize,soybean,rice,bean,rapeseed,chickpea,lentil,groundnut
+mid-evaluation (blended S),eq,wheat > maize > soybean > rice,wheat > maize > soybean > rice,0.0652572629080261,0.0181155741779152,0.0075367900802955,0.0015839846970993,,,,,
+mid-evaluation (blended S),pw,wheat > soybean > maize > rice,wheat > soybean > maize > rice,0.0836339339307556,0.0053545865529084,0.0092440091414603,0.0011199588313006,,,,,
+"four-crop, literature-only S",eq,wheat > maize > soybean > rice,wheat > maize > soybean > rice,0.1093709740698652,0.0353942709468276,0.0113157726902905,0.0031584205687321,,,,,
+"four-crop, literature-only S",pw,wheat > soybean > maize > rice,wheat > soybean > maize > rice,0.1375613621528696,0.01015620039364,0.0144729956859973,0.002213116141024,,,,,
+"nine-crop, literature-only S",eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > lentil > groundnut,wheat > maize > soybean > rice,0.0563445915138496,0.0296673909743238,0.0078245008758954,0.002395697307668,0.0172034064601976,0.0077688170172224,0.0052640454592669,0.0020675667550081,0.0014976633960682
+"nine-crop, literature-only S",pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat > soybean > maize > rice,0.0696369408401633,0.0080054490412939,0.0100072913885676,0.0015280268476235,0.0232839881817472,0.0156723354457593,0.0228353424326476,0.0039531331019799,0.0018047311872031

@@ -1,0 +1,103 @@
+\documentclass[11pt,a4paper]{article}
+% Compiles with pdflatex (+ bibtex) and with Tectonic/XeLaTeX. Sources are ASCII-only.
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\fi
+\usepackage{lmodern}
+\usepackage[margin=2.2cm]{geometry}
+\input{endeval_common.tex}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\usepackage{float}
+\hypersetup{colorlinks=true,linkcolor=paddy,citecolor=paddy,urlcolor=paddy}
+\bibliographystyle{plainnat}
+\setlength{\parskip}{0.35em}
+
+\title{Climate Change and Nutritional Security:\\ Which Crops Are Most Vulnerable?\\[0.3em]\large End-evaluation report (Earth 616)}
+\author{Arpit Mahtele \and Dev Patel \and Navey Puri \and Shreyash Lohare}
+\date{November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent We built a Climate--Nutrition Vulnerability Index that multiplies how strongly a crop's growing area
+is exposed to heat and water stress, how much yield the crop loses per unit of that stress (from the
+literature), and how much of a country's energy, protein, fat, zinc and iron the crop supplies. Applied to
+nine crops (three cereals, three pulses, three oilseeds) in \nPairs\ crop--country pairs, the index ranks
+\topEq\ as the most vulnerable crop under both country weightings and in \robTopFfour\ of \robNFfour\
+robustness rankings: wheat is the crop whose climate stress most overlaps with its role in diets, because
+it is a leading source of protein, zinc and iron and is grown in hot or water-limited plains. Under one
+climate model (MRI-ESM2-0, SSP2-4.5, 2041--2060) the flowering-season effective temperature rises by
+\meanDTeff\,\si{\celsius}, vulnerability rises in \nPairsUp\ of \nPairs\ pairs and most for wheat and common
+bean, while the crop order stays largely the same. Iron is the nutrient closest to shortfall at national
+level, so climate losses in iron-supplying crops matter most. For India, wheat, chickpea and beans are the
+most vulnerable crops; for Hyderabad, whose staples come largely from other states, the risk travels
+through the national supply of wheat and pulses rather than local rice fields.
+\end{abstract}
+
+\section{Questions and contribution}
+The project asks two questions: (1) which crop is most vulnerable to observed and projected temperature and
+precipitation change, given its nutritional importance; and (2) if a crop's yield falls, what happens to a
+country's nutrient supply. Studies of climate and yield \citep{zhao2017,ray2015} and of CO$_2$ and nutrient
+content \citep{myers2014,smith2018} are usually separate and on different scales; we found no reviewed study
+that combines climatic exposure, crop sensitivity and nutritional importance in one index. Our contribution
+is that index, applied across crop groups and periods, with a transparent yield-to-diet accounting step.
+
+The mid-evaluation presented the method for four crops. This report completes the commitments made then:
+the presented (literature-only) method implemented everywhere, nine crops in three groups, present and
+future results with comparable processing, nutrition consequences, robustness and validation under the
+final configuration, and a comparison with published findings. A commitment-by-commitment record is in
+\texttt{docs/END\_EVAL\_RESULTS\_REGISTER.md}.
+
+\input{sections/methods.tex}
+
+\begin{table}[H]
+\centering\small
+\caption{Crop parameters (from \texttt{config.py}; sources in \texttt{docs/input\_register.csv}).}\label{tab:params}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_params9.tex}}
+\end{table}
+
+\begin{table}[H]
+\centering\small
+\caption{Country panels (FAOSTAT production 2020--24).}\label{tab:panels}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_panels9.tex}}
+\end{table}
+
+\input{sections/results.tex}
+
+\input{sections/india_hyderabad.tex}
+
+\input{sections/checks.tex}
+
+\input{sections/interpretation.tex}
+
+\bibliography{refs}
+
+\appendix
+\section{Tables and figures referred to in the text}
+\begin{table}[H]\centering\small\caption{Crop scores and components, 2001--2024.}\label{tab:cropindex}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_crop_index9.tex}}\end{table}
+\begin{table}[H]\centering\small\caption{Crop-group summaries.}\label{tab:groups}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_groups.tex}}\end{table}
+\begin{figure}[H]\centering\includegraphics[width=0.92\linewidth]{G02_country_crop_matrix.pdf}
+\caption{Country by crop scores, 2001--2024.}\label{fig:matrix}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{G03_components.pdf}
+\caption{Climate part, sensitivity and importance by crop.}\label{fig:components}\end{figure}
+\begin{table}[H]\centering\small\caption{Largest future increases by pair.}\label{tab:futurepairs}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_future_pairs.tex}}\end{table}
+\begin{figure}[H]\centering\includegraphics[width=0.8\linewidth]{G07_nutrient_profiles.pdf}
+\caption{Share of national supply from each crop (panel mean).}\label{fig:profiles}\end{figure}
+\begin{table}[H]\centering\small\caption{Nutrient adequacy ratios, 2021--23.}\label{tab:adequacy}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_adequacy9.tex}}\end{table}
+\begin{table}[H]\centering\small\caption{Standard $-10\%$ yield shock: largest MAR changes.}\label{tab:shock}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_shock9.tex}}\end{table}
+\begin{table}[H]\centering\small\caption{Conditional future yield change by crop.}\label{tab:futyield}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_future_yield.tex}}\end{table}
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{G10_robustness.pdf}
+\caption{Robustness: crop ranks under each test and Monte Carlo weights.}\label{fig:robust}\end{figure}
+\begin{table}[H]\centering\small\caption{Robustness tests (one at a time).}\label{tab:robust}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_robust9.tex}}\end{table}
+\end{document}

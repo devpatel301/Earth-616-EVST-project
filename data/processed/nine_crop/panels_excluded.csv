@@ -1,0 +1,4 @@
+crop,country,reason
+chickpea,Brazil,core country with no FAOSTAT production 2020-24 or no SPAM 2010 crop area
+lentil,Brazil,core country with no FAOSTAT production 2020-24 or no SPAM 2010 crop area
+groundnut,(any Europe country),no Europe production recorded in FAOSTAT 2020-24 with SPAM 2010 area; no Europe country for this crop

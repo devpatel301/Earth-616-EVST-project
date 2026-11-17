@@ -1,0 +1,56 @@
+path,folder,source,bytes,modified,sha256
+data/raw/cmip6/wc2.1_10m_prec_MRI-ESM2-0_ssp245_2041-2060.tif,cmip6,WorldClim 2.1 CMIP6 MRI-ESM2-0 SSP2-4.5 2041-2060,18462147,2026-11-17,6b6e2be388f0c3a9e9ec0135f92aa9b6b7988fad3c87cb0a295482052e1f3017
+data/raw/cmip6/wc2.1_10m_tmax_MRI-ESM2-0_ssp245_2041-2060.tif,cmip6,WorldClim 2.1 CMIP6 MRI-ESM2-0 SSP2-4.5 2041-2060,17877539,2026-11-17,27ce447413b7dbf369e31c781ab20df89035744e864f79f04236672aaf43ac99
+data/raw/cmip6/wc2.1_10m_tmin_MRI-ESM2-0_ssp245_2041-2060.tif,cmip6,WorldClim 2.1 CMIP6 MRI-ESM2-0 SSP2-4.5 2041-2060,17874197,2026-11-17,161b17901f56da678b151ffb91470b9a8fa7f26c8ce4bd375de7df4cd93ebbbd
+data/raw/faostat/FoodBalanceSheetsHistoric_E_All_Data_(Normalized).zip,faostat,"FAOSTAT bulk (QCL, FBS, FBS historic, food security)",72467143,2026-10-05,925bac969ea3904eca1a33f0b3d7ea4416bbac79d14db50b0db43cd2a77a3adb
+data/raw/faostat/FoodBalanceSheets_E_All_Data_(Normalized).zip,faostat,"FAOSTAT bulk (QCL, FBS, FBS historic, food security)",54840802,2026-10-05,26200855ed5da3d0805e34219124e241d0e0bc6959d0995ebc77a10dd84cbaf1
+data/raw/faostat/Food_Security_Data_E_All_Data_(Normalized).zip,faostat,"FAOSTAT bulk (QCL, FBS, FBS historic, food security)",2214673,2026-10-05,1ccced40d8e228693c6fcc5d172de9bcaa3a1c6a1581ebde345d71c1dfa9b692
+data/raw/faostat/Production_Crops_Livestock_E_All_Data_(Normalized).zip,faostat,"FAOSTAT bulk (QCL, FBS, FBS historic, food security)",33921825,2026-10-05,c5835418c18f9322e7decbd6800f93a216eaae3cdfa31acb08f0518c0c6d6853
+data/raw/faostat_sua/SUA_Crops_Livestock_E_All_Data_(Normalized).zip,faostat_sua,FAOSTAT SUA crops & livestock,89485519,2026-11-17,0f1cbec667da058495fff0b5d26237a379aabe4504855404c655199fe2436470
+data/raw/koppen/koppen_geiger_1991_2020_0p5.tif,koppen,Beck et al. 2023 Koppen-Geiger 0.5 deg (manual download),20931,2026-10-05,6b6c456d2e6eb9296fb134595915b54b597b218e4e06fe7dd8c070d73842c3e3
+data/raw/naturalearth/ne_50m_admin_0_countries.zip,naturalearth,Natural Earth 1:50m admin-0,799734,2026-10-05,5fed433373581fa648920435f937d95f2d3c0200e067409c6478dcdf1b853139
+data/raw/normals/wc2.1_10m_tmax.zip,normals,"WorldClim 2.1 1970-2000 monthly normals (tmax, tmin)",37446442,2026-11-17,599d56a7745a2cd0a50dbe77e15fcb19d06a2c57e5c6922a18155388a58f4f20
+data/raw/normals/wc2.1_10m_tmin.zip,normals,"WorldClim 2.1 1970-2000 monthly normals (tmax, tmin)",37605037,2026-11-17,918edb6cc60786ec3335c544237074fe2ce50c1d83f0fa7bfd47921b26f3df9b
+data/raw/sacks/Groundnuts.crop.calendar.fill.nc.gz,sacks,Sacks et al. 2010 crop calendars,1640491,2026-11-17,a92078437005f2a7527f0fdb762e26bf12cdaf9c44830b66329111df2c649ecb
+data/raw/sacks/Groundnuts.crop.calendar.nc.gz,sacks,Sacks et al. 2010 crop calendars,4984778,2026-11-17,30c3e58ed2e32fa0bd109117a2052f4047bff0f078eacb1cea8279da61b524bf
+data/raw/sacks/Maize.2.crop.calendar.fill.nc.gz,sacks,Sacks et al. 2010 crop calendars,517484,2026-10-05,3a33a9437da7f468f205e58bdd79a8bf57a51c8a38b1bb791c8a51422887e07c
+data/raw/sacks/Maize.crop.calendar.fill.nc.gz,sacks,Sacks et al. 2010 crop calendars,1842234,2026-10-05,a6ce87f202f30553ef5dea6647c4ffdb72840116b40dce1a090513079ee2ccad
+data/raw/sacks/Maize.crop.calendar.nc.gz,sacks,Sacks et al. 2010 crop calendars,8018907,2026-10-05,3116ac4ed050f05f88b09cc31212f508e0b335813dbd041beb38cce52efe5a50
+data/raw/sacks/Pulses.crop.calendar.fill.nc.gz,sacks,Sacks et al. 2010 crop calendars,1592908,2026-11-17,8c229bd0f2c366b50bfd3c85a949e2fd85769cb263240cc7db9fa28688310ce7
+data/raw/sacks/Pulses.crop.calendar.nc.gz,sacks,Sacks et al. 2010 crop calendars,7633635,2026-11-17,d9c7d1e315bbe331bd6a40a8e206e605f979c8cb74e11933208fb599dab1a35e
+data/raw/sacks/Rapeseed.Winter.crop.calendar.fill.nc.gz,sacks,Sacks et al. 2010 crop calendars,1523473,2026-11-17,f511b295648592651f03fe2145731874dad7bea551bbd7baa16f71f13426f23d
+data/raw/sacks/Rapeseed.Winter.crop.calendar.nc.gz,sacks,Sacks et al. 2010 crop calendars,4710848,2026-11-17,d6a0ca980e720a109a5e8448ce540d11de41de4dabe3553880ba465c67713fe9
+data/raw/sacks/Rice.2.crop.calendar.fill.nc.gz,sacks,Sacks et al. 2010 crop calendars,531784,2026-10-05,139cd42e032e139b3bfe278bfac1e19691c0f1eb7f9b10576f843def89180dce
+data/raw/sacks/Rice.2.crop.calendar.nc.gz,sacks,Sacks et al. 2010 crop calendars,5058539,2026-10-05,0d8cc922a10e502dbfacd381775319503ffee05eca47adb83bcc5b7497d2f73b
+data/raw/sacks/Rice.crop.calendar.fill.nc.gz,sacks,Sacks et al. 2010 crop calendars,1778894,2026-10-05,cb5bb88b82488eb7c4a3b55c9534e47c53eab1a7682cf6893c9840e2b1882e2b
+data/raw/sacks/Rice.crop.calendar.nc.gz,sacks,Sacks et al. 2010 crop calendars,5659386,2026-10-05,449de15d8b6be496c72db29731997d0456efc3765d6f5519231d9ede7eb3e314
+data/raw/sacks/Soybeans.crop.calendar.fill.nc.gz,sacks,Sacks et al. 2010 crop calendars,1618377,2026-10-05,58036f547e1e04a5e4afb263d3283a08a9e4366cbcf24de250d1414729a88d9b
+data/raw/sacks/Soybeans.crop.calendar.nc.gz,sacks,Sacks et al. 2010 crop calendars,5764718,2026-10-05,8e0cfcc20361e1d1826105ae81d6f77ba3aa9cac7204f0289012aada5afb5249
+data/raw/sacks/Wheat.Winter.crop.calendar.fill.nc.gz,sacks,Sacks et al. 2010 crop calendars,1749645,2026-10-05,fbd5762d3841172cb40c22134c9cb78464a6a8e75405aed1a1eda6ac66b3056f
+data/raw/sacks/Wheat.Winter.crop.calendar.nc.gz,sacks,Sacks et al. 2010 crop calendars,6952844,2026-10-05,b969eeac52c6b1f0f78e59280bdc5e82ee14412bc1ff80fa6e836c889742eec5
+data/raw/sacks/Wheat.crop.calendar.fill.nc.gz,sacks,Sacks et al. 2010 crop calendars,1638501,2026-10-05,7930356f86b9c285554d7a8e6ce681355e72d633dddaa4d6c7312c1e4feccdf6
+data/raw/sacks/Wheat.crop.calendar.nc.gz,sacks,Sacks et al. 2010 crop calendars,6603337,2026-10-05,94551683cd026f6e183afbb13341cffcdcc6c021fe720fba8b66fdee6b49d8b1
+data/raw/sacks/crop-readme.txt,sacks,Sacks et al. 2010 crop calendars,30307,2026-10-05,0c322ef6e8946800a98af7018735dcb3131afbed3dc7edc8e3e3b8461e309118
+data/raw/spam/ReadMe_v2r0_Global.txt,spam,SPAM 2010 v2.0 (IFPRI),6639,2026-10-05,9d75acf6acbdd90c4a50cbac05a2ea6a7159496e04a236738c5370843ea9770b
+data/raw/spam/spam2010v2r0_global_harv_area.geotiff.zip,spam,SPAM 2010 v2.0 (IFPRI),143651190,2026-10-05,3fc0d52e075cad00dfc857ca033d54e44326fd4c57ae8da7bc14f9f0ba3f3dc6
+data/raw/tmax/wc2.1_cruts4.09_10m_tmax_1970-1979.zip,tmax,WorldClim 2.1 CRU-TS 4.09 monthly tmax,135906179,2026-10-05,e7b0675542c545ebdfa6eff4f98a5cd87f64fcee1cd7ef1556f807d5dfbe3626
+data/raw/tmax/wc2.1_cruts4.09_10m_tmax_1980-1989.zip,tmax,WorldClim 2.1 CRU-TS 4.09 monthly tmax,135963725,2026-10-05,4a460f4da64b8736b86704908f79b34c34302429b5b741a80d35d14625aa20ac
+data/raw/tmax/wc2.1_cruts4.09_10m_tmax_1990-1999.zip,tmax,WorldClim 2.1 CRU-TS 4.09 monthly tmax,135631534,2026-10-05,746a9793c9cadac600f53b6dcb867e350495c9f6e90aeb93c3b632bce51e73c7
+data/raw/tmax/wc2.1_cruts4.09_10m_tmax_2000-2009.zip,tmax,WorldClim 2.1 CRU-TS 4.09 monthly tmax,135894385,2026-10-05,e4a54c6f6dc21cc521034d7e63cc88fb9cc92eeef5b37d1b19cd6c8ef00f8b0d
+data/raw/tmax/wc2.1_cruts4.09_10m_tmax_2010-2019.zip,tmax,WorldClim 2.1 CRU-TS 4.09 monthly tmax,136358415,2026-10-05,6a4e1b9d749f3c692e3933f830179d3f78c93ecfeeed58f79b8752f7bf57c4b4
+data/raw/tmax/wc2.1_cruts4.09_10m_tmax_2020-2024.zip,tmax,WorldClim 2.1 CRU-TS 4.09 monthly tmax,68173011,2026-10-05,fac24f1ea75602606300a624b1d8227447aed1bd46abbfbebade875f2b79277b
+data/raw/tmin/wc2.1_cruts4.09_10m_tmin_1970-1979.zip,tmin,WorldClim 2.1 CRU-TS 4.09 monthly tmin,131866675,2026-10-05,5c37a5d768af64ba277370cdfe7f4c072c31645c06b007502093b920602f70a4
+data/raw/tmin/wc2.1_cruts4.09_10m_tmin_1980-1989.zip,tmin,WorldClim 2.1 CRU-TS 4.09 monthly tmin,131800065,2026-10-05,024bb876d5662a7784e6829bede746024e19703cf6ae0f5187a5f47d513075b6
+data/raw/tmin/wc2.1_cruts4.09_10m_tmin_1990-1999.zip,tmin,WorldClim 2.1 CRU-TS 4.09 monthly tmin,131668525,2026-10-05,a4018eda6f6ca20e567aa5bc1c2a507ecc78bcade7d9f302943993280d3f7e4c
+data/raw/tmin/wc2.1_cruts4.09_10m_tmin_2000-2009.zip,tmin,WorldClim 2.1 CRU-TS 4.09 monthly tmin,131787753,2026-10-05,8688bf528a3b99ff878da3c3b0b3312d44f40b3fc935ad3adb828cc59a78cbef
+data/raw/tmin/wc2.1_cruts4.09_10m_tmin_2010-2019.zip,tmin,WorldClim 2.1 CRU-TS 4.09 monthly tmin,132207122,2026-10-05,1ad3fe9955ee5ed9b2bb6fa6811080ea52f4deda3fa01b5489ef34e0eed5fb3a
+data/raw/tmin/wc2.1_cruts4.09_10m_tmin_2020-2024.zip,tmin,WorldClim 2.1 CRU-TS 4.09 monthly tmin,66123889,2026-10-05,f0294dda73292ae5582bda1628e6e39dacd82d86d5a5b347b0a67da26370c0b1
+data/raw/usda/FoodData_Central_sr_legacy_food_csv_2018-04.zip,usda,USDA FoodData Central SR Legacy 2018-04,6074592,2026-10-05,b80817294b8850530aaedf2e515c02593b1824f763a0ff356e5c2081643e6fd0
+data/raw/worldclim/wc2.1_10m_elev.zip,worldclim,WorldClim 2.1 (CRU-TS 4.09 monthly prec; 1970-2000 prec normals; elevation),1332437,2026-10-05,6a9f4e9a37f289d594ed1567b63be344a4dacf247f0b69756e81df031087e3bd
+data/raw/worldclim/wc2.1_10m_prec.zip,worldclim,WorldClim 2.1 (CRU-TS 4.09 monthly prec; 1970-2000 prec normals; elevation),7258539,2026-10-05,1090f578f6402672a2b6438e252156f6cf867a25002a8ad6ffcbfa19e516ddc6
+data/raw/worldclim/wc2.1_cruts4.09_10m_prec_1970-1979.zip,worldclim,WorldClim 2.1 (CRU-TS 4.09 monthly prec; 1970-2000 prec normals; elevation),218450879,2026-10-05,9b0b947034ab69213d1dd9d851a1103797b50403ae210b03d1c36becd4ca336f
+data/raw/worldclim/wc2.1_cruts4.09_10m_prec_1980-1989.zip,worldclim,WorldClim 2.1 (CRU-TS 4.09 monthly prec; 1970-2000 prec normals; elevation),218352145,2026-10-05,dd7ecaee065d2b020193c387799f31f74f5ae0d0f71f226cf28291bdae9ea002
+data/raw/worldclim/wc2.1_cruts4.09_10m_prec_1990-1999.zip,worldclim,WorldClim 2.1 (CRU-TS 4.09 monthly prec; 1970-2000 prec normals; elevation),218310833,2026-10-05,823f52181dcc26bcce7171ba6fa10adf6f235dc969d4a5fbf94b45e366ff22e8
+data/raw/worldclim/wc2.1_cruts4.09_10m_prec_2000-2009.zip,worldclim,WorldClim 2.1 (CRU-TS 4.09 monthly prec; 1970-2000 prec normals; elevation),217986040,2026-10-05,1eed691178b72b354818415b17bacd460cb1e8538c5f9efba3a00115191ff6cf
+data/raw/worldclim/wc2.1_cruts4.09_10m_prec_2010-2019.zip,worldclim,WorldClim 2.1 (CRU-TS 4.09 monthly prec; 1970-2000 prec normals; elevation),218030570,2026-10-05,a3ee5571a8f08ff8db4bdd6748e96586bc2f21127e5f368334351773af3429a6
+data/raw/worldclim/wc2.1_cruts4.09_10m_prec_2020-2024.zip,worldclim,WorldClim 2.1 (CRU-TS 4.09 monthly prec; 1970-2000 prec normals; elevation),108904511,2026-10-05,062c36b16f90154be23140f0ba64b3eeb0c7660d2b628caba2d9a51ced51f786

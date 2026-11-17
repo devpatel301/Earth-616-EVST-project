@@ -1,0 +1,110 @@
+# FAO Food Balance Sheet item -> USDA FoodData Central SR Legacy (2018) food used for zinc and iron content (mg/100 g).
+# Rule: the RAW, unprocessed form closest to the FBS primary-commodity equivalent. FBS quantities are in primary equivalent
+# (cereals = grain, meat = carcass weight, fish = live weight, sugar = raw equivalent), so applying raw edible-portion
+# composition OVERSTATES Zn/Fe for meat and fish (bones, offcuts) and for cereals eaten refined (bran removed).
+# fdc_id 0 = no reasonable USDA analogue AND negligible food supply -> zinc = iron = 0 (listed in the report).
+fbs_item,fdc_id,note
+Wheat and products,168890,Wheat hard red winter grain (whole grain; refined flour has less Zn/Fe -> upper bound)
+Rice and products,169756,"Rice white long-grain raw unenriched (FBS rice is milled equivalent)"
+Maize and products,170288,Corn grain yellow
+Soyabeans,174270,Soybeans mature seeds raw
+Soyabean Oil,171411,Oil soybean salad or cooking
+Barley and products,170283,Barley hulled
+Millet and products,169702,Millet raw
+Sorghum and products,169716,Sorghum grain
+Oats,169705,Oats
+Rye and products,168884,Rye grain
+"Cereals, other",170286,Buckwheat (representative minor cereal)
+Cassava and products,169985,Cassava raw
+Potatoes and products,170026,Potatoes flesh and skin raw
+Sweet potatoes,168482,Sweet potato raw
+Yams,170071,Yam raw
+"Roots, Other",169308,Taro raw
+Beans,175193,Beans kidney mature seeds raw
+Peas,172428,Peas green split mature seeds raw
+"Pulses, Other and products",172420,Lentils raw
+Groundnuts,172430,Peanuts all types raw
+Sunflower seed,170562,Sunflower seed kernels dried
+Sesame seed,170150,Sesame seeds whole dried
+Rape and Mustardseed,170929,Mustard seed ground
+Cottonseed,170596,Cottonseed kernels roasted (glandless)
+"Coconuts - Incl Copra",170169,Coconut meat raw
+Palm kernels,0,no USDA analogue; food use negligible
+"Olives (including preserved)",169094,Olives ripe canned
+"Oilcrops, Other",169414,Flaxseed (representative minor oilseed)
+Groundnut Oil,171410,Oil peanut
+Sunflowerseed Oil,171017,Oil sunflower
+Rape and Mustard Oil,172336,Oil canola
+Cottonseed Oil,171024,Oil cottonseed
+Palm Oil,171015,Oil palm
+Palmkernel Oil,171412,Oil coconut (palm-kernel oil not in SR Legacy; both lauric oils with ~0 Zn/Fe)
+Coconut Oil,171412,Oil coconut
+Sesameseed Oil,171016,Oil sesame
+Olive Oil,171413,Oil olive
+Maize Germ Oil,171029,Oil corn
+Ricebran Oil,171013,Oil rice bran
+"Oilcrops Oil, Other",172337,Oil mustard
+"Sugar (Raw Equivalent)",170674,Sugar turbinado (raw)
+Sugar non-centrifugal,168833,Sugars brown
+"Sweeteners, Other",169659,Syrups corn high-fructose
+Honey,169640,Honey
+Sugar cane,0,no USDA analogue; food use negligible
+Sugar beet,169145,Beets raw
+Tomatoes and products,170457,Tomatoes red ripe raw
+Onions,170000,Onions raw
+"Vegetables, other",170471,Vegetables mixed frozen unprepared
+"Oranges, Mandarines",169097,Oranges raw all commercial varieties
+"Lemons, Limes and products",167746,Lemons raw without peel
+Grapefruit and products,173033,Grapefruit raw
+"Citrus, Other",169097,Oranges raw (representative)
+Bananas,173944,Bananas raw
+Plantains,168215,Plantains green raw
+Apples and products,171688,Apples raw with skin
+Pineapples and products,169124,Pineapple raw all varieties
+Dates,171726,Dates deglet noor
+Grapes and products (excl wine),174683,Grapes red or green raw
+"Fruits, other",174667,Fruit cocktail water pack (representative mixed fruit)
+Coffee and products,171890,Coffee brewed
+Cocoa Beans and products,169593,Cocoa dry powder unsweetened
+Tea (including mate),173227,Tea black brewed
+Pepper,170931,Pepper black
+Pimento,170932,Pepper red or cayenne
+Cloves,171321,Cloves ground
+"Spices, Other",170924,Curry powder
+Wine,173185,Wine table all
+Beer,168746,Beer regular all
+"Beverages, Fermented",168746,Beer regular (representative)
+"Beverages, Alcoholic",171919,Distilled spirits 86 proof
+Bovine Meat,169430,Beef carcass separable lean and fat raw
+Mutton & Goat Meat,175303,Goat raw
+Pigmeat,168219,Pork fresh carcass separable lean and fat raw
+Poultry Meat,171447,Chicken broilers meat and skin raw
+"Meat, Other",172521,Rabbit domesticated raw
+"Offals, Edible",169451,Beef liver raw
+"Fats, Animals, Raw",171401,Lard
+"Butter, Ghee",173410,Butter salted
+Cream,170859,Cream fluid heavy whipping
+Milk - Excluding Butter,172217,Milk whole 3.25% fat
+Eggs,171287,Egg whole raw fresh
+Freshwater Fish,171952,Carp raw
+Demersal Fish,171955,Cod Atlantic raw
+Pelagic Fish,175119,Mackerel Atlantic raw
+"Marine Fish, Other",175156,Tuna skipjack raw
+Crustaceans,174210,Shrimp mixed species raw
+Cephalopods,174223,Squid mixed species raw
+"Molluscs, Other",174216,Mussel blue raw
+"Aquatic Animals, Others",174204,Crab blue raw (representative)
+Aquatic Plants,168457,Seaweed kelp raw
+"Fish, Body Oil",172341,Fish oil menhaden
+"Fish, Liver Oil",173577,Fish oil cod liver
+"Nuts and products",170187,Walnuts english (representative tree nut)
+Infant food,170964,Babyfood cereal mixed dry fortified
+Miscellaneous,0,unspecified; no composition
+Rice (Milled Equivalent),169756,old-FBS (1961-2013) name of Rice and products
+Groundnuts (Shelled Eq),172430,old-FBS name of Groundnuts
+"Cereals, Other",170286,old-FBS spelling of Cereals other
+"Meat, Aquatic Mammals",0,no USDA analogue; negligible supply
+"Alcohol, Non-Food",0,non-food alcohol (no nutrient)
+# End evaluation: FAOSTAT SUA items (not FBS items) used for chickpea and lentil, whose food supply FBS hides inside "Pulses, Other and products"
+"Chick peas, dry",173756,"Chickpeas (garbanzo beans, bengal gram) mature seeds raw (SUA item; dry seed = SUA primary equivalent)"
+"Lentils, dry",172420,"Lentils raw (SUA item)"

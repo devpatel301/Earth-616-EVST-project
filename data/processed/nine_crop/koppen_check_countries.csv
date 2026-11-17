@@ -1,0 +1,60 @@
+crop,country,ours,beck
+rice,"China, mainland",C,C
+rice,India,A,C
+rice,Bangladesh,A,C
+rice,Brazil,A,A
+rice,United States of America,C,C
+rice,Nigeria,A,A
+rice,Italy,C,C
+wheat,"China, mainland",C,C
+wheat,India,C,C
+wheat,Russian Federation,D,D
+wheat,United States of America,D,D
+wheat,Egypt,B,B
+wheat,Brazil,C,C
+maize,United States of America,D,D
+maize,"China, mainland",D,D
+maize,Brazil,A,A
+maize,India,A,A
+maize,Ukraine,D,D
+maize,South Africa,B,C
+soybean,Brazil,A,A
+soybean,United States of America,D,D
+soybean,Argentina,C,C
+soybean,"China, mainland",D,D
+soybean,India,A,A
+soybean,Russian Federation,D,D
+soybean,South Africa,C,C
+chickpea,India,A,B
+chickpea,Australia,B,B
+chickpea,TÃ¼rkiye,C,C
+chickpea,Ethiopia,A,C
+chickpea,Russian Federation,D,D
+chickpea,United States of America,D,B
+chickpea,"China, mainland",C,C
+lentil,Canada,D,D
+lentil,India,C,C
+lentil,Australia,B,B
+lentil,United States of America,B,B
+lentil,Russian Federation,D,D
+lentil,"China, mainland",C,C
+lentil,Ethiopia,C,C
+bean,India,B,B
+bean,Brazil,A,A
+bean,Myanmar,A,A
+bean,United Republic of Tanzania,A,A
+bean,"China, mainland",C,C
+bean,United States of America,D,D
+bean,Belarus,D,D
+groundnut,"China, mainland",C,C
+groundnut,India,B,B
+groundnut,Nigeria,A,A
+groundnut,United States of America,C,C
+groundnut,Brazil,A,A
+rapeseed,Canada,D,D
+rapeseed,"China, mainland",C,C
+rapeseed,India,B,B
+rapeseed,France,C,C
+rapeseed,United States of America,D,D
+rapeseed,South Africa,B,B
+rapeseed,Brazil,A,A

@@ -6,7 +6,7 @@ import geopandas as gpd
 import numpy as np
 import pandas as pd
 
-from config import CORE, CROPS, FAO_YEARS, MIN_SHARE_PCT, MOUNTAIN_M, PROC, RAW, TOP_N, WORK
+from config import CORE, CROPS, FAO_YEARS, MIN_SHARE_PCT, MOUNTAIN_M, PROC, RAW, TOP_N, WORK, QCL_PKL
 
 QCL_ZIP_PATH = os.path.join(RAW, "faostat", "Production_Crops_Livestock_E_All_Data_(Normalized).zip")
 TARGET_CONTINENTS = ("Africa", "Europe")
@@ -35,7 +35,7 @@ def load_continent_mapping():
 
 def main():
     qcl_df = load_qcl_dataframe()
-    qcl_df.to_pickle(os.path.join(WORK, "qcl_4crops.pkl"))
+    qcl_df.to_pickle(QCL_PKL)
     latest_year = int(qcl_df.Year.max())
     analysis_years = list(range(latest_year - FAO_YEARS + 1, latest_year + 1))
     
@@ -74,12 +74,21 @@ def main():
     assert len(core_m49_dict) == len(CORE), core_m49_dict
 
     panel_rows = []
+    excluded_rows = []
     for crop_name in CROPS:
         crop_group = window_df[window_df.crop == crop_name]
         selected_countries = {}
         
+        crop_area_grid = np.load(os.path.join(WORK, f"grids_{crop_name}.npz"))["area_A"]
+        has_spam_area = lambda m49: bool(((country_grid == m49) & (crop_area_grid > 0)).any())
         for core_country_name in CORE:
-            selected_countries[core_m49_dict[core_country_name]] = "core (USA, Brazil, India, China)"
+            core_m49 = core_m49_dict[core_country_name]
+            # end evaluation: a core country is included only if it produces the crop (FAOSTAT 2020-24) AND
+            # SPAM 2010 maps crop area there (e.g. Brazil has no lentil or chickpea production)
+            if (crop_group.m49 == core_m49).any() and has_spam_area(core_m49):
+                selected_countries[core_m49] = "core (USA, Brazil, India, China)"
+            else:
+                excluded_rows.append({"crop": crop_name, "country": core_country_name, "reason": "core country with no FAOSTAT production 2020-24 or no SPAM 2010 crop area"})
             
         for continent_name in TARGET_CONTINENTS:
             if shared_continent_countries[continent_name] is not None:
@@ -88,16 +97,22 @@ def main():
                     f"{continent_name}: top-{TOP_N} in {continent_name} for every crop"
                 )
             else:
-                top_continent_producer = crop_group[crop_group.continent == continent_name].sort_values("Production", ascending=False).iloc[0]
-                selected_countries.setdefault(
-                    int(top_continent_producer.m49),
-                    f"{continent_name}: largest {continent_name} producer of this crop"
-                )
+                for _, top_continent_producer in crop_group[crop_group.continent == continent_name].sort_values("Production", ascending=False).iterrows():
+                    if has_spam_area(int(top_continent_producer.m49)):
+                        selected_countries.setdefault(
+                            int(top_continent_producer.m49),
+                            f"{continent_name}: largest {continent_name} producer of this crop"
+                        )
+                        break
+                    excluded_rows.append({"crop": crop_name, "country": top_continent_producer.Area, "reason": f"largest {continent_name} producer but no SPAM 2010 crop area; next producer used"})
+                else:
+                    excluded_rows.append({"crop": crop_name, "country": f"(any {continent_name} country)", "reason": f"no {continent_name} production recorded in FAOSTAT 2020-24 with SPAM 2010 area; no {continent_name} country for this crop"})
                 
         for _, top_row in crop_group.sort_values("Production", ascending=False).head(TOP_N).iterrows():
-            selected_countries.setdefault(int(top_row.m49), f"world top-{TOP_N} producer")
-            
-        crop_area_grid = np.load(os.path.join(WORK, f"grids_{crop_name}.npz"))["area_A"]
+            if has_spam_area(int(top_row.m49)):
+                selected_countries.setdefault(int(top_row.m49), f"world top-{TOP_N} producer")
+            else:
+                excluded_rows.append({"crop": crop_name, "country": top_row.Area, "reason": "world top-3 producer but no SPAM 2010 crop area"})
         
         for country_m49, selection_reason in selected_countries.items():
             country_record = crop_group[crop_group.m49 == country_m49].iloc[0]
@@ -145,6 +160,8 @@ def main():
     ).reset_index(drop=True)
     
     panels_dataframe.to_csv(os.path.join(PROC, "panels.csv"), index=False)
+    pd.DataFrame(excluded_rows, columns=["crop", "country", "reason"]).to_csv(os.path.join(PROC, "panels_excluded.csv"), index=False)
+    print("excluded:", excluded_rows)
     
     crops_per_country = panels_dataframe.groupby("country").crop.nunique()
     shared_countries = sorted(crops_per_country[crops_per_country == len(CROPS)].index)
@@ -153,7 +170,7 @@ def main():
     pd.set_option("display.width", 220)
     print(panels_dataframe[["crop", "country", "continent", "rank", "share_pct", "classes", "elev_m", "small_producer", "reason"]].round(2).to_string(index=False))
     print("panel share of world production (%):", panels_dataframe.groupby("crop").share_pct.sum().round(1).to_dict())
-    print("shared by all four crops:", shared_countries)
+    print(f"shared by all {len(CROPS)} crops:", shared_countries)
 
 
 if __name__ == "__main__":

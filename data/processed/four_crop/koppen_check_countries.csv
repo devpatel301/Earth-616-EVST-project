@@ -1,0 +1,27 @@
+crop,country,ours,beck
+rice,"China, mainland",C,C
+rice,India,A,C
+rice,Bangladesh,A,C
+rice,Brazil,A,A
+rice,United States of America,C,C
+rice,Nigeria,A,A
+rice,Russian Federation,C,C
+wheat,"China, mainland",C,C
+wheat,India,C,C
+wheat,Russian Federation,D,D
+wheat,United States of America,D,D
+wheat,Egypt,B,B
+wheat,Brazil,C,C
+maize,United States of America,D,D
+maize,"China, mainland",D,D
+maize,Brazil,A,A
+maize,India,A,A
+maize,South Africa,B,C
+maize,Russian Federation,D,D
+soybean,Brazil,A,A
+soybean,United States of America,D,D
+soybean,Argentina,C,C
+soybean,"China, mainland",D,D
+soybean,India,A,A
+soybean,Russian Federation,D,D
+soybean,South Africa,C,C

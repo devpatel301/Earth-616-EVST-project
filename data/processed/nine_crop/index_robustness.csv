@@ -1,0 +1,185 @@
+test,form,weighting,order,top,rank_rice,rank_wheat,rank_maize,rank_soybean,rank_chickpea,rank_lentil,rank_bean,rank_groundnut,rank_rapeseed
+"main (x/max, exposure = stress level, literature S)",F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+"main (x/max, exposure = stress level, literature S)",F1_multiplicative,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+"main (x/max, exposure = stress level, literature S)",F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+"main (x/max, exposure = stress level, literature S)",F2_geometric,pw,wheat > bean > chickpea > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,3,7,2,8,5
+"main (x/max, exposure = stress level, literature S)",F3_additive,eq,wheat > bean > lentil > soybean > chickpea > rice > maize > rapeseed > groundnut,wheat,6,1,7,4,5,3,2,9,8
+"main (x/max, exposure = stress level, literature S)",F3_additive,pw,wheat > bean > chickpea > lentil > soybean > rice > rapeseed > maize > groundnut,wheat,6,1,8,5,3,4,2,9,7
+"main (x/max, exposure = stress level, literature S)",F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,4,6,8,3,9,5
+"main (x/max, exposure = stress level, literature S)",F4_hazard_paired,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+min-max normalisation,F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+min-max normalisation,F1_multiplicative,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+min-max normalisation,F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+min-max normalisation,F2_geometric,pw,wheat > bean > chickpea > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,3,7,2,8,5
+min-max normalisation,F3_additive,eq,wheat > bean > lentil > soybean > chickpea > rice > maize > rapeseed > groundnut,wheat,6,1,7,4,5,3,2,9,8
+min-max normalisation,F3_additive,pw,wheat > bean > chickpea > lentil > soybean > rice > rapeseed > maize > groundnut,wheat,6,1,8,5,3,4,2,9,7
+min-max normalisation,F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,4,6,8,3,9,5
+min-max normalisation,F4_hazard_paired,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+exposure = level + change (average),F1_multiplicative,eq,wheat > maize > rice > soybean > bean > rapeseed > chickpea > groundnut > lentil,wheat,3,1,2,4,7,9,5,8,6
+exposure = level + change (average),F1_multiplicative,pw,wheat > rice > soybean > bean > chickpea > rapeseed > maize > groundnut > lentil,wheat,2,1,7,3,5,9,4,8,6
+exposure = level + change (average),F2_geometric,eq,wheat > maize > rice > soybean > bean > rapeseed > groundnut > chickpea > lentil,wheat,3,1,2,4,8,9,5,7,6
+exposure = level + change (average),F2_geometric,pw,wheat > rice > soybean > chickpea > bean > rapeseed > maize > groundnut > lentil,wheat,2,1,7,3,4,9,5,8,6
+exposure = level + change (average),F3_additive,eq,wheat > lentil > soybean > bean > maize > rice > chickpea > rapeseed > groundnut,wheat,6,1,5,3,7,2,4,9,8
+exposure = level + change (average),F3_additive,pw,wheat > rice > lentil > bean > soybean > chickpea > rapeseed > maize > groundnut,wheat,2,1,8,5,6,3,4,9,7
+exposure = level + change (average),F4_hazard_paired,eq,wheat > maize > rice > soybean > bean > rapeseed > chickpea > groundnut > lentil,wheat,3,1,2,4,7,9,5,8,6
+exposure = level + change (average),F4_hazard_paired,pw,wheat > rice > soybean > chickpea > bean > rapeseed > maize > groundnut > lentil,wheat,2,1,7,3,4,9,5,8,6
+exposure = change only,F1_multiplicative,eq,wheat > rice > maize > soybean > bean > rapeseed > groundnut > chickpea > lentil,wheat,2,1,3,4,8,9,5,7,6
+exposure = change only,F1_multiplicative,pw,wheat > rice > soybean > rapeseed > bean > maize > chickpea > groundnut > lentil,wheat,2,1,6,3,7,9,5,8,4
+exposure = change only,F2_geometric,eq,wheat > rice > maize > soybean > bean > groundnut > rapeseed > chickpea > lentil,wheat,2,1,3,4,8,9,5,6,7
+exposure = change only,F2_geometric,pw,wheat > rice > soybean > rapeseed > chickpea > bean > groundnut > maize > lentil,wheat,2,1,8,3,5,9,6,7,4
+exposure = change only,F3_additive,eq,wheat > maize > rice > soybean > lentil > chickpea > rapeseed > bean > groundnut,wheat,3,1,2,4,6,5,8,9,7
+exposure = change only,F3_additive,pw,wheat > rice > soybean > lentil > chickpea > bean > rapeseed > maize > groundnut,wheat,2,1,8,3,5,4,6,9,7
+exposure = change only,F4_hazard_paired,eq,wheat > maize > rice > soybean > bean > rapeseed > chickpea > groundnut > lentil,wheat,3,1,2,4,7,9,5,8,6
+exposure = change only,F4_hazard_paired,pw,wheat > rice > soybean > rapeseed > chickpea > bean > maize > groundnut > lentil,wheat,2,1,7,3,5,9,6,8,4
+sensitivity = literature + empirical average (mid-evaluation configuration),F1_multiplicative,eq,wheat > maize > bean > soybean > chickpea > rapeseed > lentil > groundnut > rice,wheat,9,1,2,4,5,7,3,8,6
+sensitivity = literature + empirical average (mid-evaluation configuration),F1_multiplicative,pw,wheat > chickpea > bean > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,2,7,3,8,5
+sensitivity = literature + empirical average (mid-evaluation configuration),F2_geometric,eq,wheat > maize > soybean > bean > rapeseed > groundnut > chickpea > lentil > rice,wheat,9,1,2,3,7,8,4,6,5
+sensitivity = literature + empirical average (mid-evaluation configuration),F2_geometric,pw,wheat > chickpea > bean > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,2,7,3,8,5
+sensitivity = literature + empirical average (mid-evaluation configuration),F3_additive,eq,wheat > lentil > maize > soybean > bean > rice > chickpea > rapeseed > groundnut,wheat,6,1,3,4,7,2,5,9,8
+sensitivity = literature + empirical average (mid-evaluation configuration),F3_additive,pw,wheat > lentil > chickpea > bean > soybean > rice > maize > rapeseed > groundnut,wheat,6,1,7,5,3,2,4,9,8
+sensitivity = literature + empirical average (mid-evaluation configuration),F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > groundnut > rice,wheat,9,1,2,4,6,7,3,8,5
+sensitivity = literature + empirical average (mid-evaluation configuration),F4_hazard_paired,pw,wheat > bean > chickpea > rapeseed > soybean > lentil > maize > groundnut > rice,wheat,9,1,7,5,3,6,2,8,4
+sensitivity = empirical only,F1_multiplicative,eq,maize > wheat > soybean > chickpea > lentil > groundnut > rice > bean > rapeseed,maize,7,2,1,3,4,5,8,6,8
+sensitivity = empirical only,F1_multiplicative,pw,wheat > chickpea > soybean > maize > lentil > groundnut > rice > bean > rapeseed,wheat,7,1,4,3,2,5,8,6,8
+sensitivity = empirical only,F2_geometric,eq,wheat > maize > soybean > groundnut > lentil > chickpea > rice > bean > rapeseed,wheat,7,1,2,3,6,5,8,4,8
+sensitivity = empirical only,F2_geometric,pw,wheat > chickpea > soybean > maize > lentil > groundnut > rice > bean > rapeseed,wheat,7,1,4,3,2,5,8,6,8
+sensitivity = empirical only,F3_additive,eq,wheat > lentil > maize > soybean > bean > rice > groundnut > chickpea > rapeseed,wheat,6,1,3,4,8,2,5,7,9
+sensitivity = empirical only,F3_additive,pw,lentil > wheat > chickpea > soybean > rice > bean > maize > groundnut > rapeseed,lentil,5,2,7,4,3,1,6,8,9
+sensitivity = empirical only,F4_hazard_paired,eq,soybean > lentil > wheat > groundnut > chickpea > maize > rice > bean > rapeseed,soybean,7,3,6,1,5,2,8,4,8
+sensitivity = empirical only,F4_hazard_paired,pw,lentil > soybean > wheat > groundnut > maize > chickpea > rice > bean > rapeseed,lentil,7,3,5,2,6,1,8,4,8
+rice Ky = 1.0,F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > groundnut > rice,wheat,9,1,2,4,6,7,3,8,5
+rice Ky = 1.0,F1_multiplicative,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+rice Ky = 1.0,F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > lentil > rice,wheat,9,1,2,4,7,8,3,6,5
+rice Ky = 1.0,F2_geometric,pw,wheat > bean > chickpea > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,3,7,2,8,5
+rice Ky = 1.0,F3_additive,eq,wheat > bean > lentil > soybean > chickpea > maize > rapeseed > rice > groundnut,wheat,8,1,6,4,5,3,2,9,7
+rice Ky = 1.0,F3_additive,pw,wheat > bean > chickpea > lentil > soybean > rice > rapeseed > maize > groundnut,wheat,6,1,8,5,3,4,2,9,7
+rice Ky = 1.0,F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+rice Ky = 1.0,F4_hazard_paired,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+rice Ky = 1.5,F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+rice Ky = 1.5,F1_multiplicative,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+rice Ky = 1.5,F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+rice Ky = 1.5,F2_geometric,pw,wheat > bean > chickpea > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,3,7,2,8,5
+rice Ky = 1.5,F3_additive,eq,wheat > bean > lentil > soybean > rice > chickpea > maize > rapeseed > groundnut,wheat,5,1,7,4,6,3,2,9,8
+rice Ky = 1.5,F3_additive,pw,wheat > bean > chickpea > lentil > rice > soybean > rapeseed > maize > groundnut,wheat,5,1,8,6,3,4,2,9,7
+rice Ky = 1.5,F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,4,6,8,3,9,5
+rice Ky = 1.5,F4_hazard_paired,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > rice > groundnut,wheat,8,1,6,5,3,7,2,9,4
+importance = kcal share only,F1_multiplicative,eq,wheat > maize > soybean > bean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,3,6,8,4,9,5
+importance = kcal share only,F1_multiplicative,pw,wheat > soybean > rapeseed > chickpea > bean > maize > lentil > rice > groundnut,wheat,8,1,6,2,4,7,5,9,3
+importance = kcal share only,F2_geometric,eq,wheat > maize > soybean > bean > rapeseed > rice > groundnut > chickpea > lentil,wheat,6,1,2,3,8,9,4,7,5
+importance = kcal share only,F2_geometric,pw,wheat > chickpea > soybean > bean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,3,2,7,4,8,5
+importance = kcal share only,F3_additive,eq,wheat > lentil > bean > soybean > rice > chickpea > maize > rapeseed > groundnut,wheat,5,1,7,4,6,2,3,9,8
+importance = kcal share only,F3_additive,pw,bean > lentil > chickpea > wheat > rice > soybean > rapeseed > maize > groundnut,bean,5,4,8,6,3,2,1,9,7
+importance = kcal share only,F4_hazard_paired,eq,wheat > maize > soybean > bean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,3,6,8,4,9,5
+importance = kcal share only,F4_hazard_paired,pw,wheat > rapeseed > chickpea > soybean > bean > maize > lentil > rice > groundnut,wheat,8,1,6,4,3,7,5,9,2
+importance = Zn+Fe+protein only,F1_multiplicative,eq,wheat > maize > bean > chickpea > lentil > rice > soybean > groundnut > rapeseed,wheat,6,1,2,7,4,5,3,8,9
+importance = Zn+Fe+protein only,F1_multiplicative,pw,wheat > bean > chickpea > maize > lentil > groundnut > rice > rapeseed > soybean,wheat,7,1,4,9,3,5,2,6,8
+importance = Zn+Fe+protein only,F2_geometric,eq,wheat > bean > maize > chickpea > lentil > groundnut > rice > soybean > rapeseed,wheat,7,1,3,8,4,5,2,6,9
+importance = Zn+Fe+protein only,F2_geometric,pw,wheat > bean > chickpea > maize > lentil > groundnut > rice > rapeseed > soybean,wheat,7,1,4,9,3,5,2,6,8
+importance = Zn+Fe+protein only,F3_additive,eq,wheat > bean > lentil > maize > chickpea > soybean > rice > rapeseed > groundnut,wheat,7,1,4,6,5,3,2,9,8
+importance = Zn+Fe+protein only,F3_additive,pw,wheat > bean > chickpea > lentil > rice > soybean > maize > rapeseed > groundnut,wheat,5,1,7,6,3,4,2,9,8
+importance = Zn+Fe+protein only,F4_hazard_paired,eq,wheat > maize > bean > chickpea > lentil > rice > soybean > groundnut > rapeseed,wheat,6,1,2,7,4,5,3,8,9
+importance = Zn+Fe+protein only,F4_hazard_paired,pw,wheat > bean > chickpea > maize > lentil > rice > groundnut > rapeseed > soybean,wheat,6,1,4,9,3,5,2,7,8
+heat threshold T_crit -2 C (all crops),F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > groundnut > rice,wheat,9,1,2,4,6,7,3,8,5
+heat threshold T_crit -2 C (all crops),F1_multiplicative,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+heat threshold T_crit -2 C (all crops),F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+heat threshold T_crit -2 C (all crops),F2_geometric,pw,wheat > bean > chickpea > soybean > rapeseed > maize > groundnut > lentil > rice,wheat,9,1,6,4,3,8,2,7,5
+heat threshold T_crit -2 C (all crops),F3_additive,eq,wheat > bean > lentil > soybean > maize > chickpea > rice > rapeseed > groundnut,wheat,7,1,5,4,6,3,2,9,8
+heat threshold T_crit -2 C (all crops),F3_additive,pw,wheat > bean > chickpea > lentil > soybean > rice > rapeseed > maize > groundnut,wheat,6,1,8,5,3,4,2,9,7
+heat threshold T_crit -2 C (all crops),F4_hazard_paired,eq,wheat > maize > bean > rapeseed > soybean > chickpea > rice > groundnut > lentil,wheat,7,1,2,5,6,9,3,8,4
+heat threshold T_crit -2 C (all crops),F4_hazard_paired,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+heat threshold T_crit -1 C (all crops),F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+heat threshold T_crit -1 C (all crops),F1_multiplicative,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+heat threshold T_crit -1 C (all crops),F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+heat threshold T_crit -1 C (all crops),F2_geometric,pw,wheat > bean > chickpea > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,3,7,2,8,5
+heat threshold T_crit -1 C (all crops),F3_additive,eq,wheat > bean > lentil > soybean > chickpea > rice > maize > rapeseed > groundnut,wheat,6,1,7,4,5,3,2,9,8
+heat threshold T_crit -1 C (all crops),F3_additive,pw,wheat > bean > chickpea > lentil > soybean > rice > rapeseed > maize > groundnut,wheat,6,1,8,5,3,4,2,9,7
+heat threshold T_crit -1 C (all crops),F4_hazard_paired,eq,wheat > maize > bean > rapeseed > soybean > chickpea > rice > lentil > groundnut,wheat,7,1,2,5,6,8,3,9,4
+heat threshold T_crit -1 C (all crops),F4_hazard_paired,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+heat threshold T_crit +1 C (all crops),F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+heat threshold T_crit +1 C (all crops),F1_multiplicative,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+heat threshold T_crit +1 C (all crops),F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+heat threshold T_crit +1 C (all crops),F2_geometric,pw,wheat > chickpea > bean > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,2,7,3,8,5
+heat threshold T_crit +1 C (all crops),F3_additive,eq,wheat > bean > lentil > soybean > chickpea > rice > maize > rapeseed > groundnut,wheat,6,1,7,4,5,3,2,9,8
+heat threshold T_crit +1 C (all crops),F3_additive,pw,wheat > bean > chickpea > lentil > soybean > rice > rapeseed > maize > groundnut,wheat,6,1,8,5,3,4,2,9,7
+heat threshold T_crit +1 C (all crops),F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,4,6,8,3,9,5
+heat threshold T_crit +1 C (all crops),F4_hazard_paired,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4
+heat threshold T_crit +2 C (all crops),F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+heat threshold T_crit +2 C (all crops),F1_multiplicative,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4
+heat threshold T_crit +2 C (all crops),F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+heat threshold T_crit +2 C (all crops),F2_geometric,pw,wheat > chickpea > bean > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,2,7,3,8,5
+heat threshold T_crit +2 C (all crops),F3_additive,eq,wheat > lentil > bean > soybean > chickpea > rice > maize > rapeseed > groundnut,wheat,6,1,7,4,5,2,3,9,8
+heat threshold T_crit +2 C (all crops),F3_additive,pw,wheat > bean > chickpea > lentil > soybean > rice > rapeseed > maize > groundnut,wheat,6,1,8,5,3,4,2,9,7
+heat threshold T_crit +2 C (all crops),F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,4,6,8,3,9,5
+heat threshold T_crit +2 C (all crops),F4_hazard_paired,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4
+heat threshold T_crit +3 C (all crops),F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+heat threshold T_crit +3 C (all crops),F1_multiplicative,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4
+heat threshold T_crit +3 C (all crops),F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+heat threshold T_crit +3 C (all crops),F2_geometric,pw,wheat > chickpea > bean > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,2,7,3,8,5
+heat threshold T_crit +3 C (all crops),F3_additive,eq,wheat > lentil > bean > soybean > chickpea > rice > maize > rapeseed > groundnut,wheat,6,1,7,4,5,2,3,9,8
+heat threshold T_crit +3 C (all crops),F3_additive,pw,wheat > bean > chickpea > lentil > soybean > rice > rapeseed > maize > groundnut,wheat,6,1,8,5,3,4,2,9,7
+heat threshold T_crit +3 C (all crops),F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,4,6,8,3,9,5
+heat threshold T_crit +3 C (all crops),F4_hazard_paired,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4
+new legumes T_crit +3 C (chamber vs model thresholds),F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+new legumes T_crit +3 C (chamber vs model thresholds),F1_multiplicative,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4
+new legumes T_crit +3 C (chamber vs model thresholds),F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+new legumes T_crit +3 C (chamber vs model thresholds),F2_geometric,pw,wheat > chickpea > bean > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,2,7,3,8,5
+new legumes T_crit +3 C (chamber vs model thresholds),F3_additive,eq,wheat > lentil > bean > soybean > chickpea > rice > maize > rapeseed > groundnut,wheat,6,1,7,4,5,2,3,9,8
+new legumes T_crit +3 C (chamber vs model thresholds),F3_additive,pw,wheat > bean > chickpea > lentil > soybean > rice > rapeseed > maize > groundnut,wheat,6,1,8,5,3,4,2,9,7
+new legumes T_crit +3 C (chamber vs model thresholds),F4_hazard_paired,eq,wheat > maize > bean > rapeseed > soybean > chickpea > rice > lentil > groundnut,wheat,7,1,2,5,6,8,3,9,4
+new legumes T_crit +3 C (chamber vs model thresholds),F4_hazard_paired,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4
+bean T_crit +2 C (Mesoamerican types),F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+bean T_crit +2 C (Mesoamerican types),F1_multiplicative,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4
+bean T_crit +2 C (Mesoamerican types),F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+bean T_crit +2 C (Mesoamerican types),F2_geometric,pw,wheat > chickpea > bean > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,2,7,3,8,5
+bean T_crit +2 C (Mesoamerican types),F3_additive,eq,wheat > lentil > bean > soybean > chickpea > rice > maize > rapeseed > groundnut,wheat,6,1,7,4,5,2,3,9,8
+bean T_crit +2 C (Mesoamerican types),F3_additive,pw,wheat > bean > chickpea > lentil > soybean > rice > rapeseed > maize > groundnut,wheat,6,1,8,5,3,4,2,9,7
+bean T_crit +2 C (Mesoamerican types),F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,4,6,8,3,9,5
+bean T_crit +2 C (Mesoamerican types),F4_hazard_paired,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4
+"calendar = plain Sacks (Pulses / Rapeseed.Winter) for chickpea, lentil, rapeseed",F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > groundnut > lentil,wheat,7,1,2,4,6,9,3,8,5
+"calendar = plain Sacks (Pulses / Rapeseed.Winter) for chickpea, lentil, rapeseed",F1_multiplicative,pw,wheat > bean > soybean > rapeseed > maize > chickpea > lentil > groundnut > rice,wheat,9,1,5,3,6,7,2,8,4
+"calendar = plain Sacks (Pulses / Rapeseed.Winter) for chickpea, lentil, rapeseed",F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+"calendar = plain Sacks (Pulses / Rapeseed.Winter) for chickpea, lentil, rapeseed",F2_geometric,pw,wheat > bean > soybean > rapeseed > chickpea > maize > groundnut > lentil > rice,wheat,9,1,6,3,5,8,2,7,4
+"calendar = plain Sacks (Pulses / Rapeseed.Winter) for chickpea, lentil, rapeseed",F3_additive,eq,wheat > bean > soybean > lentil > rice > maize > chickpea > rapeseed > groundnut,wheat,5,1,6,3,7,4,2,9,8
+"calendar = plain Sacks (Pulses / Rapeseed.Winter) for chickpea, lentil, rapeseed",F3_additive,pw,wheat > bean > soybean > rice > lentil > chickpea > rapeseed > maize > groundnut,wheat,4,1,8,3,6,5,2,9,7
+"calendar = plain Sacks (Pulses / Rapeseed.Winter) for chickpea, lentil, rapeseed",F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > groundnut > lentil,wheat,7,1,2,4,6,9,3,8,5
+"calendar = plain Sacks (Pulses / Rapeseed.Winter) for chickpea, lentil, rapeseed",F4_hazard_paired,pw,wheat > bean > soybean > rapeseed > maize > chickpea > lentil > groundnut > rice,wheat,9,1,5,3,6,7,2,8,4
+new legumes: heat slope x0.7 (chamber -> field),F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+new legumes: heat slope x0.7 (chamber -> field),F1_multiplicative,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+new legumes: heat slope x0.7 (chamber -> field),F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+new legumes: heat slope x0.7 (chamber -> field),F2_geometric,pw,wheat > bean > chickpea > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,3,7,2,8,5
+new legumes: heat slope x0.7 (chamber -> field),F3_additive,eq,wheat > soybean > bean > lentil > rice > maize > rapeseed > chickpea > groundnut,wheat,5,1,6,2,8,4,3,9,7
+new legumes: heat slope x0.7 (chamber -> field),F3_additive,pw,wheat > bean > chickpea > soybean > rice > lentil > rapeseed > maize > groundnut,wheat,5,1,8,4,3,6,2,9,7
+new legumes: heat slope x0.7 (chamber -> field),F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,4,6,8,3,9,5
+new legumes: heat slope x0.7 (chamber -> field),F4_hazard_paired,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4
+rapeseed heat slope 0.07 (proxy low),F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+rapeseed heat slope 0.07 (proxy low),F1_multiplicative,pw,wheat > bean > chickpea > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,3,7,2,8,5
+rapeseed heat slope 0.07 (proxy low),F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+rapeseed heat slope 0.07 (proxy low),F2_geometric,pw,wheat > bean > chickpea > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,3,7,2,8,5
+rapeseed heat slope 0.07 (proxy low),F3_additive,eq,wheat > bean > lentil > soybean > chickpea > rice > maize > rapeseed > groundnut,wheat,6,1,7,4,5,3,2,9,8
+rapeseed heat slope 0.07 (proxy low),F3_additive,pw,wheat > bean > chickpea > lentil > soybean > rice > maize > rapeseed > groundnut,wheat,6,1,7,5,3,4,2,9,8
+rapeseed heat slope 0.07 (proxy low),F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,4,6,8,3,9,5
+rapeseed heat slope 0.07 (proxy low),F4_hazard_paired,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+rapeseed heat slope 0.18 (proxy high),F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+rapeseed heat slope 0.18 (proxy high),F1_multiplicative,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+rapeseed heat slope 0.18 (proxy high),F2_geometric,eq,wheat > maize > bean > soybean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,4,7,9,3,6,5
+rapeseed heat slope 0.18 (proxy high),F2_geometric,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+rapeseed heat slope 0.18 (proxy high),F3_additive,eq,wheat > bean > lentil > rapeseed > soybean > chickpea > rice > maize > groundnut,wheat,7,1,8,5,6,3,2,9,4
+rapeseed heat slope 0.18 (proxy high),F3_additive,pw,wheat > bean > chickpea > lentil > rapeseed > soybean > rice > maize > groundnut,wheat,7,1,8,6,3,4,2,9,5
+rapeseed heat slope 0.18 (proxy high),F4_hazard_paired,eq,wheat > maize > bean > rapeseed > soybean > chickpea > rice > lentil > groundnut,wheat,7,1,2,5,6,8,3,9,4
+rapeseed heat slope 0.18 (proxy high),F4_hazard_paired,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+"new crops K_y low (chickpea 0.67, lentil 0.87, bean 0.6, rapeseed 0.85)",F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+"new crops K_y low (chickpea 0.67, lentil 0.87, bean 0.6, rapeseed 0.85)",F1_multiplicative,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4
+"new crops K_y low (chickpea 0.67, lentil 0.87, bean 0.6, rapeseed 0.85)",F2_geometric,eq,wheat > maize > soybean > bean > rapeseed > groundnut > chickpea > rice > lentil,wheat,8,1,2,3,7,9,4,6,5
+"new crops K_y low (chickpea 0.67, lentil 0.87, bean 0.6, rapeseed 0.85)",F2_geometric,pw,wheat > chickpea > bean > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,2,7,3,8,5
+"new crops K_y low (chickpea 0.67, lentil 0.87, bean 0.6, rapeseed 0.85)",F3_additive,eq,wheat > lentil > soybean > rice > maize > bean > chickpea > rapeseed > groundnut,wheat,4,1,5,3,7,2,6,9,8
+"new crops K_y low (chickpea 0.67, lentil 0.87, bean 0.6, rapeseed 0.85)",F3_additive,pw,wheat > lentil > chickpea > soybean > bean > rice > rapeseed > maize > groundnut,wheat,6,1,8,4,3,2,5,9,7
+"new crops K_y low (chickpea 0.67, lentil 0.87, bean 0.6, rapeseed 0.85)",F4_hazard_paired,eq,wheat > maize > bean > soybean > rapeseed > chickpea > rice > lentil > groundnut,wheat,7,1,2,4,6,8,3,9,5
+"new crops K_y low (chickpea 0.67, lentil 0.87, bean 0.6, rapeseed 0.85)",F4_hazard_paired,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+"new crops K_y high (chickpea 1.15, lentil 1.15, bean 1.4, rapeseed 0.95)",F1_multiplicative,eq,wheat > maize > bean > soybean > rapeseed > chickpea > lentil > rice > groundnut,wheat,8,1,2,4,6,7,3,9,5
+"new crops K_y high (chickpea 1.15, lentil 1.15, bean 1.4, rapeseed 0.95)",F1_multiplicative,pw,wheat > bean > chickpea > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,3,7,2,8,4
+"new crops K_y high (chickpea 1.15, lentil 1.15, bean 1.4, rapeseed 0.95)",F2_geometric,eq,wheat > bean > maize > soybean > rapeseed > groundnut > chickpea > lentil > rice,wheat,9,1,3,4,7,8,2,6,5
+"new crops K_y high (chickpea 1.15, lentil 1.15, bean 1.4, rapeseed 0.95)",F2_geometric,pw,wheat > bean > chickpea > soybean > rapeseed > maize > lentil > groundnut > rice,wheat,9,1,6,4,3,7,2,8,5
+"new crops K_y high (chickpea 1.15, lentil 1.15, bean 1.4, rapeseed 0.95)",F3_additive,eq,wheat > bean > lentil > chickpea > soybean > rice > maize > rapeseed > groundnut,wheat,6,1,7,5,4,3,2,9,8
+"new crops K_y high (chickpea 1.15, lentil 1.15, bean 1.4, rapeseed 0.95)",F3_additive,pw,bean > wheat > chickpea > lentil > soybean > rice > rapeseed > maize > groundnut,bean,6,2,8,5,3,4,1,9,7
+"new crops K_y high (chickpea 1.15, lentil 1.15, bean 1.4, rapeseed 0.95)",F4_hazard_paired,eq,wheat > maize > bean > rapeseed > soybean > chickpea > rice > lentil > groundnut,wheat,7,1,2,5,6,8,3,9,4
+"new crops K_y high (chickpea 1.15, lentil 1.15, bean 1.4, rapeseed 0.95)",F4_hazard_paired,pw,wheat > chickpea > bean > rapeseed > soybean > maize > lentil > groundnut > rice,wheat,9,1,6,5,2,7,3,8,4

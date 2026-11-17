@@ -1,0 +1,27 @@
+% worked example: wheat in India, from raw components to F4 (values from worked_example.csv via macros)
+\begin{table}[t]
+\centering\small
+\caption{Worked example: wheat in India. The physical inputs are identical in both runs; only the
+normalisation maxima differ. Values from \texttt{worked\_example.csv}; the hand calculation
+$\tfrac12(E_TS_T+E_PS_P)\tilde I$ equals the pipeline value (checked by an assertion in the code).}\label{tab:worked}
+\begin{tabular}{lrr}
+\toprule
+ & four-crop run & nine-crop run\\
+\midrule
+Heat level $L_{\text{heat}}$ (\si{\celsius} of $\Teff$ above \SI{25}{\celsius}) & \exFourLheatc & \exNineLheatc\\
+\quad maximum over pairs & \exFourmaxLheat & \exNinemaxLheat\\
+\quad $E_{\text{heat}}$ & \exFourEheat & \exNineEheat\\
+Water level $L_{\text{water}}$ (rainfed share $\times$ deficit) & \exFourLwater & \exNineLwater\\
+\quad maximum over pairs & \exFourmaxLwater & \exNinemaxLwater\\
+\quad $E_{\text{water}}$ & \exFourEwater & \exNineEwater\\
+Heat slope $s_T$ (/\si{\celsius}) and maximum over crops & \exFoursTpc\ / \exFourmaxsT & \exNinesTpc\ / \exNinemaxsT\\
+\quad $S_T$ & \exFourSheat & \exNineSheat\\
+$K_y$ and maximum over crops & \exFourKy\ / \exFourmaxKy & \exNineKy\ / \exNinemaxKy\\
+\quad $S_P$ & \exFourSwater & \exNineSwater\\
+Importance $I$ and maximum & \exFourI\ / \exFourmaxI & \exNineI\ / \exNinemaxI\\
+\quad $\tilde I$ & \exFourInorm & \exNineInorm\\
+\midrule
+\Fd & \exFourFFourpipeline & \exNineFFourpipeline\\
+\bottomrule
+\end{tabular}
+\end{table}

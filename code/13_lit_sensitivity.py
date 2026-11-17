@@ -21,7 +21,9 @@ matplotlib.rcParams.update({
     "axes.labelsize": 12.5
 })
 
-CROP_COLORS = {"rice": "#2a7f62", "wheat": "#c8961a", "maize": "#c0504d", "soybean": "#5b5ea6"}
+CROP_COLORS = {"rice": "#2a7f62", "wheat": "#c8961a", "maize": "#c0504d", "soybean": "#5b5ea6", "chickpea": "#8c6d31",
+               "lentil": "#d6616b", "bean": "#7b4173", "groundnut": "#e6550d", "rapeseed": "#bcbd22"}
+N = len(CROPS)
 CROP_LABELS = [CROPS[c]["label"] for c in CROPS]
 s_temperature = np.array([CROPS[c]["heat_slope"] for c in CROPS])
 ky_water = np.array([CROPS[c]["ky"] for c in CROPS])
@@ -38,7 +40,8 @@ rows_temp_table = []
 rows_water_table = []
 for crop_idx, crop_name in enumerate(CROPS):
     crop_info = CROPS[crop_name]
-    limit_temp_str = "--" if crop_name == "rice" else f"{crop_info['tcrit'] + 1.0 / crop_info['heat_slope']:.0f}"
+    limit_temp_str = "--" if crop_info.get("tlim") is None and crop_name == "rice" else (
+        f"{crop_info['tlim']:.0f}" if crop_info.get("tlim") else f"{crop_info['tcrit'] + 1.0 / crop_info['heat_slope']:.0f}")
     rows_temp_table.append(
         f"{crop_info['label']} & {crop_info['tcrit']:.0f} & {limit_temp_str} & {100.0 * s_temperature[crop_idx]:.1f} & {S_temp_normalized[crop_idx]:.2f} \\\\"
     )
@@ -68,15 +71,15 @@ with open(os.path.join(output_tex_dir, "tab_lit_sens_temp.tex"), "w", encoding="
 with open(os.path.join(output_tex_dir, "tab_lit_sens_water.tex"), "w", encoding="utf-8") as f:
     f.write(latex_water_table)
 
-fig_lit, axes_lit = plt.subplots(1, 2, figsize=(10.5, 4.3))
+fig_lit, axes_lit = plt.subplots(1, 2, figsize=(max(10.5, 1.4 * N + 4), 4.3))
 for ax, values, scores, title_text, y_label_text in (
     (axes_lit[0], 100.0 * s_temperature, S_temp_normalized, "Temperature", "Yield lost per °C above the heat limit (%)"),
     (axes_lit[1], ky_water, S_water_normalized, "Precipitation", "FAO water factor $K_y$")
 ):
-    ax.bar(range(4), values, color=[CROP_COLORS[c] for c in CROPS])
-    for i in range(4):
+    ax.bar(range(N), values, color=[CROP_COLORS[c] for c in CROPS])
+    for i in range(N):
         ax.text(i, values[i] * 1.02, f"S = {scores[i]:.2f}", ha="center", va="bottom", fontsize=11.5)
-    ax.set_xticks(range(4), CROP_LABELS)
+    ax.set_xticks(range(N), CROP_LABELS, rotation=30 if N > 4 else 0)
     ax.set_ylim(0, values.max() * 1.22)
     ax.set_title(title_text)
     ax.set_ylabel(y_label_text)
@@ -97,6 +100,8 @@ with open(os.path.join(PROC, "sensitivity_pooled.csv"), mode="r", encoding="utf-
 fig_check, ax_check = plt.subplots(figsize=(8.6, 4.6))
 bar_width = 0.36
 for crop_idx, crop_name in enumerate(CROPS):
+    if crop_name not in ZHAO:
+        continue
     b_T_vals = [r["b_T"] for r in pooled_rows if r["crop"] == crop_name]
     p_T_vals = [r["p_T"] for r in pooled_rows if r["crop"] == crop_name]
     mean_val, min_val, max_val = float(np.mean(b_T_vals)), float(np.min(b_T_vals)), float(np.max(b_T_vals))
@@ -122,7 +127,7 @@ for crop_idx, crop_name in enumerate(CROPS):
     ax_check.text(crop_idx + bar_width / 2.0 + 0.02, min(zhao_val - (zhao_se or 0), zhao_val) - 0.6, f"{zhao_val:+.1f}", ha="left", va="top", fontsize=10.5)
 
 ax_check.axhline(0, color="#777777", lw=0.8)
-ax_check.set_xticks(range(4), CROP_LABELS)
+ax_check.set_xticks(range(N), CROP_LABELS, rotation=30 if N > 4 else 0)
 ax_check.set_xlabel("Crop")
 ax_check.set_ylabel("Yield change (%) per +1 °C")
 ax_check.set_ylim(-20, 3)

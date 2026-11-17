@@ -1,0 +1,14 @@
+# Python 3.13 (do not use 3.14: rasterio builds from source and hangs). Versions = the venv that produced the end-evaluation results (17 Nov 2026).
+affine==3.0.1
+geopandas==1.2.0
+matplotlib==3.11.2
+netCDF4==1.7.4
+numpy==2.5.3
+pandas==3.0.6
+pillow==12.3.0
+pymupdf==1.28.2
+pyproj==3.8.0
+rasterio==1.5.2
+scipy==1.18.1
+shapely==2.1.2
+xarray==2026.9.0

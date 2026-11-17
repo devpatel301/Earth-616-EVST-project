@@ -40,3 +40,6 @@ data/work/
 *.part
 *.chunks/
 
+
+# Large regenerated intermediates (nutrient_supply.pkl is 164 MB, over the GitHub file limit)
+data/processed/**/*.pkl

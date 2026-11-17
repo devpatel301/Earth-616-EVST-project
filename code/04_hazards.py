@@ -1,9 +1,14 @@
 import importlib
 import os
+import sys
 
 import numpy as np
 
-from config import ALL_YEARS, CROPS, NX, NY, RES, WORK
+from config import ALL_YEARS, CLIMATE_CROPS, NX, NY, RES, WORK
+
+CROPS = CLIMATE_CROPS
+# heat exceedance is also stored at T_crit + these offsets (deg C) for the parameter robustness test
+TCRIT_OFFSETS = (-2, -1, 1, 2, 3)
 
 climate_exposure_module = importlib.import_module("04_climate_exposure")
 
@@ -35,7 +40,10 @@ def main():
     cell_row_indices = np.repeat(np.arange(NY), NX)
     
     crop_hazard_accumulators = {}
+    only = set(sys.argv[1:])
     for crop_name in CROPS:
+        if only and crop_name not in only:
+            continue
         crop_grids = np.load(os.path.join(WORK, f"grids_{crop_name}.npz"))
         valid_cells = np.load(os.path.join(WORK, f"series_prec_{crop_name}.npz"))["cells"]
         crop_hazard_accumulators[crop_name] = {
@@ -51,7 +59,8 @@ def main():
             ),
             "et0_gs": np.zeros((len(ANALYSIS_YEARS), len(valid_cells))),
             "heat_exceedance": np.zeros((len(ANALYSIS_YEARS), len(valid_cells))),
-            "teff_flow": np.zeros((len(ANALYSIS_YEARS), len(valid_cells)))
+            "teff_flow": np.zeros((len(ANALYSIS_YEARS), len(valid_cells))),
+            **{f"heat_off{o:+d}": np.zeros((len(ANALYSIS_YEARS), len(valid_cells))) for o in TCRIT_OFFSETS}
         }
 
     for year_idx in range(START_YEAR_BUFFER, END_YEAR + 1):
@@ -75,7 +84,8 @@ def main():
                     (crop_data["weights_gs"], "et0_gs", et0_monthly),
                     (crop_data["weights_flow"], "heat_exceedance", heat_exceedance_monthly),
                     (crop_data["weights_flow"], "teff_flow", teff_monthly)
-                ]
+                ] + [(crop_data["weights_flow"], f"heat_off{o:+d}", np.maximum(teff_monthly - critical_temp - o, 0))
+                     for o in TCRIT_OFFSETS]
                 
                 for (cur_weights, prev_weights), series_key, monthly_val in mappings:
                     w_cur_m = cur_weights[:, month_idx - 1]
@@ -98,7 +108,8 @@ def main():
             cells=crop_data["cells"],
             et0_gs=crop_data["et0_gs"].astype("float32"),
             heat_flow=(crop_data["heat_exceedance"] / flowering_weight_sum).astype("float32"),
-            teff_flow=(crop_data["teff_flow"] / flowering_weight_sum).astype("float32")
+            teff_flow=(crop_data["teff_flow"] / flowering_weight_sum).astype("float32"),
+            **{f"heat_off{o:+d}": (crop_data[f"heat_off{o:+d}"] / flowering_weight_sum).astype("float32") for o in TCRIT_OFFSETS}
         )
         print(crop_name, "saved", len(crop_data["cells"]), "cells")
 

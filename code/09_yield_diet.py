@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-from config import BASE, PROC, RECENT, WORK
+from config import BASE, PROC, RECENT, WORK, QCL_PKL
 
 NUTRIENT_NAMES = ["kcal", "protein", "fat", "zinc", "iron"]
 
@@ -16,9 +16,11 @@ def compute_percentage_detrended_anomaly(values_series, time_index_array):
 
 def main():
     panels_df = pd.read_csv(os.path.join(PROC, "panels.csv"))
-    qcl_df = pd.read_pickle(os.path.join(WORK, "qcl_4crops.pkl"))
+    qcl_df = pd.read_pickle(QCL_PKL)
     yield_df = qcl_df[qcl_df.Element == "Yield"].rename(columns={"Year": "year", "Value": "yield"})[["crop", "m49", "year", "yield"]]
     supply_df = pd.read_pickle(os.path.join(PROC, "nutrient_supply.pkl"))
+    # chickpea / lentil food supply comes from FAOSTAT SUA (2010-2023, same methodology era as the new FBS)
+    supply_df = supply_df.assign(method=supply_df["method"].replace({"sua": "new"}))
     crop_supply_df = supply_df.dropna(subset=["crop"]).groupby(["method", "crop", "m49", "Year"])[NUTRIENT_NAMES].sum().reset_index()
     adequacy_df = pd.read_csv(os.path.join(PROC, "adequacy.csv"))
     crop_contrib_df = pd.read_csv(os.path.join(PROC, "crop_contrib.csv"))

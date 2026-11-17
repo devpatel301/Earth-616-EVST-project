@@ -1,0 +1,4 @@
+quantity,max_value,crop,country,n_pairs,period
+H_heat,0.580386613888992,wheat,India,26,2001-2024
+H_water,0.545875642604104,maize,Russian Federation,26,2001-2024
+I,0.4212964502350365,rice,Bangladesh,26,FBS 2021-2023

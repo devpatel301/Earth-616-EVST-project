@@ -1,0 +1,249 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+% Compiles with pdflatex (+ bibtex) and with Tectonic/XeLaTeX. Sources are ASCII-only.
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\fi
+\input{endeval_common.tex}
+\usepackage[round]{natbib}
+\bibliographystyle{plainnat}
+\hypersetup{colorlinks=true,linkcolor=paddy,citecolor=paddy,urlcolor=paddy}
+\usetheme{default}
+\setbeamercolor{structure}{fg=paddy}
+\setbeamercolor{frametitle}{fg=paddy}
+\setbeamercolor{title}{fg=paddy}
+\setbeamercolor{alerted text}{fg=clay}
+\setbeamercolor{block title}{bg=paddy,fg=white}
+\setbeamercolor{block body}{bg=paddy!6}
+\setbeamercolor{block title alerted}{bg=clay,fg=white}
+\setbeamercolor{block body alerted}{bg=clay!7}
+\setbeamerfont{frametitle}{series=\bfseries,size=\large}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{footline}{\hfill{\scriptsize\color{muted}\insertframenumber\,/\,\inserttotalframenumber}\hspace*{1em}\vspace*{0.6em}}
+\setbeamertemplate{frametitle}{\vspace*{0.4em}\insertframetitle\par\vspace*{-0.2em}{\color{grain}\rule{2.2em}{2pt}}}
+\newcommand{\src}[1]{\par\vfill{\tiny\color{muted}#1}}
+
+\title{Climate Change and Nutritional Security:\\ Which Crops Are Most Vulnerable?}
+\subtitle{End evaluation}
+\author{Arpit Mahtele \and Dev Patel \and Navey Puri \and Shreyash Lohare}
+\date{Earth 616}
+
+\begin{document}
+\begin{frame}\titlepage\end{frame}
+
+\begin{frame}{The question, and what is new since the mid-evaluation}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\textbf{Questions}
+\begin{enumerate}
+\item Which crop is most vulnerable to climate, given what it supplies to diets?
+\item If its yield falls, what happens to nutrient supply?
+\end{enumerate}
+\textbf{Gap:} yield studies and nutrient studies are separate; no reviewed study combines exposure,
+sensitivity and nutritional importance in one index.
+\column{0.5\textwidth}
+\textbf{Done for the end evaluation}
+\begin{itemize}
+\item Presented method (literature-only sensitivity) implemented everywhere
+\item 4 $\to$ \nCrops\ crops: cereals, pulses, oilseeds; \nPairs\ crop--country pairs
+\item Future 2041--2060 with comparable processing
+\item Nutrition consequences, robustness, validation, literature comparison
+\item India and Hyderabad: what the index means locally
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{The index: what a high score means}
+\[
+\Fd = \tfrac12\big(\underbrace{E_{\text{heat}}\,S_T}_{\text{heat}} + \underbrace{E_{\text{water}}\,S_P}_{\text{water}}\big)\times\underbrace{\tilde I}_{\text{diet}}
+\]
+\begin{itemize}
+\item $E$: observed stress \emph{level} 2001--24 on the crop's own area --- \si{\celsius} of flowering-season
+$\Teff$ above the crop's threshold; rainfed share $\times$ unmet water need $1-P/\ETc$
+\item $S$: literature yield loss per unit of stress --- $s_T = 1/(T_{\lim}-\Tcrit)$, FAO $K_y$
+\item $\tilde I$: crop's mean share of national energy, protein, fat, zinc, iron (FAO 2021--23)
+\end{itemize}
+\begin{block}{Reading}
+High \Fd\ = the crop is stressed \emph{where it grows}, loses yield fast under that stress, \emph{and} people
+depend on it for nutrients. It is a relative score (0--1 scale), never a yield loss.
+\end{block}
+\end{frame}
+
+\begin{frame}{Five new crops: every input checked against a source}
+\begin{columns}[T]
+\column{0.56\textwidth}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_params9.tex}}
+\column{0.44\textwidth}\small
+\begin{itemize}
+\item Heat: fits to chamber/field seed-yield data \citep{prasad2002bean,prasad2003peanut,bhandari2020,morrison2002}
+\item Water: FAO $K_y$; field values for chickpea \citep{tari2022}
+\item Calendars: Sacks ``Pulses'' puts Indian chickpea in the monsoon (95\% gap-filled) $\Rightarrow$ cool-season rule: rabi sowing in South Asia, spring sowing where winters freeze
+\item Chickpea, lentil food supply from FAOSTAT SUA (hidden inside ``Pulses, Other'' in food balances)
+\end{itemize}
+\end{columns}
+\src{docs/input\_register.csv; docs/literature\_verification\_new\_crops.md}
+\end{frame}
+
+\begin{frame}{Result 1: wheat is the most vulnerable crop}
+\centering\includegraphics[width=0.93\linewidth]{G01_crop_ranking.pdf}
+\src{Equal weights: \orderEq. \quad Production-weighted: \orderPw.}
+\end{frame}
+
+\begin{frame}{Where vulnerability sits}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\centering\includegraphics[height=0.82\textheight]{G02_country_crop_matrix.pdf}
+\column{0.45\textwidth}\small
+Highest pairs:
+\begin{itemize}
+\item \topPairA\ (\topPairAValue), \topPairC\ (\topPairCValue)
+\item \topPairB\ (\topPairBValue): rainfed staple (\maizeSAkcal\% of energy)
+\item \topPairD\ (\topPairDValue): also the hottest wheat area
+\item \topPairE, \topPairF
+\end{itemize}
+\textbf{Pattern:} a crop that matters in the diet, grown on rainfed land. Water term larger than heat in
+\nTopSevenWater\ of the top 7; today water is \presentWaterShare\% of the summed score, heat drives the future rise.
+\end{columns}
+\end{frame}
+
+\begin{frame}{Why: overlap, not sensitivity alone}
+\centering\includegraphics[width=0.95\linewidth]{G03_components.pdf}
+\begin{itemize}\small
+\item Soybean has the steepest heat slope but zero heat exposure in all its countries; eaten mainly as oil
+\item Wheat: largest food source of zinc in \wheatTopZinc\ and iron in \wheatTopIron\ of \nDivUnits\ units; exposed on both hazards
+\item Rice scores low because it is irrigated and monthly data hide hot days --- not proven safe
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Crop groups}
+\centering\includegraphics[width=0.9\linewidth]{G06_crop_groups.pdf}
+\src{\groupOrder. Group = mean of the three selected crops; it does not describe every cereal, pulse or oilseed.}
+\end{frame}
+
+\begin{frame}{Future: comparable processing}
+\begin{itemize}
+\item WorldClim CMIP6 MRI-ESM2-0, SSP2-4.5, 2041--2060: 20-year monthly climatologies
+\item Threshold on an average $\neq$ average of yearly exceedances $\Rightarrow$ change factors added to each
+1971--2000 year; historical comparator = same years, same code (reproduces the main series to \histReproMaxDiff)
+\item One fixed normalisation reference (2001--24 maxima); sensitivity, importance, crop area held fixed
+\item Check: thresholds on the 20-year means give the same sign in \climCheckSameSign\% of pairs ($\rho$ = \climCheckRho)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Result 2: by 2041--2060 the order holds, magnitudes rise}
+\begin{columns}[T]
+\column{0.58\textwidth}
+\includegraphics[width=\linewidth]{G04_present_future_crops.pdf}
+\column{0.42\textwidth}\small
+\begin{itemize}
+\item Flowering-season $\Teff$: +\meanDTeff\,\si{\celsius} on average
+\item Score rises in \nPairsUp\ of \nPairs\ pairs
+\item Increase: \futHeatShare\% heat, \futWaterShare\% water
+\item Largest: \futTopPair\ (\futTopPairChange)
+\item Falls only where the model gives a smaller rainfed deficit
+\end{itemize}
+\end{columns}
+\src{One model, one scenario: direction under that model, not the range of futures.}
+\end{frame}
+
+\begin{frame}{Result 3: the nutrient at stake is iron}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\includegraphics[width=\linewidth]{G07_nutrient_profiles.pdf}
+\column{0.5\textwidth}\small
+\begin{itemize}
+\item Iron is the only nutrient below requirement in any panel country: \nIronShort\ of \nAdqCountries
+\item Depends on the requirement: with 15\% bioavailability, \nIronShortAlt\ countries
+\item Recommended intakes vs national mean supply: overstates individual shortfall
+\item Iron comes mostly from wheat and pulses --- crops among the most vulnerable
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{A 10\% yield loss: what the diet loses}
+\centering\includegraphics[width=0.9\linewidth]{G08_yield_shock.pdf}
+\src{No market response; MAR caps each ratio at 1, so nutrient losses are shown too. Largest energy loss: \shockTopKcal\ (\shockTopKcalValue\%).}
+\end{frame}
+
+\begin{frame}{Future yield and nutrition: a conditional estimate}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\linewidth]{G09_future_yield.pdf}
+\column{0.45\textwidth}\small
+\begin{itemize}
+\item Stress $\times$ literature response, paired before normalisation; only the change is used
+\item Largest: \futYieldWorst\ (\futYieldWorstValue\% mean)
+\item Empirical regressions do not confirm it pair by pair ($\rho$ = \corrLitEmp) $\Rightarrow$ screening estimate, not a forecast
+\item No CO$_2$ fertilisation, adaptation or trade response
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\input{sections/slides_india.tex}
+
+\begin{frame}{Can we trust it?}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\linewidth]{G10_robustness.pdf}
+\column{0.45\textwidth}\small
+\begin{itemize}
+\item Wheat first in \robTopFfour\ of \robNFfour\ rankings (thresholds $\pm$3\,\si{\celsius}, calendars, proxies, weights)
+\item First in \mcTopShare\% of 2,000 random weightings (share, not probability)
+\item Positions 2--6 move with choices
+\item Yield-shock test: $\rho$ = \shockRho\ ($p$ = \shockP, \shockNpairs\ pairs)
+\item Literature: \litAgree\ of \litN\ comparisons agree, \litDiffer\ differ (Russia wheat mechanism; maize in Africa)
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{What the index indicates}
+\begin{enumerate}
+\item \textbf{Vulnerability is overlap}: wheat ranks first because it is stressed \emph{and} central to diets, not because it is most heat-sensitive
+\item \textbf{Iron is the nutrient at stake}: climate risk falls on the nutrient already short
+\item \textbf{Concentrated diets amplify}: India draws \divIndIronTopShare\% of its iron from wheat
+\item \textbf{Irrigation is the hidden buffer} behind rice's low score
+\item \textbf{Pulses rise fastest}: the protein and iron source of vegetarian diets
+\end{enumerate}
+\begin{block}{Points to}
+heat-tolerant wheat and sowing dates in India; water management for rainfed maize and wheat; heat-tolerant beans; more diverse iron sources.
+\end{block}
+\end{frame}
+
+\begin{frame}{Limitations}\small
+\begin{itemize}
+\item Monthly data: heat exposure is a lower bound; water ratio has no soil storage (overstates chickpea on residual moisture)
+\item New-crop heat values are fits to chamber data; bean threshold from one Andean variety sets the heat reference
+\item SPAM 2010 maps; gap-filled calendars; pigeon pea (tur) not among the nine crops
+\item One climate model, one scenario
+\item National supply $\neq$ individual intake; requirement choice changes the iron shortfall count
+\item Future yield step: accounting, no CO$_2$ or adaptation; CO$_2$ nutrient effect shown only as an extra pathway
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+\begin{itemize}
+\item \textbf{\topEq} is the crop whose climate stress most overlaps with its nutritional role --- robust across tests and to 2041--2060
+\item Cereals most vulnerable; pulses rising fastest; iron is the nutrient at stake
+\item India: wheat, chickpea and beans lead; Hyderabad's risk arrives mainly through national supply of wheat and pulses
+\item The index is a map of where adaptation and diet diversification would protect nutrition most
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{References}
+\tiny\bibliography{refs}
+\end{frame}
+
+\appendix
+\begin{frame}{Backup: worked example (wheat, India)}
+\centering\scriptsize\input{sections/worked_example.tex}
+\end{frame}
+\begin{frame}{Backup: presented method vs mid-evaluation numbers}
+\centering\includegraphics[height=0.8\textheight]{G11_mideval_vs_literature_only.pdf}
+\src{Same 26 pairs; crop order unchanged (\orderFourEq); top pair now \litTopPair\ (\litTopValue) vs \litSecondPair\ (\litSecondValue).}
+\end{frame}
+\begin{frame}{Backup: largest future changes}
+\centering\includegraphics[height=0.8\textheight]{G05_future_pairs.pdf}
+\end{frame}
+\end{document}

@@ -13,7 +13,7 @@ CLIMATOLOGY_PERIOD = (1991, 2020)
 
 def main():
     weather_file_map = {
-        source_var: climate_exposure_module.monthly_files(folder, var_name)
+        source_var: climate_exposure_module.extract_and_index_monthly_files(folder, var_name)
         for source_var, folder, var_name in (
             ("prec", "worldclim", "prec"),
             ("tmax", "tmax", "tmax"),
@@ -28,9 +28,9 @@ def main():
     for year in range(CLIMATOLOGY_PERIOD[0], CLIMATOLOGY_PERIOD[1] + 1):
         for month_idx in range(12):
             month_num = month_idx + 1
-            tmax_data = climate_exposure_module.read(weather_file_map["tmax"][(year, month_num)])
-            tmin_data = climate_exposure_module.read(weather_file_map["tmin"][(year, month_num)])
-            prec_data = climate_exposure_module.read(weather_file_map["prec"][(year, month_num)])
+            tmax_data = climate_exposure_module.read_raster_layer(weather_file_map["tmax"][(year, month_num)])
+            tmin_data = climate_exposure_module.read_raster_layer(weather_file_map["tmin"][(year, month_num)])
+            prec_data = climate_exposure_module.read_raster_layer(weather_file_map["prec"][(year, month_num)])
             monthly_temperature[month_idx] += (tmax_data + tmin_data) / 2.0 / num_years
             monthly_precipitation[month_idx] += prec_data / num_years
 

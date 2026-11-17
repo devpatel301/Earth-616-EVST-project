@@ -5,7 +5,7 @@ import zipfile
 import numpy as np
 import pandas as pd
 
-from config import CROPS, FE_REQ, PROC, RAW, WORK, ZN_REQ
+from config import CROPS, FE_REQ, IRON_REQUIREMENT_15PCT, PROC, RAW, WORK, ZINC_REQUIREMENT_MODERATE, ZN_REQ
 
 ELEMENT_MAP = {
     "Food supply (kcal/capita/day)": "kcal",
@@ -91,6 +91,55 @@ def map_item_to_crop(fbs_item_name):
     return None
 
 
+SUA_ELEMENT_MAP = {
+    "Food supply (kcal/capita/day)": "kcal",
+    "Protein supply quantity (g/capita/day)": "protein",
+    "Fat supply quantity (g/capita/day)": "fat",
+    "Food supply quantity (g/capita/day)": "g_day",
+    "Production": "prod",
+    "Import quantity": "imp",
+    "Export quantity": "exp",
+    "Stock Variation": "stock_var",
+    "Food supply quantity (tonnes)": "food_t",
+    "Feed": "feed_t",
+    "Processed": "processed_t",
+    "Other uses (non-food)": "other_t",
+}
+SUA_CROPS = {item: crop for crop, info in CROPS.items() for item in info.get("sua_items", [])}
+
+
+def read_sua_crop_supply(composition_dataframe):
+    """Chickpea and lentil: FAOSTAT Supply Utilization Accounts (2010-), the table FBS are compiled from.
+    Domestic supply = production + imports - exports - stock variation (checked: equals the sum of food,
+    feed, seed, loss, processing, other uses and residuals). Units match the FBS rows: per-capita supply per
+    day for nutrients, tonnes for quantities (FBS uses 1000 t, so tonnes are divided by 1000)."""
+    if not SUA_CROPS:
+        return pd.DataFrame()
+    sua_zip = os.path.join(RAW, "faostat_sua", "SUA_Crops_Livestock_E_All_Data_(Normalized).zip")
+    with zipfile.ZipFile(sua_zip) as zip_ref:
+        csv_name = [entry for entry in zip_ref.namelist() if entry.endswith("(Normalized).csv")][0]
+        raw_df = pd.read_csv(io.BytesIO(zip_ref.read(csv_name)), encoding="latin-1", low_memory=False,
+                             usecols=["Area Code", "Area Code (M49)", "Area", "Item", "Element", "Year", "Value"])
+    raw_df = raw_df[raw_df.Item.isin(SUA_CROPS) & raw_df.Element.isin(SUA_ELEMENT_MAP) & (raw_df["Area Code"] < 5000)].copy()
+    raw_df["m49"] = raw_df["Area Code (M49)"].astype(str).str.replace("'", "").astype(int)
+    raw_df["el"] = raw_df.Element.map(SUA_ELEMENT_MAP)
+    wide = raw_df.pivot_table(index=["m49", "Area", "Year", "Item"], columns="el", values="Value", aggfunc="sum").reset_index()
+    for col in SUA_ELEMENT_MAP.values():
+        if col not in wide:
+            wide[col] = np.nan
+    for col in ("prod", "imp", "exp", "stock_var", "food_t", "feed_t", "processed_t", "other_t"):
+        wide[col] = wide[col].fillna(0.0) / 1000.0          # tonnes -> 1000 t (FBS unit)
+    wide["dom"] = wide["prod"] + wide["imp"] - wide["exp"] - wide["stock_var"]
+    wide["food_kt"] = wide["food_t"]
+    wide["kg"] = wide["g_day"].fillna(0.0) * 365.0 / 1000.0
+    grams = wide["g_day"].fillna(0.0)
+    wide["zinc"] = grams * wide.Item.map(composition_dataframe.zinc_mg100) / 100.0
+    wide["iron"] = grams * wide.Item.map(composition_dataframe.iron_mg100) / 100.0
+    wide["crop"] = wide.Item.map(SUA_CROPS)
+    wide["method"] = "sua"
+    return wide
+
+
 def load_average_dietary_energy_requirement():
     food_security_zip = os.path.join(RAW, "faostat", "Food_Security_Data_E_All_Data_(Normalized).zip")
     with zipfile.ZipFile(food_security_zip) as zip_ref:
@@ -120,7 +169,10 @@ def main():
         calculated_supply["method"] = tag_name
         supply_dict[tag_name] = calculated_supply
         
-    combined_supply_df = pd.concat(supply_dict.values())
+    # SUA rows (chickpea, lentil) are stored with method "sua" and are NEVER added to national totals:
+    # their supply is already inside the FBS aggregate "Pulses, Other and products".
+    sua_supply_df = read_sua_crop_supply(comp_df)
+    combined_supply_df = pd.concat(list(supply_dict.values()) + ([sua_supply_df] if len(sua_supply_df) else []))
     combined_supply_df.to_pickle(os.path.join(PROC, "nutrient_supply.pkl"))
 
     grand_total_calories = current_fbs_df[
@@ -132,7 +184,10 @@ def main():
 
     current_supply_df = supply_dict["new"]
     total_national_supply = current_supply_df.groupby(["m49", "Area", "Year"])[NUTRIENT_LIST].sum()
-    crop_contribution_df = current_supply_df.dropna(subset=["crop"]).groupby(
+    crop_rows = current_supply_df.dropna(subset=["crop"])
+    if len(sua_supply_df):
+        crop_rows = pd.concat([crop_rows, sua_supply_df[crop_rows.columns.intersection(sua_supply_df.columns)]])
+    crop_contribution_df = crop_rows.groupby(
         ["m49", "Area", "Year", "crop"]
     )[NUTRIENT_LIST + ["prod", "dom", "exp", "imp"]].sum()
     crop_contribution_df = crop_contribution_df.reset_index().merge(
@@ -163,6 +218,10 @@ def main():
     for nutrient_name in NUTRIENT_LIST:
         adequacy_df[f"nar_{nutrient_name}"] = np.minimum(1.0, adequacy_df[nutrient_name] / adequacy_df[f"req_{nutrient_name}"])
     adequacy_df["MAR"] = adequacy_df[[f"nar_{n}" for n in NUTRIENT_LIST]].mean(axis=1)
+    # sensitivity variant: moderate-bioavailability zinc and 15 %-bioavailability iron requirements
+    adequacy_df["nar_zinc_moderate"] = np.minimum(1.0, adequacy_df.zinc / ZINC_REQUIREMENT_MODERATE)
+    adequacy_df["nar_iron_15pct"] = np.minimum(1.0, adequacy_df.iron / IRON_REQUIREMENT_15PCT)
+    adequacy_df["MAR_moderate_bioavailability"] = adequacy_df[["nar_kcal", "nar_protein", "nar_fat", "nar_zinc_moderate", "nar_iron_15pct"]].mean(axis=1)
     adequacy_df.to_csv(os.path.join(PROC, "adequacy.csv"), index=False)
     
     print(adequacy_df[adequacy_df.Year == latest_year_num].sort_values("MAR")[["Area", "MAR"] + [f"nar_{n}" for n in NUTRIENT_LIST]].head(15).round(3).to_string(index=False))

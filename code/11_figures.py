@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 from matplotlib.colors import BoundaryNorm, ListedColormap, TwoSlopeNorm
 
-from config import CLASS_NAME, CROPS, FIG, NX, NY, PROC, WORK, ZHAO
+from config import CLASS_NAME, CROPS, FIG, NX, NY, PROC, WORK, ZHAO, QCL_PKL
 
 matplotlib.rcParams.update({"font.size": 13, "font.family": "DejaVu Sans", "axes.spines.top": False,
                             "axes.spines.right": False, "savefig.bbox": "tight", "savefig.pad_inches": 0.05,
@@ -428,7 +428,7 @@ def f_scenario():
 # ---------------------------------------------------------------- F15 example series
 def f_examples():
     cs = pd.read_pickle(os.path.join(PROC, "country_series.pkl"))
-    qcl = pd.read_pickle(os.path.join(WORK, "qcl_4crops.pkl"))
+    qcl = pd.read_pickle(QCL_PKL)
     ex = [("rice", 356, "Rice, India"), ("maize", 840, "Maize, USA"), ("wheat", 356, "Wheat, India"), ("soybean", 32, "Soybean, Argentina")]
     fig, axs = plt.subplots(2, 2, figsize=(11, 6.4), gridspec_kw=dict(wspace=0.35, hspace=0.5))
     for ax, (crop, m49, t) in zip(axs.ravel(), ex):

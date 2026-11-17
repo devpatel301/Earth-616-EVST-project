@@ -6,7 +6,7 @@ import numpy as np
 import rasterio
 from scipy import stats
 
-from config import ALL_YEARS, BASE, CROPS, DRY_PCTL, MAIN_CROPS, RAW, RECENT, WORK
+from config import ALL_YEARS, BASE, CLIMATE_CROPS, DRY_PCTL, RAW, RECENT, WORK
 
 VARIABLE_NAME = sys.argv[1] if len(sys.argv) > 1 else "prec"
 DATA_SOURCES = {
@@ -109,7 +109,8 @@ def compute_and_save_summary_metrics(crop_name, values_array_by_year, window_tag
 
 def main():
     source_file_mappings = [extract_and_index_monthly_files(folder, tag) for folder, tag in DATA_SOURCES[VARIABLE_NAME]]
-    target_crops = list(CROPS) if VARIABLE_NAME == "prec" else MAIN_CROPS
+    only = set(sys.argv[2:])
+    target_crops = [c for c in CLIMATE_CROPS if not only or c in only]
     grids_by_crop = {crop: np.load(os.path.join(WORK, f"grids_{crop}.npz")) for crop in target_crops}
     
     valid_cell_indices = {}
@@ -172,7 +173,8 @@ def main():
                     weight_sum = window_weights[crop][window_type][0].sum(1) + window_weights[crop][window_type][1].sum(1)
                     series_data = series_data / np.where(weight_sum > 0, weight_sum, np.nan)[None, :]
             processed_series[window_type] = series_data.astype("float32")
-            compute_and_save_summary_metrics(crop, series_data, window_type)
+            if os.environ.get("CNVI_LEGACY_METRICS") == "1":   # rice-era per-cell metrics; not used by the index
+                compute_and_save_summary_metrics(crop, series_data, window_type)
             
         np.savez_compressed(
             os.path.join(WORK, f"series_{VARIABLE_NAME}_{crop}.npz"),

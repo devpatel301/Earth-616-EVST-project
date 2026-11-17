@@ -1,0 +1,35 @@
+% robustness, validation and literature comparison (all numbers from generated macros)
+\section{How much can these results be trusted?}\label{sec:checks}
+
+\paragraph{Robustness.} All checks were re-run under the final configuration; none of the mid-evaluation
+counts is reused. We varied one choice at a time: normalisation (x/max vs min-max), exposure definition
+(level, level + change, change only), sensitivity (literature, blended as at the mid-evaluation, empirical
+only), rice $K_y$, nutrient weighting, heat thresholds ($\pm$1--3\,\si{\celsius}), the new crops' proxy
+parameters and their calendars. Wheat is first in \robTopFfour\ of \robNFfour\ \Fd\ rankings (both
+weightings) and in \robTopAll\ of \robN\ rankings over all four index forms. The exceptions are the
+``empirical sensitivity only'' tests, which rest on regressions that detect a heat-damage effect in only \empHeatDetected\ of \empN\ pairs (\empHeatCountry\ with a robust country-specific estimate, the rest from pooled panels). With 2,000 random weightings (level vs change, heat vs water, nutrient weights; seed 20261005) wheat
+ranks first in \mcTopShare\% of draws and \mcSecond\ in \mcSecondShare\%; these are shares of weightings,
+not probabilities that a crop is truly most vulnerable (Figure~\ref{fig:robust}). What does \emph{not}
+survive: the order of positions two to six, which moves with the weighting and with the pulse parameters.
+
+\paragraph{Validation.} Against Zhao et al.'s per-degree losses \citep{zhao2017} the climate part of the
+index has Spearman $\rho$ = \zhaoRhoClimate\ and the full index \zhaoRhoFfour\ (four crops only, so
+descriptive). Across the \shockNpairs\ pairs, the climate part is positively associated with how often yield
+fell more than one standard deviation below trend in 2001--2024 ($\rho$ = \shockRho, one-sided permutation
+$p$ = \shockP). At the mid-evaluation, with 26 pairs, this test was null; the nine-crop result should be read
+as an association in a larger and more varied sample, not as proof that the index predicts shocks. The
+fitted year-to-year climate response correlates positively with observed 2001--24 yield anomalies in
+\oosPos\ of \oosN\ pairs with enough data (median $r$ = \oosMedian).
+
+\paragraph{Comparison with published studies.} Of \litN\ comparisons of signs and rank orders
+(Table~\ref{tab:lit}), \litAgree\ agree, \litPartial\ partly agree and \litDiffer\ differ. The
+disagreements are informative: \citet{lobell2011} attribute Russian wheat losses to temperature, while our
+monthly threshold measure sees mainly rainfed water deficit there; and maize suitability studies
+\citep{ramirez2017} project losses in Africa where our single climate model projects a wetter South African
+growing season. Agreement is supporting context, not proof of accuracy.
+
+\begin{table}[p]
+\centering\scriptsize
+\caption{Our results next to published findings.}\label{tab:lit}
+\input{nine_crop/generated/tab_litcompare.tex}
+\end{table}

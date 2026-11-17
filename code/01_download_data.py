@@ -40,6 +40,23 @@ DOWNLOADS = [
     ("faostat", "https://bulks-faostat.fao.org/production/FoodBalanceSheetsHistoric_E_All_Data_(Normalized).zip"),
     ("worldclim", "https://geodata.ucdavis.edu/climate/worldclim/2_1/base/wc2.1_10m_elev.zip"),
     ("usda", "https://fdc.nal.usda.gov/fdc-datasets/FoodData_Central_sr_legacy_food_csv_2018-04.zip"),
+    # ---- end evaluation additions (downloaded 17 Nov 2026) ----
+    # Sacks et al. (2010) calendars for the five new crops: chickpea/lentil/common bean share the generic
+    # "Pulses" calendar (Sacks has no crop-specific pulse calendars), groundnut and rapeseed have their own.
+    *[("sacks", f"{SACKS_BASE}{name}.crop.calendar{fill}.nc.gz")
+      for name in ("Pulses", "Groundnuts", "Rapeseed.Winter") for fill in ("", ".fill")],
+    # WorldClim 2.1 1970-2000 monthly normals (tmax, tmin; prec is already above): the baseline that the
+    # WorldClim CMIP6 future layers are downscaled and calibrated against -> used to form change factors.
+    ("normals", "https://geodata.ucdavis.edu/climate/worldclim/2_1/base/wc2.1_10m_tmax.zip"),
+    ("normals", "https://geodata.ucdavis.edu/climate/worldclim/2_1/base/wc2.1_10m_tmin.zip"),
+    # WorldClim CMIP6 future: MRI-ESM2-0, SSP2-4.5, 2041-2060, 10 arc-min, 12 monthly bands (20-year climatology)
+    *[("cmip6", f"https://geodata.ucdavis.edu/cmip6/10m/MRI-ESM2-0/ssp245/wc2.1_10m_{v}_MRI-ESM2-0_ssp245_2041-2060.tif")
+      for v in ("tmax", "tmin", "prec")],
+    # FAOSTAT Supply Utilization Accounts: the only FAOSTAT table with chickpea and lentil food supply as
+    # separate items (Food Balance Sheets lump them into "Pulses, Other and products").
+    ("faostat_sua", "https://bulks-faostat.fao.org/production/SUA_Crops_Livestock_E_All_Data_(Normalized).zip"),
+    # Natural Earth 1:10m admin-1 (states/provinces): Telangana boundary for the Hyderabad analysis
+    ("naturalearth_admin1", "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_1_states_provinces.zip"),
 ]
 
 TARGET_FILENAMES = {

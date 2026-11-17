@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-from config import ALL_YEARS, CROPS, MYERS, PROC, RAY, RECENT, SHOCK_SD, WORK, ZHAO, BASE
+from config import ALL_YEARS, CROPS, MYERS, PROC, RAY, RECENT, SHOCK_SD, WORK, ZHAO, BASE, QCL_PKL
 
 FORMULA_LIST = ["F1_multiplicative", "F2_geometric", "F3_additive", "F4_hazard_paired"]
 
@@ -14,7 +14,7 @@ def main():
     crop_index_df = pd.read_csv(os.path.join(PROC, "index_crop.csv")).set_index("crop")
     sensitivity_df = pd.read_csv(os.path.join(PROC, "sensitivity.csv"))
     pooled_sensitivity_df = pd.read_csv(os.path.join(PROC, "sensitivity_pooled.csv"))
-    qcl_df = pd.read_pickle(os.path.join(WORK, "qcl_4crops.pkl"))
+    qcl_df = pd.read_pickle(QCL_PKL)
     country_series_df = pd.read_pickle(os.path.join(PROC, "country_series.pkl"))
     importance_df = pd.read_csv(os.path.join(PROC, "importance.csv"))
 
@@ -142,7 +142,7 @@ def main():
             crop_record[f"myers_{nutrient_name}_pct"] = decline_val
             crop_record[f"myers_{nutrient_name}_sig"] = is_significant
             crop_record[f"panel_share_{nutrient_name}"] = panel_mean_importance.loc[crop_key, f"sh_{nutrient_name}"]
-            if world_importance_df is not None:
+            if world_importance_df is not None and crop_key in world_importance_df.index:
                 crop_record[f"world_share_{nutrient_name}"] = world_importance_df.loc[crop_key, f"sh_{nutrient_name}"]
             effective_decline = decline_val if (is_significant and np.isfinite(decline_val)) else 0.0
             crop_record[f"at_risk_{nutrient_name}_pp"] = -effective_decline * panel_mean_importance.loc[crop_key, f"sh_{nutrient_name}"]

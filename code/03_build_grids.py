@@ -11,7 +11,7 @@ import xarray as xr
 from rasterio import features
 from rasterio.transform import from_origin
 
-from config import CROPS, GRID_COLUMNS, GRID_ROWS, GRID_RESOLUTION, RAW_DIR, WORK_DIR
+from config import CLIMATE_CROPS, GRID_COLUMNS, GRID_ROWS, GRID_RESOLUTION, RAW_DIR, WORK_DIR
 
 TRANSFORM_10M = from_origin(-180, 90, GRID_RESOLUTION, GRID_RESOLUTION)
 DAYS_PER_MONTH = np.array([31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31])
@@ -122,13 +122,15 @@ def calculate_month_weights(plant_doy, harvest_doy, fraction_start=0.0, fraction
     return weights_harvest_year, weights_previous_year
 
 
-def build_crop_calendar(crop_name, area_5min_total):
-    calendar_names = CROPS[crop_name]["sacks"]
+def build_sacks_calendar(calendar_names, area_5min_total, observed_only=False, source_codes=(1, 2)):
+    """Sacks calendars in priority order: every listed calendar's observed layer first, then (unless
+    observed_only) every filled layer. source code 1/2 = observed/filled (or 3/4 for wheat-proxy calendars)."""
     plant_doy_grid = np.full((GRID_ROWS, GRID_COLUMNS), np.nan)
     harvest_doy_grid = np.full((GRID_ROWS, GRID_COLUMNS), np.nan)
     calendar_source_grid = np.zeros((GRID_ROWS, GRID_COLUMNS), dtype="int8")
 
-    for is_filled, source_code in ((False, 1), (True, 2)):
+    layers = ((False, source_codes[0]),) if observed_only else ((False, source_codes[0]), (True, source_codes[1]))
+    for is_filled, source_code in layers:
         for calendar_name in calendar_names:
             plant_5min, harvest_5min = load_sacks_calendar(calendar_name, is_filled)
             plant_10min = resample_calendar_to_10min(plant_5min, area_5min_total)
@@ -141,12 +143,39 @@ def build_crop_calendar(crop_name, area_5min_total):
     return plant_doy_grid, harvest_doy_grid, calendar_source_grid
 
 
+def build_crop_calendar(crop_name, area_5min_total):
+    crop_info = CLIMATE_CROPS[crop_name]
+    if crop_info.get("calendar_rule") != "cool_season":
+        return build_sacks_calendar(crop_info["sacks"], area_5min_total)
+
+    # Cool-season rule (end evaluation; chickpea, lentil, rapeseed-mustard). Sacks has no chickpea/lentil
+    # calendar (its generic "Pulses" calendar puts Indian pulses in the kharif monsoon season, 95 % gap-filled)
+    # and only a WINTER rapeseed calendar. These are cool-season crops sown in the same window as wheat:
+    #   1. the crop's own OBSERVED Sacks calendar where one exists (rapeseed: Rapeseed.Winter observed);
+    #   2. cold-winter cells (our Koppen group D, coldest month <= 0 C): SPRING sowing -> Sacks spring "Wheat";
+    #   3. other cells: the wheat calendar rule (Wheat.Winter observed, Wheat observed, then filled) ->
+    #      rabi sowing in South Asia, autumn sowing in Australia / the Mediterranean.
+    # Sensitivity alternative: the crop's plain Sacks calendar (pseudo-crops "<crop>__altcal" in config.py).
+    koppen_groups = np.load(os.path.join(WORK_DIR, "zones.npz"))["kg"]
+    cold_winter = koppen_groups == 3
+    plant, harvest, source = build_sacks_calendar(crop_info.get("sacks_observed_first", []), area_5min_total,
+                                                  observed_only=True) if crop_info.get("sacks_observed_first") else (
+        np.full((GRID_ROWS, GRID_COLUMNS), np.nan), np.full((GRID_ROWS, GRID_COLUMNS), np.nan),
+        np.zeros((GRID_ROWS, GRID_COLUMNS), dtype="int8"))
+    mild_p, mild_h, mild_s = build_sacks_calendar(["Wheat.Winter", "Wheat"], area_5min_total, source_codes=(3, 4))
+    cold_p, cold_h, cold_s = build_sacks_calendar(["Wheat"], area_5min_total, source_codes=(3, 4))
+    for mask, (p, h, s) in ((cold_winter, (cold_p, cold_h, cold_s)), (~cold_winter, (mild_p, mild_h, mild_s))):
+        fill = np.isnan(plant) & mask & np.isfinite(p) & np.isfinite(h)
+        plant[fill], harvest[fill], source[fill] = p[fill], h[fill], s[fill]
+    return plant, harvest, source
+
+
 def main():
     if not os.path.exists(os.path.join(WORK_DIR, "country_grid.npy")):
         country_grid()
 
     crops_filter = sys.argv[1:]
-    for crop_name, crop_info in CROPS.items():
+    for crop_name, crop_info in CLIMATE_CROPS.items():
         if crops_filter and crop_name not in crops_filter:
             continue
         spam_area_dict = load_spam_areas(crop_info["spam"])
@@ -162,11 +191,13 @@ def main():
         total_crop_area = spam_area_dict["A"][crop_cells_mask].sum()
         observed_share = spam_area_dict["A"][crop_cells_mask & (source_grid == 1)].sum() / total_crop_area
         filled_share = spam_area_dict["A"][crop_cells_mask & (source_grid == 2)].sum() / total_crop_area
+        proxy_share = spam_area_dict["A"][crop_cells_mask & (source_grid >= 3)].sum() / total_crop_area
         irrigated_share = spam_area_dict["I"].sum() / spam_area_dict["A"].sum()
 
         print(
             f"{crop_name}: area {total_crop_area / 1e6:.1f} Mha, irrigated {100 * irrigated_share:.0f}%, "
-            f"calendar observed for {100 * observed_share:.1f}% of area, filled {100 * filled_share:.1f}%"
+            f"calendar observed for {100 * observed_share:.1f}% of area, filled {100 * filled_share:.1f}%, "
+            f"wheat-proxy {100 * proxy_share:.1f}%"
         )
         np.savez_compressed(
             os.path.join(WORK_DIR, f"grids_{crop_name}.npz"),

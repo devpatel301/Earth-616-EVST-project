@@ -3,7 +3,10 @@ import os
 import numpy as np
 import pandas as pd
 
-from config import BASE, CROPS, RECENT, WORK, PROC, season_kc
+from config import BASE, CLIMATE_CROPS, RECENT, WORK, PROC, season_kc
+
+CROPS = CLIMATE_CROPS
+TCRIT_OFFSETS = (-2, -1, 1, 2, 3)
 
 STANDARD_DEVIATION_FLOOR = {"teff": 0.05, "mr": 0.01}
 
@@ -42,6 +45,7 @@ def main():
         water_deficit = np.clip(1.0 - moisture_ratio, 0.0, 1.0)
         
         heat_exceedance = hazard_data["heat_flow"].astype("float64")
+        heat_offsets = {o: hazard_data[f"heat_off{o:+d}"].astype("float64") for o in TCRIT_OFFSETS}
         teff_flowering = hazard_data["teff_flow"].astype("float64")
         tmax_flowering = tmax_data["flow"].astype("float64")
         tavg_gs = tavg_data["gs"].astype("float64")
@@ -86,6 +90,7 @@ def main():
                 continue
 
             national_heat_hazard_by_year = compute_weighted_mean_1d(heat_exceedance[:, country_mask], total_crop_area_country)
+            national_heat_offsets = {o: compute_weighted_mean_1d(v[:, country_mask], total_crop_area_country) for o, v in heat_offsets.items()}
             national_water_deficit_by_year = np.where(
                 np.isfinite(water_deficit[:, country_mask]), water_deficit[:, country_mask], 0.0
             ) @ rainfed_crop_area_country / total_crop_area_country.sum()
@@ -103,6 +108,7 @@ def main():
                     "m49": int(country_m49_code),
                     "year": int(year_val),
                     "H_heat": national_heat_hazard_by_year[year_idx],
+                    **{f"H_heat_off{o:+d}": national_heat_offsets[o][year_idx] for o in TCRIT_OFFSETS},
                     "H_water": national_water_deficit_by_year[year_idx],
                     "mr_rainfed": national_moisture_ratio_by_year[year_idx],
                     "teff_flow": national_teff_by_year[year_idx],
