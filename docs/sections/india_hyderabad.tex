@@ -1,1 +1,137 @@
-\section{India and Hyderabad (in preparation)}
+% India, Telangana and Hyderabad: what the index says locally. All numbers come from generated macros
+% (numbers_india.tex) computed from FAOSTAT, WorldClim/CMIP6, SPAM and official surveys listed in
+% docs/india_hyderabad_sources.md (MoSPI HCES 2023-24 and NSS 594, NFHS-5, CNNS, ICMR-NIN IFCT 2017, Telangana DES).
+\section{What the index says for India and for Hyderabad}\label{sec:india}
+
+\subsection{India}
+India is in the panel for all nine crops, so the whole ranking can be read for one country: \indOrder.
+Wheat (\indWheatFFour) is first; chickpea (\indChickpeaFFour) and common bean (\indBeanFFour) follow. The heat
+and water parts differ by crop: wheat's score is mostly water today but its projected increase to 2041--2060
+is almost all heat (change in \Fd\ \indWheatdFFour, flowering $\Teff$ \indWheatdTeff\,\si{\celsius}); chickpea's
+is entirely water (the rainfed deficit is the highest in the panel, which is why chickpea sets the water
+reference); common bean's is mostly heat (about three-fifths) with the rest water. Wheat supplies \indWheatShKcal\% of
+India's energy, \indWheatShProtein\% of protein and \indWheatShIron\% of iron, so the stress on wheat is a
+stress on iron. A standard 10\% loss of the wheat crop changes national energy supply by \indWheatShockKcal\% and national
+iron supply by \indWheatShockIron\%, and MAR by \indWheatShockMar\ points (out of 100), the largest change of
+any Indian crop. Under climate change alone (literature accounting, no CO$_2$ fertilisation or adaptation) wheat
+yield changes by \indWheatdY\% in 2041--2060 and lentil by \indLentildY\%.
+
+India's food supply is concentrated: the effective number of food items supplying its energy is \divIndKcal\
+(Shannon diversity of the FAO food-balance supply, 2021--23, following \citealp{remans2014}), against \divWorldKcal\ for the world, \divUsaKcal\
+for the United States and \divChnKcal\ for China; cereals provide \divIndCereal\% of energy; and wheat is the
+largest single source of iron (\divIndIronTopShare\%).
+
+\subsection{Hyderabad: what is known, and at what resolution}
+Official data are not published for Hyderabad at every level. Household food consumption (MoSPI HCES 2023--24)
+and nutrient intake (NSS report 594) are published by state and by rural/urban sector, so
+\emph{Telangana urban} is used as the nearest official description of Hyderabad's diet (Hyderabad is the
+state's dominant city, but the figures are not city-specific). The National Family Health Survey (NFHS-5,
+2019--21) publishes a \emph{Hyderabad district} fact sheet, which is fully urban. Climate is computed for the
+WorldClim grid cell containing Hyderabad (\SI{17.4}{\degree}N, \SI{78.5}{\degree}E; 10 arc-minute, roughly
+\SI{18}{km}), and crop exposure for all of Telangana (Natural Earth boundary).
+
+\subsection{How diverse is the diet?}
+\paragraph{Staples.} A person in urban Telangana acquires \hqTgUrbanKgRice\,kg of rice and
+\hqTgUrbanKgWheat\,kg of wheat or atta per month: rice is \hqTgUrbanRiceToWheat\ times wheat, against
+\hqInUrbanRiceToWheat\ for urban India as a whole (\hqInUrbanKgRice\,kg rice, \hqInUrbanKgWheat\,kg wheat). Cereals
+provide \hqKcalCerealTgUrban\% of energy (urban India \hqKcalCerealInUrban\%) and \hqProtCerealTgUrban\% of protein
+(\hqProtCerealInUrban\%). Hyderabad's staple is therefore rice, not wheat, which sets it apart from the national
+picture above.
+
+\paragraph{Protein sources.} Average intake in urban Telangana is \hqIntakeKcalTgUrban\,kcal,
+\hqIntakeProtTgUrban\,g protein and \hqIntakeFatTgUrban\,g fat per person per day (all-India urban:
+\hqIntakeKcalInUrban, \hqIntakeProtInUrban, \hqIntakeFatInUrban). Protein comes from cereals
+(\hqProtCerealTgUrban\%), pulses (\hqProtPulseTgUrban\%), milk (\hqProtMilkTgUrban\%), eggs, fish and meat
+(\hqProtAnimalTgUrban\%, against \hqProtAnimalInUrban\% in urban India) and other foods. The effective number of
+protein sources (Shannon diversity over MoSPI's five groups) is \hqProtEffTgUrban\ in urban Telangana and
+\hqProtEffInUrban\ in urban India: in this coarse measure Hyderabad's protein diversity is the same as the
+national urban average. The animal-source share is higher.
+
+\paragraph{Food groups (NFHS-5, women 15--49, Telangana).} At least weekly: pulses \hqWeeklyPulses\%, milk or curd
+\hqWeeklyMilk\%, eggs \hqWeeklyEgg\%, chicken or meat \hqWeeklyMeat\%, dark green leafy vegetables
+\hqWeeklyLeafy\%, fruit \hqWeeklyFruit\%, fish \hqWeeklyFish\%. Daily: milk \hqDailyMilk\%, pulses \hqDailyPulses\%,
+leafy vegetables \hqDailyLeafy\%, fruit \hqDailyFruit\%, fish \hqDailyFish\%. The gaps are fruit, leafy
+vegetables and fish, which are the usual sources of vitamin C, folate and bioavailable iron.
+
+\paragraph{Pulses and where they come from.} Listed pulses amount to \hqTgUrbanKgPulses\,kg per person per
+month (urban India \hqInUrbanKgPulses); tur (pigeon pea, not one of our nine crops) is \hqTgUrbanShareTur\% of it,
+moong \hqTgUrbanShareMoong\%, gram (chickpea) \hqTgUrbanShareChick\% and masur (lentil) \hqTgUrbanShareLentil\%.
+Only the chickpea and lentil shares are covered by the index.
+
+\subsection{Nutrient diversity: where does Hyderabad's iron come from?}
+The HCES quantities of the listed grains and pulses, multiplied by the iron and zinc content of the matching
+foods in the Indian Food Composition Tables (ICMR-NIN 2017), give the following sources of iron in urban Telangana
+(urban India in brackets): rice \hqTgUrbanFeRice\% (\hqInUrbanFeRice\%), wheat \hqTgUrbanFeWheat\%
+(\hqInUrbanFeWheat\%), chickpea \hqTgUrbanFeChickpea\% (\hqInUrbanFeChickpea\%), lentil \hqTgUrbanFeLentil\%
+(\hqInUrbanFeLentil\%), tur \hqTgUrbanFeTur\%, moong \hqTgUrbanFeMoong\%, groundnut \hqTgUrbanFeGroundnut\%, other
+cereals \hqTgUrbanFeOtherCereal\%. The crops of this study supply \hqTgUrbanFeStudy\% of the iron in these foods.
+The comparison with India is the point: nationally wheat provides most of the iron from these foods, whereas in
+Hyderabad rice does, and rice is a poor iron source (\SI{0.65}{mg} per \SI{100}{g}, against 6.1--7.1 for
+chickpea and lentil dal). The listed foods yield \hqTgUrbanFeListed\,mg of iron and \hqTgUrbanZnListed\,mg of zinc
+per person per day (urban India: \hqInUrbanFeListed\ and \hqInUrbanZnListed); these are lower bounds, because
+vegetables, meat, fish and milk are not included, and they are quantities acquired by households, not intake.
+
+\paragraph{Does the nutrition data show it?} In the Hyderabad district, \hydAnaemChild\% of children 6--59 months
+and \hydAnaemNPW\% of non-pregnant women are anaemic (Telangana: \tgAnaemChild\% and \tgAnaemNPW\%; India,
+women: \inAnaemNPW\%), while only \hydBmiLow\% of women are underweight and \hydOverweight\% are overweight or obese
+(Telangana: \tgBmiLow\% and \tgOverweight\%; India: \inOverweight\% overweight or obese). Energy is not the
+problem; iron is. This matches the index's finding that iron is the nutrient closest to shortfall, and it shows
+that for a rice-based urban diet the shortfall is one of nutrient density, not quantity. For Telangana,
+the national nutrition survey (CNNS 2016--18) found low serum ferritin in \cnnsIronCFour\% of children 1--4 years,
+\cnnsIronCNine\% of children 5--9 and \cnnsIronAdol\% of adolescents, and zinc deficiency in \cnnsZincCFour\%,
+\cnnsZincCNine\% and \cnnsZincAdol\%.
+
+\subsection{How would climate affect Hyderabad's diet?}
+\paragraph{Local climate (grid cell).} Mean daily maximum temperature rose from \hydTmaxBase\ to
+\hydTmaxRecent\,\si{\celsius} between 1971--2000 and 2001--2024 (trend \hydTmaxTrend\,\si{\celsius} per decade;
+minimum temperature \hydTminTrend), while annual rainfall rose from \hydRainBase\ to \hydRainRecent\,mm. April--May
+maximum temperature, the hottest season, changed little (\hydAMBase\ to \hydAMRecent\,\si{\celsius}). Under
+MRI-ESM2-0 SSP2-4.5, 2041--2060 minus the 1970--2000 normal: April--May maximum $+$\hydAMFutChange\,\si{\celsius}
+(to \hydAMFutLevel\,\si{\celsius}), mean minimum $+$\hydTminFutChange\,\si{\celsius}, annual rainfall \hydRainFutRatio\%.
+One model, one scenario.
+
+\paragraph{Factor 1 --- heat on Telangana's crops.} Rice is the dominant crop (\tgAreaRice\% of Telangana
+cropland in the 2010 SPAM map, then cotton \tgAreaCotton\%, maize \tgAreaMaize\%, common bean \tgAreaBean\%).
+Heat exposure of rice and maize is essentially zero (monthly flowering temperature is below the rice
+\SI{35}{\celsius} and maize \SI{32}{\celsius} thresholds), whereas the common bean area (\tgBeanEheatTwoZeroZeroOneTwoZeroTwoFour\ times the panel reference maximum)
+is above its threshold. Flowering temperature in Telangana rises by \tgRicedTefffutureC\,\si{\celsius} for
+rice by 2041--2060 (wheat, with a very small area: \tgWheatdTefffutureC).
+
+\paragraph{Factor 2 --- water.} Telangana rice is \tgRiceRainfed\% rainfed, i.e.\ \emph{almost entirely
+irrigated}, so the index gives it almost no water stress today, and by 2041--2060 the model projects a smaller
+deficit. This is the weak point of the result: the index treats irrigation as a guaranteed buffer. Telangana's
+own statistics put paddy at \tgPaddyAreaMha\,Mha in 2023--24 against \tgPaddySpamMha\,Mha in the 2010 map
+(\tgPaddyGrowth\ times larger), so the area on which this buffer depends has grown a great deal; the index
+cannot say whether that irrigation can be sustained. The other crops that matter for iron are rainfed:
+chickpea (\tgChickpeaRainfed\% rainfed), maize (\tgMaizeRainfed\%) and groundnut (\tgGroundnutRainfed\%); chickpea's
+water exposure in Telangana is \tgChickpeaEwaterTwoZeroZeroOneTwoZeroTwoFour\ times the panel reference maximum.
+
+\paragraph{What this means for iron intake.} Taking the crops that supply Hyderabad's iron and the climate-driven
+yield change under the literature accounting (Telangana climate for rice, maize, chickpea and groundnut; the
+national figure for wheat, since Telangana grows almost no wheat, and for lentil): rice \hqdYRice\%, maize
+\hqdYMaize\%, chickpea \hqdYChickpea\%, groundnut \hqdYGroundnut\%, wheat \hqdYWheat\%, lentil \hqdYLentil\%. Weighted
+by their shares of listed iron, the change in iron from these foods is \hqIronChangeUrban\% for urban Telangana.
+A standard 10\% loss of a single crop would lower the iron from these foods by \hqIronTenRiceUrban\% (rice),
+\hqIronTenWheatUrban\% (wheat) or \hqIronTenChickpeaUrban\% (chickpea). These are accounting estimates with no market
+response, no CO$_2$ fertilisation and no adaptation, not forecasts.
+
+\subsection{What the index indicates for Hyderabad}
+\begin{enumerate}
+\item \textbf{Hyderabad's diet is less exposed to the crop that dominates the national ranking.} Wheat is the
+most vulnerable crop in India, but it supplies about a fifth (\hqTgUrbanFeWheat\%) of the iron Hyderabad gets from
+staples; rice, the main source (\hqTgUrbanFeRice\%), has the lowest vulnerability scores of the cereals because it
+is irrigated.
+\item \textbf{The nutritional risk in Hyderabad is structural, not climatic.} Rice is a poor iron source and
+anaemia is already widespread in the district while energy is adequate. Within the climate scenarios computed
+here, the change in iron from staple crops is small (\hqIronChangeUrban\%) compared with the existing gap.
+\item \textbf{The climate risk that does exist is indirect.} It comes through (a) the irrigation that keeps rice
+unstressed, (b) the rainfed crops that supply much of the remaining iron (chickpea and groundnut are modelled and are
+rainfed; tur, which is not modelled, is the largest part of the pulses), and (c) the wheat imported from other states, whose supply carries
+the national wheat vulnerability.
+\item \textbf{Where Hyderabad can improve:} the index's iron finding points to more iron-dense pulses
+and to the fruit and leafy vegetables whose weekly consumption is low, rather than to protecting any single crop.
+\end{enumerate}
+Limits: HCES describes household acquisition by state and sector (not Hyderabad city); the district anaemia
+figures come from the NFHS-5 district fact sheet (sample sizes are smaller; estimates flagged as unreliable in the
+source are not used); tur and moong, which are major in Hyderabad's diet, are not among the nine crops; and
+IFCT values are for raw foods, so cooking and processing losses are not counted.

@@ -1,1 +1,88 @@
-\begin{frame}{India and Hyderabad (in preparation)}\end{frame}
+% India and Hyderabad slides (all numbers from numbers_india.tex)
+\begin{frame}{India: what the nine-crop index says}
+\begin{columns}[T]
+\column{0.52\textwidth}\small
+\textbf{Ranking for India:} \indOrder
+\begin{itemize}
+\item Wheat \indWheatFFour: \indWheatShIron\% of national iron, \indWheatShKcal\% of energy
+\item Wheat today: mostly water; its \emph{future} rise is almost all heat
+\item Chickpea \indChickpeaFFour: all water --- the highest rainfed deficit in the panel
+\item 10\% wheat loss: energy \indWheatShockKcal\%, iron \indWheatShockIron\%, MAR \indWheatShockMar\ pts
+\end{itemize}
+\column{0.48\textwidth}\small
+\textbf{A concentrated food supply}
+\begin{itemize}
+\item Effective food items supplying energy: India \divIndKcal, China \divChnKcal, USA \divUsaKcal, world \divWorldKcal
+\item Cereals: \divIndCereal\% of energy
+\item Wheat: largest iron source (\divIndIronTopShare\%)
+\end{itemize}
+\end{columns}
+\src{FAO food balance sheets 2021--23 (Shannon diversity of supply, after Remans et al.\ 2014).}
+\end{frame}
+
+\begin{frame}{Hyderabad: a rice diet, unlike the national wheat story}
+\begin{columns}[T]
+\column{0.5\textwidth}\small
+\textbf{Urban Telangana} (nearest official data to Hyderabad), kg per person per month
+\begin{itemize}
+\item Rice \hqTgUrbanKgRice\ vs wheat \hqTgUrbanKgWheat\ ($\times$\hqTgUrbanRiceToWheat; urban India $\times$\hqInUrbanRiceToWheat)
+\item Cereals: \hqKcalCerealTgUrban\% of energy, \hqProtCerealTgUrban\% of protein
+\item Protein-source diversity \hqProtEffTgUrban\ of 5 groups (urban India \hqProtEffInUrban)
+\item Animal protein \hqProtAnimalTgUrban\% (India urban \hqProtAnimalInUrban\%)
+\end{itemize}
+\column{0.5\textwidth}\small
+\textbf{Food groups, Telangana women: at least weekly}
+\begin{itemize}
+\item Pulses \hqWeeklyPulses\%, milk \hqWeeklyMilk\%, eggs \hqWeeklyEgg\%, meat \hqWeeklyMeat\%
+\item Leafy vegetables \hqWeeklyLeafy\%, fruit \hqWeeklyFruit\%, fish \hqWeeklyFish\%
+\end{itemize}
+\textbf{Gaps:} fruit, leafy vegetables, fish
+\end{columns}
+\src{MoSPI HCES 2023--24 and NSS 594 (state, rural/urban); NFHS-5 Telangana state report (2019--21).}
+\end{frame}
+
+\begin{frame}{Nutrient diversity: where Hyderabad's iron comes from}
+\begin{columns}[T]
+\column{0.55\textwidth}\small
+Share of iron from listed grains and pulses (HCES quantity $\times$ IFCT 2017):
+\begin{itemize}
+\item Rice \hqTgUrbanFeRice\% (urban India \hqInUrbanFeRice\%)
+\item Wheat \hqTgUrbanFeWheat\% (urban India \hqInUrbanFeWheat\%)
+\item Chickpea \hqTgUrbanFeChickpea\%, lentil \hqTgUrbanFeLentil\%, tur \hqTgUrbanFeTur\%, moong \hqTgUrbanFeMoong\%, groundnut \hqTgUrbanFeGroundnut\%
+\end{itemize}
+Rice: \SI{0.65}{mg} iron per \SI{100}{g}; chickpea and lentil dal 6.1--7.1.
+\column{0.45\textwidth}\small
+\textbf{Does the health data agree?} (NFHS-5, Hyderabad district)
+\begin{itemize}
+\item Anaemic: children \hydAnaemChild\%, non-pregnant women \hydAnaemNPW\%
+\item Underweight women only \hydBmiLow\%; overweight/obese \hydOverweight\%
+\end{itemize}
+$\Rightarrow$ energy is adequate; \textbf{iron is the problem} --- the index's finding, locally.
+\end{columns}
+\src{Telangana, CNNS 2016--18: low ferritin \cnnsIronCFour\% (1--4 y), \cnnsIronAdol\% (adolescents); zinc deficiency \cnnsZincAdol\% (adolescents).}
+\end{frame}
+
+\begin{frame}{How would climate affect Hyderabad's diet?}
+\begin{columns}[T]
+\column{0.5\textwidth}\small
+\textbf{Local climate} (grid cell; MRI-ESM2-0, SSP2-4.5)
+\begin{itemize}
+\item Mean $T_{\max}$ \hydTmaxBase\,$\to$\,\hydTmaxRecent\,\si{\celsius} (1971--2000 $\to$ 2001--24); rain \hydRainBase\,$\to$\,\hydRainRecent\,mm
+\item 2041--60: April--May $T_{\max}$ $+$\hydAMFutChange\,\si{\celsius} (\hydAMFutLevel); rain \hydRainFutRatio\%
+\end{itemize}
+\textbf{Telangana crops}
+\begin{itemize}
+\item Rice: \tgAreaRice\% of cropland, \tgRiceRainfed\% rainfed $\Rightarrow$ almost no modelled stress
+\item Paddy \tgPaddyAreaMha\,Mha (2023--24) vs \tgPaddySpamMha\,Mha in the 2010 map: $\times$\tgPaddyGrowth
+\end{itemize}
+\column{0.5\textwidth}\small
+\textbf{Effect on iron from staples}
+\begin{itemize}
+\item Climate-driven yield change: rice \hqdYRice\%, chickpea \hqdYChickpea\%, wheat \hqdYWheat\% (national)
+\item Iron from these foods: \hqIronChangeUrban\%
+\item 10\% loss of rice: iron \hqIronTenRiceUrban\%; of wheat \hqIronTenWheatUrban\%
+\end{itemize}
+\begin{block}{Reading}Small next to the existing gap: Hyderabad's risk is structural; the climate route is irrigation, rainfed pulses and imported wheat.\end{block}
+\end{columns}
+\src{Conditional screening estimates; no CO$_2$ fertilisation, adaptation or market response.}
+\end{frame}

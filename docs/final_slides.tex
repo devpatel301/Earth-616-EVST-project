@@ -72,18 +72,16 @@ depend on it for nutrients. It is a relative score (0--1 scale), never a yield l
 \end{frame}
 
 \begin{frame}{Five new crops: every input checked against a source}
-\begin{columns}[T]
-\column{0.56\textwidth}
-\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_params9.tex}}
-\column{0.44\textwidth}\small
+\centering\scriptsize
+\input{nine_crop/generated/tab_params9.tex}
+\par\medskip
+\begin{minipage}{0.95\textwidth}\scriptsize
 \begin{itemize}
-\item Heat: fits to chamber/field seed-yield data \citep{prasad2002bean,prasad2003peanut,bhandari2020,morrison2002}
-\item Water: FAO $K_y$; field values for chickpea \citep{tari2022}
+\item Heat: fits to chamber/field seed-yield data \citep{prasad2002bean,prasad2003peanut,bhandari2020,morrison2002}; water: FAO $K_y$, field value for chickpea \citep{tari2022}
 \item Calendars: Sacks ``Pulses'' puts Indian chickpea in the monsoon (95\% gap-filled) $\Rightarrow$ cool-season rule: rabi sowing in South Asia, spring sowing where winters freeze
-\item Chickpea, lentil food supply from FAOSTAT SUA (hidden inside ``Pulses, Other'' in food balances)
+\item Chickpea and lentil food supply from FAOSTAT SUA (hidden inside ``Pulses, Other'' in food balances)
 \end{itemize}
-\end{columns}
-\src{docs/input\_register.csv; docs/literature\_verification\_new\_crops.md}
+\end{minipage}
 \end{frame}
 
 \begin{frame}{Result 1: wheat is the most vulnerable crop}
@@ -226,7 +224,7 @@ heat-tolerant wheat and sowing dates in India; water management for rainfed maiz
 \begin{itemize}
 \item \textbf{\topEq} is the crop whose climate stress most overlaps with its nutritional role --- robust across tests and to 2041--2060
 \item Cereals most vulnerable; pulses rising fastest; iron is the nutrient at stake
-\item India: wheat, chickpea and beans lead; Hyderabad's risk arrives mainly through national supply of wheat and pulses
+\item India: wheat, chickpea and beans lead. Hyderabad: rice-based diet, so less exposed to the national wheat risk --- but rice is iron-poor and anaemia is already high; the climate route is irrigation, rainfed pulses and imported wheat
 \item The index is a map of where adaptation and diet diversification would protect nutrition most
 \end{itemize}
 \end{frame}

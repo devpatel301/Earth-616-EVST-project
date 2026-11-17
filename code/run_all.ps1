@@ -48,6 +48,8 @@ Run 17_compare_runs.py nine_crop
 Run 18_endeval_figures.py nine_crop
 Run 20_input_register.py nine_crop
 Run 21_india_hyderabad.py nine_crop
+Run 22_literature_comparison.py nine_crop
+Run 23_sources_doc.py nine_crop
 Run 19_endeval_tex.py nine_crop
 
 # ---- 4. documents (Tectonic, https://tectonic-typesetting.github.io) ----

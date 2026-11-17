@@ -85,3 +85,13 @@ numbers exactly. **Intermediate data** (`data/work`, ≈10 GB) are regenerated b
 | `17_compare_runs.py` | Mid-evaluation vs four-crop vs nine-crop comparisons; worked example |
 | `18_endeval_figures.py`, `19_endeval_tex.py` | End-evaluation figures and LaTeX tables/macros |
 | `20_input_register.py` | Nine-crop input register |
+| `21_india_hyderabad.py`, `hyderabad_diet.py` | India profile; food-supply diversity; Telangana crop exposure; Hyderabad climate; Hyderabad/Telangana diet and nutrient sources from official surveys |
+| `22_literature_comparison.py` | Our results next to published findings, verdicts computed |
+| `23_sources_doc.py` | Writes `docs/india_hyderabad_sources.md` from the indicators table |
+
+## LaTeX
+
+The three end-evaluation documents (`docs/final_report.tex`, `final_slides.tex`, `final_appendix.tex`) are ASCII-only
+and use standard packages (`iftex` selects `inputenc`/`fontenc` under pdfLaTeX); they are compiled here with Tectonic.
+With pdfLaTeX run `pdflatex` / `bibtex` / `pdflatex` twice inside `docs/`. This pdfLaTeX route has **not** been run on
+this machine (no pdfLaTeX installed); only the Tectonic compile is tested.
