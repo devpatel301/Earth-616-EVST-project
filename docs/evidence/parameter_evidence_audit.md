@@ -1,11 +1,11 @@
 # Parameter evidence audit (crop-response parameters)
 
-Audit date: 2026-11-18. Companion file: `docs/parameter_evidence_register.csv` (97 rows, one per crop × parameter
+Audit date: 2026-11-18. Companion file: `docs/evidence/parameter_evidence_register.csv` (97 rows, one per crop × parameter
 actually used in `code/config.py` / `code/04_hazards.py` / `code/08_index.py`, including every `PARAM_RANGES`
 perturbation and the all-crop T_crit offsets −2, −1, +1, +2, +3 °C).
 
 Rules followed:
-- Checks already documented with quotes in `docs/literature_verification_new_crops.md` (cited "LV-NC §x") and in the
+- Checks already documented with quotes in `docs/evidence/literature_verification_new_crops.md` (cited "LV-NC §x") and in the
   mid-evaluation notes `c:\sem_5\est\project\S_rice_precipitation\docs\literature_verification.md` /
   `literature_verification_v2.md` (cited "LV1 §x", "LV2 §x") were not redone. This file adds what was missing.
 - Bibliographic details checked against Crossref (`api.crossref.org/works/<DOI>`) on 2026-11-18; the GGCMI

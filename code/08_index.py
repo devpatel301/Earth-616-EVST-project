@@ -57,7 +57,7 @@ def load_index_components():
     )
     
     assert merged_components.I.notna().all(), merged_components[merged_components.I.isna()]
-    # crop-specific threshold tests (docs/literature_verification_new_crops.md s5 items 4-5)
+    # crop-specific threshold tests (docs/evidence/literature_verification_new_crops.md s5 items 4-5)
     if "H_heat_off+3" in merged_components:
         legumes = merged_components.crop.isin(["chickpea", "lentil", "bean", "groundnut"])
         merged_components["H_heat_newlegumes_p3"] = np.where(legumes, merged_components["H_heat_off+3"], merged_components.H_heat)

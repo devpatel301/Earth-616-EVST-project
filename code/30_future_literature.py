@@ -2,10 +2,10 @@
 30_future_literature.py -- future-impact literature coverage for all nine crops (research extension 1).
 
 Inputs
-  docs/future_literature_sources.csv     verified study rows (citation, read level, locator, period, scenario,
+  docs/evidence/future_literature_sources.csv     verified study rows (citation, read level, locator, period, scenario,
                                          CO2/adaptation treatment, outcome, paraphrased conclusion, direction,
-                                         mechanism); quotes in docs/future_literature_sources.md
-  docs/future_literature_assessment.csv  our reviewed judgement per row: consistency verdict, likely reasons,
+                                         mechanism); quotes in docs/evidence/future_literature_sources.md
+  docs/evidence/future_literature_assessment.csv  our reviewed judgement per row: consistency verdict, likely reasons,
                                          what the comparison cannot establish, shared-input flag; and one
                                          coverage note per crop (row id "COVERAGE-<crop>")
 Our corresponding conclusion is COMPUTED here from the result tables for the panel countries the study covers
@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 import ext_common as E  # noqa: E402
 from config import CROP_ORDER, CROPS, ROOT_DIR  # noqa: E402
 
-DOCS = os.path.join(ROOT_DIR, "docs")
+DOCS = os.path.join(ROOT_DIR, "docs", "evidence")
 SHORT = {"United States of America": "USA", "China, mainland": "China", "Russian Federation": "Russia",
          "United Republic of Tanzania": "Tanzania"}
 VERDICTS = {"consistent", "partly consistent", "different", "not directly comparable"}

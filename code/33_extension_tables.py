@@ -483,7 +483,7 @@ def co2():
 
 # ---------------------------------------------------------------- parameter evidence
 def parameters():
-    reg = pd.read_csv(os.path.join(ROOT_DIR, "docs", "parameter_evidence_register.csv"))
+    reg = pd.read_csv(os.path.join(ROOT_DIR, "docs", "evidence", "parameter_evidence_register.csv"))
     st = reg.status.str.strip()
     ap = reg.applicability.fillna("not assessed").str.strip()
     stat_order = ["published", "derived", "borrowed", "assumption", "unsupported"]
@@ -634,7 +634,7 @@ def checks_and_levels():
     write_longtable("ext_checks.tex", ["ID", "Check", "Result", "Detail"], rows, "@{}lp{9.0cm}lp{3.8cm}@{}",
                     "Checks of the research extensions (\\file{code/32\\_extension\\_checks.py}). S: synthetic edge cases; R: real outputs against the established tables.",
                     "tab:extchecks")
-    lv = pd.read_csv(os.path.join(ROOT_DIR, "docs", "co2_reference_levels.csv"))
+    lv = pd.read_csv(os.path.join(ROOT_DIR, "docs", "evidence", "co2_reference_levels.csv"))
     import re
 
     def brk(x):      # let long unbreakable tokens (DOIs, paths) wrap inside narrow columns

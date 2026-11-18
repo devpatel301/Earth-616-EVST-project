@@ -1,8 +1,8 @@
 """
 31_parameter_evidence.py -- evidence-screened view of the index (research extension 2).
 
-Input: docs/parameter_evidence_register.csv (one row per crop x parameter actually used, with status, applicability
-and recommended treatment; sources in docs/parameter_evidence_audit.md).
+Input: docs/evidence/parameter_evidence_register.csv (one row per crop x parameter actually used, with status, applicability
+and recommended treatment; sources in docs/evidence/parameter_evidence_audit.md).
 
 What this script does
   1. Summarises the register (status, applicability, range status) -> parameter_evidence_summary.csv.
@@ -34,7 +34,7 @@ import pandas as pd
 sys.path.insert(0, os.path.dirname(__file__))
 from config import CROP_ORDER, CROPS, PROC, ROOT_DIR  # noqa: E402
 
-REGISTER = os.path.join(ROOT_DIR, "docs", "parameter_evidence_register.csv")
+REGISTER = os.path.join(ROOT_DIR, "docs", "evidence", "parameter_evidence_register.csv")
 P = lambda f: os.path.join(PROC, f)
 F4 = "F4_hazard_paired"
 NOT_APPLICABLE_PAIRS = {("bean", "India"): "FAOSTAT 'Beans, dry' includes Vigna pulses in India (FAO item definition); parameters are for Phaseolus vulgaris",

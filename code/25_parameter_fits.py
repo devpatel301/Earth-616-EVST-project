@@ -1,6 +1,6 @@
 """
 25_parameter_fits.py -- reproduces the DERIVED heat parameters of the new crops from the published data tabulated in
-docs/literature_verification_new_crops.md (section 2), and checks them against config.py.
+docs/evidence/literature_verification_new_crops.md (section 2), and checks them against config.py.
 
 Model (Deryng et al. 2014 form, on the index's temperature scale T_eff = (T_mean + T_max)/2):
     relative seed-yield loss = min(1, s_T * max(0, T_eff - T_crit)),   T_lim = T_crit + 1/s_T.

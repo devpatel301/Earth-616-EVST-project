@@ -128,7 +128,7 @@ def real():
           fac.crop.isin(CROPS).all() and fac.nutrient.isin(E.NUTRIENTS).all() and not fac.duplicated(["crop", "nutrient"]).any())
     check("R11", "CO2 envelopes ordered: factor_low <= factor_primary <= factor_high",
           ((fac.factor_low <= fac.factor_primary + 1e-12) & (fac.factor_primary <= fac.factor_high + 1e-12)).all())
-    sel = pd.read_csv(os.path.join(ROOT_DIR, "docs", "co2_effects_used.csv"))
+    sel = pd.read_csv(os.path.join(ROOT_DIR, "docs", "evidence", "co2_effects_used.csv"))
     allf = pd.read_csv(P("co2_effects_selected.csv"))
     applied = allf[allf["set"].isin(["primary", "extended", "extended_wet", "extended_dry"])]
     sel_applied = sel[sel["set"].isin(["primary", "extended", "extended_wet", "extended_dry"])]
@@ -255,15 +255,15 @@ def evidence_checks():
     refs = pd.read_csv(P("evidence_screened_references.csv")).set_index("view")
     check("R20", "V1 is a common rescaling of V0 (importance reference only): order of the seven remaining crops unchanged, factor = I_ref(V0)/I_ref(V1)",
           ranks_ok and np.isclose(refs.loc["V1", "F4_rescale_vs_V0"], refs.loc["V0", "I"] / refs.loc["V1", "I"]), f"factor {refs.loc['V1', 'F4_rescale_vs_V0']:.4f}")
-    reg = pd.read_csv(os.path.join(ROOT_DIR, "docs", "parameter_evidence_register.csv"))
+    reg = pd.read_csv(os.path.join(ROOT_DIR, "docs", "evidence", "parameter_evidence_register.csv"))
     miss = {c for c in CROPS} - set(reg.crop)
     check("R21", "parameter register covers all nine crops and every PARAM_RANGES perturbation is labelled as such",
           not miss and reg[reg.parameter.str.startswith("robustness")].range_status.astype(str).str.contains("exploratory|literature range|treatment range").all(),
           f"{len(reg)} rows")
     # literature coverage
-    src = pd.read_csv(os.path.join(ROOT_DIR, "docs", "future_literature_sources.csv"))
+    src = pd.read_csv(os.path.join(ROOT_DIR, "docs", "evidence", "future_literature_sources.csv"))
     cov = pd.read_csv(P("future_literature_coverage.csv"))
-    ass = pd.read_csv(os.path.join(ROOT_DIR, "docs", "future_literature_assessment.csv"))
+    ass = pd.read_csv(os.path.join(ROOT_DIR, "docs", "evidence", "future_literature_assessment.csv"))
     check("R22", "future literature: all nine crops accounted for (coverage assessment present), every source row has a verdict from the allowed set",
           set(cov.crop) == set(CROPS) and (cov.coverage_note.astype(str).str.len() > 20).all()
           and set(ass[~ass.id.astype(str).str.startswith("COVERAGE-")].consistency) <= {"consistent", "partly consistent", "different", "not directly comparable"})
@@ -275,10 +275,10 @@ def evidence_checks():
     miss_doi2 = sorted({str(d).lower() for d in sel[sel["set"].isin(["primary", "extended", "extended_wet", "extended_dry"])].doi.dropna()} - dois)
     check("R25", "every DOI of the applied CO2 effects is in refs.bib", not miss_doi2, miss_doi2[:5])
     # CO2 reference levels file against the raw NOAA file
-    lv = pd.read_csv(os.path.join(ROOT_DIR, "docs", "co2_reference_levels.csv"))
+    lv = pd.read_csv(os.path.join(ROOT_DIR, "docs", "evidence", "co2_reference_levels.csv"))
     noaa = pd.read_csv(os.path.join(ROOT_DIR, "data", "raw", "noaa_gml", "co2_annmean_gl.txt"), comment="#", sep=r"\s+", names=["year", "mean", "unc"]).set_index("year")["mean"]
     ok = all(np.isclose(float(lv.loc[lv.quantity.str.contains(f"2021|2022|2023") & lv.quantity.str.contains(str(y)), "value_ppm"].iloc[0]), noaa.loc[y]) for y in (2021, 2022, 2023))
-    check("R26", "CO2 reference levels: NOAA 2021-2023 values in docs/co2_reference_levels.csv equal the raw file; SSP2-4.5 2050 level (507 ppm) is below the 546 ppm lower end of the FACE experiments",
+    check("R26", "CO2 reference levels: NOAA 2021-2023 values in docs/evidence/co2_reference_levels.csv equal the raw file; SSP2-4.5 2050 level (507 ppm) is below the 546 ppm lower end of the FACE experiments",
           ok and float(lv.loc[lv.quantity.str.contains("SSP2-4.5 CO2, 2050"), "value_ppm"].iloc[0]) < 546)
 
 

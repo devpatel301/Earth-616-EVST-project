@@ -1,7 +1,7 @@
 """
 15_future_index.py -- historical vs future vulnerability with fixed assumptions (end evaluation, C5).
 
-Recorded decisions (docs/DECISION_REGISTER_END_EVAL.md, E5-E9):
+Recorded decisions (docs/records/DECISION_REGISTER_END_EVAL.md, E5-E9):
   * Comparator: the 1971-2000 season-years processed by 14_future_climate.py WITHOUT change factors;
     future = the same years WITH the MRI-ESM2-0 SSP2-4.5 2041-2060 change factors. Identical processing.
     The present (2001-2024) score of the main index is shown alongside for context.

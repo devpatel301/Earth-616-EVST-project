@@ -2,7 +2,7 @@
 28_co2_quality.py -- elevated-CO2 nutrient-CONCENTRATION stress test on the national food supply
 (research extension 3).
 
-Evidence: docs/co2_nutrient_effects.csv (verified rows; docs/co2_nutrient_effects.md). Only rows marked
+Evidence: docs/evidence/co2_nutrient_effects.csv (verified rows; docs/evidence/co2_nutrient_effects.md). Only rows marked
 "primary for our stress test" for the nine study crops and the nutrients we count are used. Nothing is
 transferred between species (no field pea -> chickpea/lentil/bean, no soybean -> groundnut/rapeseed), no
 effect is applied to extracted oils, and no effect is applied to energy or fat unless a primary row exists.
@@ -35,8 +35,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 import ext_common as E  # noqa: E402
 from config import CROPS, ROOT_DIR  # noqa: E402
 
-EVIDENCE = os.path.join(ROOT_DIR, "docs", "co2_nutrient_effects.csv")      # verified evidence rows (all candidates)
-SELECTION = os.path.join(ROOT_DIR, "docs", "co2_effects_used.csv")        # our reviewed selection, with reasons
+EVIDENCE = os.path.join(ROOT_DIR, "docs", "evidence", "co2_nutrient_effects.csv")      # verified evidence rows (all candidates)
+SELECTION = os.path.join(ROOT_DIR, "docs", "evidence", "co2_effects_used.csv")        # our reviewed selection, with reasons
 APPLIED_SETS = ("primary", "extended", "extended_wet", "extended_dry")
 
 

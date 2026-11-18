@@ -1,5 +1,5 @@
 """
-23_sources_doc.py -- writes docs/india_hyderabad_sources.md from data/external/india_hyderabad_indicators.csv:
+23_sources_doc.py -- writes docs/evidence/india_hyderabad_sources.md from data/external/india_hyderabad_indicators.csv:
 one section per source (citation, URL, saved file, granularity, row count, the tables/pages used) plus the
 limits that matter for interpreting the Hyderabad analysis.
 """
@@ -10,7 +10,7 @@ import pandas as pd
 from config import ROOT_DIR
 
 CSV = os.path.join(ROOT_DIR, "data", "external", "india_hyderabad_indicators.csv")
-OUT = os.path.join(ROOT_DIR, "docs", "india_hyderabad_sources.md")
+OUT = os.path.join(ROOT_DIR, "docs", "evidence", "india_hyderabad_sources.md")
 
 GRANULARITY = {
     "HCES2324_A10S": "State x rural/urban household consumption (quantity and value per person per 30 days). Not city-level: Telangana urban is the nearest description of Hyderabad.",

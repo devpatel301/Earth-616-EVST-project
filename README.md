@@ -17,23 +17,18 @@ SSP2-4.5), plus the nutrient consequences of yield losses. The mid-evaluation (f
 
 | Path | Contents |
 |---|---|
-| [docs/final_report.pdf](docs/final_report.pdf) | **Comprehensive final report** (self-contained): method with numbered equations, worked examples, all results, India/Hyderabad, robustness and validation, limitations, reproduction and audit; appendices with the parameter and source ledger, full tables, record of corrections and audit evidence. Sources: `docs/final_report.tex` + `docs/report/` |
-| [docs/final_slides.pdf](docs/final_slides.pdf) | Final slide deck |
-| [docs/final_appendix.pdf](docs/final_appendix.pdf) | Short stand-alone appendix (equations, full tables); its content is also in the report |
-| [docs/END_EVAL_RESULTS_REGISTER.md](docs/END_EVAL_RESULTS_REGISTER.md) | Commitments C1–C10 → evidence, results and limitations register |
-| `docs/co2_nutrient_effects.csv/.md`, `co2_effects_used.csv`, `co2_reference_levels.csv` | CO2 nutrient-quality evidence: every candidate effect with read level and locator; our selection with reasons; reference CO2 levels |
-| `docs/future_literature_sources.csv/.md`, `future_literature_assessment.csv` | 39 future-impact study rows (24 publications) covering all nine crops, with quotes, read level and our verdicts |
-| `docs/parameter_evidence_register.csv`, `parameter_evidence_audit.md` | Evidence register of every crop parameter used (status, applicability, replacement, treatment) and its audit |
-| [docs/DECISION_REGISTER_END_EVAL.md](docs/DECISION_REGISTER_END_EVAL.md) | Every end-evaluation method/scope decision (E1–E24) with its reason and test |
-| [docs/input_register.csv](docs/input_register.csv) / [.md](docs/input_register.md) | Nine-crop input register (items, panels, maps, calendars, parameters, mappings, proxies, sign-off) |
-| [docs/literature_verification_new_crops.md](docs/literature_verification_new_crops.md) | Source checks (quotes, pages, read level) for the five new crops' parameters; section 8 = follow-up checks of the 18 Nov 2026 audit |
-| [docs/literature_comparison_sources.md](docs/literature_comparison_sources.md) | Published findings used for the comparison with our results |
-| [docs/DATA_MANIFEST.csv](docs/DATA_MANIFEST.csv) | Every raw input: path, size, date, SHA-256 |
-| [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md) | Data source register (mid-evaluation datasets) |
-| `data/processed/nine_crop/` | End-evaluation result tables (machine readable) |
-| `data/processed/four_crop/` | Mid-evaluation crops re-run with the presented (literature-only) method |
-| `figures/nine_crop/G*.pdf` | End-evaluation figures; `figures/four_crop/` the regenerated mid-evaluation figure set |
-| `docs/nine_crop/generated/` | LaTeX tables and macros written by the code (no hand-typed result values) |
+| [docs/final_report.pdf](docs/final_report.pdf) | Comprehensive report, including methods, results, limitations, sources and appendices |
+| [docs/final_slides.pdf](docs/final_slides.pdf) | Presentation PDF |
+| [output/presentation/EST_Earth616_PPT.pptx](output/presentation/EST_Earth616_PPT.pptx) | Current editable presentation |
+| [docs/PRESENTATION_GUIDE.md](docs/PRESENTATION_GUIDE.md) | Presentation timing and interpretation notes |
+| [docs/evidence/](docs/evidence/) | Literature/source verification, parameter evidence, input register, CO2 selections and state-map sources |
+| [docs/records/](docs/records/) | Method decisions, commitments, corrections and results history |
+| [docs/DATA_MANIFEST.csv](docs/DATA_MANIFEST.csv) | Raw input inventory and checksums |
+| `docs/final_report.tex`, `docs/report/`, `docs/sections/`, `docs/nine_crop/generated/` | Report source and generated tables required to rebuild the report |
+| `data/processed/nine_crop/`, `figures/nine_crop/` | Final scientific results and figures |
+| `data/processed/four_crop/`, `docs/four_crop/`, `figures/four_crop/` | Reproduced four-crop comparison outputs used by the pipeline/audit |
+| [archive/mid_evaluation/](archive/mid_evaluation/) | Frozen mid-evaluation submission |
+| [archive/proposals/gpbo/](archive/proposals/gpbo/) | Preserved GP/BO proposal; separate from implemented results |
 
 ## Reproducing
 
@@ -61,7 +56,7 @@ run comparisons → figures → India/Hyderabad → literature comparison → co
 CRU-TS 4.09 (prec, tmax, tmin 1970–2024), WorldClim 1970–2000 normals, WorldClim CMIP6 MRI-ESM2-0 SSP2-4.5
 2041–2060, SPAM 2010, Sacks et al. 2010 calendars, FAOSTAT (production, food balances old and new, food
 security indicators, Supply Utilization Accounts), USDA FoodData Central SR Legacy, Natural Earth admin-0 and admin-1, the official India/Telangana survey files
-(`data/raw/india/`, sources in `docs/india_hyderabad_sources.md`), and
+(`data/raw/india/`, sources in `docs/evidence/india_hyderabad_sources.md`), and
 (optional) Beck et al. Köppen map. `01_download_data.py` fetches everything except the Köppen GeoTIFF.
 FAOSTAT bulk files change over time: copy the original zips (dates in the manifest) to reproduce the
 numbers exactly. **Intermediate data** (`data/work`, ≈10 GB) are regenerated by the pipeline.
@@ -92,7 +87,7 @@ numbers exactly. **Intermediate data** (`data/work`, ≈10 GB) are regenerated b
 | `20_input_register.py` | Nine-crop input register |
 | `21_india_hyderabad.py`, `hyderabad_diet.py` | India profile; food-supply diversity; Telangana crop exposure; Hyderabad climate; Hyderabad/Telangana diet and nutrient sources from official surveys |
 | `22_literature_comparison.py` | Our results next to published findings, verdicts computed |
-| `23_sources_doc.py` | Writes `docs/india_hyderabad_sources.md` from the indicators table |
+| `23_sources_doc.py` | Writes `docs/evidence/india_hyderabad_sources.md` from the indicators table |
 | `24_checks.py` | 29 consistency checks on the saved results (arithmetic, fixed reference, no double counting, bounds); stops the run on a failure |
 | `25_parameter_fits.py` | Refits the derived new-crop heat thresholds/slopes from the published data and checks them against `config.py` |
 | `26_report_tables.py` | Report tables and macros: data sources, parameter ledger, crop mapping, worked examples, checks, audit, India shares |
@@ -108,12 +103,30 @@ numbers exactly. **Intermediate data** (`data/work`, ≈10 GB) are regenerated b
 
 ## LaTeX
 
-The three end-evaluation documents (`docs/final_report.tex`, `final_slides.tex`, `final_appendix.tex`) are ASCII-only
-and use standard packages (`iftex` selects `inputenc`/`fontenc` under pdfLaTeX); they are compiled here with Tectonic.
+The comprehensive report (`docs/final_report.tex`) is ASCII-only
+and use standard packages (`iftex` selects `inputenc`/`fontenc` under pdfLaTeX); it is compiled here with Tectonic.
 With pdfLaTeX run `pdflatex` / `bibtex` / `pdflatex` twice inside `docs/`. This pdfLaTeX route has **not** been run on
 this machine (no pdfLaTeX installed); only the Tectonic compile is tested.
 
+## Presentation and submission files
+
+- **Present:** [20-minute slides, PDF](docs/final_slides.pdf).
+- **Edit or use presenter view:** [PowerPoint with timed speaker notes](output/presentation/EST_Earth616_PPT.pptx).
+- **Read:** [comprehensive final report](docs/final_report.pdf), including the latest literature follow-up.
+- **Prepare:** [presentation guide and timing](docs/PRESENTATION_GUIDE.md).
+
+The deck has 25 main slides plus four backups, timed to 20 minutes. Metrics and equations come first, followed by
+overall crop and nutrient trends, then focused findings. Summary charts and tables are editable. The PDF uses
+the inspected slide renderings. Rebuild documents from saved results using `code/build_presentables.ps1`; this does
+not run the scientific pipeline or tests. The report already includes its appendices; a duplicate standalone appendix is no longer maintained.
+
 ## Research extensions (19 Nov 2026)
+
+**Literature follow-up (18 Nov 2026, documentation only):** [review and disagreement explanations](docs/evidence/LITERATURE_FOLLOWUP.md)
+and [all 29 previously unmatched pairs](docs/evidence/literature_followup_pairs.csv). The targeted search adds regional yield evidence
+for six pairs and suitability evidence for four; nineteen future comparisons remain unverified. These sources have not yet
+been merged into the historical generated comparison tables. They are now integrated as a clearly labelled report
+subsection and in the presentation. No analysis or scientific test was rerun for this follow-up.
 
 Four extensions were added after the 18 Nov audit; they only read the verified baseline results and change none of
 them. Checked with `git diff`: of the tracked files in `data/processed/`, only `literature_comparison.csv` changed (the
@@ -129,16 +142,10 @@ text of the Ray et al. and Myers rows); every other baseline result is byte-iden
 
 Rerun alone: `powershell -ExecutionPolicy Bypass -File .\run_extensions.ps1` (from `code\`); they are also in
 `run_all.ps1`. **Not done / open:** teammate review of parameter statuses, CO2 evidence selection and literature
-verdicts; pdfLaTeX test; slides not updated (see below); CO2 evidence for bean, groundnut, energy and fat; a supported
+verdicts; optional pdfLaTeX test; CO2 evidence for bean, groundnut, energy and fat; a supported
 rice yield slope, any rapeseed heat slope, a *Vigna* parameter set.
 
-**Presentation statements that will need updating later (`docs/final_slides.tex`, not touched; it still compiles from
-the same macros):** the "Result 1: wheat is the most vulnerable crop" slide needs its condition (first in the full
-index, which uses proxies; first among the seven crops with supported parameters; rice and rapeseed not established);
-the literature slide's counts changed because the Ray et al. row was reclassified (7 of 12 "agree" instead of 8); the
-slide that says the CO2 nutrient effect is "shown only as an extra pathway" is superseded by the stress test (partial
-coverage, not a forecast); and any statement that the diversity of supply measures dietary quality. The slides do not
-present the new material (parameter audit, future-literature coverage, CO2 quality, diversity after losses).
+**Presentation status:** superseded by the results-focused 20-minute deck linked above. The deck includes the four extensions, conditional rankings, CO2 stress-test caveat, diversity interpretation, literature follow-up and speaker notes.
 
 ## Reproduction status (18 Nov 2026)
 
@@ -154,4 +161,4 @@ present the new material (parameter audit, future-literature coverage, CO2 quali
 - **Checks:** 29 of 29 consistency checks pass; the derived heat parameters are reproduced from the published data.
 - **Not done:** pdfLaTeX compile; independent teammate review; team rehearsal.
 
-Details, corrections and limitations: `docs/END_EVAL_RESULTS_REGISTER.md`, and Section 15 and the appendices of the report.
+Details, corrections and limitations: `docs/records/END_EVAL_RESULTS_REGISTER.md`, and Section 15 and the appendices of the report.

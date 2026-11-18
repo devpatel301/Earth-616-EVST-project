@@ -162,8 +162,8 @@ ALL_CROPS = {
         "kc": (0.40, 1.15, 0.50),
         "stages": (15, 15, 40, 15)
     },
-    # ---- end-evaluation crops (parameters: docs/literature_verification_new_crops.md;
-    #      every proxy is listed in docs/input_register.csv with its sensitivity range) ----
+    # ---- end-evaluation crops (parameters: docs/evidence/literature_verification_new_crops.md;
+    #      every proxy is listed in docs/evidence/input_register.csv with its sensitivity range) ----
     "chickpea": {
         "group": "pulse",
         "label": "Chickpea",
@@ -177,7 +177,7 @@ ALL_CROPS = {
         "tcrit": 34.0,
         "tlim": 41.14285714285714,
         "heat_slope": 0.14,
-        "heat_source": 'Bhandari et al. 2020 (J. Agron. Crop Sci., Table 3): growth-chamber seed yield vs day/night regime 30/20->42/32 C (flowering to maturity), 3 Indian genotypes; DERIVED T_eff fit (docs/literature_verification_new_crops.md s2c)',
+        "heat_source": 'Bhandari et al. 2020 (J. Agron. Crop Sci., Table 3): growth-chamber seed yield vs day/night regime 30/20->42/32 C (flowering to maturity), 3 Indian genotypes; DERIVED T_eff fit (docs/evidence/literature_verification_new_crops.md s2c)',
         "heat_metric": '12 h/12 h step chambers converted to T_eff = (mean+max)/2; outcome seed yield per plant (pots)',
         "ky": 0.88,
         "ky_source": 'Tari & Bahceci 2022 (Konya field trial: 0.85 early, 0.91 late sowing); not in FAO-33/66',
@@ -203,7 +203,7 @@ ALL_CROPS = {
         "tcrit": 31.9,
         "tlim": 37.78235294117647,
         "heat_slope": 0.17,
-        "heat_source": 'Bhandari et al. 2020 (J. Agron. Crop Sci.): growth-chamber seed yield vs day/night regime (4 points, 2 Indian genotypes); DERIVED T_eff fit; field cross-check 32/20 C (docs/literature_verification_new_crops.md s2d)',
+        "heat_source": 'Bhandari et al. 2020 (J. Agron. Crop Sci.): growth-chamber seed yield vs day/night regime (4 points, 2 Indian genotypes); DERIVED T_eff fit; field cross-check 32/20 C (docs/evidence/literature_verification_new_crops.md s2d)',
         "heat_metric": '12 h/12 h step chambers converted to T_eff; outcome seed yield per plant (pots)',
         "ky": 1.0,
         "ky_source": 'PROXY 1.0: field best-treatment 0.87 (Nandi et al. 2021, abstract) and ~1 on average (paraphrase); not in FAO',
@@ -227,7 +227,7 @@ ALL_CROPS = {
         "tcrit": 25.5,
         "tlim": 34.5,
         "heat_slope": 0.1111111111111111,
-        "heat_source": 'Prasad et al. 2002 Glob. Change Biol. (sunlit chambers, 28/18 optimum -> zero seed yield at 37/27 C); DERIVED to T_eff 25.5/34.5 (docs/literature_verification_new_crops.md s2a; abstract + Boote 2005/Hatfield 2011 read)',
+        "heat_source": 'Prasad et al. 2002 Glob. Change Biol. (sunlit chambers, 28/18 optimum -> zero seed yield at 37/27 C); DERIVED to T_eff 25.5/34.5 (docs/evidence/literature_verification_new_crops.md s2a; abstract + Boote 2005/Hatfield 2011 read)',
         "heat_metric": 'season-long day max/night min regimes (10 C diurnal range) converted to T_eff; outcome seed yield, linear decline to zero',
         "ky": 1.15,
         "ky_source": 'FAO-33 via FAO-66 Table 1 (Beans) and FAO-56 Rev.1 Table 8.7',
@@ -250,7 +250,7 @@ ALL_CROPS = {
         "tcrit": 31.8,
         "tlim": 42.32631578947368,
         "heat_slope": 0.095,
-        "heat_source": 'Prasad et al. 2003 Glob. Change Biol. (sunlit chambers 32/22 -> 44/34 C, seed yield); DERIVED T_eff fit (docs/literature_verification_new_crops.md s2b)',
+        "heat_source": 'Prasad et al. 2003 Glob. Change Biol. (sunlit chambers 32/22 -> 44/34 C, seed yield); DERIVED T_eff fit (docs/evidence/literature_verification_new_crops.md s2b)',
         "heat_metric": 'season-long day max/night min regimes converted to T_eff; outcome seed yield',
         "ky": 0.7,
         "ky_source": 'FAO-33 via FAO-66 Table 1 (Groundnuts) and FAO-56 Rev.1 Table 8.7',
@@ -308,7 +308,7 @@ ALT_CALENDAR_CROPS = {f"{k}__altcal": {**ALL_CROPS[k], "parent": k, "calendar_ru
 CLIMATE_CROPS = dict(CROPS) if RUN == "four_crop" else {**CROPS, **ALT_CALENDAR_CROPS}
 CROP_PARAMS = {**ALL_CROPS, **ALT_CALENDAR_CROPS}
 
-# Parameter ranges for the new crops' proxies (robustness rows in 08_index.py; docs/literature_verification_new_crops.md s5)
+# Parameter ranges for the new crops' proxies (robustness rows in 08_index.py; docs/evidence/literature_verification_new_crops.md s5)
 _LEG = ("chickpea", "lentil", "bean", "groundnut")
 PARAM_RANGES = {
     "new legumes: heat slope x0.7 (chamber -> field)": {c: {"s_lit_heat": 0.7 * ALL_CROPS[c]["heat_slope"]} for c in _LEG},

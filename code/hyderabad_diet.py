@@ -1,6 +1,6 @@
 """
 hyderabad_diet.py -- diet diversity and nutrient sources for Telangana (rural/urban) and the Hyderabad district,
-from official survey indicators (data/external/india_hyderabad_indicators.csv; sources in docs/india_hyderabad_sources.md).
+from official survey indicators (data/external/india_hyderabad_indicators.csv; sources in docs/evidence/india_hyderabad_sources.md).
 HCES/NSS are state-level rural/urban, so Telangana-URBAN stands in for Hyderabad city; NFHS-5 has a Hyderabad
 DISTRICT fact sheet. Called from 21_india_hyderabad.py; returns LaTeX macro values and writes result tables.
 """

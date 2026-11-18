@@ -1,7 +1,7 @@
 # Future climate-impact literature: verified sources for the nine crops
 
 Compiled 18 Nov 2026 for *Climate Change and Nutritional Security: Which Crops Are Most Vulnerable?* (research extension 1).
-Companion files: `docs/future_literature_sources.csv` (39 rows, one per study x crop x geography finding) and `docs/future_literature_assessment.csv` (our verdict per row plus one `COVERAGE-<crop>` row per crop).
+Companion files: `docs/evidence/future_literature_sources.csv` (39 rows, one per study x crop x geography finding) and `docs/evidence/future_literature_assessment.csv` (our verdict per row plus one `COVERAGE-<crop>` row per crop).
 
 How to read this file:
 - **Verification.** Every DOI was resolved against the Crossref API (`api.crossref.org/works/<DOI>`) on 18 Nov 2026. Title, journal, volume, issue, pages and author list in the BibTeX below come from Crossref.

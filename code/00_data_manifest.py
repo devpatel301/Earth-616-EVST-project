@@ -24,7 +24,7 @@ SOURCE = {"worldclim": "WorldClim 2.1 (CRU-TS 4.09 monthly prec; 1970-2000 prec 
           "usda": "USDA FoodData Central SR Legacy 2018-04", "naturalearth": "Natural Earth 1:50m admin-0",
           "koppen": "Beck et al. 2023 Koppen-Geiger 0.5 deg (manual download)",
           "naturalearth_admin1": "Natural Earth 1:10m admin-1 states/provinces (Telangana mask)",
-          "india": "Official India/Telangana/Hyderabad survey and statistics files (see docs/india_hyderabad_sources.md)",
+          "india": "Official India/Telangana/Hyderabad survey and statistics files (see docs/evidence/india_hyderabad_sources.md)",
           "noaa_gml": "NOAA Global Monitoring Laboratory globally averaged annual mean CO2 (gml.noaa.gov/ccgg/trends), retrieved 2026-11-18"}
 
 

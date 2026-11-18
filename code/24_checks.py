@@ -34,9 +34,9 @@ def main():
 
     # ---- C1/C2: inputs and component arithmetic -------------------------------------------------
     check("nine crops in panels", set(panels.crop) == set(CROPS) and len(CROPS) == 9, f"{panels.crop.nunique()} crops, {len(panels)} pairs")
-    reg = pd.read_csv(os.path.join(PROC, "..", "..", "..", "docs", "input_register.csv")).astype(str)
+    reg = pd.read_csv(os.path.join(PROC, "..", "..", "..", "docs", "evidence", "input_register.csv")).astype(str)
     missing = [c for c in CROPS if not reg.apply(lambda col: col.str.contains(c, case=False)).any(axis=None)]
-    check("every crop appears in docs/input_register.csv", not missing, str(missing))
+    check("every crop appears in docs/evidence/input_register.csv", not missing, str(missing))
     for h in ("heat", "water"):
         check(f"E_{h} = observed level / fixed maximum", close(comp[f"E_{h}"], comp[f"H_{h}_used"] / comp[f"H_{h}_used"].max()) < 1e-12,
               f"max {ref[f'H_{h}']:.4f}")

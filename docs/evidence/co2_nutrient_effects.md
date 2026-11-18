@@ -1,6 +1,6 @@
 # Elevated-CO2 effects on nutrient concentration in edible crop parts: verified evidence
 
-Companion to `docs/co2_nutrient_effects.csv` (137 rows, one per crop x nutrient x evidence set). Compiled 2026-11-18 for the elevated-CO2 stress test on FAOSTAT FBS 2021-2023 nutrient supply.
+Companion to `docs/evidence/co2_nutrient_effects.csv` (137 rows, one per crop x nutrient x evidence set). Compiled 2026-11-18 for the elevated-CO2 stress test on FAOSTAT FBS 2021-2023 nutrient supply.
 
 Rules used: a value goes in only if species, edible part, nutrient, CO2 treatment and units match. Nonsignificant estimates are recorded as nonsignificant, not as zero. Missing combinations stay missing. Field-pea effects are not transferred to chickpea, lentil or bean. Soybean effects are not transferred to groundnut or rapeseed. Downloaded copies are in the session scratchpad, `papers_co2/`.
 

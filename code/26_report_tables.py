@@ -1,7 +1,7 @@
 """
 26_report_tables.py -- extra tables and macros for the comprehensive final report (docs/final_report.tex):
 data-source inventory (from docs/DATA_MANIFEST.csv), parameter/source ledger (values from config.py, sources from
-docs/literature_verification_new_crops.md and the mid-evaluation verification notes), derived-parameter fits,
+docs/evidence/literature_verification_new_crops.md and the mid-evaluation verification notes), derived-parameter fits,
 consistency checks, rerun comparison, worked examples for the yield shock and the future yield accounting, and the
 India nine-crop supply shares before/after the chickpea-lentil correction. Every number is read from a saved output
 or from config.py; the code asserts that hand calculations equal the pipeline values.
@@ -122,7 +122,7 @@ def ledger():
     add("Groundnut", "$T_{crit}$, $s_T$", f"{f(c['groundnut']['tcrit'], 1)}, {f(c['groundnut']['heat_slope'], 3)}", "\\citet{prasad2003peanut} abstract", "cv.\\ Georgia Green, sunlit chambers 32/22--44/34\\,\\si{\\celsius}, season-long, ambient CO$_2$", "seed yield ($-$14, $-$59, $-$90\\%)", "DERIVED fit (4 points); full text not read", "29.0/0.074 \\citep{boote2005}; +3\\,\\si{\\celsius}; slope $\\times$0.7")
     add("Groundnut", "$K_y$", f(c["groundnut"]["ky"]), "FAO-33 Table 24; FAO-66 Table 1", "--", "seasonal", "published", "--")
     add("Rapeseed-mustard", "$T_{crit}$", f(c["rapeseed"]["tcrit"], 1), "\\citet{morrison2002} abstract", "field, Ottawa, 3 years $\\times$ 3 sowing dates, 3 \\emph{Brassica} species incl.\\ \\emph{B.~juncea}", "accumulated daily $T_{\\max}$ above 29.5\\,\\si{\\celsius} at flowering; seed yield", "PROXY conversion to $T_{eff}$ with an assumed 12\\,\\si{\\celsius} diurnal range", "$\\pm$1--3\\,\\si{\\celsius}")
-    add("Rapeseed-mustard", "$s_T$", f(c["rapeseed"]["heat_slope"], 2), "borrowed: \\citet{deryng2014} spring-wheat span (10\\,\\si{\\celsius})", "--", "--", "PROXY: no published slope found; unsupported (Section~\ref{sec:parevidence})", "0.07, 0.18")
+    add("Rapeseed-mustard", "$s_T$", f(c["rapeseed"]["heat_slope"], 2), "borrowed: \\citet{deryng2014} spring-wheat span (10\\,\\si{\\celsius})", "--", "--", "PROXY: no published slope found; unsupported (Section~\\ref{sec:parevidence})", "0.07, 0.18")
     add("Rapeseed-mustard", "$K_y$", f(c["rapeseed"]["ky"]), "FAO-56 Rev.1 Table 8.7 p.~279 \\citep{fao56rev1}", "no source stated by FAO; field 0.87 \\citep{istanbulluoglu2010}", "seasonal", "published, origin not traceable", "0.85, 0.95")
     for k in CROPS:
         add(LAB[k], "$K_c$ ini, mid, end; $\\bar K_c$", ", ".join(f(x) for x in c[k]["kc"]) + f"; {season_kc(k):.2f}", "FAO-56 Tables 11--12 \\citep{fao56}" + ("; stages: lentil arid row" if k == "chickpea" else "; stages: Rev.1 Table 6.11 GDD shares" if k == "rapeseed" else ""),
@@ -136,7 +136,7 @@ def ledger():
     add("All", "Zn, Fe composition", "per FBS item", "USDA SR Legacy \\citep{usda2019}; \\texttt{code/fbs\\_usda\\_map.csv}", "raw, unprocessed form (whole grain; primary weight)", "mg/100 g", "mapping choice (overstates Zn, Fe for refined cereals, meat)", "--")
     write("tab_ledger.tex", longtable("p{1.5cm}p{1.6cm}p{1.6cm}p{2.8cm}p{3.0cm}p{2.3cm}p{2.0cm}p{1.6cm}",
                                       ["Crop", "Parameter", "Value", "Source and location", "Experiment / conditions", "Metric and outcome", "Status", "Exploratory perturbations run"], R,
-                                      "Parameter and source ledger. Values are read from \\texttt{code/config.py}. The last column lists perturbations we ran; they are exploratory, not literature-supported ranges (Section~\ref{sec:parevidence}). Status: published = value printed in the source; DERIVED = our arithmetic or fit on published values; PROXY = value borrowed from another crop, outcome or metric. Read levels and verbatim quotes: \\texttt{docs/literature\\_verification\\_new\\_crops.md}.", "tab:ledger"))
+                                      "Parameter and source ledger. Values are read from \\texttt{code/config.py}. The last column lists perturbations we ran; they are exploratory, not literature-supported ranges (Section~\\ref{sec:parevidence}). Status: published = value printed in the source; DERIVED = our arithmetic or fit on published values; PROXY = value borrowed from another crop, outcome or metric. Read levels and verbatim quotes: \\texttt{docs/evidence/literature\\_verification\\_new\\_crops.md}.", "tab:ledger"))
 
 
 def crop_mapping():

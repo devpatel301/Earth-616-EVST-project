@@ -38,8 +38,28 @@ ehthumbs.db
 data/raw/
 data/work/
 *.part
+.chart-data-*/
 *.chunks/
 
 
 # Large regenerated intermediates (nutrient_supply.pkl is 164 MB, over the GitHub file limit)
 data/processed/**/*.pkl
+
+# Regenerable presentation figures; keep original theme assets and provenance.
+/figures/presentation/*.png
+
+# Keep only the current user-maintained presentation in the output directory.
+/output/*
+!/output/presentation/
+/output/presentation/*
+!/output/presentation/EST_Earth616_PPT.pptx
+
+# Rendered proposal PDF is reproducible from its retained LaTeX source.
+/archive/proposals/**/*.pdf
+
+# Local review renders, dependency caches and alternate cleanup backups.
+/.codex-finalizer/
+/.presentation-build/
+/tmp/
+/node_modules/
+/repo-cleanup-backup-*/

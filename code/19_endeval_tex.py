@@ -137,7 +137,7 @@ def main():
         rows.append([LAB[c], f"{i['tcrit']:.1f}", tl, f"{i['heat_slope']:.3f}", f"{i['heat_slope'] / smax:.2f}", f"{i['ky']:.2f}",
                      f"{i['ky'] / kmax:.2f}", f"{season_kc(c):.2f}", short_src.get(c, "")])
     write("tab_params9.tex", tabular("lrrrrrrrl", [r"Crop", r"$T_{crit}$", r"$T_{lim}$", r"$s_T$ (/\si{\celsius})", r"$S_T$", r"$K_y$", r"$S_P$", r"$\bar K_c$", "heat source"], rows,
-                                     r"$T_{crit}$, $T_{lim}$ in \si{\celsius} of $T_{eff}$. Rice $K_y$ is a proxy (FAO gives none); lentil $K_y$ and the rapeseed slope are proxies; new-crop heat values are fits to chamber or field data (docs/literature\_verification\_new\_crops.md)."))
+                                     r"$T_{crit}$, $T_{lim}$ in \si{\celsius} of $T_{eff}$. Rice $K_y$ is a proxy (FAO gives none); lentil $K_y$ and the rapeseed slope are proxies; new-crop heat values are fits to chamber or field data (docs/evidence/literature\_verification\_new\_crops.md)."))
 
     # ---- panels ----
     rows = []
@@ -265,7 +265,7 @@ def main():
                          .replace("~", "-").replace("<", "$<$").replace(">", "$>$").replace("#", r"\#"))
         rows = [[esc(r.id), esc(r.paper), esc(r.published_finding), esc(r.our_comparable_result), esc(r.agreement)] for _, r in lc.iterrows()]
         write("tab_litcompare.tex", tabular("p{0.9cm}p{3.0cm}p{4.4cm}p{4.6cm}p{2.0cm}", ["", "Study", "Published finding", "Our comparable result", "Verdict"], rows,
-                                            "Signs and rank orders only; published values verified in docs/literature\\_comparison\\_sources.md; ours computed by code/22\\_literature\\_comparison.py."))
+                                            "Signs and rank orders only; published values verified in docs/evidence/literature\\_comparison\\_sources.md; ours computed by code/22\\_literature\\_comparison.py."))
         lc_agree = lc.agreement.str.startswith("agree").sum()
         mac("litN", len(lc)); mac("litAgree", int(lc_agree)); mac("litDiffer", int(lc.agreement.str.startswith("differ").sum()))
         mac("litPartial", int(lc.agreement.str.startswith("partial").sum() + lc.agreement.str.startswith("sign").sum()))

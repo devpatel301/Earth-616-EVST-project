@@ -65,8 +65,10 @@ Run 26_report_tables.py nine_crop     # report tables: data sources, parameter l
 # ---- 4. documents (Tectonic, https://tectonic-typesetting.github.io) ----
 $tectonic = if (Get-Command tectonic -ErrorAction SilentlyContinue) { "tectonic" } else { "$env:LOCALAPPDATA\tectonic\tectonic.exe" }
 Set-Location ..\docs
-foreach ($doc in "final_report", "final_slides", "final_appendix") {
+foreach ($doc in "final_report") {
     & $tectonic -X compile "$doc.tex"
     if ($LASTEXITCODE -ne 0) { throw "tectonic failed on $doc.tex" }
 }
 Set-Location ..\code
+# Current slides are authored with editable charts/tables in build_presentation.mjs.
+# Rebuild all presentables (without rerunning analysis) with build_presentables.ps1.

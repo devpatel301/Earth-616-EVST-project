@@ -11,12 +11,12 @@ and the generated LaTeX macros; none is typed by hand in the documents.
 | ID | Commitment | Status | Evidence (files) | What a reviewer should check |
 |---|---|---|---|---|
 | C1 | Common index, reproducible crop x country scores, F4 | implemented, awaiting review | `index_components.csv`, `index_crop.csv`, `worked_example.csv` (wheat-India from raw values to F4; the code asserts hand = pipeline) | Re-derive one other pair by hand |
-| C2 | Nine crops in three groups | implemented, awaiting review | `docs/input_register.csv/.md`, `docs/literature_verification_new_crops.md`, `panels.csv` (59 pairs, 20 countries) | Each new-crop heat value is a *fit* (chamber or field data), not a quoted threshold; rapeseed slope and lentil K_y are proxies |
+| C2 | Nine crops in three groups | implemented, awaiting review | `docs/evidence/input_register.csv/.md`, `docs/evidence/literature_verification_new_crops.md`, `panels.csv` (59 pairs, 20 countries) | Each new-crop heat value is a *fit* (chamber or field data), not a quoted threshold; rapeseed slope and lentil K_y are proxies |
 | C3 | Refined implementation: literature-only main sensitivity, regenerated tables and figures | implemented | `config.py` (blended kept only as a labelled robustness row); four-crop regenerated set in `figures/four_crop/`, `docs/four_crop/generated/`; `compare_mideval_vs_fourcrop.csv` | Mid-evaluation crop order unchanged under literature-only (four-crop run) |
 | C4 | Present comparison, nine crops, both weightings | implemented | `index_crop.csv`, `index_components.csv`, `compare_fourcrop_vs_ninecrop.csv` (normalisation-reference effect separated from physical stress, which is identical) | Original-pair scores roughly halve because the new maxima (bean heat, chickpea water) enlarge the reference |
 | C5 | Future vulnerability, comparable processing | implemented, awaiting review | `future_components.csv`, `future_crop.csv`, `future_group.csv`, `future_check_hist_vs_main.csv` (historical run reproduces the main 1971-2000 series, max difference ~4e-6), `future_clim_check.csv` | Change-factor choice (decision E9); single model |
 | C6 | Crop group comparison | implemented | `index_group.csv`, `future_group.csv` | Group = mean of three selected crops; not all cereals/pulses/oilseeds |
-| C7 | Comparison with published findings, incl. disagreements | implemented | `literature_comparison.csv` (verdicts computed from our results), `docs/literature_comparison_sources.md` (quotes, page/table, read level) | Re-check 3 quotes against the papers; two disagreements are reported, not hidden |
+| C7 | Comparison with published findings, incl. disagreements | implemented | `literature_comparison.csv` (verdicts computed from our results), `docs/evidence/literature_comparison_sources.md` (quotes, page/table, read level) | Re-check 3 quotes against the papers; two disagreements are reported, not hidden |
 | C8 | Nutritional significance | implemented, awaiting review | `adequacy.csv`, `yield_diet_scenarios.csv`, `future_nutrition.csv`, `food_supply_diversity.csv`, `india_nutrient_sources.csv` | Requirement choice changes the iron shortfall count (main vs moderate-bioavailability variant) |
 | C9 | Final communication | report implemented as one comprehensive document; slides not redesigned (presentation work pending) | `docs/final_report.pdf` (sources `docs/final_report.tex` + `docs/report/`), `final_slides.pdf`, `final_appendix.pdf`; figures `figures/nine_crop/G*.pdf` | Team rehearsal not done; slides compile from the same macros but do not yet present the report's new material (ledger, worked examples, audit) |
 | C10 | Reproducible evidence | implemented; full rerun from raw inputs reproduces all outputs exactly (second audit below) | `code/run_all.ps1`, `requirements.txt`, `docs/DATA_MANIFEST.csv` (55 raw files with SHA-256), `consistency_checks.csv` (29 checks), `README.md` | A teammate should run `00_data_manifest.py --check` and one representative step on a fresh checkout |
@@ -29,7 +29,7 @@ and the generated LaTeX macros; none is typed by hand in the documents.
 | P1 four-crop completion | Done (see C3). The one-pair worked example is in the report. |
 | P2 five new crops | Input register complete; every proxy visible. Unresolved: heat thresholds are fits, not stated by sources; no published canola slope. |
 | P3 present analysis | Done (C4, C6). |
-| P4 future | Done (C5). Decisions E9-E12 in `docs/DECISION_REGISTER_END_EVAL.md`. |
+| P4 future | Done (C5). Decisions E9-E12 in `docs/records/DECISION_REGISTER_END_EVAL.md`. |
 | P5 nutrition and future yield accounting | Standard 10% shock extended to nine crops; future yield accounting implemented as a **conditional screening estimate** (literature damage accounting, empirical cross-check). **Scope decision:** this is not a climate-driven nutrient *forecast*; the two methods do not agree pair by pair (rank correlation ~0). |
 | P6 credibility | Robustness (one-at-a-time and Monte Carlo), validation, literature comparison done under the final method. Mid-evaluation counts (80/80, 97.5%) are **not** reused. |
 | P7 submission | Report, slides, appendix, input/decision register, result tables, code and manifest present. |
@@ -53,7 +53,7 @@ and the generated LaTeX macros; none is typed by hand in the documents.
 4. Pigeon pea (tur) and moong are major in Hyderabad's diet but outside the nine crops.
 5. One climate model, one scenario; no CO2 fertilisation or adaptation (a separate CO2 nutrient-quality stress test is in the third audit below).
 6. HCES and NSS describe state rural/urban households, not Hyderabad city; NFHS has a district fact sheet.
-7. Not verified in the sources: Prasad 2002/2003, Morrison and Stewart 2002 full texts; the origin of FAO-56 Rev.1's rapeseed K_y; see `docs/literature_verification_new_crops.md` section 6.
+7. Not verified in the sources: Prasad 2002/2003, Morrison and Stewart 2002 full texts; the origin of FAO-56 Rev.1's rapeseed K_y; see `docs/evidence/literature_verification_new_crops.md` section 6.
 8. Not done: the team rehearsal; reviewer sign-off; a test of the documents with `pdflatex` itself (see README). (The climate steps were re-run from raw inputs in the second audit.)
 
 ## Corrected earlier claims
@@ -94,7 +94,7 @@ Unchanged by the re-run: every `index_*`, `future_components/crop/group`, `adequ
   - New: the outputs of `25` and `26`.
 - **Final check.** A final `run_all.ps1 -SkipClimate` with the complete pipeline order (24 → 25 → 19 → 26 → documents) is reported in the final response of this audit.
 
-**Source review** (`docs/literature_verification_new_crops.md` §8; report Appendix A ledger):
+**Source review** (`docs/evidence/literature_verification_new_crops.md` §8; report Appendix A ledger):
 - **FAO-33 rice.** Read: no K_y; rice is classed "high" (Table 2 p. 7), the same class as maize. The rice K_y 1.25 is therefore explicitly a proxy.
 - **Nandi 2021.** The "1 % per 1 %" sentence is now verbatim (abstract). It supports the lentil proxy K_y 1.0.
 - **FAO-56 Rev.1 rapeseed K_y 0.90.** The whole text was searched; no source is stated.
@@ -130,9 +130,9 @@ comparable); the rice K_y source text in `config.py` and the ledger no longer im
 
 | Extension | Implemented | Main result | Unresolved |
 |---|---|---|---|
-| 2 Parameter evidence | `31_parameter_evidence.py`, `docs/parameter_evidence_register.csv` (97 rows), `parameter_evidence_audit.md` | Published 38, derived 18, borrowed 13, assumption 27, unsupported 1 (rapeseed heat slope); rice heat slope (fertility) also unsupported as a yield slope. Evidence-screened view: rice and rapeseed unavailable; bean India and Myanmar flagged (Vigna). Wheat first in V0, V1 (7 crops) and V2 under both weightings. Heat is 0.02% (rice) and 1.4% (rapeseed) of present F4 but 55% of rapeseed's projected change. | No supported rice yield slope on T_eff; no Brassica slope; no Vigna set; Prasad 2002/2003 and Morrison and Stewart 2002 full texts; Baker-derived rice candidate not computed |
-| 1 Future literature | `30_future_literature.py`, `docs/future_literature_sources.csv/.md`, `future_literature_assessment.csv` | 39 rows, 24 publications, 26 read in full, 13 abstract only; all nine crops accounted for; verdicts 12 consistent, 21 partly, 5 different, 1 not comparable (a description of the evidence, not an accuracy score). 29 of 59 pairs have no verified study. Studies with CO2 fertilisation or adaptation find gains where we find losses (Canada lentil, Brazil bean). MRI-ESM2 described by one study as the least pessimistic model. | Verdicts not reviewed by teammates; Qian 2026 and Singh 2014 abstract only; no study for most Australian, Turkish, Russian, USA and Chinese pulse pairs |
-| 3 CO2 quality | `28_co2_quality.py`, `docs/co2_nutrient_effects.csv/.md`, `co2_effects_used.csv`, `co2_reference_levels.csv` | Stress test, not a forecast. 12 primary effects (Myers 2014 original FACE table; 9 significant). India: quality only protein -2.96%, zinc -3.85%, iron -2.24%; climate yield only -1.55, -1.72, -2.03; combined -4.45, -5.44, -4.20 (multiplicative); MAR -0.75 points. Zinc falls more from quality than from the climate yield channel in all 20 panel countries. MAR hides it (zinc adequacy stays at or above 1). | Energy, fat, bean, groundnut not estimated; chickpea, lentil, rapeseed thin or extended-only; no dose-response, so no scaling to SSP2-4.5 (507 ppm in 2050 vs 546-586 ppm in the experiments); FACE sites not in India |
+| 2 Parameter evidence | `31_parameter_evidence.py`, `docs/evidence/parameter_evidence_register.csv` (97 rows), `parameter_evidence_audit.md` | Published 38, derived 18, borrowed 13, assumption 27, unsupported 1 (rapeseed heat slope); rice heat slope (fertility) also unsupported as a yield slope. Evidence-screened view: rice and rapeseed unavailable; bean India and Myanmar flagged (Vigna). Wheat first in V0, V1 (7 crops) and V2 under both weightings. Heat is 0.02% (rice) and 1.4% (rapeseed) of present F4 but 55% of rapeseed's projected change. | No supported rice yield slope on T_eff; no Brassica slope; no Vigna set; Prasad 2002/2003 and Morrison and Stewart 2002 full texts; Baker-derived rice candidate not computed |
+| 1 Future literature | `30_future_literature.py`, `docs/evidence/future_literature_sources.csv/.md`, `future_literature_assessment.csv` | 39 rows, 24 publications, 26 read in full, 13 abstract only; all nine crops accounted for; verdicts 12 consistent, 21 partly, 5 different, 1 not comparable (a description of the evidence, not an accuracy score). 29 of 59 pairs have no verified study. Studies with CO2 fertilisation or adaptation find gains where we find losses (Canada lentil, Brazil bean). MRI-ESM2 described by one study as the least pessimistic model. | Verdicts not reviewed by teammates; Qian 2026 and Singh 2014 abstract only; no study for most Australian, Turkish, Russian, USA and Chinese pulse pairs |
+| 3 CO2 quality | `28_co2_quality.py`, `docs/evidence/co2_nutrient_effects.csv/.md`, `co2_effects_used.csv`, `co2_reference_levels.csv` | Stress test, not a forecast. 12 primary effects (Myers 2014 original FACE table; 9 significant). India: quality only protein -2.96%, zinc -3.85%, iron -2.24%; climate yield only -1.55, -1.72, -2.03; combined -4.45, -5.44, -4.20 (multiplicative); MAR -0.75 points. Zinc falls more from quality than from the climate yield channel in all 20 panel countries. MAR hides it (zinc adequacy stays at or above 1). | Energy, fat, bean, groundnut not estimated; chickpea, lentil, rapeseed thin or extended-only; no dose-response, so no scaling to SSP2-4.5 (507 ppm in 2050 vs 546-586 ppm in the experiments); FACE sites not in India |
 | 4 Diversity after losses | `29_diversity_losses.py` | Whole-supply Shannon over FBS items; SUA chickpea and lentil removed from the parent item. A loss raises the effective number of sources exactly when the item share exceeds 1/N_eff (predicts the sign in 142 of 142 single-item cases). India: wheat -10% lowers iron 2.95% and raises N_eff(iron) by 0.58; CO2+climate scenario iron -4.20%, N_eff +0.49. | Loss-only; no substitution, trade or household response; N_eff depends on the FBS classification |
 
 **Checks.** `32_extension_checks.py`: 37 of 37 pass (10 synthetic edge cases for accounting; real outputs against the
@@ -145,3 +145,34 @@ literature verdicts; decision on whether to adopt any rice or rapeseed heat para
 test; correct reference [16] of the submitted literature review (earlier item).
 
 **Presentation items (slides not touched):** see README, "Presentation statements that will need updating later".
+
+
+## Presentation and document polish, 18 November 2026
+
+- Compiled the comprehensive report with a clearly labelled additional literature assessment (six regional yield comparisons and four regional suitability comparisons; nineteen still unverified).
+- Replaced the current presentation with 20 main slides timed to 20 minutes and four backup slides. Editable PowerPoint includes speaker notes, sources, native charts and tables; matching projection PDF uses inspected renderings.
+- Main India quality/quantity comparison uses present-relative climate effects; historical-reference values remain in backup. Equations and the limits of F4, CO2 treatment, diversity and adequacy are retained.
+- Archived the earlier Beamer source; added a document-only build command and presentation guide. Numerical result tables and model parameters were unchanged; scientific pipeline and tests were not rerun.
+
+### Professor presentation revision, 18 November 2026
+
+- Used the mid-evaluation deck's explanatory sequence while retaining the final nine-crop method. Added separate formula-and-graph explanations of heat exposure, water exposure, sensitivity and nutritional importance, followed by the paired F4 formula and nutrient-supply accounting. Observed-yield regressions remain cross-checks only.
+- Moved the crop nutrient-profile heatmap into the main overview. Added the median national nutrient changes across 20 countries from the saved present-relative quantity and primary combined CO2 scenarios. These descriptive medians are not global population-weighted changes or calibrated 2050 forecasts.
+- Ordered the talk as metrics, broad crop/nutrition trends, focused findings and interpretation. The 25 main slides total 1,200 seconds in speaker-note targets; four backups follow. Black backgrounds and no visible footers are retained.
+- Output: `output/presentation/Earth_616_Professor_Presentation_Final.pptx` and `docs/final_slides.pdf`. Scientific CSVs, parameters, pipeline and scientific tests were untouched by this presentation revision.
+
+- Map revision: overview slide 3 now maps coverage across 20 countries using the number of crops evaluated per country. India slide 18 pairs a national locator map with nutrient-supply shares and wheat F4. No subnational estimates were inferred. Current deck: `output/presentation/Earth_616_Professor_Presentation_Maps_Final.pptx`; matching PDF remains `docs/final_slides.pdf`. Slide count and 20-minute timing are unchanged.
+
+- State-insight revision: replaced the India locator on slide 18 with two maps of official 2023-24 state wheat production shares and irrigation coverage. Top-three production concentration is 66.78%; irrigation varies substantially among listed states. These are contextual observations, not estimated state vulnerability or future losses. Sources: `docs/evidence/INDIA_STATE_MAP_SOURCES.md`; data: `data/external/india_state_wheat_2023_24.csv`. Current deck: `Earth_616_Professor_Presentation_State_Maps.pptx`. No scientific pipeline was rerun.
+
+- Styling revision: graphs, maps and mathematical images now have white backgrounds and dark labels/axes; slide backgrounds remain black. All presentation assets and both outputs were rebuilt from saved results. No scientific calculations were rerun. Current deck: `Earth_616_Professor_Presentation_White_Graphs.pptx`.
+
+- Theme revision: recreated the user-supplied Big Longs PDF style with grey uppercase headings, numbered white panels, grayscale charts and original source ornaments. White graph backgrounds and no visible footers are retained. Main talk remains 25 slides/1,200 seconds, plus four backups. Current deck: `Earth_616_Professor_Presentation_Big_Longs_Theme.pptx`; matching PDF: `docs/final_slides.pdf`. No scientific pipeline or tests were rerun.
+
+- Colour revision: restored coloured data series and map/heatmap scales while retaining the Big Longs typography, numbered panels, white graph backgrounds and no visible footers. Current deck: `Earth_616_Professor_Presentation_Big_Longs_Colour.pptx`; matching PDF: `docs/final_slides.pdf`. Scientific results and timing are unchanged.
+
+- Slide 15 overlap fix: nutrient/category names now sit below the plot (native chart axis tick-label position low), separate from near-zero value labels. Values, colours and theme unchanged. Updated PowerPoint: `Earth_616_Professor_Presentation_Overlap_Fixed.pptx`; matching PDF rebuilt.
+
+## Repository cleanup, 19 November 2026
+
+Removed the duplicate standalone appendix, generated Markdown copy of the input register, obsolete four-crop source summary, superseded Beamer files, invalid root bibliography pointer and build logs from the active repo. Permanent deletion was blocked by automatic review, so these 11 files are recoverable in the sibling `repo-cleanup-backup-2026-11-19` folder. Unique literature/parameter evidence is retained under `docs/evidence/`; decision/results records under `docs/records/`. The GP/BO proposal is preserved under `archive/proposals/gpbo/`. Evidence CSV bytes and scientific output values are unchanged. Pipeline readers/generators and report references use the new paths. `EST_Earth616_PPT.pptx`, the current slide PDF and the frozen mid-evaluation submission are preserved. No scientific pipeline was rerun.

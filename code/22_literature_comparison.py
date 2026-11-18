@@ -1,6 +1,6 @@
 """
 22_literature_comparison.py -- comparison of our results with published findings (commitment C7).
-Published values are copied from docs/literature_comparison_sources.md (each verified there with a quote,
+Published values are copied from docs/evidence/literature_comparison_sources.md (each verified there with a quote,
 page/table and read level). Our comparable quantity is COMPUTED here from the result tables, so every row
 pairs a sourced number with a reproducible one. Only signs and rank orders are compared, never an index
 value with a yield percentage. Output: data/processed/nine_crop/literature_comparison.csv
