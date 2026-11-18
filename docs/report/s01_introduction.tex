@@ -1,0 +1,92 @@
+\section{Introduction}\label{sec:intro}
+
+\subsection{Problem and research questions}
+Climate change affects nutrition through two channels. The first is how much of each crop is produced. The
+second is what that crop contributes to diets. A crop matters for nutrition security when three things
+coincide: its growing areas are under heat or water stress, its yield falls quickly under that stress, and many
+people depend on it for energy or micronutrients. This report asks:
+\begin{enumerate}[label=\textbf{RQ\arabic*}]
+\item Which of nine major food crops (three cereals, three pulses, three oilseeds) is most vulnerable to
+observed (2001--2024) and projected (2041--2060) heat and water stress, given its nutritional importance, and
+does the answer differ between countries and crop groups?
+\item If a crop's yield falls, by a standard amount or by the amount implied by the projected climate change,
+what happens to a country's supply of energy, protein, fat, zinc and iron, and to its nutrient adequacy?
+\item What does the index indicate for one place studied in more detail: India, Telangana and the city of
+Hyderabad?
+\end{enumerate}
+
+\subsection{Literature context}
+\paragraph{Climate and yield.} The yield literature is large and quantitative.
+\begin{itemize}
+\item Four independent methods agree that each degree of global warming lowers global yields of wheat, rice,
+maize and soybean by about 6.0, 3.2, 7.4 and 3.1\% without CO$_2$ fertilisation or adaptation \citep{zhao2017}.
+\item Year-to-year climate variation explains about a third of global yield variability \citep{ray2015}.
+\item Crop models project large regional losses under warming \citep{rosenzweig2014,jagermeyr2021}.
+\item Statistical studies attribute part of the recent yield trend to warming \citep{lobell2007,lobell2011}.
+\item Process studies locate most of the damage in the reproductive phase, where a few hot days above a crop
+threshold reduce seed set \citep{jagadish2007,deryng2014,boote2005}.
+\end{itemize}
+These studies measure yield; they do not ask who eats the crop.
+
+\paragraph{Climate and nutrition.} The nutrition literature has a different emphasis.
+\begin{itemize}
+\item Elevated CO$_2$ lowers zinc, iron and protein in C$_3$ grains and legumes \citep{myers2014,smith2018,zhu2018,beach2019}.
+\item Diet-level work asks how environmental change alters food supply and diet quality
+\citep{scheelbeek2018,nelson2018,medek2017}.
+\item The diversity of national food supply is itself an indicator of nutritional resilience \citep{remans2014}.
+\end{itemize}
+
+\paragraph{Vulnerability indices.} These indices usually follow the IPCC framing of exposure, sensitivity and
+adaptive capacity \citep{ipcc2022ch5}, and crop-suitability studies map where crops will remain viable
+\citep{ramirez2017,rippke2016}.
+
+\paragraph{The gap.} Yield losses, nutrient supply and vulnerability scores are reported on incompatible scales.
+We found no reviewed study that ranks crops by combining their climatic exposure, their sensitivity and their
+nutritional importance in one index.
+
+\subsection{Contribution}
+The project contributes:
+\begin{itemize}
+\item a transparent index that combines the three in one number per crop and country (Section~\ref{sec:index});
+\item its application to nine crops in three groups, for the present, a historical baseline and a mid-century
+future, with one processing chain and one normalisation reference (Section~\ref{sec:periods});
+\item an accounting step from yield loss to national nutrient supply and adequacy (Section~\ref{sec:nutmethod});
+\item a local reading of the results for India and Hyderabad, using official survey data at the resolutions
+they are actually published (Section~\ref{sec:india});
+\item a reproducible evidence trail: raw-data checksums, a complete pipeline, generated tables, and a parameter
+ledger that labels every derived value and proxy (Section~\ref{sec:repro}, Appendix~\ref{app:ledger}).
+\end{itemize}
+The index is a \emph{screening} tool. It shows where stress and dependence coincide. It does not forecast yields
+or diets.
+
+\paragraph{Framing.} The structure follows the IPCC AR4 vulnerability framing (exposure $\times$ sensitivity
+$\times$ adaptive capacity), with adaptive capacity replaced by nutritional \emph{importance}. In AR5/AR6
+vocabulary the index is closer to a risk index, in which the stress plays the role of hazard and nutrition is
+what is exposed. The substitution is deliberate, because the project asks about nutrition security, not about
+farmers' coping capacity. It also means the index is not a pure climate-impact measure.
+
+\subsection{Relation to the mid-evaluation and how to read this report}
+The mid-evaluation presented the method for four crops (rice, wheat, maize, soybean). Its deck, report, tables
+and figures are frozen in \file{archive/mid\_evaluation/}, and no number from them is reused as a new result.
+This report completes the commitments made then.
+\begin{itemize}
+\item The presented \emph{literature-only} sensitivity is now used everywhere. The mid-evaluation numbers had
+used an average of literature and observed-yield sensitivity; that version survives only as a robustness test.
+\item The analysis covers nine crops, the future period, the nutrition consequences, and robustness,
+validation and literature comparison under the final configuration.
+\end{itemize}
+
+\paragraph{Where to find things.}
+\begin{itemize}
+\item \textbf{Method:} Sections~\ref{sec:scope}--\ref{sec:periods}, with symbols in Table~\ref{tab:symbols}.
+\item \textbf{Worked examples:} Section~\ref{sec:worked}.
+\item \textbf{Results:} Sections~\ref{sec:present}--\ref{sec:india}.
+\item \textbf{Robustness, validation and literature comparison:} Section~\ref{sec:checks}.
+\item \textbf{Limitations and conclusions:} Sections~\ref{sec:limits}--\ref{sec:discussion}.
+\item \textbf{Reproduction and audit:} Section~\ref{sec:repro}.
+\item \textbf{Appendices:} the parameter and source ledger, full result tables, the record of corrections, and
+the audit evidence.
+\end{itemize}
+
+Every number in the text is a macro or table written by the code from the saved results
+(\file{docs/nine\_crop/generated/}). No result is typed by hand.

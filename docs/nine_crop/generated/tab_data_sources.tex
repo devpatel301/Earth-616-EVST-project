@@ -1,0 +1,24 @@
+{\scriptsize\begin{longtable}{L{0.275}L{0.131}L{0.137}L{0.191}rrL{0.096}}
+\caption[Raw inputs]{Raw inputs (from \texttt{docs/DATA\_MANIFEST.csv}, which lists every file with its SHA-256 checksum).}\label{tab:datasources}\\
+\toprule
+Dataset & Version & Source & Used for & Files & MB & File date \\
+\midrule\endfirsthead
+\toprule
+Dataset & Version & Source & Used for & Files & MB & File date \\
+\midrule\endhead
+\bottomrule\endfoot
+WorldClim 2.1 monthly weather (CRU-TS 4.09 downscaled), 10$'$; elevation; 1970--2000 precipitation normals & CRU-TS 4.09; WorldClim 2.1 & \citet{fick2017,harris2020} & monthly precipitation 1970--2024; elevation & 8 & 1{,}209 & 2026-10-05 \\
+WorldClim 2.1 monthly maximum temperature, 10$'$ & CRU-TS 4.09 & \citet{fick2017,harris2020} & $T_{\max}$ 1970--2024 & 6 & 748 & 2026-10-05 \\
+WorldClim 2.1 monthly minimum temperature, 10$'$ & CRU-TS 4.09 & \citet{fick2017,harris2020} & $T_{\min}$ 1970--2024 & 6 & 725 & 2026-10-05 \\
+WorldClim 2.1 monthly normals $T_{\max}$, $T_{\min}$, 10$'$ & 1970--2000 & \citet{fick2017} & baseline of the change factors & 2 & 75 & 2026-11-17 \\
+WorldClim 2.1 CMIP6 downscaled climatology, MRI-ESM2-0, SSP2-4.5, 10$'$ & 2041--2060 & \citet{wcmip6} & future change factors & 3 & 54 & 2026-11-17 \\
+SPAM 2010 harvested area (all, irrigated, rainfed), 5$'$ & v2.0 & \citet{spam2010} & crop area weights, rainfed share & 2 & 144 & 2026-10-05 \\
+Crop calendar dataset (planting, harvest) & Sacks et al.\ 2010 & \citet{sacks2010} & growing season and flowering window & 20 & 70 & 2026-10-05 / 2026-11-17 \\
+FAOSTAT bulk: crop production (QCL); Food Balances 2010-- and --2013; Food Security indicators & bulk files of 5 Oct 2026 & \citet{faostat} & panels, yields, nutrient supply, energy requirement & 4 & 163 & 2026-10-05 \\
+FAOSTAT Supply Utilization Accounts, crops & bulk file of 17 Nov 2026 & \citet{faosua} & chickpea and lentil supply & 1 & 89 & 2026-11-17 \\
+USDA FoodData Central, SR Legacy & April 2018 release & \citet{usda2019} & zinc and iron per 100 g & 1 & 6 & 2026-10-05 \\
+Natural Earth admin-0 countries, 1:50m & -- & Natural Earth (public domain) & country masks, continents & 1 & 1 & 2026-10-05 \\
+Natural Earth admin-1 states/provinces, 1:10m & -- & Natural Earth (public domain) & Telangana mask & 1 & 15 & 2026-11-17 \\
+K\"oppen--Geiger 1991--2020, 0.5\textdegree & Beck et al.\ 2023 & \citet{beck2018} & check of our K\"oppen groups & 1 & 0 & 2026-10-05 \\
+Official India/Telangana/Hyderabad files: MoSPI HCES 2023--24, NSS 592 and 594, NFHS-5, CNNS, ICMR-NIN IFCT 2017, Telangana DES & see Appendix~\ref{app:indiasources} & Section~\ref{sec:india} & Hyderabad and Telangana analysis & 18 & 99 & 2026-11-17 \\
+\end{longtable}}

@@ -1,0 +1,157 @@
+\section{The index: exposure, sensitivity, importance and F4}\label{sec:index}
+
+Indices: crop $k$, country $c$, grid cell $i$, season-year $t$, calendar month $m$, nutrient $n$. All symbols and
+units are collected in Table~\ref{tab:symbols}.
+
+\begin{table}[H]\centering\small
+\caption{Symbols and units.}\label{tab:symbols}
+\begin{tabular}{p{2.6cm}p{9.6cm}p{2.4cm}}
+\toprule
+Symbol & Meaning & Unit \\
+\midrule
+$T_{\max}, T_{\min}, T_{\text{mean}}$ & monthly mean daily maximum, minimum and mean air temperature & \si{\celsius} \\
+$\Teff$ & effective temperature $(T_{\text{mean}}+T_{\max})/2$ & \si{\celsius} \\
+$\Tcrit, T_{\lim}$ & crop threshold above which yield is lost; temperature of total loss & \si{\celsius} \\
+$s_T$ & fractional yield loss per degree above $\Tcrit$, $1/(T_{\lim}-\Tcrit)$ & \si{\per\celsius} \\
+$K_y$ & FAO seasonal yield-response factor (relative yield loss per relative ET deficit) & -- \\
+$P$, $\ETo$, $\ETc$ & precipitation; reference evapotranspiration; crop water need $\bar K_c\,\ETo$ & mm \\
+$\bar K_c$ & season-mean crop coefficient (stage-weighted FAO-56 values) & -- \\
+$w^{f}_{m}$, $w^{g}_{m}$ & fraction of month $m$ inside the flowering window / growing season & -- \\
+$A_i$, $R_i$ & harvested and rainfed area of the crop in cell $i$ (SPAM 2010) & ha \\
+$L_{\text{heat}}$ & heat level: mean degrees of $\Teff$ above $\Tcrit$ in the flowering window & \si{\celsius} \\
+$L_{\text{water}}$ & water level: rainfed share $\times$ unmet share of crop water need & -- (0--1) \\
+$E_{\text{heat}}, E_{\text{water}}$ & exposure, level divided by its maximum over all pairs & -- \\
+$S_T, S_P$ & sensitivity, $s_T$ and $K_y$ divided by their maxima over crops & -- \\
+$\text{sh}_{n}$ & crop's share of national supply of nutrient $n$ & -- (0--1) \\
+$I$, $\tilde I$ & importance, mean share over five nutrients; divided by its maximum & -- \\
+$\Fd$ & hazard-paired index & -- \\
+$\text{NAR}_n$, MAR & nutrient adequacy ratio; mean adequacy ratio & --; points (0--100) \\
+SSR & self-sufficiency ratio, production / domestic supply & -- \\
+$\Delta Y$ & yield change & \% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Exposure}\label{sec:exposure}
+\paragraph{Season and flowering window.} The growing season of a cell runs from the planting to the harvest day of
+its calendar. The flowering window is 45--70\% of the season, the convention of \citet{deryng2014} (anthesis at
+half the season). Calendar months are weighted by the fraction of their days inside the season ($w^g_m$) or the
+window ($w^f_m$). A season that crosses the new year is assigned to the harvest year.
+
+\paragraph{Heat.} For each cell and season-year,
+\begin{equation}\label{eq:heatcell}
+H_{i,t} = \frac{\sum_m w^f_m \max\!\left(0,\ \Teff{}_{,m}-\Tcrit\right)}{\sum_m w^f_m}, \qquad
+\Teff{}_{,m} = \tfrac12\left(T_{\text{mean},m}+T_{\max,m}\right).
+\end{equation}
+$H$ is in degrees Celsius of effective temperature above the threshold. Damage concentrates in the
+reproductive phase, which is why the flowering window is used, and $\Teff$ is the scale on which the
+\citet{deryng2014} thresholds are defined. Monthly means smooth out hot days, so $H$ is a lower bound on true heat
+stress.
+
+\paragraph{Water.} Crop water need uses the Hargreaves reference evapotranspiration (FAO-56 Eq.~52), which needs
+only temperature and extraterrestrial radiation $R_a$ (FAO-56 Eqs.~21--25):
+\begin{equation}\label{eq:et0}
+\ETo{}_{,m} = 0.0023\,(T_{\text{mean},m}+17.8)\,\sqrt{T_{\max,m}-T_{\min,m}}\;\cdot 0.408\,R_{a,m}\cdot d_m \quad[\text{mm month}^{-1}],
+\end{equation}
+with $R_a$ in \si{\mega\joule\per\square\metre\per\day}, $0.408$ converting it to mm of evaporation, and $d_m$ the
+number of days in the month. The share of the season's water need not met by rain is
+\begin{equation}\label{eq:deficit}
+D_{i,t} = \operatorname{clip}\!\left(1-\frac{\sum_m w^g_m P_m}{\bar K_c\sum_m w^g_m \ETo{}_{,m}},\ 0,\ 1\right).
+\end{equation}
+This is a \emph{screening ratio}. It counts neither soil water stored before sowing nor runoff, and it treats
+irrigated hectares as unstressed (Section~\ref{sec:limits}).
+
+\paragraph{National levels.} Cell values are combined over the crop's SPAM hectares in the country and averaged
+over 2001--2024:
+\begin{equation}\label{eq:levels}
+L_{\text{heat},kc} = \overline{\left(\frac{\sum_i A_i H_{i,t}}{\sum_i A_i}\right)}^{\,t\in 2001..2024},\qquad
+L_{\text{water},kc} = \overline{\left(\frac{\sum_i R_i D_{i,t}}{\sum_i A_i}\right)}^{\,t\in 2001..2024}.
+\end{equation}
+Dividing the rainfed-weighted deficit by \emph{all} hectares makes $L_{\text{water}}$ the rainfed share times
+the mean rainfed deficit.
+
+\paragraph{Exposure.} Each level is divided by its largest value over all \nPairs\ pairs:
+\begin{equation}\label{eq:exposure}
+E_{\text{heat},kc} = \frac{L_{\text{heat},kc}}{\max_{k'c'} L_{\text{heat},k'c'}},\qquad
+E_{\text{water},kc} = \frac{L_{\text{water},kc}}{\max_{k'c'} L_{\text{water},k'c'}}.
+\end{equation}
+In the main run the maxima are \refHeatPair\ (\refHeat\,\si{\celsius}) and \refWaterPair\ (\refWater). Dividing by
+the maximum, rather than min--max scaling, keeps zero stress at zero. At the mid-evaluation, exposure also included
+an observed \emph{change} term (signal-to-noise of 2001--24 against 1971--2000); the presented method uses the level
+only, and the change term survives only as a robustness test.
+
+\subsection{Sensitivity (literature only)}\label{sec:sensitivity}
+Sensitivity is a property of the crop, identical in every country:
+\begin{equation}\label{eq:sens}
+s_T = \frac{1}{T_{\lim}-\Tcrit},\qquad S_{T,k} = \frac{s_{T,k}}{\max_{k'} s_{T,k'}},\qquad S_{P,k} = \frac{K_{y,k}}{\max_{k'} K_{y,k'}}.
+\end{equation}
+\begin{itemize}
+\item $s_T$ is the slope of the linear damage function of \citet{deryng2014}: yield falls from full at $\Tcrit$ to
+zero at $T_{\lim}$.
+\item $K_y$ is FAO's seasonal yield-response factor, $1-Y_a/Y_m = K_y(1-\mathrm{ET}_a/\mathrm{ET}_m)$
+\citep{fao66}.
+\end{itemize}
+The values and their sources are in Table~\ref{tab:params} and, with experimental conditions and status, in the
+ledger (Appendix~\ref{app:ledger}). Their origins differ:
+\begin{itemize}
+\item \textbf{Wheat, maize, soybean:} published model parameters.
+\item \textbf{Rice:} the threshold is published, but the slope is a spikelet-fertility slope and $K_y$ is maize's
+value.
+\item \textbf{Four new legumes:} fits to published chamber experiments.
+\item \textbf{Rapeseed-mustard:} the threshold is converted from a daily-maximum threshold, and the slope is
+borrowed.
+\end{itemize}
+Observed-yield regressions (detrended yield on $\Teff$ and moisture ratio, 1971--2000) are kept as
+\emph{checks} and as a robustness variant, not in the main index.
+
+\begin{table}[H]\centering\small
+\caption{Crop parameters used by the index (from \file{code/config.py}).}\label{tab:params}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_params9.tex}}
+\end{table}
+
+\subsection{Importance}\label{sec:importance}
+\begin{equation}\label{eq:importance}
+\text{sh}_{n,kc} = \frac{\text{supply}_{n}\text{ from crop }k}{\text{total national supply}_{n}},\qquad
+I_{kc} = \frac15\sum_{n\in\{\text{kcal, protein, fat, Zn, Fe}\}} \text{sh}_{n,kc},\qquad
+\tilde I_{kc} = \frac{I_{kc}}{\max_{k'c'} I_{k'c'}}.
+\end{equation}
+\begin{itemize}
+\item Shares are the 2021--2023 means of the FBS (SUA for chickpea and lentil); see Section~\ref{sec:fbsmap}.
+\item The five nutrients get equal weights because no ranking of them is defensible a priori. Calories-only and
+micronutrient-weighted variants are robustness tests.
+\item The largest importance is \refImpPair\ (\refImp).
+\item A crop that is fed to animals or crushed for oil has low importance for protein and micronutrients even
+when production is large. This is intended: the index asks about food.
+\end{itemize}
+
+\subsection{Combining the components: four forms and the choice of F4}\label{sec:forms}
+With $E=\frac12(E_{\text{heat}}+E_{\text{water}})$ and $S=\frac12(S_T+S_P)$, four forms were computed:
+\begin{align}
+\text{F1 (multiplicative)}\quad & V = E\cdot S\cdot\tilde I \label{eq:f1}\\
+\text{F2 (geometric)}\quad & V = (E\,S\,\tilde I)^{1/3} \label{eq:f2}\\
+\text{F3 (additive)}\quad & V = (E+S+\tilde I)/3 \label{eq:f3}\\
+\text{F4 (hazard-paired)}\quad & V = \tfrac12\left(E_{\text{heat}}S_T + E_{\text{water}}S_P\right)\tilde I \label{eq:f4}
+\end{align}
+F4 is the main index, chosen at the mid-evaluation for three design reasons.
+\begin{itemize}
+\item \textbf{Each stress meets its own sensitivity.} In F1--F3, heat exposure can multiply water sensitivity.
+\item \textbf{No compensation.} A crop nobody eats ($\tilde I\approx0$) cannot score high. F3 lets exposure
+compensate for low importance.
+\item \textbf{Interpretable climate part.} The term $\frac12(E_{\text{heat}}S_T+E_{\text{water}}S_P)$ is a
+normalised analogue of a relative yield loss. Because of the normalisation, however, F4 is \emph{not} a yield-loss
+percentage (Section~\ref{sec:futureyield}).
+\end{itemize}
+F2 is a monotone transform of F1 and gives the same ranking. All four forms appear in the robustness counts.
+
+\subsection{Aggregation to crops and groups}\label{sec:aggregation}
+For crop $k$ with panel countries $c\in C_k$ and production $Q_{kc}$ (FAOSTAT 2020--24):
+\begin{equation}\label{eq:agg}
+\Fd^{\text{eq}}_k = \frac{1}{|C_k|}\sum_{c\in C_k}\Fd_{kc},\qquad
+\Fd^{\text{pw}}_k = \sum_{c\in C_k}\frac{Q_{kc}}{\sum_{c'}Q_{kc'}}\Fd_{kc},\qquad
+\Fd_g = \frac13\sum_{k\in g}\Fd_k .
+\end{equation}
+\begin{itemize}
+\item The equal-weighted mean asks how vulnerable the crop is across the climates where it is grown.
+\item The production-weighted mean asks how much of world supply is at risk.
+\item The group score $\Fd_g$ is the simple mean of its three crop scores, for either weighting.
+\end{itemize}

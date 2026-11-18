@@ -1,0 +1,54 @@
+\section{Results: how does vulnerability change by 2041--2060?}\label{sec:future}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{G04_present_future_crops.pdf}
+\caption{Historical (1971--2000, open) and future (2041--2060, filled) crop scores, MRI-ESM2-0 SSP2-4.5, change
+factors on the same years, one fixed normalisation reference.}\label{fig:future}
+\end{figure}
+
+\subsection{Magnitude and order}
+Under one model and one scenario, the flowering-window effective temperature rises by \meanDTeff\,\si{\celsius} on
+average over the \nPairs\ pairs.
+\begin{itemize}
+\item The score rises in \nPairsUp\ of \nPairs\ pairs.
+\item \nPairsExceedRef\ pair exceeds the present-day reference maximum (values above one are allowed by
+construction).
+\item The crop order changes little: \futOrderEq\ with equal weights in 2041--2060, against \histOrderEq\ in
+1971--2000 (Figure~\ref{fig:future}, Table~\ref{tab:futurecrop}).
+\item Relative to 1971--2000, the equal-weighted group scores change by \grpCerealPct\% (cereals),
+\grpPulsePct\% (pulses) and \grpOilseedPct\% (oilseeds). The \grpFastest\ rise fastest, mainly through common bean.
+\end{itemize}
+
+\begin{table}[H]\centering\small\caption{Crop scores 2001--24, 1971--2000 and 2041--2060 (fixed normalisation
+reference; $\Delta$F4 is a change in index units, not a yield change).}\label{tab:futurecrop}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_future_crop.tex}}\end{table}
+
+\subsection{Heat and water parts of the change}
+The change splits exactly into heat and water parts (Eq.~\ref{eq:decomp}).
+\begin{itemize}
+\item Summed over all pairs, the heat term contributes about \futHeatShare\% of the increase and the water term
+\futWaterShare\%. The future increase is mainly heat, while today's scores are mainly water.
+\item The largest increase is \futTopPair\ (\futTopPairChange), about two-thirds of it through water. Wheat in
+India and common bean in India, Brazil and Myanmar rise almost entirely through heat. Wheat in the USA and bean in
+Tanzania rise through heat and water in similar measure (Figure~\ref{fig:futurepairs},
+Table~\ref{tab:futurepairs}; pair values in \file{future\_components.csv}).
+\item Every pair whose score falls does so through the water term alone. In those pairs the change factors give a
+smaller rainfed deficit, while the heat term stays near zero. Examples are rice, maize, soybean and groundnut in
+some countries, such as maize in South Africa and rice in Nigeria.
+\end{itemize}
+
+\begin{figure}[H]\centering\includegraphics[width=0.85\linewidth]{G05_future_pairs.pdf}
+\caption{Largest changes in pair scores, split into heat and water parts.}\label{fig:futurepairs}\end{figure}
+
+\subsection{Does the result depend on the method?}
+The climatology check applies the thresholds directly to the 20-year means instead of using change factors. It
+gives the same sign of change in \climCheckSameSign\% of pairs, with Spearman $\rho$ = \climCheckRho\ between the
+two sets of changes. The direction of change therefore does not hinge on the change-factor choice. It does depend
+on the single climate model: the wetter South African maize season, for example, is a property of MRI-ESM2-0, and
+other models disagree on regional rainfall.
+
+\subsection{Interpretation}
+A crop can stay nutritionally important while its climate stress rises, and a low score can still reflect the
+monthly heat measure. The future index values are scores relative to today's maxima, not yield losses. The yield
+and nutrient consequences are estimated separately in Section~\ref{sec:futurenut}.

@@ -1,0 +1,61 @@
+\section{Scope: crops, groups and countries}\label{sec:scope}
+
+\subsection{Crops and groups}
+The index covers nine crops in three predefined groups:
+\begin{itemize}
+\item \textbf{cereals}: wheat, rice, maize;
+\item \textbf{pulses}: chickpea, lentil, common bean;
+\item \textbf{oilseeds}: soybean, groundnut, rapeseed-mustard.
+\end{itemize}
+The groups were fixed before any result was computed. A group score is the simple mean of its three crops'
+scores (Section~\ref{sec:aggregation}). It describes these three crops, not every cereal, pulse or oilseed.
+
+Each crop must be identified in five datasets: FAOSTAT production, the SPAM crop map, the Sacks calendar, the FAO
+food balance sheets and the food composition table. The identifiers are listed in Table~\ref{tab:cropmap}
+(Section~\ref{sec:data}). Three definitions need explanation.
+\begin{itemize}
+\item \textbf{Rapeseed-mustard} is a single item definition used everywhere: FAOSTAT ``Rape or colza seed'' (India
+reports its rapeseed-mustard here; the separate ``Mustard seed'' item is about 1\% of the total and is excluded),
+SPAM \texttt{RAPE}, and the food-balance items ``Rape and Mustardseed'' and ``Rape and Mustard Oil''.
+\item \textbf{Common bean} is FAOSTAT ``Beans, dry''. In India and Myanmar this item also contains tropical
+\emph{Vigna} pulses, which are not \emph{Phaseolus vulgaris}. The bean heat parameter is therefore applied beyond
+the species it was measured on (Appendix~\ref{app:ledger}).
+\item \textbf{Chickpea and lentil} have production and crop-map entries of their own. The food balance sheets,
+however, report them only inside the aggregate ``Pulses, Other and products''. Their food supply is taken from the
+FAOSTAT Supply Utilization Accounts (Section~\ref{sec:fbsmap}).
+\end{itemize}
+
+\subsection{Country selection rule}\label{sec:panelrule}
+Countries are chosen per crop by the rule presented at the mid-evaluation, applied unchanged. Production is the
+FAOSTAT mean for 2020--2024.
+\begin{enumerate}
+\item The \textbf{core countries} USA, Brazil, India and China are included for every crop they produce.
+\item \textbf{One European and one African country.} A country is used for all crops if it is among its
+continent's top three producers of every crop. Otherwise each crop uses its continent's largest producer.
+\item The crop's \textbf{world top-3 producers} are added.
+\end{enumerate}
+A core country enters a crop's panel only if FAOSTAT records production there in 2020--2024 \emph{and} SPAM~2010
+maps crop area there. With nine crops, no European or African country is in its continent's top three for every
+crop, so the rule's own fallback applies. This changes two of the original four-crop panels: rice uses Italy
+instead of Russia, and maize uses Ukraine instead of Russia. Three combinations are excluded by the rule:
+\begin{itemize}
+\item Brazil for chickpea and for lentil (no production or no mapped area);
+\item groundnut in Europe (no European production recorded).
+\end{itemize}
+The result is \nPairs\ crop--country pairs in \nCountries\ countries (Table~\ref{tab:panels}). The panels cover
+between half and nine-tenths of world production of each crop. A panel is a sample of the main producing
+systems, not a census, so a crop's score describes these countries only.
+
+\begin{table}[H]\centering\small
+\caption{Country panels (FAOSTAT production 2020--24; world rank order; $*$ = less than 0.5\% of world output).}\label{tab:panels}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_panels9.tex}}
+\end{table}
+
+\subsection{Periods}
+\begin{itemize}
+\item \textbf{Present:} 2001--2024, observed monthly climate.
+\item \textbf{Historical baseline:} 1971--2000, observed.
+\item \textbf{Future:} 2041--2060, one climate model (MRI-ESM2-0) under one scenario (SSP2-4.5).
+\end{itemize}
+Importance is fixed at the 2021--2023 food balance sheets in every period. Crop area, irrigation and calendars are
+fixed at their 2010 maps. Sensitivity is fixed at its literature values.

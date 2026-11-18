@@ -1,0 +1,98 @@
+\section{Data, versions and preprocessing}\label{sec:data}
+
+\subsection{Raw inputs}
+Table~\ref{tab:datasources} lists every raw dataset with its version, size and file date. The manifest
+\file{docs/DATA\_MANIFEST.csv} records each of the \manifestFiles\ raw files (\manifestGB\,GB) with its SHA-256
+checksum, so any later run can confirm that it uses exactly the same inputs (Section~\ref{sec:repro}). The files
+come from two snapshots:
+\begin{itemize}
+\item the mid-evaluation snapshot (5 October 2026): climate, SPAM, the original calendars, FAOSTAT, USDA and
+Natural Earth;
+\item an end-evaluation snapshot (17 November 2026): the calendars of the new crops, the WorldClim normals and
+CMIP6 files, the FAOSTAT Supply Utilization Accounts, the admin-1 boundaries and the Indian survey files.
+\end{itemize}
+FAOSTAT bulk files are revised over time, so the numbers are exactly reproducible only from these archived files.
+
+\input{nine_crop/generated/tab_data_sources.tex}
+
+\subsection{Gridded climate, crop area and calendars}
+All gridded work is done on a 10 arc-minute global grid (about 18\,km at the equator).
+\begin{itemize}
+\item \textbf{Climate.} WorldClim~2.1 historical monthly weather (CRU-TS 4.09 downscaled) gives monthly
+$T_{\max}$, $T_{\min}$ and precipitation $P$ for 1970--2024; $T_{\text{mean}} = (T_{\max}+T_{\min})/2$. Monthly data
+cannot show individual hot days, a limitation discussed in Section~\ref{sec:limits}. In cell-months with no nearby
+station, CRU-TS falls back to climatology, which weakens year-to-year rainfall variation in data-poor regions.
+\item \textbf{Crop area.} SPAM~2010 harvested area (all, irrigated, rainfed; 5$'$) is summed to the 10$'$ grid. It
+gives each cell's crop hectares $A_i$ and rainfed hectares $R_i$. Cells are assigned to countries with the
+Natural Earth admin-0 boundaries.
+\item \textbf{Calendars.} The Sacks et al.\ dataset gives planting and harvest days per cell; observed values are
+used first and gap-filled values only as a fallback. Chickpea, lentil and rapeseed-mustard use a
+\textbf{cool-season rule}, for three reasons:
+  \begin{itemize}
+  \item Sacks et al.\ have no chickpea or lentil calendar;
+  \item their generic ``Pulses'' calendar is 95\% gap-filled in India;
+  \item that calendar places these winter (rabi) crops in the monsoon season.
+  \end{itemize}
+  The rule takes the crop's own observed calendar where one exists (winter rapeseed in China, India and Europe),
+  then the spring-wheat calendar where winters are cold (K\"oppen group D), then the wheat calendar elsewhere. This
+  gives rabi sowing in South Asia, autumn sowing in Australia and spring sowing in Canada and Russia. The plain
+  Sacks calendar is kept as a robustness test.
+\item \textbf{Elevation and climate zones.} Elevation and K\"oppen groups (computed from WorldClim with the
+published rules, \citealp{beck2018}) only \emph{describe} the panel countries; they never select them.
+\end{itemize}
+
+\subsection{Food balance sheets, supply utilization accounts and composition}\label{sec:fbsmap}
+\paragraph{Nutrient supply.} National supply of energy, protein and fat per person per day comes from the FAOSTAT
+food balance sheets (FBS). The new series (2010--2023) is used for importance and adequacy. The old series
+(1961--2013) is used only for the historical pass-through regression. The two series use different methods, so
+they are analysed separately and never joined.
+
+Zinc and iron are not in the FBS. They are computed item by item as FBS food quantity multiplied by a composition
+value from USDA FoodData Central (SR Legacy).
+\begin{itemize}
+\item Each FBS item is mapped to the raw, unprocessed USDA food closest to its primary-commodity equivalent
+(\file{code/fbs\_usda\_map.csv}). This overstates zinc and iron for cereals eaten refined and for meat and fish in
+carcass or live weight.
+\item Five minor items with no reasonable analogue and negligible supply are set to zero.
+\item The sum of our item-level energy equals FAO's Grand Total to four decimals, so no item is missing.
+\end{itemize}
+
+\paragraph{Chickpea and lentil.} The FBS fold chickpea and lentil into ``Pulses, Other and products''. Their
+supply comes instead from the FAOSTAT Supply Utilization Accounts (SUA), the tables from which the FBS are
+compiled (items ``Chick peas, dry'' and ``Lentils, dry'').
+\begin{itemize}
+\item SUA domestic supply is production $+$ imports $-$ exports $-$ stock variation. We checked this identity
+against the sum of all uses in the raw SUA file: it holds in 100\% of chickpea and lentil country-years, while the
+opposite sign holds in only half.
+\item The SUA rows give each crop's contribution. They are \emph{never} added to national totals, which already
+contain them inside the FBS aggregate.
+\item They are not entered as extra items in the food-supply diversity calculation.
+\item Across country-years the SUA chickpea and lentil energy stays within the parent FBS aggregate in all but
+0.1\% of cases (Table~\ref{tab:checks}).
+\end{itemize}
+How each crop maps to FBS and SUA items is in Table~\ref{tab:cropmap}.
+
+\paragraph{Requirements.} Requirements combine FAOSTAT's country- and year-specific Average Dietary Energy
+Requirement (ADER) with the WHO/FAO recommended intakes (Section~\ref{sec:adequacy}).
+
+\input{nine_crop/generated/tab_crop_mapping.tex}
+
+\subsection{Future climate}
+The future input is the WorldClim~2.1 downscaled CMIP6 climatology for MRI-ESM2-0, SSP2-4.5, 2041--2060. These are
+20-year mean monthly values of $T_{\max}$, $T_{\min}$ and $P$. Their baseline is the WorldClim 1970--2000 monthly
+normals. How they are combined with the observed years is described in Section~\ref{sec:periods}. Only one model
+and one scenario are used, so the future results show direction under that model, not the range of possible
+futures.
+
+\subsection{India, Telangana and Hyderabad}
+The local analysis uses official files listed in Appendix~\ref{app:indiasources}:
+\begin{itemize}
+\item MoSPI Household Consumption Expenditure Survey 2023--24 (state $\times$ rural/urban item quantities);
+\item NSS reports 592 and 594 (expenditure and nutrient intake by state and sector);
+\item NFHS-5 2019--21 (India, Telangana and the Hyderabad district fact sheet);
+\item CNNS 2016--18 (Telangana micronutrient status);
+\item the ICMR-NIN Indian Food Composition Tables 2017;
+\item the Telangana Directorate of Economics and Statistics crop statistics.
+\end{itemize}
+Each number taken from these files is stored once, with its table or page, in
+\file{data/external/india\_hyderabad\_indicators.csv}.

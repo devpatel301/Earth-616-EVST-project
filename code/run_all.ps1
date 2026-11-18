@@ -51,7 +51,9 @@ Run 21_india_hyderabad.py nine_crop
 Run 22_literature_comparison.py nine_crop
 Run 23_sources_doc.py nine_crop
 Run 24_checks.py nine_crop            # consistency checks; a FAIL stops the run before any document is built
+Run 25_parameter_fits.py nine_crop    # refit derived heat parameters from published data; must reproduce config.py
 Run 19_endeval_tex.py nine_crop
+Run 26_report_tables.py nine_crop     # report tables: data sources, parameter ledger, worked examples, checks, audit
 
 # ---- 4. documents (Tectonic, https://tectonic-typesetting.github.io) ----
 $tectonic = if (Get-Command tectonic -ErrorAction SilentlyContinue) { "tectonic" } else { "$env:LOCALAPPDATA\tectonic\tectonic.exe" }

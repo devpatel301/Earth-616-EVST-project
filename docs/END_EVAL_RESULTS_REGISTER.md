@@ -18,8 +18,8 @@ and the generated LaTeX macros; none is typed by hand in the documents.
 | C6 | Crop group comparison | implemented | `index_group.csv`, `future_group.csv` | Group = mean of three selected crops; not all cereals/pulses/oilseeds |
 | C7 | Comparison with published findings, incl. disagreements | implemented | `literature_comparison.csv` (verdicts computed from our results), `docs/literature_comparison_sources.md` (quotes, page/table, read level) | Re-check 3 quotes against the papers; two disagreements are reported, not hidden |
 | C8 | Nutritional significance | implemented, awaiting review | `adequacy.csv`, `yield_diet_scenarios.csv`, `future_nutrition.csv`, `food_supply_diversity.csv`, `india_nutrient_sources.csv` | Requirement choice changes the iron shortfall count (main vs moderate-bioavailability variant) |
-| C9 | Final communication | implemented | `docs/final_report.pdf`, `final_slides.pdf`, `final_appendix.pdf`; figures `figures/nine_crop/G*.pdf` | Team rehearsal not done |
-| C10 | Reproducible evidence | implemented; re-run 18 Nov 2026 (see below) | `code/run_all.ps1`, `requirements.txt`, `docs/DATA_MANIFEST.csv` (55 raw files with SHA-256), `consistency_checks.csv` (29 checks), `README.md` | A teammate should run `00_data_manifest.py --check` and one representative step on a fresh checkout |
+| C9 | Final communication | report implemented as one comprehensive document; slides not redesigned (presentation work pending) | `docs/final_report.pdf` (sources `docs/final_report.tex` + `docs/report/`), `final_slides.pdf`, `final_appendix.pdf`; figures `figures/nine_crop/G*.pdf` | Team rehearsal not done; slides compile from the same macros but do not yet present the report's new material (ledger, worked examples, audit) |
+| C10 | Reproducible evidence | implemented; full rerun from raw inputs reproduces all outputs exactly (second audit below) | `code/run_all.ps1`, `requirements.txt`, `docs/DATA_MANIFEST.csv` (55 raw files with SHA-256), `consistency_checks.csv` (29 checks), `README.md` | A teammate should run `00_data_manifest.py --check` and one representative step on a fresh checkout |
 
 ## Plan-specific items
 
@@ -40,7 +40,7 @@ and the generated LaTeX macros; none is typed by hand in the documents.
 |---|---|---|
 | Wheat is the most vulnerable crop | Yes | first in all but two of 46 robustness rankings of F4 (the exceptions are the empirical-sensitivity-only tests); first in ~92% of 2,000 random weightings |
 | Order of positions 2-9 | No (moves with weighting and pulse parameters) | `index_robustness.csv` |
-| Vulnerability rises mainly through heat by 2041-2060 | Yes for the sum over pairs; wheat in Russia/USA is water-driven | `future_components.csv` |
+| Vulnerability rises mainly through heat by 2041-2060 | Yes for the sum over pairs (~72 % heat); wheat in Russia is mainly water-driven, wheat in the USA and bean in Tanzania shared heat/water (earlier text said "Russia/USA water-driven": corrected 18 Nov) | `future_components.csv` |
 | Iron is the nutrient closest to shortfall | Yes under the main requirement; no under the 15%-bioavailability requirement | `adequacy.csv` |
 | Index predicts yield-shock frequency | Partly: positive association in the 59-pair sample; null in the mid-evaluation 26-pair sample | `val_shocks_test.csv`; read as an association |
 | Future nutrient numbers | Conditional screening only | `future_nutrition.csv` |
@@ -54,7 +54,7 @@ and the generated LaTeX macros; none is typed by hand in the documents.
 5. One climate model, one scenario; no CO2 fertilisation or adaptation.
 6. HCES and NSS describe state rural/urban households, not Hyderabad city; NFHS has a district fact sheet.
 7. Not verified in the sources: Prasad 2002/2003, Morrison and Stewart 2002 full texts; the origin of FAO-56 Rev.1's rapeseed K_y; see `docs/literature_verification_new_crops.md` section 6.
-8. Not done: the team rehearsal; reviewer sign-off; a test of the documents with `pdflatex` itself (see README); a re-run of the climate steps from the raw monthly files (`run_all.ps1` without `-SkipClimate`, hours), see the audit below.
+8. Not done: the team rehearsal; reviewer sign-off; a test of the documents with `pdflatex` itself (see README). (The climate steps were re-run from raw inputs in the second audit.)
 
 ## Corrected earlier claims
 
@@ -81,3 +81,38 @@ Defects found and fixed:
 Checks (`code/24_checks.py`, saved in `consistency_checks.csv`; 29 of 29 pass): nine crops and 59 pairs; every crop in the input register; E = level / fixed maximum; S equals literature slope and K_y over their maxima (literature-only); F4 recomputed from components; crop scores (equal, production-weighted) and group scores recomputed; the future run's present column equals the main F4; the future and 1971-2000 scores use the present-period reference; S and importance are identical across periods; heat part + water part = change in F4; the 1971-2000 comparator matches the main series (relative difference 2e-7); future yield change comes from loss accounting; crop contribution totals equal the FBS totals; nine crops never exceed 100 % of any supply; SUA chickpea and lentil stay within the parent FBS aggregate in 99.9 % of country-years and are kept out of totals; the India nine-crop share equals the summed contributions; the shock is -10 % everywhere; nutrient changes are never positive and lower bounds never exceed upper bounds.
 
 Unchanged by the re-run: every `index_*`, `future_components/crop/group`, `adequacy`, `importance` and `crop_contrib` table of the nine-crop run is identical to the committed version (git shows no change).
+
+## Second audit: full reproduction from raw inputs and source review, 18 Nov 2026
+
+**Reproduction.**
+- **Manifest.** 74 of 74 raw files match their SHA-256: the 55 original entries plus 19 files added in this audit (Telangana admin-1 mask and the India/Telangana survey files, which were used but not listed). The climate, SPAM, calendar, FAOSTAT and USDA files are the original snapshot files (symlinked from the mid-evaluation folder), so this is exact reproduction, not a new snapshot.
+- **Rerun.** `data/work` (~10 GB) was moved outside the repository as a comparison copy, so no cached file could be reused; copies of `data/processed`, the figures and the generated LaTeX were taken too. `run_all.ps1` was then run **without** `-SkipClimate` in a fresh Python 3.13 venv from `requirements.txt`. All steps ran: 02b, 03 grids, 04 climate series (prec, tmax, tavg), 04 hazards, 14 future climate, then 03_panels through 13 for both runs, 11/12, 15–23, 24, 19.
+- **Run outcome.** It stopped, as designed, at the report compile: the new report referenced audit macros that did not exist yet. Every data step had finished, in 21 minutes.
+- **Comparison** (`code/27_compare_rerun.py` → `data/processed/nine_crop/audit_rerun_comparison.csv`, tolerance 1e-9 absolute and relative):
+  - 107 intermediate files, 85 result tables and 31 generated LaTeX files are **identical**; 0 within tolerance only; 0 differ.
+  - 75 previous files were not regenerated, and none is used by the pipeline: 72 legacy per-cell metric files (written only with `CNVI_LEGACY_METRICS=1`), an old production cache, a pulse cache and a shell script.
+  - New: the outputs of `25` and `26`.
+- **Final check.** A final `run_all.ps1 -SkipClimate` with the complete pipeline order (24 → 25 → 19 → 26 → documents) is reported in the final response of this audit.
+
+**Source review** (`docs/literature_verification_new_crops.md` §8; report Appendix A ledger):
+- **FAO-33 rice.** Read: no K_y; rice is classed "high" (Table 2 p. 7), the same class as maize. The rice K_y 1.25 is therefore explicitly a proxy.
+- **Nandi 2021.** The "1 % per 1 %" sentence is now verbatim (abstract). It supports the lentil proxy K_y 1.0.
+- **FAO-56 Rev.1 rapeseed K_y 0.90.** The whole text was searched; no source is stated.
+- **Jalota 2006.** Identified as a CROPMAN simulation; its abstract gives no K_y. The range 0.67–0.93 stays secondary.
+- **Still not accessible:** Prasad 2002 and 2003 and Morrison & Stewart 2002 full texts.
+- **Derived heat fits** are now reproducible (`code/25_parameter_fits.py`) and match `config.py`.
+- **SUA stock-variation sign** checked against the sum of uses (100 % identity). Canada lentil's negative supply is a published FAOSTAT 2023 balance (residuals −267 kt).
+
+**No numerical result changed in the second audit.** Wording corrections:
+- wheat-USA future increase is shared heat/water;
+- bean has no empirical response in **any** country;
+- maize's empirical response is much larger than the literature accounting.
+
+**Report.** `docs/final_report.pdf` was rewritten as one comprehensive document (59 pages, clickable contents, lists of figures and tables, numbered equations). It contains the parameter ledger, worked examples, record of corrections and audit evidence. The old `docs/sections/{methods,results,checks,interpretation,india_hyderabad}.tex` were superseded by `docs/report/` and removed.
+
+**Human tasks still open** (not implementation):
+- teammate review and sign-off of parameters, one calculation and the interpretation;
+- team rehearsal;
+- updating the slide deck to the report;
+- correcting reference [16] in the submitted literature review;
+- optional pdfLaTeX test.

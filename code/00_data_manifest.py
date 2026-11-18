@@ -3,6 +3,7 @@
 A fresh checkout compares its data/raw against this file to see exactly which inputs are missing or differ.
 Run:  python 00_data_manifest.py            (writes the manifest)
       python 00_data_manifest.py --check    (compares local data/raw with the manifest)
+      python 00_data_manifest.py --add-new  (appends files not yet listed; existing rows and checksums are kept)
 """
 import datetime
 import hashlib
@@ -21,7 +22,9 @@ SOURCE = {"worldclim": "WorldClim 2.1 (CRU-TS 4.09 monthly prec; 1970-2000 prec 
           "spam": "SPAM 2010 v2.0 (IFPRI)", "sacks": "Sacks et al. 2010 crop calendars",
           "faostat": "FAOSTAT bulk (QCL, FBS, FBS historic, food security)", "faostat_sua": "FAOSTAT SUA crops & livestock",
           "usda": "USDA FoodData Central SR Legacy 2018-04", "naturalearth": "Natural Earth 1:50m admin-0",
-          "koppen": "Beck et al. 2023 Koppen-Geiger 0.5 deg (manual download)"}
+          "koppen": "Beck et al. 2023 Koppen-Geiger 0.5 deg (manual download)",
+          "naturalearth_admin1": "Natural Earth 1:10m admin-1 states/provinces (Telangana mask)",
+          "india": "Official India/Telangana/Hyderabad survey and statistics files (see docs/india_hyderabad_sources.md)"}
 
 
 def sha256(path, block=1 << 22):
@@ -57,6 +60,15 @@ if __name__ == "__main__":
         m["status"] = ["missing" if pd.isna(x) else ("ok" if x == y else "differs") for x, y in zip(m.sha256_local, m.sha256)]
         print(m.status.value_counts().to_string())
         print(m[m.status != "ok"][["path", "status"]].to_string(index=False))
+        extra = local[~local.path.isin(ref.path)]
+        if len(extra):
+            print(f"{len(extra)} local files are not in the manifest (add them with --add-new):")
+            print(extra.path.to_string(index=False))
+    elif "--add-new" in sys.argv:
+        ref = pd.read_csv(MANIFEST)
+        extra = local[~local.path.isin(ref.path)]
+        pd.concat([ref, extra]).to_csv(MANIFEST, index=False)
+        print(f"added {len(extra)} files -> {MANIFEST}")
     else:
         local.to_csv(MANIFEST, index=False)
         print(f"{len(local)} files, {local.bytes.sum() / 1e9:.2f} GB -> {MANIFEST}")

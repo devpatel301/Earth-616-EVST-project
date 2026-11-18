@@ -1,0 +1,6 @@
+crop,source,points_teff,points_loss,tcrit_fit,slope_fit,tlim_fit,rmse,tcrit_config,slope_config,reproduces_config,status
+chickpea,Bhandari et al. 2020 Table 3; 3 genotypes; 12h/12h step regimes,27.5; 32.5; 35.5; 37.5; 39.5,0.000; 0.027; 0.219; 0.460; 0.790,34.05,0.142,41.09,0.0201,34.0,0.14,True,"DERIVED: fit, 5 points"
+lentil,Bhandari et al. 2020 Table 3; 2 genotypes; first 4 regimes,27.5; 32.5; 35.5; 37.5,0.000; 0.138; 0.534; 1.000,31.85,0.1685,37.78,0.049,31.9,0.17,True,"DERIVED: fit, 4 points / 2 parameters"
+groundnut,Prasad et al. 2003 abstract; cv. Georgia Green; season-long,29.5; 33.5; 37.5; 41.5,0.000; 0.140; 0.590; 0.900,31.75,0.0945,42.33,0.0286,31.8,0.095,True,"DERIVED: fit, 4 points"
+bean,"Prasad et al. 2002 via Boote et al. 2005 p.470 (optimum 28/18, zero yield 37/27 C)",25.5; 34.5,0; 1,25.5,0.1111,34.5,,25.5,0.1111,True,DERIVED: two published points; optimum is the lowest regime tested
+rapeseed,Morrison & Stewart 2002 abstract (29.5 C daily T_max); slope borrowed from Deryng spring wheat (10 C span),,,26.5,0.1,36.5,,26.5,0.1,True,PROXY: threshold converted with an assumed diurnal range; slope borrowed

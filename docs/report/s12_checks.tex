@@ -1,0 +1,91 @@
+\section{How much can the results be trusted?}\label{sec:checks}
+
+\subsection{Three different kinds of evidence}
+Three questions are kept apart here because passing one does not establish the others.
+\begin{enumerate}
+\item \textbf{Arithmetic consistency.} Do the saved numbers follow from the stated equations and from each other?
+\checksPassed\ of \checksN\ automated checks pass (Table~\ref{tab:checks}, Appendix~\ref{app:audit}). Examples:
+  \begin{itemize}
+  \item F4 recomputed from its components;
+  \item crop and group aggregation;
+  \item the fixed future reference;
+  \item heat plus water parts summing to the change;
+  \item supply shares against summed contributions;
+  \item no double counting;
+  \item correctly ordered bounds.
+  \end{itemize}
+\item \textbf{Reproducibility.} Does the documented pipeline regenerate the numbers from the checksummed raw
+inputs? Section~\ref{sec:repro} reports a full rerun from raw data and its comparison with the previous outputs.
+\item \textbf{Scientific validity.} Is the index a good measure of vulnerability? This cannot be proven with the
+data available. The subsections below give the partial evidence: robustness to choices, agreement with independent
+yield observations, and comparison with published studies. Agreement with the literature is supporting context,
+not proof of accuracy.
+\end{enumerate}
+
+\subsection{Robustness}\label{sec:robust}
+All checks were re-run under the final configuration; none of the mid-evaluation counts is reused. We varied one
+choice at a time:
+\begin{itemize}
+\item normalisation (division by the maximum or min--max);
+\item exposure definition (level, level plus change, change only);
+\item sensitivity (literature, blended as at the mid-evaluation, empirical only);
+\item rice $K_y$ (1.0, 1.5) and nutrient weighting;
+\item heat thresholds ($-2$ to $+3$\,\si{\celsius});
+\item the new crops' proxy parameters (slopes $\times0.7$, rapeseed slope 0.07 and 0.18, $K_y$ low and high);
+\item their calendars (plain Sacks calendar).
+\end{itemize}
+
+\paragraph{Results.}
+\begin{itemize}
+\item Wheat is first in \robTopFfour\ of \robNFfour\ \Fd\ rankings (both weightings), and in \robTopAll\ of \robN\
+rankings over all four index forms.
+\item The exceptions are the ``empirical sensitivity only'' tests. These rest on regressions that detect a
+heat-damage effect in only \empHeatDetected\ of \empN\ pairs (\empHeatCountry\ with a robust country estimate, the
+rest pooled).
+\item With 2,000 random weightings (level vs change, heat vs water, nutrient weights; seed 20261005), wheat ranks
+first in \mcTopShare\% of draws and \mcSecond\ in \mcSecondShare\%. These are shares of weightings, not
+probabilities that a crop is truly the most vulnerable (Figure~\ref{fig:robust}).
+\item What does \emph{not} survive is the order of positions two to six, which moves with the weighting and with
+the pulse parameters (Table~\ref{tab:robust}, Appendix~\ref{app:tables}).
+\end{itemize}
+
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{G10_robustness.pdf}
+\caption{Robustness: crop ranks under each one-at-a-time test (left) and shares of first place under random
+weightings (right).}\label{fig:robust}\end{figure}
+
+\subsection{Validation against observations}
+\begin{itemize}
+\item \textbf{Zhao et al.\ (2017).} Against their per-degree global yield losses, the climate part of the index has
+Spearman $\rho$ = \zhaoRhoClimate\ and the full index \zhaoRhoFfour. With four crops only, this is descriptive.
+\item \textbf{Yield shocks, 2001--2024.} Across the \shockNpairs\ pairs, the climate part is positively
+associated with how often yield fell more than one standard deviation below trend ($\rho$ = \shockRho, one-sided
+permutation $p$ = \shockP).
+  \begin{itemize}
+  \item At the mid-evaluation, with 26 pairs, this test was null. That null result is kept on record.
+  \item The nine-crop result is an association in a larger and more varied sample, not proof that the index
+  predicts shocks.
+  \end{itemize}
+\item \textbf{Year-to-year anomalies.} The fitted climate response correlates positively with observed 2001--24
+yield anomalies in \oosPos\ of \oosN\ pairs with enough data (median $r$ = \oosMedian).
+\item \textbf{Future responses.} The literature and empirical future yield responses agree in sign for only
+\fySameSign\% of pairs (Section~\ref{sec:futurenut}). This is a disagreement, not a validation.
+\end{itemize}
+
+\subsection{Comparison with published studies}
+Of \litN\ comparisons of signs and rank orders (Table~\ref{tab:lit}), \litAgree\ agree, \litPartial\ partly agree and
+\litDiffer\ differ. The disagreements are informative:
+\begin{itemize}
+\item \citet{lobell2011} attribute Russian wheat losses to temperature, while our monthly threshold measure sees
+mainly rainfed water deficit there;
+\item maize suitability studies \citep{ramirez2017} project losses in Africa where our single climate model projects
+a wetter South African growing season.
+\end{itemize}
+Each published value is checked against its source (quote, page or table, read level) in
+\file{docs/literature\_comparison\_sources.md}. Only signs and rank orders are compared, never index values with
+yield percentages.
+
+\begin{table}[p]\centering\scriptsize
+\caption{Our results next to published findings (verdicts computed from our result tables by
+\file{code/22\_literature\_comparison.py}).}\label{tab:lit}
+\input{nine_crop/generated/tab_litcompare.tex}
+\end{table}

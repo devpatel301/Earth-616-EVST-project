@@ -1,0 +1,105 @@
+\section{Parameter and source ledger}\label{app:ledger}
+Table~\ref{tab:ledger} records, for every parameter that enters the index or the nutrition accounting:
+\begin{itemize}
+\item its value and exact source location;
+\item the experiment behind it;
+\item the temperature metric and the outcome measured;
+\item whether the value is published, derived by us, or a proxy;
+\item the alternatives tested.
+\end{itemize}
+Verbatim quotes and read levels are in \file{docs/literature\_verification\_new\_crops.md} (new crops, including the
+follow-up checks of this audit in its Section~8) and in the mid-evaluation verification notes (original crops).
+
+\paragraph{Read levels.} Full texts were read for:
+\begin{itemize}
+\item \citet{bhandari2020}, \citet{boote2005}, \citet{tari2022};
+\item FAO-33, FAO-66, FAO-56 and FAO-56 Rev.1;
+\item WHO/FAO 2004;
+\item the Deryng, Yoshida and Jagadish sources.
+\end{itemize}
+Only abstracts were available for \citet{prasad2002bean}, \citet{prasad2003peanut}, \citet{morrison2002},
+\citet{nandi2021} and \citet{istanbulluoglu2010}. The chickpea $K_y$ range 0.67--0.93 attributed to Jalota et al.\
+(2006) is known only through a secondary citation; that study's abstract gives no $K_y$.
+
+\paragraph{Derived heat parameters.} The derived thresholds and slopes are refitted from the published data by
+\file{code/25\_parameter\_fits.py} (Table~\ref{tab:fits}). The model is the Deryng broken-stick function
+$\text{loss} = \min(1, s_T\max(0,\Teff-\Tcrit))$, fitted by least squares on a grid. Chamber day/night regimes
+$D/N$ are converted with $\Teff = ((D+N)/2 + D)/2$.
+
+\input{nine_crop/generated/tab_ledger.tex}
+
+\begin{table}[H]\centering\small\caption{Derived heat parameters refitted from published data, compared with
+\file{config.py} (bean: two published points; rapeseed: converted threshold and borrowed slope).}\label{tab:fits}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_fits.tex}}\end{table}
+
+\clearpage
+\section{Full result tables}\label{app:tables}
+
+\begin{table}[H]\centering\scriptsize\caption{Country by crop \Fd, 2001--2024.}\label{tab:countrycrop}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_country_crop9.tex}}\end{table}
+
+\begin{table}[H]\centering\small\caption{Nutrient adequacy ratios, 2021--23, main and alternative requirements.}\label{tab:adequacy}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_adequacy9.tex}}\end{table}
+
+\begin{table}[H]\centering\small\caption{Standard $-10\%$ yield shock: pairs with the largest MAR changes (upper
+bound; last column with exports absorbing first).}\label{tab:shock}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_shock9.tex}}\end{table}
+
+\begin{table}[H]\centering\small\caption{Largest future changes by pair, split into heat and water parts.}\label{tab:futurepairs}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_future_pairs.tex}}\end{table}
+
+\begin{table}[H]\centering\small\caption{Conditional future yield and nutrient change: pairs with the largest MAR
+changes (conditional screening estimate).}\label{tab:futnut}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_future_nutrition.tex}}\end{table}
+
+\begin{table}[H]\centering\scriptsize\caption{One-at-a-time robustness tests (F4).}\label{tab:robust}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_robust9.tex}}\end{table}
+
+\begin{figure}[H]\centering\includegraphics[width=0.85\linewidth]{F05l_literature_sensitivity.pdf}
+\caption{Literature sensitivity of the nine crops: heat slope and $K_y$.}\label{fig:litsens}\end{figure}
+
+\begin{figure}[H]\centering\includegraphics[width=0.6\linewidth]{G11_mideval_vs_literature_only.pdf}
+\caption{The same 26 pairs: frozen mid-evaluation values (blended sensitivity) against the presented
+literature-only method.}\label{fig:midlit}\end{figure}
+
+\begin{table}[H]\centering\small\caption{Food-supply diversity (effective number of FBS items supplying each
+nutrient, 2021--23) and share of supply from the nine crops.}\label{tab:diversity}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/tab_diversity.tex}}\end{table}
+
+\clearpage
+\section{Record of corrections}\label{app:corrections}
+Table~\ref{tab:corrections} lists every error found after the first end-evaluation version and how it was fixed.
+Decisions E18 and E19 are recorded in \file{docs/DECISION\_REGISTER\_END\_EVAL.md}.
+
+{\small
+\begin{longtable}{p{0.4cm}p{4.6cm}p{5.0cm}p{4.6cm}}
+\caption{Corrections made during the end-evaluation audits.}\label{tab:corrections}\\
+\toprule
+& Issue & Fix & Effect on results \\
+\midrule\endfirsthead
+\toprule & Issue & Fix & Effect on results \\ \midrule\endhead
+\bottomrule\endfoot
+1 & The nine-crop supply share counted only crops with an FBS item of their own, omitting chickpea and lentil. & Numerator from summed crop contributions (SUA for chickpea and lentil), denominator FBS total; World left blank (no SUA); not added to totals or to the Shannon items (E18). & India: energy \shareOldKcal\ $\to$ \shareNewKcal\%, protein \shareOldProtein\ $\to$ \shareNewProtein\%, iron \shareOldIron\ $\to$ \shareNewIron\%, zinc \shareOldZinc\ $\to$ \shareNewZinc\%. No index value changes. \\
+2 & Yield-to-nutrient bounds: Canada lentil has negative 2023 domestic supply in FAOSTAT (residuals $-$267\,kt), so SSR $<0$ turned a loss into a gain; in five pairs the lower bound exceeded the upper. & SSR capped to [0,1], non-positive supply with positive production counted as SSR = 1, lower bound $\le$ upper bound, in both historical and future accounting (E19). & 7 historical scenario rows and 3 future rows changed by at most 0.26 percentage points of a nutrient; no ranking or headline value changed. \\
+3 & Committed four-crop outputs (empirical sensitivity, S1/S2 scenarios) were stale, i.e.\ not what the code produces. & Regenerated; now identical to the nine-crop run on the 24 shared pairs. & Empirical water slope differed by up to 33, S1/S2 yield changes by up to 20 points; checks only, so no main index value changed. \\
+4 & Derived heat parameters were fitted in an unsaved scratch script. & \file{code/25\_parameter\_fits.py} refits them from the tabulated published data (a bounded optimiser hit local minima; replaced by a grid). & Reproduces \file{config.py} to its rounding; no value changed. \\
+5 & The raw-data manifest did not list the 19 Telangana-mask and Indian survey files used by the analysis. & Added with checksums, existing rows unchanged. & None. \\
+6 & The pipeline did not stop on a failed document compile; no automated arithmetic checks. & Compile exit codes checked; \file{24\_checks.py} runs before the documents. & None. \\
+7 & Text said wheat's future increase in the USA is water-driven, and bean has no empirical response in ``most'' countries. & Checked against \file{future\_components.csv} and \file{future\_yield.csv}: USA is shared heat/water; bean has no detected response in any country. & Wording only. \\
+8 & Rice $K_y$: FAO-33's rice chapter is at p.~125 and gives no number (rice is classed ``high''). & Proxy label made explicit. & None. \\
+9 & Reference: Beach et al.\ (2019) had been cited as ``Smith and Myers 2019''. & Corrected in \file{refs.bib}. & Reference [16] of the submitted literature review still carries the wrong authorship. \\
+10 & Layout: a future table ran 174\,pt past the margin; notes shrank tables; overlapping tick labels in a figure. & Tables wrapped and notes set under the table; tick formatter fixed. & None. \\
+\end{longtable}}
+
+\clearpage
+\section{Audit evidence}\label{app:audit}
+\input{nine_crop/generated/tab_checks.tex}
+
+\input{nine_crop/generated/tab_audit_diff.tex}
+
+\section{India, Telangana and Hyderabad sources}\label{app:indiasources}
+Every number used in Section~\ref{sec:india} is stored once with its table or page in
+\file{data/external/india\_hyderabad\_indicators.csv}. The source register \file{docs/india\_hyderabad\_sources.md} is
+generated from that file. Table~\ref{tab:indiasources} summarises it.
+
+\input{nine_crop/generated/tab_india_sources.tex}

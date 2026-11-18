@@ -175,8 +175,8 @@ def g06_groups(crop, fc):
             vals = col_src.set_index("crop").loc[members, col]
             ax.barh(gi, vals.mean(), color=GROUP_COLOR[g], height=0.55, alpha=0.35)
             ax.scatter(vals, [gi] * len(vals), color=GROUP_COLOR[g], s=40, zorder=3, edgecolor="white")
-            for c, v in vals.items():
-                ax.annotate(LABEL[c], (v, gi), xytext=(0, 9), textcoords="offset points", ha="center", fontsize=7.5, color=TEXT2)
+            for (c, v), dy in zip(vals.sort_values().items(), (11, -16, 23)):   # three label levels: close values do not collide
+                ax.annotate(LABEL[c], (v, gi), xytext=(0, dy), textcoords="offset points", ha="center", va="center", fontsize=7.5, color=TEXT2)
         ax.set_yticks(range(len(groups)), ["Cereals", "Pulses", "Oilseeds"])
         ax.set_xlabel("F4, equal weights (bar = mean of the three crops)")
         ax.set_title(label)

@@ -533,3 +533,36 @@ These are **development cut-offs for GDD (Eq. 6.23), not yield-damage thresholds
   - mean: T_crit 29.3, T_lim 39.8. This matches Hatfield's "failure point temperature of 40ºC".
   - T_max: T_crit 34.3, T_lim 44.8.
 - **Bean:** T_eff = (mean + max)/2 → (23 + 28)/2 = 25.5; (32 + 37)/2 = 34.5.
+
+---
+
+## 8. Follow-up checks, 2026-11-18 (end-evaluation audit)
+
+Same rules as above. Downloads were read from local copies; no repository data changed.
+
+1. **FAO-33 and rice K_y. Full text of the relevant pages read** (scanned copy at posmet.ufv.br; pages rendered and read visually).
+   - Table 2 (printed p. 7), column "Sensitivity to water supply (ky)": Rice reads only **"high"**, with no number. Maize in the same column is "high (1.25)".
+   - Table 23 (p. 36), rice: "during period of head development and flowering > vegetative period and ripening".
+   - The rice chapter starts at **p. 125** (not p. 118). Fig. 32 (p. 126) shows stage bands with no printed K_y.
+   - p. 127: "The most sensitive periods to water deficit are flowering (2) and the second half of the vegetative period (head development)."
+   - FAO-56 Rev.1 Table 8.7 has no rice row either.
+   - **Conclusion:** FAO gives no rice K_y. The 1.25 used for rice is maize's value, a **proxy** justified only by FAO-33 putting rice in the same "high" class as maize. It is tested at 1.0 and 1.5.
+2. **Prasad et al. 2002 and 2003: still not accessible.** Both are listed as closed in OpenAlex and Semantic Scholar, and no repository copy was found. Item 6.1 stays open.
+3. **Morrison & Stewart 2002: abstract only** (AGRIS/NAL record). Verbatim: "A heat stress index was developed on the basis of the accumulation of daily maximum temperatures greater than a threshold temperature. The threshold temperature during flowering, which resulted in seed yield losses, was 29.5 degrees C for all Brassica species." No slope is given. Item 6.2 stays open.
+4. **FAO-56 Rev.1 rapeseed K_y = 0.90: full text searched.** Table 8.7 (p. 279) has no source line. "Rapeseed" occurs only in Table 8.7 and in the salinity table, and the Chapter 8 reference list has no rapeseed study. The accurate wording is "tabulated in FAO-56 Rev.1 without a stated source". Item 6.7 stays open.
+5. **Jalota et al. 2006** = Jalota SK, Sood A, Harman WL, *Agric. Water Manage.* 79(3): 312–320, doi:10.1016/j.agwat.2005.02.014.
+   - It is a CROPMAN **simulation** study.
+   - Its abstract (ISC mirror) gives **no K_y and no 0.67 or 0.93**.
+   - The range 0.67–0.93 therefore stays **secondary**, via Tarı & Bahçeci 2022.
+6. **Nandi et al. 2021, now verbatim** (abstract, ScienceDirect/RePEc): "An average of 1% relative yield loss per 1% decline in relative ET suggests the suitability of growing of lentil crop in this post-rice residual water regimes of LGP." This resolves item 6.8: the lentil proxy K_y = 1.0 rests on this sentence (abstract level).
+7. **Derived heat fits are now reproducible in the repository.** `code/25_parameter_fits.py` refits chickpea, lentil and groundnut from the tabulated values in section 2, recomputes bean and rapeseed, and checks every value against `config.py`. The method is a least-squares grid over T_crit (0.05 °C steps) and slope (0.0005 /°C steps); a bounded 1-D optimiser is not used because the min(1, ·) cap gives local minima. Results:
+
+   | Crop | T_crit | s_T (/°C) | RMSE |
+   |---|---|---|---|
+   | Chickpea | 34.05 | 0.142 | 0.020 |
+   | Lentil | 31.85 | 0.1685 | 0.049 |
+   | Groundnut | 31.75 | 0.0945 | 0.029 |
+
+   All match the configured values to the stated rounding (output in `data/processed/nine_crop/parameter_fits.csv`). The previous session-scratchpad `fit.py` is no longer needed.
+8. **SUA stock-variation sign (code check, not literature).** In the raw SUA file, production + imports − exports − stock variation equals the sum of uses in 100 % of chickpea and lentil country-years. The plus sign matches in only 50 %. So the code's sign is correct.
+   - Canada lentil's negative domestic supply in 2023 is a property of the published FAOSTAT balance: food supply is 0 t and residuals are −266,981 t. It is not a coding error. Decision E19 handles it.

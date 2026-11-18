@@ -1,0 +1,46 @@
+{\scriptsize\begin{longtable}{L{0.091}L{0.098}L{0.098}L{0.171}L{0.183}L{0.140}L{0.122}L{0.098}}
+\caption[Parameter and source ledger]{Parameter and source ledger. Values are read from \texttt{code/config.py}. Status: published = value printed in the source; DERIVED = our arithmetic or fit on published values; PROXY = value borrowed from another crop, outcome or metric. Read levels and verbatim quotes: \texttt{docs/literature\_verification\_new\_crops.md}.}\label{tab:ledger}\\
+\toprule
+Crop & Parameter & Value & Source and location & Experiment / conditions & Metric and outcome & Status & Alternatives tested \\
+\midrule\endfirsthead
+\toprule
+Crop & Parameter & Value & Source and location & Experiment / conditions & Metric and outcome & Status & Alternatives tested \\
+\midrule\endhead
+\bottomrule\endfoot
+Rice & $T_{crit}$ & 35.0 & \citet{yoshida1981} Table 2.4; FAO-66 p.~106 & critical high temperature at anthesis, $>$1 h & daily mean air $T$; spikelet sterility & published (metric differs from $T_{eff}$) & $\pm$1--3\,\si{\celsius} \\
+Rice & $s_T$ & 0.070 & \citet{jagadish2007} & IR64 in chambers, $\le$1 h at anthesis & spikelet fertility ($\approx$7\%/\si{\celsius} above 29.6\,\si{\celsius}) & published, outcome borrowed (fertility $\to$ yield) & -- \\
+Rice & $K_y$ & 1.25 & FAO-33 Table 2 p.~7 (rice ``high'', no number); maize value FAO-66 Table 1 & -- & seasonal yield--ET response & PROXY (maize) & 1.0, 1.5 \\
+Wheat & $T_{crit}$, $T_{lim}$ & 25, 35 & \citet{deryng2014} Table A.1 & PEGASUS model, spring wheat & $T_{eff}$, 45--70\% of season; yield & published model parameter (also used for winter wheat) & $\pm$1--3\,\si{\celsius} \\
+Wheat & $K_y$ & 1.10 & FAO-66 Table 1 (spring 1.15, winter 1.05) & -- & seasonal & DERIVED mean of two FAO values & -- \\
+Maize & $T_{crit}$, $T_{lim}$ & 32, 45 & \citet{deryng2014} Table A.1 & PEGASUS model & $T_{eff}$; yield & published model parameter & $\pm$1--3\,\si{\celsius} \\
+Maize & $K_y$ & 1.25 & FAO-66 Table 1 (= FAO-33) & -- & seasonal & published & -- \\
+Soybean & $T_{crit}$, $T_{lim}$ & 35, 40 & \citet{deryng2014} Table A.1 & PEGASUS model & $T_{eff}$; yield & published model parameter & $\pm$1--3\,\si{\celsius} \\
+Soybean & $K_y$ & 0.85 & FAO-66 Table 1 (= FAO-33) & -- & seasonal & published & -- \\
+Chickpea & $T_{crit}$, $s_T$ & 34.0, 0.140 & \citet{bhandari2020} Table 3 p.~749 & 3 Indian genotypes, pots, growth chambers 30/20--42/32\,\si{\celsius} (12/12 h), flowering to maturity & seed yield per plant & DERIVED fit (5 points) & $T_{crit}$ 30.3 (pod set, \citealp{devasirvatham2013}); +3\,\si{\celsius}; slope $\times$0.7 \\
+Chickpea & $K_y$ & 0.88 & \citet{tari2022} p.~143 & field, Konya (Turkey), 2 years, 2 sowing dates & seasonal (0.85, 0.91) & DERIVED mean of 2 field values; not in FAO & 0.67, 1.15 \\
+Lentil & $T_{crit}$, $s_T$ & 31.9, 0.170 & \citet{bhandari2020} Table 3 & 2 Indian genotypes, as chickpea & seed yield per plant & DERIVED fit (4 points, 2 parameters) & +3\,\si{\celsius}; slope $\times$0.7 \\
+Lentil & $K_y$ & 1.00 & \citet{nandi2021} abstract & field, Lower Gangetic Plain, after rice & ``1\% yield loss per 1\% decline in relative ET''; best treatment 0.87 & PROXY (abstract only) & 0.87, 1.15 \\
+Common bean & $T_{crit}$, $s_T$ & 25.5, 0.111 & \citet{prasad2002bean} via \citet{boote2005} p.~470 & cv.\ Montcalm (Andean red kidney), sunlit chambers, season-long, 10\,\si{\celsius} diurnal range & seed yield (max at 28/18, zero at 37/27\,\si{\celsius}) & DERIVED from two published points; full text not read & $T_{crit}$ +2\,\si{\celsius}; slope $\times$0.7 \\
+Common bean & $K_y$ & 1.15 & FAO-33 Table 24 p.~39; FAO-66 Table 1 & -- & seasonal (IAEA field 0.59, 1.43) & published & 0.6, 1.4 \\
+Groundnut & $T_{crit}$, $s_T$ & 31.8, 0.095 & \citet{prasad2003peanut} abstract & cv.\ Georgia Green, sunlit chambers 32/22--44/34\,\si{\celsius}, season-long, ambient CO$_2$ & seed yield ($-$14, $-$59, $-$90\%) & DERIVED fit (4 points); full text not read & 29.0/0.074 \citep{boote2005}; +3\,\si{\celsius}; slope $\times$0.7 \\
+Groundnut & $K_y$ & 0.70 & FAO-33 Table 24; FAO-66 Table 1 & -- & seasonal & published & -- \\
+Rapeseed-mustard & $T_{crit}$ & 26.5 & \citet{morrison2002} abstract & field, Ottawa, 3 years $\times$ 3 sowing dates, 3 \emph{Brassica} species incl.\ \emph{B.~juncea} & accumulated daily $T_{\max}$ above 29.5\,\si{\celsius} at flowering; seed yield & PROXY conversion to $T_{eff}$ with an assumed 12\,\si{\celsius} diurnal range & $\pm$1--3\,\si{\celsius} \\
+Rapeseed-mustard & $s_T$ & 0.10 & borrowed: \citet{deryng2014} spring-wheat span (10\,\si{\celsius}) & -- & -- & PROXY (no published slope found) & 0.07, 0.18 \\
+Rapeseed-mustard & $K_y$ & 0.90 & FAO-56 Rev.1 Table 8.7 p.~279 \citep{fao56rev1} & no source stated by FAO; field 0.87 \citep{istanbulluoglu2010} & seasonal & published, origin not traceable & 0.85, 0.95 \\
+Rice & $K_c$ ini, mid, end; $\bar K_c$ & 1.05, 1.20, 0.75; 1.11 & FAO-56 Tables 11--12 \citep{fao56} & subhumid reference conditions & crop water need ($\mathrm{ET_c}=K_c\mathrm{ET_0}$) & published & -- \\
+Wheat & $K_c$ ini, mid, end; $\bar K_c$ & 0.40, 1.15, 0.33; 0.88 & FAO-56 Tables 11--12 \citep{fao56} & subhumid reference conditions & crop water need ($\mathrm{ET_c}=K_c\mathrm{ET_0}$) & published & -- \\
+Maize & $K_c$ ini, mid, end; $\bar K_c$ & 0.30, 1.20, 0.48; 0.84 & FAO-56 Tables 11--12 \citep{fao56} & subhumid reference conditions & crop water need ($\mathrm{ET_c}=K_c\mathrm{ET_0}$) & published & -- \\
+Soybean & $K_c$ ini, mid, end; $\bar K_c$ & 0.40, 1.15, 0.50; 0.89 & FAO-56 Tables 11--12 \citep{fao56} & subhumid reference conditions & crop water need ($\mathrm{ET_c}=K_c\mathrm{ET_0}$) & published & -- \\
+Chickpea & $K_c$ ini, mid, end; $\bar K_c$ & 0.40, 1.00, 0.35; 0.77 & FAO-56 Tables 11--12 \citep{fao56}; stages: lentil arid row & subhumid reference conditions & crop water need ($\mathrm{ET_c}=K_c\mathrm{ET_0}$) & published; stages PROXY & -- \\
+Lentil & $K_c$ ini, mid, end; $\bar K_c$ & 0.40, 1.10, 0.30; 0.83 & FAO-56 Tables 11--12 \citep{fao56} & subhumid reference conditions & crop water need ($\mathrm{ET_c}=K_c\mathrm{ET_0}$) & published & -- \\
+Common bean & $K_c$ ini, mid, end; $\bar K_c$ & 0.40, 1.15, 0.35; 0.85 & FAO-56 Tables 11--12 \citep{fao56} & subhumid reference conditions & crop water need ($\mathrm{ET_c}=K_c\mathrm{ET_0}$) & published & -- \\
+Groundnut & $K_c$ ini, mid, end; $\bar K_c$ & 0.40, 1.15, 0.60; 0.85 & FAO-56 Tables 11--12 \citep{fao56} & subhumid reference conditions & crop water need ($\mathrm{ET_c}=K_c\mathrm{ET_0}$) & published & -- \\
+Rapeseed-mustard & $K_c$ ini, mid, end; $\bar K_c$ & 0.35, 1.15, 0.35; 0.78 & FAO-56 Tables 11--12 \citep{fao56}; stages: Rev.1 Table 6.11 GDD shares & subhumid reference conditions & crop water need ($\mathrm{ET_c}=K_c\mathrm{ET_0}$) & published; stages PROXY & -- \\
+All & Flowering window & 45--70\% of season & \citet{deryng2014} & anthesis at 0.5 of the season & -- & published (model convention) & -- \\
+Chickpea, lentil, rapeseed & Calendar & cool-season rule & \citet{sacks2010} (own observed calendar, else wheat/spring-wheat calendar) & Sacks ``Pulses'' calendar is 95\% gap-filled in India and monsoon-season & -- & PROXY (borrowed calendars) & plain Sacks calendar \\
+All & $\mathrm{ET_0}$ & Hargreaves & FAO-56 Eq.~52 \citep{fao56} & needs $T_{\max}$, $T_{\min}$, $R_a$ only & -- & published & -- \\
+All & Zn requirement & 11.9 mg/d & WHO/FAO 2004 Table 12.4 p.~240 \citep{whofao2004} & adults, low bioavailability (women 9.8, men 14.0) & RNI (upper percentile) & DERIVED mean of two RNIs & 5.95 (moderate) \\
+All & Fe requirement & 21.55 mg/d & WHO/FAO 2004 Table 13.5 p.~271 & adults, 10\% bioavailability (women 29.4, men 13.7) & RNI (95th percentile) & DERIVED mean of two RNIs & 14.35 (15\%) \\
+All & Energy, protein, fat requirement & ADER; 10\%, 15\% of energy & FAOSTAT food-security indicators; \citet{who2003} & country- and year-specific energy requirement & population average (energy); lower bounds of goals & published & -- \\
+All & Zn, Fe composition & per FBS item & USDA SR Legacy \citep{usda2019}; \texttt{code/fbs\_usda\_map.csv} & raw, unprocessed form (whole grain; primary weight) & mg/100 g & mapping choice (overstates Zn, Fe for refined cereals, meat) & -- \\
+\end{longtable}}

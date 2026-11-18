@@ -1,0 +1,79 @@
+\section{Nutritional adequacy and yield-to-diet methods}\label{sec:nutmethod}
+
+\subsection{Nutrient adequacy}\label{sec:adequacy}
+For country $c$ in year $t$, national supply $S_n$ (per person per day) is compared with a requirement $R_n$:
+\begin{equation}\label{eq:nar}
+\text{NAR}_n = \min\!\left(1,\ \frac{S_n}{R_n}\right),\qquad \text{MAR} = 100\times\frac15\sum_n \text{NAR}_n .
+\end{equation}
+The cap at one stops a surplus of one nutrient from hiding a shortfall of another. MAR is reported in points out
+of 100.
+
+The requirements are:
+\begin{itemize}
+\item \textbf{Energy:} FAOSTAT's country- and year-specific Average Dietary Energy Requirement (a population
+average).
+\item \textbf{Protein and fat:} 10\% and 15\% of that energy (at 4 and 9\,kcal/g), the lower bounds of the WHO
+goals \citep{who2003}.
+\item \textbf{Zinc:} 11.9\,mg/day, the mean of the adult RNIs at low bioavailability (women 9.8, men 14.0;
+\citealp{whofao2004} Table 12.4).
+\item \textbf{Iron:} 21.55\,mg/day, the mean of the adult RNIs at 10\% bioavailability (women 29.4, men 13.7;
+Table 13.5).
+\end{itemize}
+An alternative uses moderate-bioavailability zinc and 15\%-bioavailability iron.
+
+Two cautions apply to reading these ratios.
+\begin{itemize}
+\item RNIs are upper-percentile \emph{individual} requirements, while $S_n$ is a national \emph{mean supply},
+not intake. A ratio above one therefore does not mean that no one is deficient.
+\item A ratio below one is a supply-side warning, not a measured deficiency.
+\end{itemize}
+
+\subsection{Standard yield shock and its bounds}\label{sec:shockmethod}
+A yield change $\Delta Y<0$ (in \%) in crop $k$ removes part of the crop's contribution $C_{n,k}$ to national
+supply. The fraction removed has two bounds.
+\begin{itemize}
+\item \textbf{Upper bound (no market response):} the loss passes through in proportion to self-sufficiency.
+\item \textbf{Lower bound (exports absorb first):} exports absorb the lost production before domestic supply is
+cut.
+\end{itemize}
+\begin{equation}\label{eq:shock}
+f^{\text{up}} = \frac{|\Delta Y|}{100}\,\text{SSR}^{*},\qquad
+f^{\text{low}} = \min\!\left(f^{\text{up}},\ \frac{\max\left(0,\ \tfrac{|\Delta Y|}{100}Q - X\right)}{\text{DS}}\right),\qquad
+S'_n = S_n - f\,C_{n,k},
+\end{equation}
+where $Q$ is production, $X$ exports, DS domestic supply and $\text{SSR}=Q/\text{DS}$, all 2021--23 means. The
+adjusted self-sufficiency $\text{SSR}^{*}$ is defined as follows:
+\begin{itemize}
+\item normally, $\text{SSR}^{*}=\min(1,\max(0,\text{SSR}))$;
+\item when DS $\le0$ and $Q>0$, $\text{SSR}^{*}=1$. Such a balance occurs when exports, stock building or negative
+residuals exceed the supply; a negative SSR would otherwise turn a loss into a gain.
+\end{itemize}
+The lower bound is never above the upper bound. Both rules were added in this audit (decision~E19;
+Appendix~\ref{app:corrections}).
+
+The change in each nutrient ($-100\,f\,C_{n,k}/S_n$, in \%) and the change in MAR are reported. The standard
+shock is $\Delta Y=-10\%$ for every pair. It isolates the dietary channel, so countries and crops can be compared
+on the same footing; it is not a projection.
+
+\subsection{Historical pass-through}
+For each pair, the percentage anomaly of the crop's food-energy supply is regressed on the same year's
+percentage yield anomaly, both linearly detrended. This is done separately on the old FBS (1961--2013) and the
+new FBS (2010--2023). The slope measures how much a bad harvest has historically reached food supply. Trade,
+stocks, prices and income also move supply, so the slope is an association, not a causal effect.
+
+\subsection{Food-supply diversity}\label{sec:diversitymethod}
+The diversity of national food supply is measured, following \citet{remans2014}, by the effective number of
+items supplying a nutrient:
+\begin{equation}\label{eq:shannon}
+H_n = -\sum_j p_{j,n}\ln p_{j,n},\qquad p_{j,n} = \frac{S_{n,j}}{\sum_{j'}S_{n,j'}},\qquad N^{\text{eff}}_n = e^{H_n},
+\end{equation}
+over the FBS food items $j$ (2021--2023 means). This describes national food \emph{supply}. It is not an
+individual dietary diversity score, which needs individual or household intake data
+(Section~\ref{sec:india}).
+
+The share of a nutrient supplied by the nine study crops has:
+\begin{itemize}
+\item a \textbf{numerator}: the summed crop contributions (chickpea and lentil from SUA);
+\item a \textbf{denominator}: the FBS national total.
+\end{itemize}
+It is reported only where SUA data exist; World has none, so its share is left blank.

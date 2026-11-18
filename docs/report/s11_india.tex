@@ -22,6 +22,15 @@ for the United States and \divChnKcal\ for China; cereals provide \divIndCereal\
 largest single source of iron (\divIndIronTopShare\%). The nine index crops together supply \divIndNineKcal\% of India's energy,
 \divIndNineProtein\% of its protein and \divIndNineIron\% of its iron (national totals from the food balance sheets; chickpea
 and lentil from FAOSTAT supply-utilization accounts, because the food balance sheets only report them inside ``Pulses, other'').
+Table~\ref{tab:indiashares} shows the shares to two decimals and the correction made in this audit: an earlier version
+counted only the seven crops with an FBS item of their own and so left out chickpea and lentil
+(Appendix~\ref{app:corrections}).
+
+\begin{table}[H]\centering\small
+\caption{Share of India's national supply from the study crops, 2021--23 (numerator: summed crop contributions;
+denominator: FBS national total).}\label{tab:indiashares}
+\input{nine_crop/generated/tab_india_shares.tex}
+\end{table}
 
 \subsection{Hyderabad: what is known, and at what resolution}
 Official data are not published for Hyderabad at every level. Household food consumption (MoSPI HCES 2023--24)
@@ -31,6 +40,28 @@ state's dominant city, but the figures are not city-specific). The National Fami
 2019--21) publishes a \emph{Hyderabad district} fact sheet, which is fully urban. Climate is computed for the
 WorldClim grid cell containing Hyderabad (\SI{17.4}{\degree}N, \SI{78.5}{\degree}E; 10 arc-minute, roughly
 \SI{18}{km}), and crop exposure for all of Telangana (Natural Earth boundary).
+
+Table~\ref{tab:datalevels} keeps these levels apart. In particular:
+\begin{itemize}
+\item no statement below is a measurement of Hyderabad \emph{city} diets;
+\item ``Hyderabad district'' refers only to the NFHS-5 health and nutrition indicators;
+\item ``urban Telangana'' refers to household acquisition and intake estimates.
+\end{itemize}
+
+\begin{table}[H]\centering\small
+\caption{Levels of data used in this section and what each can and cannot say.}\label{tab:datalevels}
+\begin{tabular}{p{3.0cm}p{3.6cm}p{3.6cm}p{4.4cm}}
+\toprule
+Level & Source & Measures & Cannot say \\
+\midrule
+National supply & FAOSTAT FBS/SUA 2021--23 & food available per person (supply) & who eats it; household or individual intake \\
+State $\times$ sector households & MoSPI HCES 2023--24; NSS 594 & quantities acquired and estimated intake, urban Telangana & Hyderabad city specifically; individual diets \\
+District measurements & NFHS-5 Hyderabad district fact sheet (2019--21) & anaemia, BMI, child growth (fully urban district) & diet composition \\
+State micronutrient status & CNNS 2016--18 Telangana & ferritin, zinc in children and adolescents & district or city values \\
+Grid cell / state area & WorldClim; SPAM; Telangana DES & local climate; Telangana crop area and exposure & where Hyderabad's food is grown \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{How diverse is the diet?}
 \paragraph{Staples.} A person in urban Telangana acquires \hqTgUrbanKgRice\,kg of rice and

@@ -1,0 +1,67 @@
+\section{Worked examples: wheat in India}\label{sec:worked}
+The three examples follow one pair, wheat in India, from saved inputs to the reported numbers. In each case the
+code (\file{17\_compare\_runs.py}, \file{26\_report\_tables.py}) recomputes the result by hand and asserts that it
+equals the pipeline value.
+
+\subsection{From raw components to F4}
+Table~\ref{tab:worked} shows the present-day calculation. It also explains why scores roughly halved between the
+four-crop and nine-crop runs.
+\begin{itemize}
+\item \textbf{Same physical inputs.} The heat level of wheat in India is \exNineLheatc\,\si{\celsius} of $\Teff$
+above \SI{25}{\celsius} in both runs.
+\item \textbf{Different maxima.} In the nine-crop run the heat maximum is set by common bean in India
+(\exNinemaxLheat\,\si{\celsius}), so wheat's heat exposure falls from \exFourEheat\ to \exNineEheat.
+\item \textbf{Result.} The water term dominates:
+$\Fd = \tfrac12(\exNineEheat\times\exNineSheat + \exNineEwater\times\exNineSwater)\times\exNineInorm = \exNineFFourpipeline$.
+\end{itemize}
+
+\input{sections/worked_example.tex}
+
+\subsection{A standard 10\% loss of the wheat crop}
+In 2021--23, India produced \wsWheatIndProd\,kt of wheat against a domestic supply of \wsWheatIndDom\,kt and
+exports of \wsWheatIndExp\,kt, so SSR = \wsSSR\ and $\text{SSR}^{*}=1$.
+
+\paragraph{Upper bound (no market response).} A 10\% yield loss removes $f^{\text{up}} = 0.10\times1 =
+\wsFrac$ of wheat's contribution to supply.
+\begin{itemize}
+\item \textbf{Iron.} Wheat supplies \wsCIron\ of India's \wsBIron\,mg iron per person per day, so iron supply
+changes by $-0.10\times\wsCIron/\wsBIron$, that is \wsDIron\%. Iron adequacy moves from
+$\min(1, \wsBIron/\wsRIron) = \wsNARzeroIron$ to \wsNARoneIron.
+\item \textbf{Energy and zinc.} Energy changes by \wsDKcal\% and zinc by \wsDZinc\%. Both stay above their
+requirements, so their NAR stays 1.
+\item \textbf{MAR.} The MAR falls from \wsMARzero\ to \wsMARone, a change of \wsDMAR\ points. The whole change
+comes from iron.
+\end{itemize}
+
+\paragraph{Lower bound (exports absorb first).} Exports absorb part of the loss, so $f^{\text{low}} = \wsLower$ and
+the MAR change is \wsDMARlower\ points.
+
+\paragraph{Reading.} The MAR cap hides the energy and zinc losses: they are real but leave supply above the
+requirement. This is why the nutrient changes are reported beside MAR.
+
+\subsection{The conditional future yield change}
+\paragraph{Exposure.} From 1971--2000 to 2041--2060 under MRI-ESM2-0 SSP2-4.5, the flowering-window $\Teff$ of
+Indian wheat rises by \wfdTeff\,\si{\celsius}.
+\begin{itemize}
+\item The heat level rises from \wfHheatHist\ to \wfHheatFut\,\si{\celsius}.
+\item The water level barely moves (\wfHwaterHist\ to \wfHwaterFut).
+\end{itemize}
+
+\paragraph{Index.} With the fixed reference, $E_{\text{heat}}$ rises from \wfEheatHist\ to \wfEheatFut\ and
+\Fd\ from \wfFFourHist\ to \wfFFourFut. Of that change, \wfdFfourHeat\ is the heat part and \wfdFfourWater\ the water
+part (Eq.~\ref{eq:decomp}).
+
+\paragraph{Yield.} In physical units (Eq.~\ref{eq:loss}), with $s_T=\wfSlope$ and $K_y=\wfKy$:
+\begin{itemize}
+\item the period-mean heat loss rises from \wfHeatLossHist\ to \wfHeatLossFut;
+\item the water loss rises from \wfWaterLossHist\ to \wfWaterLossFut;
+\item the combined loss rises from \wfLossHist\ to \wfLossFut;
+\item hence $\Delta Y = -100\,(\wfLossFut-\wfLossHist)/(1-\wfLossHist) = \wfdY\%$.
+\end{itemize}
+The empirical coefficients give \wfdYemp\%.
+
+\paragraph{Nutrition.} Propagated through Eq.~\ref{eq:shock} (upper bound), the change reduces India's iron supply
+by \wfDIron\% and its energy supply by \wfDKcal\%, and lowers MAR by \wfDMAR\ points.
+
+\paragraph{Reading.} The index change (\wfFFourHist\ to \wfFFourFut) and the yield change (\wfdY\%) are different
+quantities. Only the second has physical units, and it is conditional on the literature damage functions.

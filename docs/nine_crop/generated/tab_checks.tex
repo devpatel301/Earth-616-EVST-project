@@ -1,0 +1,39 @@
+{\scriptsize\begin{longtable}{rL{0.569}cL{0.261}}
+\caption[Consistency checks run on the saved results]{Consistency checks run on the saved results.}\label{tab:checks}\\
+\toprule
+ & Check (\texttt{code/24\_checks.py}) & Result & Detail \\
+\midrule\endfirsthead
+\toprule
+ & Check (\texttt{code/24\_checks.py}) & Result & Detail \\
+\midrule\endhead
+\bottomrule\endfoot
+1 & nine crops in panels & pass & 9 crops, 59 pairs \\
+2 & every crop appears in docs/input\_register.csv & pass & [] \\
+3 & E\_heat = observed level / fixed maximum & pass & max 5.0463 \\
+4 & E\_water = observed level / fixed maximum & pass & max 0.7894 \\
+5 & index\_reference maxima equal component maxima & pass &  \\
+6 & S\_heat is literature slope / max slope (literature-only) & pass &  \\
+7 & S\_water is FAO K\_y / max K\_y (literature-only) & pass &  \\
+8 & I = mean of five nutrient shares & pass &  \\
+9 & In = I / max I & pass &  \\
+10 & F4 recomputed from components & pass &  \\
+11 & crop score, equal weights = mean over countries & pass &  \\
+12 & crop score, production weights & pass &  \\
+13 & group score = simple mean of its three crop scores & pass &  \\
+14 & future run's 'present' column reproduces the main F4 & pass &  \\
+15 & historical\_1971\_2000: E uses the FIXED present-period maximum & pass &  \\
+16 & future\_2041\_2060: E uses the FIXED present-period maximum & pass &  \\
+17 & S and In identical across periods & pass &  \\
+18 & dF4 = heat part + water part & pass &  \\
+19 & 1971-2000 comparator reproduces main series (relative < 1e-3) & pass & max rel 1.94e-07 \\
+20 & yield change comes from loss accounting, not from index values & pass &  \\
+21 & crop\_contrib national totals equal the adequacy (FBS) totals & pass & 2848 country-years \\
+22 & nine crops never exceed 100\% of any national nutrient supply & pass & max 0.835 \\
+23 & SUA chickpea+lentil kcal do not exceed the FBS 'Pulses, Other' aggregate (5\% tolerance) & pass & 0.1\% of 2369 country-years exceed (SUA and FBS can differ) \\
+24 & SUA rows are labelled and kept out of national totals & pass &  \\
+25 & India nine-crop share (diversity table) = summed crop contributions & pass & kcal 0.5800 vs 0.5800 \\
+26 & nine-crop share >= FBS-item-only share everywhere it is defined & pass &  \\
+27 & standard shock is -10\% everywhere & pass &  \\
+28 & historical scenarios: supply changes are <= 0 and the lower bound is no larger than the upper bound & pass &  \\
+29 & future nutrition: supply changes are <= 0 and the lower bound is no larger than the upper bound & pass &  \\
+\end{longtable}}

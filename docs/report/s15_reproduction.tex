@@ -1,0 +1,84 @@
+\section{Reproduction and audit}\label{sec:repro}
+
+\subsection{How to reproduce the results}
+\paragraph{Environment.} Python 3.13 with the pinned packages in \file{requirements.txt}. Python 3.14 is not
+supported, because rasterio builds from source. The PDFs are compiled with Tectonic. The documents are ASCII-only
+and select \texttt{inputenc}/\texttt{fontenc} under pdfLaTeX, but the pdfLaTeX route has not been tested.
+
+\paragraph{Raw data.} Put the raw files in \file{data/raw/} and check them against the manifest:
+\begin{verbatim}
+py -3.13 -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+cd code
+..\.venv\Scripts\python 00_data_manifest.py --check
+powershell -ExecutionPolicy Bypass -File .\run_all.ps1
+\end{verbatim}
+
+\paragraph{Pipeline.} \file{run\_all.ps1} runs, in order:
+\begin{enumerate}
+\item downloads (skipping files present);
+\item K\"oppen groups;
+\item crop grids;
+\item monthly climate series (precipitation, $T_{\max}$, $T_{\text{mean}}$);
+\item hazards;
+\item future climate;
+\item for each of the four-crop and nine-crop runs: panels, country series, sensitivity checks, nutrition, index
+and robustness, yield-to-diet, validation and literature sensitivity;
+\item the mid-evaluation figure set for the four-crop run;
+\item future index, future yield and nutrition, run comparisons, figures, input register, India and Hyderabad
+analysis, literature comparison, source register;
+\item the consistency checks (\file{24\_checks.py}) and parameter fits (\file{25\_parameter\_fits.py});
+\item the LaTeX tables and macros (\file{19\_endeval\_tex.py}, \file{26\_report\_tables.py});
+\item the documents.
+\end{enumerate}
+Any script that fails, any failed check and any failed document compile stops the run, so stale results cannot be
+compiled as new ones. On the audit machine the full run from raw inputs, climate steps included, took about 21
+minutes; downloading the raw data takes much longer. The switch \texttt{-SkipClimate} reuses \file{data/work}.
+
+\subsection{Audit of 18 November 2026}
+\paragraph{Inputs.} The manifest check found all \manifestFiles\ raw files present with matching SHA-256 checksums.
+The 55 files of the mid-evaluation and end-evaluation snapshots were listed before. The 19 files of the
+Telangana mask and the Indian surveys, already used by the analysis, were added to the manifest in this audit
+without changing any existing entry. The climate, SPAM, calendar, FAOSTAT and USDA files are the original
+snapshot files, so this is an exact reproduction, not a new data snapshot.
+
+\paragraph{Full rerun.} The previous intermediate files (\file{data/work}, about 10\,GB) and outputs were moved
+aside as a comparison copy, so no cached file could be reused. The whole pipeline, including every climate step,
+was then run from the raw inputs in a fresh Python 3.13 environment built from \file{requirements.txt}.
+
+\paragraph{Comparison.} \file{code/27\_compare\_rerun.py} compared every regenerated file with the previous copy
+(absolute and relative tolerance $10^{-9}$). Of \auditFiles\ files:
+\begin{itemize}
+\item \auditIdentical\ are identical;
+\item \auditWithinTolerance\ are within tolerance;
+\item \auditDiffers\ differ;
+\item \auditNew\ are new outputs of this audit.
+\end{itemize}
+The \auditMissing\ files of the previous copy that were not regenerated are all unused by the pipeline:
+\begin{itemize}
+\item 72 per-cell climate metric files of the rice-only prototype, written only when
+\texttt{CNVI\_LEGACY\_METRICS=1} and read by no script;
+\item an old production cache, renamed since;
+\item a leftover pulse cache and a shell script.
+\end{itemize}
+\textbf{Every output present in both runs is identical}, so the full rerun reproduces all previous results exactly
+(Table~\ref{tab:auditsummary}; the file list is in Appendix~\ref{app:audit}). The pipeline also stopped as designed
+on its first attempt: the report compile failed because this audit's macros did not yet exist, and nothing was
+built from stale results.
+
+\begin{table}[H]\centering\small\caption{Rerun from raw inputs compared with the previous outputs.}\label{tab:auditsummary}
+\input{nine_crop/generated/tab_audit_summary.tex}
+\end{table}
+
+\paragraph{Checks.} \checksPassed\ of \checksN\ consistency checks pass on the regenerated results
+(Table~\ref{tab:checks}). The derived heat parameters of the new crops are refitted from the published data by
+\file{code/25\_parameter\_fits.py} and reproduce \file{config.py} (Table~\ref{tab:fits}).
+
+\paragraph{What was not done.}
+\begin{itemize}
+\item No pdfLaTeX compile.
+\item No independent teammate review of parameters, calculations or interpretation.
+\item No team rehearsal.
+\item No re-download of FAOSTAT. A fresh download would be a new data snapshot and would change the numbers
+slightly.
+\end{itemize}

@@ -1,0 +1,79 @@
+\section{Scientific limitations and uncertainty}\label{sec:limits}
+Each limitation is tied to the result it affects. Where it was tested, the test is named.
+
+\subsection{Climate measurement}
+\begin{itemize}
+\item \textbf{Monthly data hide hot days.} Heat exposure is a lower bound. Rice and soybean score near zero on heat
+largely for this reason: their thresholds are defined for short exposures that monthly means cannot show. The
+direction of bias is to understate heat vulnerability, most for crops with high thresholds.
+\item \textbf{The water ratio has no soil storage or runoff, and treats irrigation as unlimited.}
+  \begin{itemize}
+  \item It overstates stress for crops grown on stored soil moisture. Rabi chickpea in India is grown on residual
+  monsoon moisture, and it sets the water reference.
+  \item It understates stress where irrigation water is itself at risk.
+  \end{itemize}
+  The index therefore assumes irrigation keeps flowing. This matters most for rice and for Telangana.
+\item \textbf{Station coverage.} In cell-months without stations, CRU-TS returns climatology, which damps rainfall
+variability.
+\end{itemize}
+
+\subsection{Crop parameters}
+The ledger (Appendix~\ref{app:ledger}) labels every value as published, derived or proxy.
+\begin{itemize}
+\item \textbf{New legumes are fitted.} Their thresholds and slopes are fits to chamber or pot experiments on one
+to three genotypes. Chamber exposure is continuous and without recovery days, so these values probably overstate
+field sensitivity. They also sit below model-calibrated thresholds such as those used for wheat, maize and soybean.
+Tested: $T_{\text{crit}}+3$\,\si{\celsius} and slopes $\times0.7$; wheat stays first.
+\item \textbf{Common bean.} The threshold comes from one heat-susceptible Andean cultivar. It is applied to FAO
+``beans, dry'', which in India and Myanmar include tropical \emph{Vigna} pulses. Because bean in India sets the heat
+reference for all crops, this choice scales every heat exposure. Tested: $+2$\,\si{\celsius}.
+\item \textbf{Rice.} FAO gives no rice $K_y$ (FAO-33 classes rice only as ``high'' sensitivity, like maize), so
+maize's 1.25 is a proxy. Rice's heat slope is a spikelet-fertility slope, not a yield slope. Tested: $K_y$ 1.0 and
+1.5.
+\item \textbf{Rapeseed-mustard.} The threshold is converted from a daily-maximum threshold with an assumed diurnal
+range. No published heat slope was found, so wheat's is borrowed; it is tested from 0.07 to 0.18. The FAO-56 Rev.1
+$K_y$ of 0.90 is tabulated without a stated source. Parameters from \emph{B.~napus} probably overstate the heat
+sensitivity of Indian mustard (\emph{B.~juncea}).
+\item \textbf{Inaccessible sources.} Not read in full: \citet{prasad2002bean}, \citet{prasad2003peanut} and
+\citet{morrison2002} (closed access). Their values are taken from abstracts and from \citet{boote2005}.
+\end{itemize}
+
+\subsection{Maps, calendars and panels}
+\begin{itemize}
+\item \textbf{Crop maps are from 2010 (SPAM).} Areas have since moved; Telangana's paddy area is about three times
+the 2010 map.
+\item \textbf{Calendars.} Calendars are partly gap-filled. Chickpea, lentil and rapeseed use the cool-season rule,
+whose plain-Sacks alternative is tested.
+\item \textbf{Panels.} Panels sample the main producers (half to nine-tenths of world output), not all countries.
+Pigeon pea (tur) and moong, major pulses in South India, are not among the nine crops.
+\end{itemize}
+
+\subsection{Nutrition}
+\begin{itemize}
+\item \textbf{Supply, not intake.} National supply is not individual intake, and composition is one value per item.
+Whole-grain and primary-weight compositions overstate zinc and iron.
+\item \textbf{Requirements.} RNIs compared with mean supply overstate shortfall at the individual level. The iron
+result changes with the bioavailability assumption (\nIronShort\ countries short under the main requirement, none
+under the alternative).
+\item \textbf{Shock accounting.} There is no price or trade response, so the upper bound is a bound, not a forecast.
+\end{itemize}
+
+\subsection{Future}
+\begin{itemize}
+\item \textbf{One model, one scenario.} The future results show direction under MRI-ESM2-0 SSP2-4.5, not the range
+of plausible futures. Regional rainfall changes in particular are model-dependent.
+\item \textbf{Fixed area, calendars, irrigation and diets}, with no CO$_2$ fertilisation and no adaptation. Elevated
+CO$_2$ would raise yields of C$_3$ crops but lower their zinc, iron and protein \citep{myers2014}. Neither effect is
+included.
+\item \textbf{Response methods disagree.} The literature and empirical future yield responses disagree for about
+half the pairs, so the future nutrient numbers are conditional screening estimates.
+\end{itemize}
+
+\subsection{Index design}
+\begin{itemize}
+\item \textbf{Our combination rules.} Pairing, equal nutrient weights, normalisation by the maximum, and equal or
+production weighting across countries are our design choices. Robustness tests show their effect but cannot show
+that they are right.
+\item \textbf{Relative values.} F4 values are meaningful as relative positions within this set of crops and
+countries. Adding crops changes the reference and hence every value, as the four-to-nine-crop comparison showed.
+\end{itemize}

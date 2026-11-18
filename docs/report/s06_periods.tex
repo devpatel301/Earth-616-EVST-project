@@ -1,0 +1,82 @@
+\section{Historical and future processing}\label{sec:periods}
+
+\subsection{Change factors}\label{sec:changefactors}
+The CMIP6 files are 20-year monthly \emph{climatologies}, but exposure is the mean over years of a non-linear
+quantity (a threshold exceedance). Applying a threshold to a 20-year mean is not the same as averaging yearly
+exceedances, so the main calculation uses change factors (the delta method). For every cell $i$ and calendar
+month $m$, the model's change relative to the WorldClim 1970--2000 normals is applied to each observed season-year
+$t\in1971..2000$:
+\begin{align}
+T^{f}_{\max/\min,i,t,m} &= T_{\max/\min,i,t,m} + \left(\overline T^{\,\text{CMIP6}}_{\max/\min,i,m}-\overline T^{\,\text{norm}}_{\max/\min,i,m}\right), \label{eq:delta}\\
+P^{f}_{i,t,m} &= P_{i,t,m}\cdot\min\!\left(3,\ \frac{\overline P^{\,\text{CMIP6}}_{i,m}}{\overline P^{\,\text{norm}}_{i,m}}\right). \label{eq:deltap}
+\end{align}
+Temperature changes are additive and precipitation changes multiplicative. The ratio is capped at 3 and set to 1
+where the normal is below 1\,mm.
+
+The perturbed years are processed by exactly the same code as the observed years
+(Eqs.~\ref{eq:heatcell}--\ref{eq:levels}). The \emph{historical comparator} is the same 1971--2000 years without
+change factors, run through the same code. It reproduces the main pipeline's 1971--2000 country series to
+\histReproMaxDiff\ (largest absolute difference), so the future and historical numbers differ only through the
+climate change signal. As a check, a \emph{climatology} calculation applies the thresholds directly to the 20-year
+means.
+
+\subsection{One fixed normalisation reference}\label{sec:fixedref}
+All periods are divided by the same maxima: the 2001--2024 maxima of $L_{\text{heat}}$ and $L_{\text{water}}$ and
+the maximum importance of the main run (\file{index\_reference.csv}).
+\begin{equation}\label{eq:fixedref}
+E^{\text{period}}_{\text{heat},kc} = \frac{L^{\text{period}}_{\text{heat},kc}}{\max_{k'c'} L^{2001\text{--}24}_{\text{heat},k'c'}} .
+\end{equation}
+Future values above the reference are not clipped, so a future exposure can exceed one. If each period were
+normalised separately, a uniform increase in stress would cancel out. The fixed reference makes the scores of
+different periods comparable.
+
+The change between periods is reported as future minus historical score. It splits exactly into a heat part and
+a water part, because $S$ and $\tilde I$ are held fixed:
+\begin{equation}\label{eq:decomp}
+\Delta\Fd = \underbrace{\tfrac12 S_T\,\Delta E_{\text{heat}}\,\tilde I}_{\text{heat part}} + \underbrace{\tfrac12 S_P\,\Delta E_{\text{water}}\,\tilde I}_{\text{water part}} .
+\end{equation}
+A percentage change is reported only where the historical score is at least 1\% of the largest historical pair
+score, to avoid near-zero denominators.
+
+\subsection{What is held fixed}
+\begin{itemize}
+\item crop sensitivity (literature values);
+\item importance (2021--2023 diets);
+\item crop area, irrigation and the rainfed share (SPAM~2010);
+\item calendars, flowering windows and country panels.
+\end{itemize}
+There is no CO$_2$ fertilisation, no CO$_2$ effect on nutrient content, no adaptation and no change in diets.
+The future result therefore isolates one question: how today's crops, grown where and when they are grown today
+and eaten as they are eaten today, would be exposed under the projected climate of one model.
+
+\subsection{Conditional future yield and nutrient accounting}\label{sec:futureyield}
+The normalised index is not a yield loss. To estimate nutrient consequences we return to physical units and pair
+each stress with its response coefficient \emph{before} any normalisation. For each pair and season-year $t$,
+\begin{equation}\label{eq:loss}
+\ell^{\text{heat}}_t = \min\!\left(1,\ s_T\,H_t\right),\qquad
+\ell^{\text{water}}_t = \min\!\left(1,\ K_y\,L_{\text{water},t}\right),\qquad
+\ell_t = 1-(1-\ell^{\text{heat}}_t)(1-\ell^{\text{water}}_t),
+\end{equation}
+where $H_t$ and $L_{\text{water},t}$ are the national yearly heat and water levels. The losses are averaged over the
+period ($\bar\ell$) and combined multiplicatively, so a yield cannot fall below zero. The climate-driven yield
+change is the relative change in attainable yield between the historical and future runs:
+\begin{equation}\label{eq:dy}
+\Delta Y = -100\,\frac{\bar\ell^{\,\text{fut}}-\bar\ell^{\,\text{hist}}}{1-\bar\ell^{\,\text{hist}}}\quad[\%].
+\end{equation}
+Only the \emph{change} is used, because the absolute water loss from the $P/\ETc$ screening ratio is not a
+credible yield level. Losses ($\Delta Y<0$) are propagated through the shock accounting of
+Eq.~\ref{eq:shock} on the 2021--23 supply; gains are reported but not added to supply.
+
+\paragraph{Empirical cross-check.} A second estimate uses the observed-yield regressions fitted on 1971--2000,
+$\Delta Y^{\text{emp}} = b_T\,\Delta\Teff + b_W\cdot10\,\Delta\text{MR}$:
+\begin{itemize}
+\item $\text{MR}=P/\ETc$, rainfed-weighted;
+\item a country's coefficient is used if it has the same sign and $p<0.05$ under three detrending methods
+(linear, quadratic, first differences);
+\item otherwise the pooled crop coefficient is used, under the same rule;
+\item otherwise the coefficient is zero (not detected).
+\end{itemize}
+
+\paragraph{Status.} The two estimates answer different questions and are compared, not averaged. The future
+nutrient numbers are a \textbf{conditional screening estimate}. They are conditional on the literature damage
+functions, one climate model, and fixed area, calendars and diets. They are not a forecast.
