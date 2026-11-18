@@ -78,8 +78,12 @@ def main():
             loss = max(0.0, -dy) / 100.0
             r = {"crop": p.crop, "group": CROPS[p.crop]["group"], "country": p.country, "model": model,
                  "dY_pct": dy, "ssr": c.ssr, "MAR_base": b.MAR}
-            for bound, frac in (("upper", loss * min(1.0, c.ssr)),
-                                ("lower", max(0.0, loss * c["prod"] - c["exp"]) / c["dom"] if c["dom"] > 0 else 0.0)):
+            # same bound conventions as 09_yield_diet.py: SSR capped to [0, 1] (non-positive domestic availability with
+            # positive production counts as 1) and lower bound never above upper bound
+            ssr_cap = 1.0 if (c["dom"] <= 0 and c["prod"] > 0) else float(np.clip(c.ssr, 0.0, 1.0)) if np.isfinite(c.ssr) else 0.0
+            upper = loss * ssr_cap
+            lower = min(upper, max(0.0, loss * c["prod"] - c["exp"]) / c["dom"] if c["dom"] > 0 else 0.0)
+            for bound, frac in (("upper", upper), ("lower", lower)):
                 nar = []
                 for n in NUTRIENTS:
                     new = b[n] - frac * c[n]

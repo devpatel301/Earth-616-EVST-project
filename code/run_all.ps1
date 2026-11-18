@@ -50,10 +50,14 @@ Run 20_input_register.py nine_crop
 Run 21_india_hyderabad.py nine_crop
 Run 22_literature_comparison.py nine_crop
 Run 23_sources_doc.py nine_crop
+Run 24_checks.py nine_crop            # consistency checks; a FAIL stops the run before any document is built
 Run 19_endeval_tex.py nine_crop
 
 # ---- 4. documents (Tectonic, https://tectonic-typesetting.github.io) ----
 $tectonic = if (Get-Command tectonic -ErrorAction SilentlyContinue) { "tectonic" } else { "$env:LOCALAPPDATA\tectonic\tectonic.exe" }
 Set-Location ..\docs
-foreach ($doc in "final_report", "final_slides", "final_appendix") { & $tectonic -X compile "$doc.tex" }
+foreach ($doc in "final_report", "final_slides", "final_appendix") {
+    & $tectonic -X compile "$doc.tex"
+    if ($LASTEXITCODE -ne 0) { throw "tectonic failed on $doc.tex" }
+}
 Set-Location ..\code

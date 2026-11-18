@@ -1,0 +1,30 @@
+check,passed,detail
+nine crops in panels,True,"9 crops, 59 pairs"
+every crop appears in docs/input_register.csv,True,[]
+E_heat = observed level / fixed maximum,True,max 5.0463
+E_water = observed level / fixed maximum,True,max 0.7894
+index_reference maxima equal component maxima,True,
+S_heat is literature slope / max slope (literature-only),True,
+S_water is FAO K_y / max K_y (literature-only),True,
+I = mean of five nutrient shares,True,
+In = I / max I,True,
+F4 recomputed from components,True,
+"crop score, equal weights = mean over countries",True,
+"crop score, production weights",True,
+group score = simple mean of its three crop scores,True,
+future run's 'present' column reproduces the main F4,True,
+historical_1971_2000: E uses the FIXED present-period maximum,True,
+future_2041_2060: E uses the FIXED present-period maximum,True,
+S and In identical across periods,True,
+dF4 = heat part + water part,True,
+1971-2000 comparator reproduces main series (relative < 1e-3),True,max rel 1.94e-07
+"yield change comes from loss accounting, not from index values",True,
+crop_contrib national totals equal the adequacy (FBS) totals,True,2848 country-years
+nine crops never exceed 100% of any national nutrient supply,True,max 0.835
+"SUA chickpea+lentil kcal do not exceed the FBS 'Pulses, Other' aggregate (5% tolerance)",True,0.1% of 2369 country-years exceed (SUA and FBS can differ)
+SUA rows are labelled and kept out of national totals,True,
+India nine-crop share (diversity table) = summed crop contributions,True,kcal 0.5800 vs 0.5800
+nine-crop share >= FBS-item-only share everywhere it is defined,True,
+standard shock is -10% everywhere,True,
+historical scenarios: supply changes are <= 0 and the lower bound is no larger than the upper bound,True,
+future nutrition: supply changes are <= 0 and the lower bound is no larger than the upper bound,True,

@@ -47,8 +47,9 @@ def tabular(cols, header, rows, note=None):
     out = "\\begin{tabular}{" + cols + "}\n\\toprule\n" + " & ".join(header) + " \\\\\n\\midrule\n"
     out += "\n".join(" & ".join(str(x) for x in r) + " \\\\" for r in rows)
     out += "\n\\bottomrule\n\\end{tabular}\n"
-    if note:
-        out += "\\par\\vspace{2pt}{\\footnotesize " + note + "}\n"
+    if note:   # table scaled to the text width, note set underneath at the same width
+        out = ("\\begin{minipage}{\\textwidth}\\centering\n\\adjustbox{max width=\\textwidth}{" + out + "}\n"
+               "\\par\\vspace{2pt}{\\footnotesize " + note + "}\n\\end{minipage}\n")
     return out
 
 

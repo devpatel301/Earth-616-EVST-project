@@ -10,6 +10,7 @@ import os
 
 import matplotlib
 import matplotlib.pyplot as plt
+import matplotlib.ticker
 import numpy as np
 import pandas as pd
 from matplotlib.colors import LinearSegmentedColormap, LogNorm, TwoSlopeNorm
@@ -136,6 +137,8 @@ def g04_present_future(fc):
             ax.scatter([b], [yi], s=52, color=color_of(c), zorder=3, edgecolor="white", lw=1)
         ax.set_yticks(y, [LABEL[c] for c in d.index])
         ax.set_xscale("log")
+        ax.xaxis.set_major_formatter(matplotlib.ticker.FormatStrFormatter("%g"))
+        ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
         ax.set_xlabel("F4 (log scale)")
         ax.set_title(title)
         light_grid(ax)

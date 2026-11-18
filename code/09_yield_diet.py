@@ -116,8 +116,13 @@ def main():
         
         for scenario_name, predicted_delta_yield in scenarios_to_evaluate:
             fractional_yield_loss = max(0.0, -predicted_delta_yield) / 100.0
-            upper_loss_fraction = fractional_yield_loss * min(1.0, crop_base_contrib.ssr)
+            # Upper bound: loss passes through in proportion to self-sufficiency, SSR capped to [0, 1]. A balance with
+            # non-positive domestic availability but positive production (exports + stock build exceed the supply) has
+            # no meaningful SSR below 1, so it is treated as 1 (otherwise a negative SSR would turn a loss into a gain).
+            ssr_cap = 1.0 if (crop_base_contrib["dom"] <= 0 and crop_base_contrib["prod"] > 0) else float(np.clip(crop_base_contrib.ssr, 0.0, 1.0)) if np.isfinite(crop_base_contrib.ssr) else 0.0
+            upper_loss_fraction = fractional_yield_loss * ssr_cap
             lower_loss_fraction = max(0.0, fractional_yield_loss * crop_base_contrib["prod"] - crop_base_contrib["exp"]) / crop_base_contrib["dom"] if crop_base_contrib["dom"] > 0 else 0.0
+            lower_loss_fraction = min(lower_loss_fraction, upper_loss_fraction)   # the lower bound is never above the upper
             
             scenario_result = {
                 "crop": panel_row.crop,

@@ -64,6 +64,16 @@ def food_supply_diversity():
     last = int(sup.Year.max())
     s = sup[sup.Year.between(last - 2, last)].groupby(["m49", "Area", "Item"])[NUTRIENTS].mean().reset_index()
     nine_items = {it: c for c in CROPS for it in CROPS[c].get("fbs_items", [])}
+    # Chickpea and lentil have no FBS item of their own (they sit inside the FBS aggregate "Pulses, Other and products");
+    # their supply comes from FAOSTAT SUA via crop_contrib.csv. The nine-crop NUMERATOR therefore uses crop_contrib
+    # (all nine crops, same years); the DENOMINATOR stays the FBS total. SUA rows are not added to the totals and are
+    # not entered as separate items in the Shannon calculation (the parent aggregate is already there).
+    cc = pd.read_csv(P("crop_contrib.csv"))
+    cc = cc[cc.Year.between(last - 2, last) & cc.crop.isin(CROPS)]
+    assert set(cc.crop) == set(CROPS), f"crop_contrib is missing crops: {set(CROPS) - set(cc.crop)}"
+    nine_num = cc.groupby(["m49", "Year"])[NUTRIENTS].sum().groupby("m49").mean()
+    cp_num = cc[cc.crop.isin(["chickpea", "lentil"])].groupby(["m49", "Year"])[NUTRIENTS].sum().groupby("m49").mean()
+    has_sua = cc.groupby("m49").crop.apply(lambda x: {"chickpea", "lentil"} <= set(x))   # World has no SUA rows -> NaN, not understated
     countries = set(pd.read_csv(P("panels.csv")).m49) | {1}   # 1 = World (FAOSTAT M49 001)
     rows = []
     for (m49, area), g in s[s.m49.isin(countries)].groupby(["m49", "Area"]):
@@ -76,7 +86,9 @@ def food_supply_diversity():
             top = g.loc[v.idxmax()]
             r.update({f"H_{n}": H, f"eff_sources_{n}": float(np.exp(H)), f"top_source_{n}": top.Item, f"top_share_{n}": float(v.max() / v.sum()),
                       f"total_{n}": float(v.sum()),
-                      f"share_nine_crops_{n}": float(v[g.Item.isin(nine_items)].sum() / v.sum())})
+                      f"share_fbs_item_crops_{n}": float(v[g.Item.isin(nine_items)].sum() / v.sum()),
+                      f"share_nine_crops_{n}": float(nine_num.loc[m49, n] / v.sum()) if has_sua.get(m49, False) else np.nan,
+                      f"share_chickpea_lentil_{n}": float(cp_num.loc[m49, n] / v.sum()) if has_sua.get(m49, False) else np.nan})
         r["cereal_share_kcal"] = float(g[g.Item.isin(CEREAL_ITEMS)].kcal.sum() / g.kcal.sum())
         rows.append(r)
     d = pd.DataFrame(rows).sort_values("eff_sources_kcal")
@@ -88,7 +100,7 @@ def food_supply_diversity():
         t = ind[["Item", n]].sort_values(n, ascending=False)
         t["share"] = t[n] / t[n].sum()
         for _, r in t.head(8).iterrows():
-            top_rows.append({"nutrient": n, "item": r.Item, "per_capita_day": r[n], "share": r.share, "study_crop": nine_items.get(r.Item, "")})
+            top_rows.append({"nutrient": n, "item": r.Item, "per_capita_day": r[n], "share": r.share, "study_crop": nine_items.get(r.Item, "chickpea+lentil (inside this FBS aggregate; SUA)" if r.Item.startswith("Pulses, Other") else "")})
     pd.DataFrame(top_rows).to_csv(P("india_nutrient_sources.csv"), index=False)
     return d
 
@@ -244,6 +256,7 @@ def export_macros(prof, div, areas, tg, clim, extra=None):
     mac("divIndIronTopShare", f"{100 * d.loc['India', 'top_share_iron']:.1f}")
     mac("divIndRank", int((div.eff_sources_kcal < d.loc["India", "eff_sources_kcal"]).sum()) + 1); mac("divN", len(div))
     mac("divIndNineKcal", f"{100 * d.loc['India', 'share_nine_crops_kcal']:.0f}"); mac("divIndNineIron", f"{100 * d.loc['India', 'share_nine_crops_iron']:.0f}")
+    mac("divIndNineProtein", f"{100 * d.loc['India', 'share_nine_crops_protein']:.0f}")
     a = areas.set_index("spam_code")
     for code, nm in (("RICE", "Rice"), ("COTT", "Cotton"), ("MAIZ", "Maize"), ("BEAN", "Bean"), ("PIGE", "Pigeonpea"), ("GROU", "Groundnut"),
                      ("CHIC", "Chickpea"), ("SOYB", "Soybean"), ("SORG", "Sorghum"), ("WHEA", "Wheat")):

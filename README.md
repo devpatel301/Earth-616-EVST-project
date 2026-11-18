@@ -88,6 +88,7 @@ numbers exactly. **Intermediate data** (`data/work`, ≈10 GB) are regenerated b
 | `21_india_hyderabad.py`, `hyderabad_diet.py` | India profile; food-supply diversity; Telangana crop exposure; Hyderabad climate; Hyderabad/Telangana diet and nutrient sources from official surveys |
 | `22_literature_comparison.py` | Our results next to published findings, verdicts computed |
 | `23_sources_doc.py` | Writes `docs/india_hyderabad_sources.md` from the indicators table |
+| `24_checks.py` | 29 consistency checks on the saved results (arithmetic, fixed reference, no double counting, bounds); stops the run on a failure |
 
 ## LaTeX
 
@@ -95,3 +96,9 @@ The three end-evaluation documents (`docs/final_report.tex`, `final_slides.tex`,
 and use standard packages (`iftex` selects `inputenc`/`fontenc` under pdfLaTeX); they are compiled here with Tectonic.
 With pdfLaTeX run `pdflatex` / `bibtex` / `pdflatex` twice inside `docs/`. This pdfLaTeX route has **not** been run on
 this machine (no pdfLaTeX installed); only the Tectonic compile is tested.
+
+## Reproduction status (18 Nov 2026)
+
+`run_all.ps1 -SkipClimate` was run end to end in a Python 3.13 environment built from `requirements.txt`, with all 55 raw files matching
+the manifest; all 29 consistency checks pass. The climate steps from the raw monthly files (without `-SkipClimate`) were **not** re-run in
+that audit. Details and the defects fixed: `docs/END_EVAL_RESULTS_REGISTER.md`.

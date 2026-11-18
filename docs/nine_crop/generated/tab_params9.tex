@@ -1,4 +1,5 @@
-\begin{tabular}{lrrrrrrrl}
+\begin{minipage}{\textwidth}\centering
+\adjustbox{max width=\textwidth}{\begin{tabular}{lrrrrrrrl}
 \toprule
 Crop & $T_{crit}$ & $T_{lim}$ & $s_T$ (/\si{\celsius}) & $S_T$ & $K_y$ & $S_P$ & $\bar K_c$ & heat source \\
 \midrule
@@ -13,4 +14,6 @@ Groundnut & 31.8 & 42.3 & 0.095 & 0.47 & 0.70 & 0.56 & 0.85 & Prasad 2003 (fit) 
 Rapeseed-mustard & 26.5 & 36.5 & 0.100 & 0.50 & 0.90 & 0.72 & 0.78 & Morrison 2002; slope proxy \\
 \bottomrule
 \end{tabular}
+}
 \par\vspace{2pt}{\footnotesize $T_{crit}$, $T_{lim}$ in \si{\celsius} of $T_{eff}$. Rice $K_y$ is a proxy (FAO gives none); lentil $K_y$ and the rapeseed slope are proxies; new-crop heat values are fits to chamber or field data (docs/literature\_verification\_new\_crops.md).}
+\end{minipage}
