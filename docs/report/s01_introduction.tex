@@ -13,6 +13,9 @@ does the answer differ between countries and crop groups?
 what happens to a country's supply of energy, protein, fat, zinc and iron, and to its nutrient adequacy?
 \item What does the index indicate for one place studied in more detail: India, Telangana and the city of
 Hyderabad?
+\item How well supported are the crop parameters, do published future-impact studies point the same way for each
+crop, what does an elevated-CO$_2$ change in nutrient concentration add to the yield channel, and how do crop losses
+change the diversity of a country's food sources? (Four research extensions, Sections~\ref{sec:parevidence}--\ref{sec:divloss}.)
 \end{enumerate}
 
 \subsection{Literature context}
@@ -54,7 +57,12 @@ future, with one processing chain and one normalisation reference (Section~\ref{
 \item a local reading of the results for India and Hyderabad, using official survey data at the resolutions
 they are actually published (Section~\ref{sec:india});
 \item a reproducible evidence trail: raw-data checksums, a complete pipeline, generated tables, and a parameter
-ledger that labels every derived value and proxy (Section~\ref{sec:repro}, Appendix~\ref{app:ledger}).
+ledger that labels every derived value and proxy (Section~\ref{sec:repro}, Appendix~\ref{app:ledger});
+\item four research extensions that test the result rather than extend its claims: an audit of how well each
+parameter is supported with an evidence-screened view (Section~\ref{sec:parevidence}); a coverage assessment of
+published future-impact studies for all nine crops (Section~\ref{sec:futurelit}); an elevated-CO$_2$ nutrient-quality
+stress test (Section~\ref{sec:co2}); and the diversity of national food supply after crop losses
+(Section~\ref{sec:divloss}).
 \end{itemize}
 The index is a \emph{screening} tool. It shows where stress and dependence coincide. It does not forecast yields
 or diets.
@@ -81,6 +89,8 @@ validation and literature comparison under the final configuration.
 \item \textbf{Method:} Sections~\ref{sec:scope}--\ref{sec:periods}, with symbols in Table~\ref{tab:symbols}.
 \item \textbf{Worked examples:} Section~\ref{sec:worked}.
 \item \textbf{Results:} Sections~\ref{sec:present}--\ref{sec:india}.
+\item \textbf{Research extensions} (parameter evidence, future literature, CO$_2$ quality, diversity after losses):
+Sections~\ref{sec:parevidence}--\ref{sec:divloss}.
 \item \textbf{Robustness, validation and literature comparison:} Section~\ref{sec:checks}.
 \item \textbf{Limitations and conclusions:} Sections~\ref{sec:limits}--\ref{sec:discussion}.
 \item \textbf{Reproduction and audit:} Section~\ref{sec:repro}.
@@ -88,5 +98,6 @@ validation and literature comparison under the final configuration.
 the audit evidence.
 \end{itemize}
 
-Every number in the text is a macro or table written by the code from the saved results
-(\file{docs/nine\_crop/generated/}). No result is typed by hand.
+Every number from our own results is a macro or table written by the code from the saved results
+(\file{docs/nine\_crop/generated/}); no result is typed by hand. Numbers quoted from published studies are typed
+from the sources recorded in the evidence files and carry a citation.

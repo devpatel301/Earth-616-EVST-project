@@ -1,0 +1,50 @@
+\begin{longtable}{@{}lp{9.0cm}lp{3.8cm}@{}}
+\caption{Checks of the research extensions (\file{code/32\_extension\_checks.py}). S: synthetic edge cases; R: real outputs against the established tables.}\label{tab:extchecks}\\
+\toprule
+ID & Check & Result & Detail \\
+\midrule
+\endfirsthead
+\toprule
+ID & Check & Result & Detail \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+S1 & synthetic: no-response scenario reproduces baseline & pass &  \\
+S1b & synthetic: zero loss and factor 1 reproduce baseline & pass &  \\
+S2 & synthetic: quantity fraction applied to primary and oil items of the crop only & pass &  \\
+S3 & synthetic: concentration factor applied to primary product, never to oil & pass &  \\
+S4 & synthetic: remaining = (1 - f)(1 + q), not 1 - f + q & pass &  \\
+S5 & synthetic: chickpea + lentil losses removed jointly from 'Pulses, Other' (no extra category) & pass &  \\
+S6 & synthetic: simultaneous crop effects equal sequential application & pass &  \\
+S7 & synthetic: removal exceeding the parent item shows up as negative supply (detected, not clipped) & pass &  \\
+S8 & synthetic: zero contributions ignored; equal shares give H = ln k & pass &  \\
+S9 & synthetic: losing part of a dominant staple lowers total supply but raises effective sources & pass &  \\
+S10 & synthetic: upper = loss x SSR*, lower <= upper, no gain from a loss & pass &  \\
+R1 & reference periods: food supply 2021-2023; future hybrid 1971-2000 -> 2041-2060; present-relative 2001-2024 & pass & [2021, 2022, 2023] \\
+R2 & baseline item sums reproduce adequacy.csv national totals (2021-23) & pass & max rel. error 2.22e-16 \\
+R3 & no FBS/SUA double counting: SUA items are not Shannon categories & pass &  \\
+R4 & SUA chickpea + lentil vs parent 'Pulses, Other' (kcal, protein <= parent; Zn/Fe composition mismatch reported) & pass & max ratio kcal 1.000, protein 1.000, fat 1.015, zinc 1.054, iron 1.054 \\
+R5 & food-category list valid: unique items, every study-crop FBS item mapped, SUA items absent & pass &  \\
+R6 & remaining supply non-negative in every scenario & pass &  \\
+R7 & scenario A reproduces the existing $-$10 \% shock table (nutrient \% and MAR, both bounds) & pass & max diff 3.7e-14 \\
+R8 & hybrid future yield change equals future\_yield.csv; observed-series 1971-2000 loss equals the historical run & pass &  \\
+R9 & future scenarios use only modelled crop-country pairs, losses only & pass &  \\
+R10 & CO2 factors: only study crops and counted nutrients; one primary row per crop-nutrient & pass &  \\
+R11 & CO2 envelopes ordered: factor\_low <= factor\_primary <= factor\_high & pass &  \\
+R12 & missing CO2 parameters stay missing: factors exist only for reviewed, selected rows with a published value; bean, groundnut and all kcal/fat have none & pass &  \\
+R13 & nutrients without CO2 evidence are unchanged in the quality-only scenario (convention, reported as not estimated) & pass & nutrients without evidence: ['kcal', 'fat'] \\
+R14 & quality-only change equals covered supply x published effect (coverage matches treated foods) & pass &  \\
+R15 & combined = remaining quantity x remaining concentration (independent item-level recomputation); differs from additive sum & pass & max diff 4.0e-14; country-nutrient cases where multiplicative != additive: 27 \\
+R16 & national envelopes ordered low <= primary <= high for every nutrient & pass &  \\
+R17 & diversity rises after a loss exactly when the item's share exceeds 1/N\_eff (analytic rule, single-item crops) & pass & 142 of 142 cases \\
+R18 & screening view V0 reproduces the published F4 of every pair exactly & pass &  \\
+R19 & unsupported components stay unavailable: rice and rapeseed have no F4 in V1/V2 (NaN, not 0, no re-weighting); other crops keep theirs & pass & unavailable: rapeseed, rice \\
+R20 & V1 is a common rescaling of V0 (importance reference only): order of the seven remaining crops unchanged, factor = I\_ref(V0)/I\_ref(V1) & pass & factor 1.2231 \\
+R21 & parameter register covers all nine crops and every PARAM\_RANGES perturbation is labelled as such & pass & 97 rows \\
+R22 & future literature: all nine crops accounted for (coverage assessment present), every source row has a verdict from the allowed set & pass &  \\
+R23 & future literature rows match the computed comparison table (row count, ids) & pass &  \\
+R24 & every DOI of the future-literature rows is in refs.bib & pass & [] \\
+R25 & every DOI of the applied CO2 effects is in refs.bib & pass & [] \\
+R26 & CO2 reference levels: NOAA 2021-2023 values in docs/co2\_reference\_levels.csv equal the raw file; SSP2-4.5 2050 level (507 ppm) is below the 546 ppm lower end of the FACE experiments & pass &  \\
+\end{longtable}

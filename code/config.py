@@ -95,7 +95,7 @@ ALL_CROPS = {
         "heat_slope": 0.07,
         "heat_source": "Yoshida 1981; Jagadish et al. 2007",
         "ky": 1.25,
-        "ky_source": "FAO 66; Brouwer and Heibloem 1986",
+        "ky_source": "PROXY: maize value 1.25 (FAO-33/FAO-66 give no rice K_y; FAO-33 Table 2 only classes rice as 'high'); not a rice measurement",
         "kc": (1.05, 1.20, 0.75),
         "stages": (30, 30, 60, 30)
     },

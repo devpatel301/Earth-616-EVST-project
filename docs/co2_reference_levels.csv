@@ -1,0 +1,10 @@
+quantity,value_ppm,period,source,locator,retrieved,note
+"Observed global mean CO2, 2021",414.70,2021,"NOAA Global Monitoring Laboratory, annual mean (file co2_annmean_gl.txt, created 2026-10-09)","data/raw/noaa_gml/co2_annmean_gl.txt, row 2021","2026-11-18","SHA-256 in docs/DATA_MANIFEST.csv"
+"Observed global mean CO2, 2022",417.08,2022,"NOAA Global Monitoring Laboratory, annual mean","same file, row 2022","2026-11-18",""
+"Observed global mean CO2, 2023",419.35,2023,"NOAA Global Monitoring Laboratory, annual mean","same file, row 2023","2026-11-18","food-supply reference years are 2021-2023 (mean 417.04 ppm)"
+"SSP2-4.5 CO2, 2040",475,2040,"IPCC AR6 WGI Annex III (Dentener, Hall, Smith eds.), doi:10.1017/9781009157896.017","Table AIII.2, p. 2144 (CO2 ppm, SSP2-4.5 column)","2026-11-18","concentrations from Meinshausen et al. 2020 (doi:10.5194/gmd-13-3571-2020); table read in the downloaded annex PDF"
+"SSP2-4.5 CO2, 2050",507,2050,"IPCC AR6 WGI Annex III","Table AIII.2","2026-11-18","the scenario of our future climate (MRI-ESM2-0 SSP2-4.5, 2041-2060)"
+"SSP2-4.5 CO2, 2060",537,2060,"IPCC AR6 WGI Annex III","Table AIII.2","2026-11-18",""
+"FACE experiments of Myers et al. 2014: ambient",363-386,"experiments 1998-2010","Myers et al. 2014 Nature 510:139-142","Methods, Agricultural Methods; Table 1","2026-11-18","range over seven sites and years"
+"FACE experiments of Myers et al. 2014: elevated",546-586,"experiments 1998-2010","Myers et al. 2014","main text paragraph 4 (546-586); Methods and Table 1 give 546-584","2026-11-18","the 586/584 discrepancy is recorded in docs/co2_nutrient_effects.md"
+"Smith and Myers 2018 modelled CO2",550,2050,"Smith and Myers 2018 Nat. Clim. Change 8:834-839","abstract, Fig. 2 title","2026-11-18","550 ppm assumed for 2050 population and CO2 projections"

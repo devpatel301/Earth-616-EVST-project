@@ -1,0 +1,171 @@
+\section{Extension: food-supply diversity after crop losses}\label{sec:divloss}
+\paragraph{Purpose.} Section~\ref{sec:nutrition} asks how much of each nutrient a crop loss removes. This section asks
+a different question: after the loss, does the country depend on \emph{fewer} or \emph{more evenly spread} food
+sources, and how does that sit beside the change in total supply? The answer matters because a diversity index
+can rise while nutrient availability falls.
+
+\subsection{Method}
+\paragraph{Categories.} Diversity is computed over the \emph{whole} national food supply: every FAOSTAT food-balance
+(FBS) leaf item with positive supply, the same classification as the existing diversity table
+(Section~\ref{sec:diversitymethod}) and as \citet{remans2014}. The item list is written to \file{food\_categories\_fbs.csv}
+and is identical in the baseline and in every scenario (checked). The nine study crops are never renormalised
+among themselves.
+
+\paragraph{Supply after a loss.} Let $s_{i,n}$ be the 2021--23 national supply of nutrient $n$ from item $i$ (per
+capita per day), and $f_c$ the share of crop $c$'s national supply removed (Eq.~\ref{eq:shock}: $f_c =
+|\Delta Y_c|\,\text{SSR}^{*}_c$). An item of crop $c$ (primary product or its oil) keeps
+\begin{equation}\label{eq:divitem}
+s'_{i,n}=s_{i,n}\,(1-f_{c})\,q_{c,n}^{\,e_i},
+\end{equation}
+where $q_{c,n}$ is the elevated-CO$_2$ concentration factor of Section~\ref{sec:co2} ($q=1$ in scenarios A--C), and
+$e_i=1$ for the primary product and $e_i=0$ for an extracted oil (no evidence transfers seed concentration changes
+to oil). All other items are unchanged: no substitution, trade or household response is
+modelled. Chickpea and lentil have no FBS item of their own; their supply $S_{c,n}$ (FAOSTAT SUA) is already inside
+``Pulses, Other and products''. Their losses are therefore removed from that parent item and never added as
+categories:
+\begin{equation}\label{eq:divparent}
+s'_{\text{parent},n}=s_{\text{parent},n}-\sum_{c\in\{\text{chickpea, lentil}\}} S_{c,n}\bigl[1-(1-f_c)\,q_{c,n}\bigr].
+\end{equation}
+Joint removals are checked against the parent supply; negative supply stops the run rather than being clipped.
+In Belarus the SUA zinc and iron of chickpea plus lentil exceed the parent item by about 5\%, and in Canada the fat by
+about 2\%, a mismatch between two sources compiled separately (the parent item is valued with one composition, the SUA
+crops with their own; Section~\ref{sec:fbsmap}). No scenario comes close to removing the whole parent, so this does not bind, but it is
+reported (check R4).
+
+\paragraph{Diversity measures.} For each nutrient, with shares $p_{i,n}=s'_{i,n}/\sum_j s'_{j,n}$ over items with
+positive supply:
+\begin{equation}\label{eq:divH}
+H_n=-\sum_i p_{i,n}\ln p_{i,n},\qquad N_{\text{eff},n}=e^{H_n},\qquad \text{top share}_n=\max_i p_{i,n}.
+\end{equation}
+Zero contributions are dropped ($0\ln0=0$). Total supply, NAR and MAR (Eqs.~\ref{eq:nar}) are reported beside them.
+
+\paragraph{Why diversity and supply can move apart.} Differentiating $H$ with respect to one item's supply gives
+\begin{equation}\label{eq:divrule}
+\frac{\partial H}{\partial s_i}=-\frac{\ln p_i+H}{S},
+\end{equation}
+with $S$ the total. A small loss from item $i$ therefore \emph{raises} $H$ whenever $p_i>e^{-H}=1/N_{\text{eff}}$, that
+is, whenever the item supplies more than an ``average'' source. Losing part of a dominant staple makes the
+remaining shares more even while the total falls. In the single-crop scenarios where the crop is one FBS item, this
+rule predicts the sign of the diversity change in every case (check R17, Appendix~\ref{app:ext}).
+
+\paragraph{Scenarios.} All use the 2021--23 supply and the upper bound of Eq.~\ref{eq:shock} unless stated.
+\begin{itemize}
+\item \textbf{A. Single-crop standard loss:} one crop loses 10\% of domestic production (the existing shock; both
+bounds). Scenario A reproduces the nutrient changes and MAR changes of Section~\ref{sec:nutrition} exactly (check R7).
+\item \textbf{B. Simultaneous loss (stress test):} every modelled crop of a country loses 10\% at once. This is a
+stress test, not a projection: such losses are not expected to coincide.
+\item \textbf{C. Future climate, loss-only:} each modelled pair's conditional literature yield change
+(Section~\ref{sec:futurenut}); gains are listed but not added, the convention of decision E14. Only the 59 modelled
+pairs are shocked; nothing is extrapolated to other crops or countries. The yield change is measured from
+1971--2000 to 2041--2060 and applied to 2021--23 supply, a \emph{hybrid counterfactual} (Section~\ref{sec:co2method}).
+\item \textbf{C$'$. Present-relative variant:} the same with the change from the observed 2001--2024 level to
+2041--2060.
+\item \textbf{D. C combined with the elevated-CO$_2$ quality stress test} (Section~\ref{sec:co2}), with its coverage
+limits.
+\end{itemize}
+Table~\ref{tab:divcover} shows which crops are modelled in each country, where the future scenario applies a loss and
+which favourable changes are left out. Scenario C is therefore a \emph{loss-only stress test}, not a net projection:
+yield gains are not added, and crops and countries outside the 59 pairs are not shocked.
+
+\begin{table}[H]\centering\scriptsize
+\caption[Crops covered by the diversity scenarios]{Crop--country pairs covered by the diversity scenarios. Scenario C
+applies each pair's conditional yield loss; pairs with a projected gain are left out (loss-only).}\label{tab:divcover}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_div_coverage.tex}}
+\end{table}
+
+\subsection{Results}
+\paragraph{India.} India's energy supply is spread over an effective \divIndBaseEffKcal\ items and its iron supply
+over \divIndBaseEffIron, against \divWorldEffKcal\ and \divWorldEffIron\ for the world; the largest single sources
+supply \divIndBaseTopKcal\% of energy (rice) and \divIndBaseTopIron\% of iron (wheat). A narrow base means that a
+loss in one crop moves national supply and diversity visibly. Table~\ref{tab:divindia} shows how the scenarios change
+both quantities.
+\begin{itemize}
+\item \textbf{Losing part of a dominant staple lowers supply but evens out the sources.} A 10\% wheat loss cuts
+iron supply by \divIndWheatIronPctAbs\% yet raises the effective number of iron sources by \divIndWheatIronDEffAbs,
+because wheat's iron share is far above $1/N_{\text{eff}}$. Read alone, the diversity index would suggest an
+improvement.
+\item \textbf{Losing a minor crop lowers both.} Chickpea or common bean losses reduce supply slightly and also
+reduce diversity, because each supplies less than an average share.
+\item \textbf{The simultaneous stress test} lowers energy by \divIndBKcalPctAbs\%, zinc by \divIndBZincPctAbs\% and iron by
+\divIndBIronPctAbs\%, while the effective number of sources rises for every nutrient; MAR falls by \divIndBMARAbs\
+points.
+\item \textbf{Future climate (loss-only)} gives the same pattern at smaller size. The present-relative variant is
+smaller still, because about \refShareOccurred\% of the modelled 1971--2000 to 2041--2060 yield change is already
+contained in the observed 2001--2024 climate (Section~\ref{sec:co2method}).
+\item \textbf{Adding the elevated-CO$_2$ quality stress test (D)} lowers zinc by \divIndDZincPctAbs\% and iron by
+\divIndDIronPctAbs\% and MAR by \divIndDMARAbs\ points, and \emph{raises} the effective number of iron sources by
+\divIndDIronDEffAbs. Wheat and rice, the largest sources, carry \cotwoIndWheatRiceMin--\cotwoIndWheatRiceMax\% of
+the quality loss, so the remaining supply is more evenly spread while less nutritious. This is the clearest case in the results where the diversity index and
+adequacy point in opposite directions.
+\end{itemize}
+
+\begin{table}[H]\centering\small
+\caption[India: supply and diversity after losses]{India: change in national supply (\%) / change in effective
+number of sources $N_{\text{eff}}$, and MAR change (points), by scenario. Upper bound of the supply pass-through.}
+\label{tab:divindia}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_div_india.tex}}
+\end{table}
+
+\paragraph{Other countries.} Table~\ref{tab:divcountries} and Figure~\ref{fig:divsupply} compare the 20 panel
+countries. Across all scenario, country and nutrient cases in which total supply falls, the effective number of
+sources \emph{rises} in \divNUp\ of \divNCases\ (\divPctUp\%).
+\begin{itemize}
+\item \textbf{Where a modelled crop is the dominant source}, as rice is for energy in Bangladesh
+(\divBdTopKcalShare\% of energy, \divBdEffKcal\ effective sources) and wheat is for iron in Russia
+(\divRuTopIronShare\%), a loss raises diversity although few crops are shocked. In Bangladesh the stress test lowers
+energy by \divBdBKcalPctAbs\% and raises the effective number of sources by \divBdBKcalDEffAbs; in Russia the future-climate
+scenario (C) lowers iron by \divRuCIronPctAbs\% and raises the effective number of iron sources by \divRuCIronDEffAbs.
+\item \textbf{Many staples shocked at once} gives the largest gains in effective sources: China (energy
+\divCnBKcalPct\%, effective sources \divCnBKcalDEff) and India (\divIndBKcalPct\%, \divIndBKcalDEff).
+\item \textbf{Diversity and supply can diverge across nutrients within one scenario.} Tanzania's bean loss under the
+future climate lowers energy by \divTzCKcalPctAbs\% and the effective number of energy sources by a hair
+(\divTzCKcalDEff), yet it lowers iron by \divTzCIronPctAbs\% while raising the effective number of iron sources by
+\divTzCIronDEffAbs. Beans supply \divTzBeanIronShare\% of Tanzania's iron, above the threshold $1/N_{\text{eff}}=
+\divTzThreshIron\%$, but only \divTzBeanKcalShare\% of its energy, below its threshold of \divTzThreshKcal\%
+(Eq.~\ref{eq:divrule}).
+\item \textbf{Where the lost crop is a minor source}, as for maize in Ukraine (iron \divUaCIronPct\%, effective
+sources \divUaCIronDEff) or beans in Myanmar (iron \divMmCIronPct\%, \divMmCIronDEff), diversity and supply fall
+together.
+\item \textbf{Single-crop panels} (Argentina for soybean, France for rapeseed, Italy for rice) change little in
+either measure, because the crop supplies only a small share of national energy (\divArgSoyKcalShare\%,
+\divFrRapeKcalShare\% and \divItRiceKcalShare\%). The supply pass-through itself is close to full there
+(SSR$^{*}\approx1$).
+\end{itemize}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{X04_diversity_vs_supply.pdf}
+\caption[Diversity change against supply change]{Change in national supply (\%) against change in the effective number of
+sources, for energy and iron, in scenarios B and C. Points above zero: the remaining sources are more even although
+supply fell. Labels mark India and countries with losses above 3\%.}\label{fig:divsupply}
+\end{figure}
+
+\begin{table}[H]\centering\scriptsize
+\caption[Supply and diversity after losses, by country]{Supply and diversity after losses by country: crops shocked,
+baseline effective number of energy sources, and the changes in scenario B (stress test) and C (future climate,
+loss-only, hybrid). $\Delta N$ = change in effective number of sources.}\label{tab:divcountries}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_div_countries.tex}}
+\end{table}
+
+\subsection{Reading diversity with adequacy}
+Three readings are therefore not supported by these numbers:
+\begin{enumerate}
+\item \textbf{That every crop loss reduces diversity.} It does so only when the crop is a below-average source.
+\item \textbf{That higher Shannon diversity is a nutritional improvement.} In the cases above it rises because the
+largest source shrank; the total supply of every nutrient fell.
+\item \textbf{That national food-source diversity describes diets.} $N_{\text{eff}}$ describes the composition of
+national supply. It is not household dietary diversity, which is usually a count of foods or food groups eaten by
+a household or person over a reference period \citep{ruel2003}, nor food preferences or eating behaviour.
+\end{enumerate}
+\citet{remans2014} used Shannon diversity of national food supply together with a functional measure based on the
+nutrient composition of the items (closed access; not re-read for this extension). Functional diversity, developed
+for farms by \citet{remans2011}, rises only when a food with a distinct nutrient profile is added; our item-level
+Shannon measure does not distinguish nutritionally similar items, so it is not a measure of nutritional functional
+diversity. \citet{khoury2014} found that over 50 years national food supplies became more even in their crop
+commodities while becoming more similar to each other worldwide, so a rising within-country evenness can coexist
+with a narrowing of the global crop base. Our results add a short-term counterpart: within a country, a loss in the
+dominant staple raises evenness while lowering supply. For adequacy, total supply and NAR/MAR are the decisive
+quantities; diversity describes how exposed the supply is to any single source.
+
+\paragraph{Limitations.} No substitution, imports or price response; national means hide distribution within
+countries; MAR is capped at 1 per nutrient, so it moves only where a nutrient is near or below its requirement;
+FBS items differ in breadth (``Vegetables, other'' is one item), so $N_{\text{eff}}$ depends on the classification.

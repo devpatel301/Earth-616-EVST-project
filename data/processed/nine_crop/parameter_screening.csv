@@ -1,0 +1,5 @@
+crop,parameter,rule,effect,evidence
+rice,heat_slope,A,component unavailable,"Fertility, not yield; slope estimated above a different threshold (29.6 C) on a different metric (tissue temperature, hours); Azucena slope was 2.4 % per C-day above 33 C (different form); compensation and grain filling not included"
+rapeseed,heat_slope,A,component unavailable,"No published canola or mustard yield slope on a T_max/T_eff degree basis was found: Morrison & Stewart give only the threshold (abstract); Kutcher et al. 2010 (district statistics, correlation + PCA) give no per-degree slope in the abstract (secondary '12 % per week above 30 C' not verified); Nuttall et al. 1992 (16-yr field, B. napus) report only a correlation with July-August mean T_max; chamber studies (Angadi 2000, Gan 2004) are single-regime 7-10 d stresses"
+bean,pair India,B,pair not applicable,"FAOSTAT 'Beans, dry' includes Vigna pulses in India (FAO item definition); parameters are for Phaseolus vulgaris"
+bean,pair Myanmar,B,pair not applicable,"FAOSTAT 'Beans, dry' includes Vigna pulses in Myanmar (FAO item definition); parameters are for Phaseolus vulgaris"

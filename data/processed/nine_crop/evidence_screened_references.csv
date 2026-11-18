@@ -1,0 +1,4 @@
+view,H_heat,H_water,I,s_heat,s_water,heat_max_pair,water_max_pair,importance_max_pair,F4_rescale_vs_V0
+V0,5.046344245922679,0.7894152576727812,0.4212964502350365,0.2,1.25,bean-India,chickpea-India,rice-Bangladesh,1.0
+V1,5.046344245922679,0.7894152576727812,0.3444568483830412,0.2,1.25,bean-India,chickpea-India,wheat-Egypt,1.2230746818148568
+V2,2.0116062971384765,0.7894152576727812,0.3444568483830412,0.2,1.25,bean-Brazil,chickpea-India,wheat-Egypt,

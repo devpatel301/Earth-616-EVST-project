@@ -58,7 +58,11 @@ def main():
     add("R1", "Ray et al. 2015 Nat. Commun.; Ray et al. 2019 PLoS ONE", "rice vs other cereals and soybean", "global", "~1979-2008; recent",
         "observed", "climate explains 32-39 % of yield variability; rice least",
         f"rice climate part E x S = {clim['rice']:.4f}, lowest of the four ({', '.join(f'{k} {clim[k]:.4f}' for k in ['wheat', 'maize', 'soybean'])})",
-        "agree", "Independent support for rice scoring lowest, beyond the monthly-heat artefact.")
+        "not directly comparable (different outcome)",
+        "Ray et al. measure the share of observed yield VARIABILITY that climate explains, not vulnerability. Low explained variability is "
+        "not evidence of low vulnerability (irrigation can buffer variability, and damage that monthly data cannot see is not in either "
+        "measure). Our rice climate part is lowest of the four, in line with their ordering, but the earlier reading as independent "
+        "support for a low rice score is withdrawn (18-19 Nov 2026 audit).")
     # 5 Deryng 2014 future no CO2
     fym = fy.groupby("crop").dY_lit_pct.mean()
     add("D1", "Deryng et al. 2014 ERL (Table 1)", "maize, wheat, soybean", "global", "2050s", "RCP8.5 without CO2 (RCP4.5 with CO2 in brackets)",
@@ -108,7 +112,8 @@ def main():
     add("M1", "Myers et al. 2014 Nature", "wheat, rice, soybean (C3)", "FACE experiments", "-", "546-586 ppm CO2",
         "iron concentration: wheat -5.1, rice -5.2, soybean -4.1 % (significant)",
         f"applied to India's 2021-23 iron supply shares, these declines alone would lower national iron supply by {abs(fe_loss):.1f} % (an additional pathway the index excludes)",
-        "additional pathway", "Not a validation: Myers values are an input here. It shows the CO2 channel would add to the climate channel on the nutrient already closest to shortfall.")
+        "additional pathway", "Not a validation: Myers values are an input here. It shows the CO2 channel would add to the climate channel on the nutrient already closest to shortfall. "
+        "The full CO2 nutrient-quality stress test (all covered crops, with envelopes and coverage) is in 28_co2_quality.py and report Section 'elevated CO2'.")
     df = pd.DataFrame(rows)
     df.to_csv(P("literature_comparison.csv"), index=False)
     pd.set_option("display.width", 250); pd.set_option("display.max_colwidth", 120)

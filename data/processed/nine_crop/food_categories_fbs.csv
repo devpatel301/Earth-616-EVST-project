@@ -1,0 +1,99 @@
+Item,n_countries,study_crop,role,co2_concentration_eligible
+"Alcohol, Non-Food",21,,other food (unchanged in all scenarios),False
+Apples and products,21,,other food (unchanged in all scenarios),False
+"Aquatic Animals, Others",21,,other food (unchanged in all scenarios),False
+Aquatic Plants,21,,other food (unchanged in all scenarios),False
+Bananas,20,,other food (unchanged in all scenarios),False
+Barley and products,21,,other food (unchanged in all scenarios),False
+Beans,21,bean,study-crop primary product,True
+Beer,21,,other food (unchanged in all scenarios),False
+"Beverages, Alcoholic",21,,other food (unchanged in all scenarios),False
+"Beverages, Fermented",21,,other food (unchanged in all scenarios),False
+Bovine Meat,21,,other food (unchanged in all scenarios),False
+"Butter, Ghee",21,,other food (unchanged in all scenarios),False
+Cassava and products,21,,other food (unchanged in all scenarios),False
+Cephalopods,21,,other food (unchanged in all scenarios),False
+"Cereals, other",21,,other food (unchanged in all scenarios),False
+"Citrus, Other",21,,other food (unchanged in all scenarios),False
+Cloves,21,,other food (unchanged in all scenarios),False
+Cocoa Beans and products,21,,other food (unchanged in all scenarios),False
+Coconut Oil,21,,other food (unchanged in all scenarios),False
+Coconuts - Incl Copra,21,,other food (unchanged in all scenarios),False
+Coffee and products,21,,other food (unchanged in all scenarios),False
+Cottonseed,20,,other food (unchanged in all scenarios),False
+Cottonseed Oil,21,,other food (unchanged in all scenarios),False
+Cream,21,,other food (unchanged in all scenarios),False
+Crustaceans,21,,other food (unchanged in all scenarios),False
+Dates,21,,other food (unchanged in all scenarios),False
+Demersal Fish,21,,other food (unchanged in all scenarios),False
+Eggs,21,,other food (unchanged in all scenarios),False
+"Fats, Animals, Raw",21,,other food (unchanged in all scenarios),False
+"Fish, Body Oil",21,,other food (unchanged in all scenarios),False
+"Fish, Liver Oil",18,,other food (unchanged in all scenarios),False
+Freshwater Fish,21,,other food (unchanged in all scenarios),False
+"Fruits, other",21,,other food (unchanged in all scenarios),False
+Grapefruit and products,21,,other food (unchanged in all scenarios),False
+Grapes and products (excl wine),21,,other food (unchanged in all scenarios),False
+Groundnut Oil,21,groundnut,study-crop oil (same quantity fraction as primary),False
+Groundnuts,21,groundnut,study-crop primary product,True
+Honey,21,,other food (unchanged in all scenarios),False
+Infant food,21,,other food (unchanged in all scenarios),False
+"Lemons, Limes and products",21,,other food (unchanged in all scenarios),False
+Maize Germ Oil,21,,other food (unchanged in all scenarios),False
+Maize and products,21,maize,study-crop primary product,True
+"Marine Fish, Other",21,,other food (unchanged in all scenarios),False
+"Meat, Aquatic Mammals",2,,other food (unchanged in all scenarios),False
+"Meat, Other",21,,other food (unchanged in all scenarios),False
+Milk - Excluding Butter,21,,other food (unchanged in all scenarios),False
+Millet and products,21,,other food (unchanged in all scenarios),False
+Miscellaneous,21,,other food (unchanged in all scenarios),False
+"Molluscs, Other",21,,other food (unchanged in all scenarios),False
+Mutton & Goat Meat,21,,other food (unchanged in all scenarios),False
+Nuts and products,21,,other food (unchanged in all scenarios),False
+Oats,21,,other food (unchanged in all scenarios),False
+"Offals, Edible",21,,other food (unchanged in all scenarios),False
+"Oilcrops Oil, Other",21,,other food (unchanged in all scenarios),False
+"Oilcrops, Other",21,,other food (unchanged in all scenarios),False
+Olive Oil,21,,other food (unchanged in all scenarios),False
+Olives (including preserved),21,,other food (unchanged in all scenarios),False
+Onions,21,,other food (unchanged in all scenarios),False
+"Oranges, Mandarines",21,,other food (unchanged in all scenarios),False
+Palm Oil,21,,other food (unchanged in all scenarios),False
+Palm kernels,9,,other food (unchanged in all scenarios),False
+Palmkernel Oil,21,,other food (unchanged in all scenarios),False
+Peas,21,,other food (unchanged in all scenarios),False
+Pelagic Fish,21,,other food (unchanged in all scenarios),False
+Pepper,21,,other food (unchanged in all scenarios),False
+Pigmeat,21,,other food (unchanged in all scenarios),False
+Pimento,21,,other food (unchanged in all scenarios),False
+Pineapples and products,21,,other food (unchanged in all scenarios),False
+Plantains,20,,other food (unchanged in all scenarios),False
+Potatoes and products,21,,other food (unchanged in all scenarios),False
+Poultry Meat,21,,other food (unchanged in all scenarios),False
+"Pulses, Other and products",21,,"FBS parent of SUA chickpea and lentil (removal target, not duplicated)",False
+Rape and Mustard Oil,21,rapeseed,study-crop oil (same quantity fraction as primary),False
+Rape and Mustardseed,21,rapeseed,study-crop primary product,True
+Rice and products,21,rice,study-crop primary product,True
+Ricebran Oil,9,,other food (unchanged in all scenarios),False
+"Roots, Other",20,,other food (unchanged in all scenarios),False
+Rye and products,20,,other food (unchanged in all scenarios),False
+Sesame seed,21,,other food (unchanged in all scenarios),False
+Sesameseed Oil,21,,other food (unchanged in all scenarios),False
+Sorghum and products,21,,other food (unchanged in all scenarios),False
+Soyabean Oil,21,soybean,study-crop oil (same quantity fraction as primary),False
+Soyabeans,21,soybean,study-crop primary product,True
+"Spices, Other",21,,other food (unchanged in all scenarios),False
+Sugar (Raw Equivalent),21,,other food (unchanged in all scenarios),False
+Sugar beet,17,,other food (unchanged in all scenarios),False
+Sugar cane,21,,other food (unchanged in all scenarios),False
+Sugar non-centrifugal,8,,other food (unchanged in all scenarios),False
+Sunflower seed,21,,other food (unchanged in all scenarios),False
+Sunflowerseed Oil,21,,other food (unchanged in all scenarios),False
+Sweet potatoes,21,,other food (unchanged in all scenarios),False
+"Sweeteners, Other",21,,other food (unchanged in all scenarios),False
+Tea (including mate),21,,other food (unchanged in all scenarios),False
+Tomatoes and products,21,,other food (unchanged in all scenarios),False
+"Vegetables, other",21,,other food (unchanged in all scenarios),False
+Wheat and products,21,wheat,study-crop primary product,True
+Wine,21,,other food (unchanged in all scenarios),False
+Yams,18,,other food (unchanged in all scenarios),False

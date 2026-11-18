@@ -1,0 +1,21 @@
+field,value,n_rows
+status,published,38
+status,assumption,27
+status,derived,18
+status,borrowed,13
+status,unsupported,1
+applicability,partial,38
+applicability,good,34
+applicability,not assessed,19
+applicability,poor,6
+recommended_treatment,keep-labelled-proxy,59
+recommended_treatment,keep,36
+recommended_treatment,mark unsupported,2
+range_status,none,58
+range_status,exploratory perturbation,34
+range_status,treatment range / exploratory perturbation,2
+range_status,literature range,2
+range_status,treatment range,1
+replacement_supported,not assessed,65
+replacement_supported,no,26
+replacement_supported,partial,6

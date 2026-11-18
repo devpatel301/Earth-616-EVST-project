@@ -1,0 +1,119 @@
+m49,Area,crop,reference,dY_pct,applied,qty_frac
+32,Argentina,soybean,dY_hybrid_pct,-0.5436950102412659,True,0.005291505998792984
+32,Argentina,soybean,dY_present_relative_pct,2.3679516464256256,False,0.0
+36,Australia,chickpea,dY_hybrid_pct,-8.106756722658861,True,0.08106756722658862
+36,Australia,lentil,dY_hybrid_pct,-10.17218057612999,True,0.10172180576129991
+36,Australia,chickpea,dY_present_relative_pct,1.6731125850669302,False,0.0
+36,Australia,lentil,dY_present_relative_pct,3.1466051736539304,False,0.0
+50,Bangladesh,rice,dY_hybrid_pct,-0.04469681862989694,True,0.00044696818629896937
+50,Bangladesh,rice,dY_present_relative_pct,0.00739831077953421,False,0.0
+76,Brazil,rice,dY_hybrid_pct,-0.7994852314497276,True,0.007994852314497276
+76,Brazil,wheat,dY_hybrid_pct,-1.7400258537857856,True,0.011959770265721632
+76,Brazil,maize,dY_hybrid_pct,-2.731897021380004,True,0.02731897021380004
+76,Brazil,soybean,dY_hybrid_pct,-0.17086540455609592,True,0.001708654045560959
+76,Brazil,bean,dY_hybrid_pct,-25.645406178621275,True,0.2564540617862128
+76,Brazil,groundnut,dY_hybrid_pct,-9.741703812606254,True,0.09741703812606253
+76,Brazil,rapeseed,dY_hybrid_pct,-15.637034870175958,True,0.1549818060678167
+76,Brazil,rice,dY_present_relative_pct,-0.7470091957912702,True,0.007470091957912702
+76,Brazil,wheat,dY_present_relative_pct,0.5188239766350753,False,0.0
+76,Brazil,maize,dY_present_relative_pct,0.3530787053819822,False,0.0
+76,Brazil,soybean,dY_present_relative_pct,1.0548590984656576,False,0.0
+76,Brazil,bean,dY_present_relative_pct,-17.182333217036817,True,0.17182333217036816
+76,Brazil,groundnut,dY_present_relative_pct,-3.6240467439112476,True,0.036240467439112474
+76,Brazil,rapeseed,dY_present_relative_pct,-6.7409037245226555,True,0.06681045622967506
+104,Myanmar,bean,dY_hybrid_pct,-21.480317725284046,True,0.21480317725284045
+104,Myanmar,bean,dY_present_relative_pct,-18.517053463351044,True,0.18517053463351044
+112,Belarus,bean,dY_hybrid_pct,-5.132724866938764,True,0.05132724866938764
+112,Belarus,bean,dY_present_relative_pct,2.2815418436971693,False,0.0
+124,Canada,lentil,dY_hybrid_pct,-4.264757737174769,True,0.0
+124,Canada,rapeseed,dY_hybrid_pct,-3.2365939162496447,True,0.03236593916249644
+124,Canada,lentil,dY_present_relative_pct,-1.8693310772371776,True,0.0
+124,Canada,rapeseed,dY_present_relative_pct,-0.6688239501419606,True,0.006688239501419606
+156,"China, mainland",rice,dY_hybrid_pct,-0.003245895553380729,True,3.092351798579568e-05
+156,"China, mainland",wheat,dY_hybrid_pct,-1.037792067579748,True,0.009331648654822628
+156,"China, mainland",maize,dY_hybrid_pct,2.1234701854631877,False,0.0
+156,"China, mainland",soybean,dY_hybrid_pct,2.898696560158633,False,0.0
+156,"China, mainland",chickpea,dY_hybrid_pct,-0.7381376454919141,True,0.004136121216505613
+156,"China, mainland",lentil,dY_hybrid_pct,-0.6217011919605995,True,0.00571778913458248
+156,"China, mainland",bean,dY_hybrid_pct,-14.372389923580846,True,0.1270925903009312
+156,"China, mainland",groundnut,dY_hybrid_pct,0.3471458930817976,False,0.0
+156,"China, mainland",rapeseed,dY_hybrid_pct,-1.4664728815854806,True,0.011308191168269754
+156,"China, mainland",rice,dY_present_relative_pct,-0.0026886939140133544,True,2.5615080103761722e-05
+156,"China, mainland",wheat,dY_present_relative_pct,-0.7196893021050508,True,0.006471323030576891
+156,"China, mainland",maize,dY_present_relative_pct,1.8923444513395293,False,0.0
+156,"China, mainland",soybean,dY_present_relative_pct,2.160796946085388,False,0.0
+156,"China, mainland",chickpea,dY_present_relative_pct,0.943469219878267,False,0.0
+156,"China, mainland",lentil,dY_present_relative_pct,-0.10779991040921069,True,0.0009914363434030745
+156,"China, mainland",bean,dY_present_relative_pct,-9.811684332686466,True,0.08676304940838273
+156,"China, mainland",groundnut,dY_present_relative_pct,0.056744023968889876,False,0.0
+156,"China, mainland",rapeseed,dY_present_relative_pct,-1.52034875951561,True,0.011723636100557619
+231,Ethiopia,chickpea,dY_hybrid_pct,2.0337037799853483,False,0.0
+231,Ethiopia,lentil,dY_hybrid_pct,5.537452208762333,False,0.0
+231,Ethiopia,chickpea,dY_present_relative_pct,-0.48189545684547175,True,0.004818954568454718
+231,Ethiopia,lentil,dY_present_relative_pct,0.8882437937773099,False,0.0
+250,France,rapeseed,dY_hybrid_pct,-0.38867875272315966,True,0.003829915909617695
+250,France,rapeseed,dY_present_relative_pct,-0.16100531737455817,True,0.0015864948166720923
+356,India,rice,dY_hybrid_pct,0.1013932595125886,False,0.0
+356,India,wheat,dY_hybrid_pct,-4.163311303265242,True,0.041633113032652415
+356,India,maize,dY_hybrid_pct,0.9525978816751477,False,0.0
+356,India,soybean,dY_hybrid_pct,0.5611547064378545,False,0.0
+356,India,chickpea,dY_hybrid_pct,-0.16471432202526143,True,0.0016471432202526143
+356,India,lentil,dY_hybrid_pct,-1.9578837432270253,True,0.013031877930365273
+356,India,bean,dY_hybrid_pct,-17.502022246983394,True,0.16468384894108223
+356,India,groundnut,dY_hybrid_pct,1.5131725675903747,False,0.0
+356,India,rapeseed,dY_hybrid_pct,-2.220290274976562,True,0.022202902749765618
+356,India,rice,dY_present_relative_pct,-0.061271520545938686,True,0.0006127152054593868
+356,India,wheat,dY_present_relative_pct,-1.66896998147479,True,0.0166896998147479
+356,India,maize,dY_present_relative_pct,-0.3324199021930631,True,0.0033241990219306313
+356,India,soybean,dY_present_relative_pct,0.17571764665314085,False,0.0
+356,India,chickpea,dY_present_relative_pct,1.1737878216109188,False,0.0
+356,India,lentil,dY_present_relative_pct,0.8069247613256418,False,0.0
+356,India,bean,dY_present_relative_pct,-11.521841853335477,True,0.10841382992898323
+356,India,groundnut,dY_present_relative_pct,-0.7367614773663952,True,0.007367614773663952
+356,India,rapeseed,dY_present_relative_pct,-0.1939725004916611,True,0.001939725004916611
+380,Italy,rice,dY_hybrid_pct,-0.5545638607690194,True,0.0055456386076901945
+380,Italy,rice,dY_present_relative_pct,1.9760237179671014,False,0.0
+566,Nigeria,rice,dY_hybrid_pct,6.2509984834223955,False,0.0
+566,Nigeria,groundnut,dY_hybrid_pct,1.4989179946556832,False,0.0
+566,Nigeria,rice,dY_present_relative_pct,2.640638705007854,False,0.0
+566,Nigeria,groundnut,dY_present_relative_pct,-0.3170216769609148,True,0.0031289317157589002
+643,Russian Federation,wheat,dY_hybrid_pct,-7.323997251399857,True,0.07323997251399857
+643,Russian Federation,soybean,dY_hybrid_pct,2.7113735079139065,False,0.0
+643,Russian Federation,chickpea,dY_hybrid_pct,-5.198465665898787,True,0.051984656658987875
+643,Russian Federation,lentil,dY_hybrid_pct,-6.450025906243725,True,0.06450025906243724
+643,Russian Federation,wheat,dY_present_relative_pct,-6.39197058697495,True,0.0639197058697495
+643,Russian Federation,soybean,dY_present_relative_pct,4.43411158446937,False,0.0
+643,Russian Federation,chickpea,dY_present_relative_pct,-0.3048440265430566,True,0.003048440265430566
+643,Russian Federation,lentil,dY_present_relative_pct,-0.43281619678845873,True,0.004328161967884587
+710,South Africa,maize,dY_hybrid_pct,7.842594834744271,False,0.0
+710,South Africa,soybean,dY_hybrid_pct,3.730850797160153,False,0.0
+710,South Africa,rapeseed,dY_hybrid_pct,-7.371239940135311,True,0.07371239940135312
+710,South Africa,maize,dY_present_relative_pct,18.40746897517462,False,0.0
+710,South Africa,soybean,dY_present_relative_pct,9.959923589388431,False,0.0
+710,South Africa,rapeseed,dY_present_relative_pct,2.7070462135386615,False,0.0
+792,TÃ¼rkiye,chickpea,dY_hybrid_pct,-2.331710758133163,True,0.023317107581331632
+792,TÃ¼rkiye,chickpea,dY_present_relative_pct,-1.4566252617886828,True,0.014566252617886829
+804,Ukraine,maize,dY_hybrid_pct,-16.664879905951388,True,0.16664879905951388
+804,Ukraine,maize,dY_present_relative_pct,2.1929684949391284,False,0.0
+818,Egypt,wheat,dY_hybrid_pct,-0.5476674721138566,True,0.003088656250729353
+818,Egypt,wheat,dY_present_relative_pct,0.12082369405673735,False,0.0
+834,United Republic of Tanzania,bean,dY_hybrid_pct,-17.722352342657924,True,0.17722352342657924
+834,United Republic of Tanzania,bean,dY_present_relative_pct,-20.30665316889885,True,0.2030665316889885
+840,United States of America,rice,dY_hybrid_pct,-0.10124558703820258,True,0.0010124558703820258
+840,United States of America,wheat,dY_hybrid_pct,-6.146248801528809,True,0.061462488015288086
+840,United States of America,maize,dY_hybrid_pct,-6.641815761421843,True,0.06641815761421843
+840,United States of America,soybean,dY_hybrid_pct,-4.172102029411151,True,0.041721020294111504
+840,United States of America,chickpea,dY_hybrid_pct,-3.940137378633938,True,0.03940137378633938
+840,United States of America,lentil,dY_hybrid_pct,-2.896447947876931,True,0.02896447947876931
+840,United States of America,bean,dY_hybrid_pct,-22.482744717672713,True,0.22482744717672712
+840,United States of America,groundnut,dY_hybrid_pct,-0.05052746468122178,True,0.0005052746468122178
+840,United States of America,rapeseed,dY_hybrid_pct,-7.221761744551729,True,0.03579108933353975
+840,United States of America,rice,dY_present_relative_pct,-0.10122023412501521,True,0.001012202341250152
+840,United States of America,wheat,dY_present_relative_pct,-5.663181201971252,True,0.05663181201971252
+840,United States of America,maize,dY_present_relative_pct,-11.637633263658733,True,0.11637633263658734
+840,United States of America,soybean,dY_present_relative_pct,-7.852581198637571,True,0.0785258119863757
+840,United States of America,chickpea,dY_present_relative_pct,1.1709472500321023,False,0.0
+840,United States of America,lentil,dY_present_relative_pct,-4.556135769015088,True,0.045561357690150885
+840,United States of America,bean,dY_present_relative_pct,-23.045692976588324,True,0.23045692976588325
+840,United States of America,groundnut,dY_present_relative_pct,-2.019636166539106,True,0.020196361665391058
+840,United States of America,rapeseed,dY_present_relative_pct,-13.321052965637913,True,0.06601920882666223

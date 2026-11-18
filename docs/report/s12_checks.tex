@@ -24,7 +24,10 @@ not proof of accuracy.
 
 \subsection{Robustness}\label{sec:robust}
 All checks were re-run under the final configuration; none of the mid-evaluation counts is reused. We varied one
-choice at a time:
+choice at a time. These are \emph{exploratory perturbations}: the offsets, factors and ranges were chosen by us, and
+only the bean and lentil $K_y$ values have any literature value behind them (Section~\ref{sec:parevidence}). They
+test how much the ranking depends on our choices; they are not literature-supported uncertainty ranges and no
+probability is attached to them.
 \begin{itemize}
 \item normalisation (division by the maximum or min--max);
 \item exposure definition (level, level plus change, change only);
@@ -43,8 +46,12 @@ rankings over all four index forms.
 heat-damage effect in only \empHeatDetected\ of \empN\ pairs (\empHeatCountry\ with a robust country estimate, the
 rest pooled).
 \item With 2,000 random weightings (level vs change, heat vs water, nutrient weights; seed 20261005), wheat ranks
-first in \mcTopShare\% of draws and \mcSecond\ in \mcSecondShare\%. These are shares of weightings, not
-probabilities that a crop is truly the most vulnerable (Figure~\ref{fig:robust}).
+first in \mcTopShare\% of draws and \mcSecond\ in \mcSecondShare\%. The weightings are drawn from distributions we
+chose, so these are shares of weightings, not probabilities that a crop is truly the most vulnerable
+(Figure~\ref{fig:robust}).
+\item The evidence-screened view (Section~\ref{sec:parevidence}) leaves out the components whose parameters are
+unsupported (rice and rapeseed) and the bean pairs whose item does not match the parameter source; wheat is still
+first.
 \item What does \emph{not} survive is the order of positions two to six, which moves with the weighting and with
 the pulse parameters (Table~\ref{tab:robust}, Appendix~\ref{app:tables}).
 \end{itemize}
@@ -72,8 +79,13 @@ yield anomalies in \oosPos\ of \oosN\ pairs with enough data (median $r$ = \oosM
 \end{itemize}
 
 \subsection{Comparison with published studies}
-Of \litN\ comparisons of signs and rank orders (Table~\ref{tab:lit}), \litAgree\ agree, \litPartial\ partly agree and
-\litDiffer\ differ. The disagreements are informative:
+Section~\ref{sec:futurelit} extends this comparison to future-impact studies for all nine crops and reports where
+none was found. The earlier comparison of \litN\ findings (Table~\ref{tab:lit}) is kept: \litAgree\ agree,
+\litPartial\ partly agree, \litDiffer\ differ and \litOther\ are not directly comparable or add a pathway (the Ray et
+al.\ row, which concerns climate-explained variability and not vulnerability, was moved here in the November audit).
+These counts say how the evidence is distributed, not how accurate
+the model is; several of the studies supply inputs we use (for example \citealp{deryng2014}), so agreement with them is
+not independent. The disagreements are informative:
 \begin{itemize}
 \item \citet{lobell2011} attribute Russian wheat losses to temperature, while our monthly threshold measure sees
 mainly rainfed water deficit there;

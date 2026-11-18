@@ -52,6 +52,13 @@ Run 22_literature_comparison.py nine_crop
 Run 23_sources_doc.py nine_crop
 Run 24_checks.py nine_crop            # consistency checks; a FAIL stops the run before any document is built
 Run 25_parameter_fits.py nine_crop    # refit derived heat parameters from published data; must reproduce config.py
+# research extensions (read the verified results above; can be rerun alone with run_extensions.ps1)
+Run 28_co2_quality.py nine_crop       # elevated-CO2 nutrient-concentration stress test (quantity, quality, combined)
+Run 29_diversity_losses.py nine_crop  # food-supply diversity and adequacy after crop losses
+Run 30_future_literature.py nine_crop # future-impact literature coverage, all nine crops
+Run 31_parameter_evidence.py nine_crop # evidence-screened view of the index
+Run 32_extension_checks.py nine_crop  # synthetic and real checks of the extensions; a FAIL stops the run
+Run 33_extension_tables.py nine_crop  # tables, macros and figures for the report
 Run 19_endeval_tex.py nine_crop
 Run 26_report_tables.py nine_crop     # report tables: data sources, parameter ledger, worked examples, checks, audit
 

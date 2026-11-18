@@ -4,18 +4,12 @@ once we count how much people depend on them for nutrients? And if such a crop's
 country's nutrient supply?
 
 \noindent\textbf{Method.} The Climate--Nutrition Vulnerability Index pairs each stress with its own crop response:
-$\Fd = \tfrac12(E_{\text{heat}}S_T + E_{\text{water}}S_P)\,\tilde I$.
-\begin{itemize}
-\item \textbf{Exposure} ($E$) is the observed 2001--2024 stress level on the crop's own hectares.
-\item \textbf{Sensitivity} ($S$) comes from the literature: yield lost per degree above a threshold, and FAO's
-$K_y$.
-\item \textbf{Importance} ($\tilde I$) is the crop's mean share of national energy, protein, fat, zinc and iron
-supply.
-\end{itemize}
-It covers nine crops (cereals, pulses, oilseeds) in \nPairs\ crop--country pairs and three periods: 2001--2024,
-1971--2000, and 2041--2060 under one climate model (MRI-ESM2-0, SSP2-4.5) with a fixed normalisation. Nutrient
-consequences are computed for a standard 10\% yield loss and, as a \emph{conditional screening estimate}, for the
-projected climate-driven yield change.
+$\Fd = \tfrac12(E_{\text{heat}}S_T + E_{\text{water}}S_P)\,\tilde I$, from the observed 2001--2024 stress level
+($E$), literature sensitivity (yield lost per degree above a threshold, and FAO's $K_y$; $S$) and the crop's mean
+share of national energy, protein, fat, zinc and iron supply ($\tilde I$). It covers nine crops in \nPairs\
+crop--country pairs and three periods: 2001--2024, 1971--2000, and 2041--2060 under one climate model (MRI-ESM2-0,
+SSP2-4.5) with a fixed normalisation. Nutrient consequences are computed for a standard 10\% yield loss and, as a
+\emph{conditional screening estimate}, for the projected climate-driven yield change.
 
 \noindent\textbf{Findings.}
 \begin{itemize}
@@ -23,19 +17,29 @@ projected climate-driven yield change.
 rankings and in \mcTopShare\% of random weightings. The order below first place is not stable.
 \item Water deficit dominates today's scores (\presentWaterShare\%); heat dominates the projected increase. The
 flowering-season effective temperature rises by \meanDTeff\,\si{\celsius} and the score rises in \nPairsUp\ of
-\nPairs\ pairs, while the crop order changes little.
+\nPairs\ pairs.
 \item Iron is the nutrient closest to shortfall (\nIronShort\ of \nAdqCountries\ countries under the main
 requirement, none under a 15\%-bioavailability requirement).
-\item India's ranking is led by wheat, chickpea and common bean. The nine crops supply \shareNewKcal\% of its energy
-and \shareNewIron\% of its iron.
-\item Hyderabad's rice-based diet, from irrigated paddy with little modelled climate stress, coexists with anaemia in
-\hydAnaemNPW\% of non-pregnant women in the district (urban-Telangana household data and district health
-indicators). Its nutritional risk is more structural than climatic.
+\item India's ranking is led by wheat, chickpea and common bean; the nine crops supply \shareNewKcal\% of its energy
+and \shareNewIron\% of its iron. Hyderabad's rice-based diet coexists with anaemia in \hydAnaemNPW\% of non-pregnant
+women in the district; its nutritional risk is more structural than climatic.
 \end{itemize}
 
-\noindent\textbf{What the evidence supports.} All results were regenerated from checksummed raw inputs and are
-identical to the previous outputs, and \checksPassed\ of \checksN\ consistency checks pass. This shows that the
-numbers follow from the stated method; it does not validate the method. Several new-crop parameters are fits or
-proxies. Literature and empirical future yield responses disagree for about half of the pairs. Validation against
-observed yield shocks shows an association only.
+\noindent\textbf{Four extensions test the foundations.}
+\begin{itemize}
+\item \textbf{Parameters.} Of \parNRows\ audited parameter rows, the rice and rapeseed heat slopes are unsupported.
+Wheat is still first among the seven crops with supported parameters; rice and rapeseed cannot be placed.
+\item \textbf{Literature.} \litNRows\ rows from \litNStudies\ publications cover all nine crops; direction agrees where
+studies are most comparable and differs where they include CO$_2$ fertilisation or adaptation.
+\item \textbf{CO$_2$ and quality.} As a stress test with partial coverage (not a forecast), lower grain concentrations
+cut India's zinc supply by \cotwoIndQualZincAbs\% and, with the climate yield loss, by \cotwoIndCombZincAbs\%.
+\item \textbf{Diversity.} Losing part of a dominant staple lowers supply but can raise the effective number of food
+sources, so diversity must be read with adequacy.
+\end{itemize}
+
+\noindent\textbf{What the evidence supports.} The baseline results were regenerated from checksummed raw inputs and are
+identical to the previous outputs; \checksPassed\ of \checksN\ consistency checks and \extChecksPassed\ of
+\extChecksN\ extension checks pass. This shows that the numbers follow from the stated method, not that the method is
+valid. Several parameters are fits or proxies, literature and empirical future yield responses disagree for about half
+of the pairs, and validation against yield shocks shows an association only.
 \end{abstract}

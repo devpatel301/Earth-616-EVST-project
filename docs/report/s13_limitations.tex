@@ -18,20 +18,26 @@ variability.
 \end{itemize}
 
 \subsection{Crop parameters}
-The ledger (Appendix~\ref{app:ledger}) labels every value as published, derived or proxy.
+The ledger (Appendix~\ref{app:ledger}) labels every value as published, derived or proxy, and
+Section~\ref{sec:parevidence} audits \parNRows\ register rows: \parNPublished\ published, \parNDerived\ derived,
+\parNBorrowed\ borrowed, \parNAssumption\ assumptions and \parNUnsupported\ unsupported (the rapeseed heat slope; the
+rice heat slope is also unsupported as a yield slope). The ``tested'' ranges below are exploratory perturbations, not
+literature-supported uncertainty ranges.
 \begin{itemize}
 \item \textbf{New legumes are fitted.} Their thresholds and slopes are fits to chamber or pot experiments on one
 to three genotypes. Chamber exposure is continuous and without recovery days, so these values probably overstate
 field sensitivity. They also sit below model-calibrated thresholds such as those used for wheat, maize and soybean.
-Tested: $T_{\text{crit}}+3$\,\si{\celsius} and slopes $\times0.7$; wheat stays first.
+Exploratory perturbation: $T_{\text{crit}}+3$\,\si{\celsius} and slopes $\times0.7$ (the direction is supported, the
+size is not); wheat stays first.
 \item \textbf{Common bean.} The threshold comes from one heat-susceptible Andean cultivar. It is applied to FAO
 ``beans, dry'', which in India and Myanmar include tropical \emph{Vigna} pulses. Because bean in India sets the heat
-reference for all crops, this choice scales every heat exposure. Tested: $+2$\,\si{\celsius}.
+reference for all crops, this choice scales every heat exposure; with the India and Myanmar bean pairs removed the
+heat reference falls by a factor of \scrHeatRatio\ (Section~\ref{sec:parevidence}). Exploratory perturbation: $+2$\,\si{\celsius}.
 \item \textbf{Rice.} FAO gives no rice $K_y$ (FAO-33 classes rice only as ``high'' sensitivity, like maize), so
-maize's 1.25 is a proxy. Rice's heat slope is a spikelet-fertility slope, not a yield slope. Tested: $K_y$ 1.0 and
-1.5.
+maize's 1.25 is a proxy. Rice's heat slope is a spikelet-fertility slope, not a yield slope, and is unsupported as
+one. Exploratory perturbation: $K_y$ 1.0 and 1.5.
 \item \textbf{Rapeseed-mustard.} The threshold is converted from a daily-maximum threshold with an assumed diurnal
-range. No published heat slope was found, so wheat's is borrowed; it is tested from 0.07 to 0.18. The FAO-56 Rev.1
+range. No published heat slope was found, so wheat's is borrowed and unsupported; it is perturbed from 0.07 to 0.18. The FAO-56 Rev.1
 $K_y$ of 0.90 is tabulated without a stated source. Parameters from \emph{B.~napus} probably overstate the heat
 sensitivity of Indian mustard (\emph{B.~juncea}).
 \item \textbf{Inaccessible sources.} Not read in full: \citet{prasad2002bean}, \citet{prasad2003peanut} and
@@ -63,8 +69,9 @@ under the alternative).
 \item \textbf{One model, one scenario.} The future results show direction under MRI-ESM2-0 SSP2-4.5, not the range
 of plausible futures. Regional rainfall changes in particular are model-dependent.
 \item \textbf{Fixed area, calendars, irrigation and diets}, with no CO$_2$ fertilisation and no adaptation. Elevated
-CO$_2$ would raise yields of C$_3$ crops but lower their zinc, iron and protein \citep{myers2014}. Neither effect is
-included.
+CO$_2$ would raise yields of C$_3$ crops but lower their zinc, iron and protein \citep{myers2014}. The yield effect is
+not included. The concentration effect is not in the main results either; it is reported only as a separate
+experimental stress test with partial coverage (Section~\ref{sec:co2}) and must not be read as a forecast.
 \item \textbf{Response methods disagree.} The literature and empirical future yield responses disagree for about
 half the pairs, so the future nutrient numbers are conditional screening estimates.
 \end{itemize}

@@ -1,7 +1,7 @@
 \documentclass[11pt,a4paper]{article}
 % Comprehensive end-evaluation report. Compiles with Tectonic/XeLaTeX (tested) and pdflatex + bibtex (untested here).
 % Sources are ASCII-only. Every result value comes from macros and tables written by the code
-% (docs/nine_crop/generated/: numbers9.tex, numbers_india.tex, numbers_report.tex, tab_*.tex).
+% (docs/nine_crop/generated/: numbers9.tex, numbers_india.tex, numbers_report.tex, numbers_ext.tex, tab_*.tex, ext_*.tex).
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[utf8]{inputenc}
@@ -11,6 +11,7 @@
 \usepackage[margin=2.3cm]{geometry}
 \input{endeval_common.tex}
 \InputIfFileExists{nine_crop/generated/numbers_report.tex}{}{}
+\InputIfFileExists{nine_crop/generated/numbers_ext.tex}{}{}
 \usepackage[round]{natbib}
 \usepackage{float}
 \usepackage{longtable}
@@ -62,6 +63,10 @@
 \input{report/s09_future.tex}
 \input{report/s10_nutrition.tex}
 \input{report/s11_india.tex}
+\input{report/x12_parameter_evidence.tex}
+\input{report/x13_future_literature.tex}
+\input{report/x14_co2_quality.tex}
+\input{report/x15_diversity_losses.tex}
 \input{report/s12_checks.tex}
 \input{report/s13_limitations.tex}
 \input{report/s14_discussion.tex}

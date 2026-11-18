@@ -69,7 +69,9 @@ nutrient, 2021--23) and share of supply from the nine crops.}\label{tab:diversit
 \clearpage
 \section{Record of corrections}\label{app:corrections}
 Table~\ref{tab:corrections} lists every error found after the first end-evaluation version and how it was fixed.
-Decisions E18 and E19 are recorded in \file{docs/DECISION\_REGISTER\_END\_EVAL.md}.
+Items 1--10 come from the audits of 17--18 November 2026 and are kept as recorded then; items 11--15 come from the
+research-extension audit of 19 November 2026 and were not known earlier. Decisions E18 to E24 are recorded in
+\file{docs/DECISION\_REGISTER\_END\_EVAL.md}.
 
 {\small
 \begin{longtable}{p{0.4cm}p{4.6cm}p{5.0cm}p{4.6cm}}
@@ -89,7 +91,31 @@ Decisions E18 and E19 are recorded in \file{docs/DECISION\_REGISTER\_END\_EVAL.m
 8 & Rice $K_y$: FAO-33's rice chapter is at p.~125 and gives no number (rice is classed ``high''). & Proxy label made explicit. & None. \\
 9 & Reference: Beach et al.\ (2019) had been cited as ``Smith and Myers 2019''. & Corrected in \file{refs.bib}. & Reference [16] of the submitted literature review still carries the wrong authorship. \\
 10 & Layout: a future table ran 174\,pt past the margin; notes shrank tables; overlapping tick labels in a figure. & Tables wrapped and notes set under the table; tick formatter fixed. & None. \\
+11 & The comparison with \citet{ray2015} was read as independent support for rice scoring lowest, although climate-explained yield variability is a different outcome from vulnerability. & Row reclassified as not directly comparable; the claim of independent support withdrawn. & One fewer ``agree'' in Table~\ref{tab:lit}; no numerical result. \\
+12 & The ledger and \file{config.py} gave rice $K_y$ an FAO source (it is maize's value) and called the rice and rapeseed heat slopes published or proxy without saying that neither is supported as a yield slope. & Source text corrected; status changed to unsupported; the ``alternatives tested'' column renamed ``exploratory perturbations run''. & Wording only. \\
+13 & Robustness tests and the Monte Carlo were described in terms that read as uncertainty ranges. & Labelled exploratory perturbations and weightings drawn from distributions we chose; no probability attached. & Wording only. \\
+14 & ``Wheat is the most vulnerable of the nine crops'' was stated without its condition. & Qualified: first in the full index (assumption-dependent) and first among the seven crops with supported parameters; rice and rapeseed not established. & Wording only; no value changed. \\
+15 & Text said the future result has no CO$_2$ effect on nutrient content without pointing to the separate stress test. & Cross-referenced to Section~\ref{sec:co2}; the main future result is unchanged. & None. \\
 \end{longtable}}
+
+\clearpage
+\section{Research-extension evidence}\label{app:ext}
+\subsection{CO$_2$ reference levels}
+Table~\ref{tab:co2levels} gives the CO$_2$ levels used to judge whether the experiments can represent the scenario
+(Section~\ref{sec:co2}). The NOAA file is in the raw-data manifest with its checksum.
+
+\begin{table}[H]\centering\scriptsize
+\caption{CO$_2$ reference levels with sources (\file{docs/co2\_reference\_levels.csv}).}\label{tab:co2levels}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_co2_levels.tex}}
+\end{table}
+
+\subsection{Future-impact studies, row by row}
+{\scriptsize\setlength{\tabcolsep}{3pt}
+\input{nine_crop/generated/ext_lit_rows.tex}}
+
+\subsection{Checks of the extensions}
+{\small
+\input{nine_crop/generated/ext_checks.tex}}
 
 \clearpage
 \section{Audit evidence}\label{app:audit}

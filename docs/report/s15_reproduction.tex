@@ -36,7 +36,8 @@ compiled as new ones. On the audit machine the full run from raw inputs, climate
 minutes; downloading the raw data takes much longer. The switch \texttt{-SkipClimate} reuses \file{data/work}.
 
 \subsection{Audit of 18 November 2026}
-\paragraph{Inputs.} The manifest check found all \manifestFiles\ raw files present with matching SHA-256 checksums.
+\paragraph{Inputs.} The manifest check found all \manifestFilesAudit\ raw files then listed present with matching
+SHA-256 checksums.
 The 55 files of the mid-evaluation and end-evaluation snapshots were listed before. The 19 files of the
 Telangana mask and the Indian surveys, already used by the analysis, were added to the manifest in this audit
 without changing any existing entry. The climate, SPAM, calendar, FAOSTAT and USDA files are the original
@@ -77,8 +78,38 @@ built from stale results.
 \paragraph{What was not done.}
 \begin{itemize}
 \item No pdfLaTeX compile.
-\item No independent teammate review of parameters, calculations or interpretation.
+\item No independent teammate review of parameters, calculations or interpretation, including the parameter statuses,
+the selection of CO$_2$ evidence and the literature verdicts of Sections~\ref{sec:parevidence}--\ref{sec:co2}.
 \item No team rehearsal.
 \item No re-download of FAOSTAT. A fresh download would be a new data snapshot and would change the numbers
 slightly.
+\item No rice sensitivity run on the Baker-derived heat candidate, no \emph{Vigna} parameter set, no use of the GGCMI
+rapeseed calendar, and no CO$_2$ evidence for common bean, groundnut, energy or fat (Sections~\ref{sec:parevidence}
+and~\ref{sec:co2}).
 \end{itemize}
+
+\subsection{Research extensions: rerunning them alone}\label{sec:reproext}
+The four extensions only \emph{read} the verified results of the main pipeline and write new files, so they can be
+rerun in seconds without any climate processing:
+\begin{verbatim}
+cd code
+powershell -ExecutionPolicy Bypass -File .\run_extensions.ps1
+\end{verbatim}
+The script runs, in order, \file{28\_co2\_quality.py}, \file{29\_diversity\_losses.py},
+\file{30\_future\_literature.py}, \file{31\_parameter\_evidence.py}, \file{32\_extension\_checks.py} (stops the run on a
+failed check) and \file{33\_extension\_tables.py}. The same scripts are part of \file{run\_all.ps1}, between the
+consistency checks and the document build, so a failed extension check also stops the documents from being built.
+\extChecksPassed\ of \extChecksN\ extension checks pass (Table~\ref{tab:extchecks}).
+
+\paragraph{Inputs.} The extensions use the evidence files in \file{docs/}: \file{co2\_nutrient\_effects.csv} (all
+candidate CO$_2$ effects, with read levels), \file{co2\_effects\_used.csv} (our selection, with reasons),
+\file{co2\_reference\_levels.csv}, \file{future\_literature\_sources.csv} and \file{future\_literature\_assessment.csv},
+and \file{parameter\_evidence\_register.csv}. One new raw file, the NOAA global CO$_2$ record, was added to the data
+manifest, which now lists \manifestFiles\ files; the manifest check passes. No other input was added or replaced.
+
+\paragraph{Outputs} (\file{data/processed/nine\_crop/}): \file{co2\_nutrient\_results.csv},
+\file{co2\_concentration\_factors.csv}, \file{co2\_coverage.csv}, \file{co2\_coverage\_matrix.csv},
+\file{future\_yield\_reference\_periods.csv}, \file{diversity\_after\_losses.csv}, \file{food\_categories\_fbs.csv},
+\file{future\_literature\_comparison.csv}, \file{future\_literature\_coverage.csv}, \file{parameter\_screening.csv},
+\file{evidence\_screened\_pairs.csv}, \file{evidence\_screened\_crops.csv} and \file{extension\_checks.csv}. The
+established baseline files are not modified.

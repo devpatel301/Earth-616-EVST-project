@@ -1,0 +1,129 @@
+\section{Extension: how well are the crop parameters supported?}\label{sec:parevidence}
+\paragraph{Purpose.} The index and the future yield accounting rest on crop parameters of very different quality.
+Some are printed in a peer-reviewed experiment on the same crop, outcome and temperature metric. Others are our
+conversions, values borrowed from another crop, or assumptions. This section audits every parameter the model uses,
+states how well each is supported, and shows what the headline result looks like when parameters without defensible
+support are left out instead of being filled in.
+
+\subsection{Method}
+\paragraph{Register.} The register has \parNRows\ rows: one per crop and parameter actually used (heat threshold
+$T_{\text{crit}}$, heat slope $s_T$, $K_y$, $K_c$, stage days, calendar, flowering window, temperature-metric
+conversion, food-item scope), plus one row per perturbation range we have run. Each row records the value and units,
+the source, the status, whether the primary source was read and at what level, the experimental setting, how well it
+applies to our use, any derivation, limitations, candidate replacements and the final treatment. The register is
+\file{docs/parameter\_evidence\_register.csv}; the reasoning and quotations are in
+\file{docs/parameter\_evidence\_audit.md}.
+
+\paragraph{Definitions.}
+\begin{itemize}
+\item \textbf{Published:} the value is printed in a source for the same species, outcome and metric.
+\item \textbf{Derived:} our arithmetic or fit on published data (for example the conversion of a chamber threshold to
+$T_{\text{eff}}$; refitted by \file{code/25\_parameter\_fits.py}).
+\item \textbf{Borrowed:} another crop's, outcome's or setting's value.
+\item \textbf{Assumption:} our own choice, such as a diurnal range.
+\item \textbf{Unsupported:} no source supports it for this use.
+\end{itemize}
+Applicability (good, partial, poor) compares the source with our use on species and cultivar, measured outcome,
+temperature or water metric, growth stage and exposure duration, experimental setting, and units.
+
+\begin{table}[H]\centering\small
+\caption[Register by status and applicability]{The \parNRows\ register rows by status and applicability. Rows
+without an applicability grade are perturbation ranges.}\label{tab:parstatus}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_param_status.tex}}
+\end{table}
+
+\subsection{What the audit found}
+Table~\ref{tab:parkey} lists the items the project flagged as most uncertain. Quotations, page numbers and read levels
+are in the audit file.
+
+\begin{table}[H]\centering\scriptsize
+\caption[Audit of the most uncertain parameters]{Audit of the most uncertain parameters. ``Treatment'' is the final
+treatment in this report.}\label{tab:parkey}
+\begin{tabular}{@{}p{2.2cm}p{1.9cm}p{6.7cm}p{3.9cm}@{}}
+\toprule
+Parameter & Current value & Finding & Treatment \\
+\midrule
+Rice $K_y$ & 1.25 (maize's) & FAO gives no rice $K_y$; FAO-33 only classes rice as ``high''. No field seasonal $K_y$ on the FAO definition was found. The only rice values found are stage-wise (1.14, 1.07, 1.02) and partly model-derived \citep{anupoju2020}. & Borrowed proxy, kept and labelled. The source text in the ledger was wrong (it implied an FAO rice value) and is corrected. \\
+Rice $s_T$ & 0.07 per $^\circ$C above 35\,$^\circ$C $T_{\text{eff}}$ & A spikelet-fertility slope of one genotype (IR64; tissue temperature above 29.6\,$^\circ$C, hours at anthesis; \citealp{jagadish2007}). Fertility is one yield component and does not translate one-to-one into yield \citep{prasad2006rice,hatfield2011}. & \textbf{Unsupported as a yield slope on $T_{\text{eff}}$.} Heat component unavailable in the screened view. \\
+Rice yield per $^\circ$C & (none) & Season-long sunlit-chamber work gives about $-10\%$ per $^\circ$C of mean temperature above $25\,^\circ$C, but it was read only second-hand, in \citet{hatfield2011}, and the chamber setting conflicts with field evidence on maximum temperature \citep{welch2010}. & Candidate recorded, \emph{not} adopted and not computed. \\
+Rapeseed $s_T$ & 0.10 (wheat's span) & No \emph{Brassica} yield slope found in the papers checked \citep{morrison2002,kutcher2010,gan2004,angadi2000,nuttall1992}, and no Indian mustard dose--response. & \textbf{Unsupported.} Heat component unavailable in the screened view. \\
+Rapeseed $T_{\text{crit}}$ & 26.5\,$^\circ$C $T_{\text{eff}}$ & Converted from 29.5\,$^\circ$C daily maximum \citep{morrison2002} with an unsourced 12\,$^\circ$C diurnal range. The experiment included \emph{B.~juncea} but Canadian cultivars only. & Assumption; partly applicable to Indian mustard; kept as a labelled proxy. \\
+Conversion to $T_{\text{eff}}$ & as derived & Exact algebra for 12\,h/12\,h step regimes, resting on assumptions: constant chamber regimes stand for field monthly $T_{\text{eff}}$, and a daily accumulation threshold is reused as a monthly-mean threshold. Not a published relation. & Derived calculation, labelled; not rice (rice was never converted). \\
+Lentil $K_y$ & 1.0 & A field study \citep{nandi2021}; no unstressed control; treatments mix tillage and fertiliser. Partial match to the FAO definition. No other lentil $K_y$ found. & Partial; proxy. \\
+Chamber to field & legume thresholds, slopes & The direction is supported: field thresholds sit 2--4\,$^\circ$C above chamber ones \citep{devasirvatham2013,morrison2002}. The $\times0.7$ slope factor has no source. & Exploratory perturbation only. \\
+Bean in India and Myanmar & \emph{Phaseolus} parameters & FAO's item definition says several countries include \emph{Vigna} beans \citep{fao1994commodities}. India and Myanmar are ranks 1 and 3 of the bean panel. An unreviewed USDA statement puts \emph{Vigna} at about 93\% of India's figure \citep{phaseoluscgc2020}. & \textbf{Pairs flagged not applicable} in screened view V2. \\
+Calendars & cool-season rule & No gridded observed calendar exists for chickpea or lentil. A GGCMI Phase 3 rapeseed calendar exists \citep{ggcmi3calendar} but gives maturity, not harvest, and a Canadian planting day (91) far from the rule's. & Proxy kept, labelled; alternative not adopted. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Ranges are perturbations, not uncertainty.} Of the perturbation rows, \parNExploratory\ are exploratory:
+a chosen offset or factor with no literature support as a range. Only \parNLitRange\ rows carry a literature value
+(bean $K_y$ 0.6--1.4 from two field values, and treatment values of chickpea and lentil $K_y$), and none of these is
+a confidence interval. The earlier statement that wheat stays first under every robustness test therefore remains true, but it is
+a test of sensitivity to our choices, not an uncertainty analysis. The same holds for the Monte Carlo over index
+weightings: its distributions (uniform level-versus-change and heat-versus-water mixes, Dirichlet nutrient weights)
+are ours, so its frequencies describe sensitivity to our design, not probabilities. No new distribution or Monte
+Carlo run was added in this extension.
+
+\paragraph{What is at stake.} The two unsupported slopes matter very differently for the present and the future.
+\begin{itemize}
+\item \textbf{Present scores:} heat is only \parHeatPresRice\% of rice's and \parHeatPresRape\% of rapeseed's F4,
+because their thresholds are rarely exceeded in monthly means. Their present scores are essentially water scores and
+are barely affected by the unsupported slopes.
+\item \textbf{Projected change:} heat is \parHeatFutRape\% of rapeseed's change but only \parHeatFutRice\% of rice's
+(shares of the sum of absolute pair changes). The statement that rapeseed's projected increase is heat-driven rests
+on the unsupported slope and cannot be treated as a finding.
+\item \textbf{Everything:} common bean sets the heat reference for all crops (Section~\ref{sec:exposure}), and bean in
+India and Myanmar is the least applicable part of the bean evidence.
+\end{itemize}
+
+\subsection{Evidence-screened view}
+Where no defensible replacement exists, the gap is recorded and the affected result is left unavailable. Two rules
+are applied to the register, without filling or re-weighting:
+\begin{itemize}
+\item \textbf{Rule A:} a hazard component is unavailable for a crop when the register marks a parameter it needs as
+unsupported (rice and rapeseed heat slope). The pair's F4 is then unavailable. The water term is not up-weighted
+and the missing heat term is not set to zero, because ``not estimated'' is not ``no effect''.
+\item \textbf{Rule B:} a pair is flagged not applicable when its crop definition does not match the parameter source
+(bean in India and Myanmar).
+\end{itemize}
+Three views are reported, none of them a nine-crop ranking except the first.
+\begin{itemize}
+\item \textbf{V0:} the full index as in Section~\ref{sec:present}. It is an \emph{assumption-dependent} (legacy)
+result: it uses proxies and borrowed values.
+\item \textbf{V1:} rule A applied. Rice and rapeseed are unavailable, so only seven crops are compared.
+\item \textbf{V2:} rules A and B applied, so bean is computed over its remaining five countries.
+\end{itemize}
+Reference maxima are recomputed over the pairs that remain, which changes the normalisation and is documented as
+decision E20. In V1 the heat, water and sensitivity maxima are unchanged, but the importance maximum falls because
+rice in Bangladesh, a removed pair, set it; every F4 is rescaled by the common factor \scrRescale\ (checked), so the
+order of the remaining crops cannot change. In V2 the heat maximum falls from \scrVZeroHeatMax\ to
+\scrVTwoHeatMax\,$^\circ$C (it is now set by \scrVTwoHeatPair) because bean in India no longer sets it, which makes
+every exposure to heat \scrHeatRatio\ times larger; wheat in India rises from \scrWheatIndVzero\ to
+\scrWheatIndVtwo.
+
+\begin{table}[H]\centering\scriptsize
+\caption[Evidence-screened F4]{Crop scores (rank in brackets among the crops with a score) in the full index (V0),
+without rice and rapeseed (V1), and also without bean in India and Myanmar (V2). Equal-weighted and
+production-weighted. ``Unavailable'' is not ``lowest''. Last column: pairs with a score in V2 out of all modelled
+pairs of the crop.}\label{tab:screened}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_screened.tex}}
+\end{table}
+
+\paragraph{Result.} Wheat ranks first in all three views under both country weightings, and the order of the other
+crops that remain does not change between V1 and V2. This is a statement about the seven crops whose parameters
+survive the screen. It says nothing about rice or rapeseed, whose position cannot be established from the
+supported evidence, and it does not turn V1 or V2 into a nine-crop comparison.
+
+\paragraph{Remaining gaps.} Unresolved, and left open rather than filled:
+\begin{itemize}
+\item a supported yield slope and threshold for rice on a metric convertible to $T_{\text{eff}}$;
+\item any heat slope for rapeseed and Indian mustard;
+\item a \emph{Vigna} parameter set for the bean pairs in India and Myanmar (not assessed);
+\item observed calendars for chickpea and lentil;
+\item full texts of \citet{prasad2002bean}, \citet{prasad2003peanut} and \citet{morrison2002}, which remain closed
+access and are taken from abstracts and from \citet{boote2005}.
+\end{itemize}
+A rice sensitivity run on the Baker-derived candidate would need a new hazard run and rests on a secondary source;
+it was not made.

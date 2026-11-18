@@ -1,0 +1,197 @@
+\section{Extension: elevated CO$_2$ and the quality of the nutrient supply}\label{sec:co2}
+\paragraph{Purpose.} Sections~\ref{sec:nutrition} and \ref{sec:futurenut} count \emph{how much} of a crop is lost.
+Elevated CO$_2$ also changes \emph{what is in} the grain: experiments find lower zinc, iron and protein in several C$_3$
+crops. This section adds that channel as an \textbf{elevated-CO$_2$ experimental stress test} applied to the food supply
+of 2021--23, keeps it separate from the yield channel, and combines the two by multiplication. It is not a calibrated
+forecast for 2050. The index F4 is not altered.
+
+\subsection{Evidence}
+\paragraph{Which experiments.} \citet{myers2014} report meta-analysed changes in the edible portion of crops grown at
+ambient and elevated CO$_2$ in seven FACE (free-air CO$_2$ enrichment) experiments in Japan, Australia and the USA,
+with elevated CO$_2$ of 546--586\,ppm against ambient 363--386\,ppm. Their Extended Data Table~1 uses \emph{only these
+experiments}; two later tables pool earlier FACE studies and then chamber studies, and change several values (wheat
+zinc $-8.8$ and iron $-5.5\%$ when FACE data are pooled). The values in \file{code/config.py} match Extended Data Table~1
+exactly, and that table is the evidence set used here. \citet{smith2018} draw on different inputs: zinc and iron from
+the pooled FACE table, protein from \citet{medek2017}, an effect applied when $p<0.1$, and group averages for crops
+without data (``C$_3$ legumes'', ``C$_3$ plants'', which include groundnut and rapeseed oils). The no-transfer rules
+below exclude those group values. The paper's main text was not available, so only its abstract and supplementary
+tables were read.
+
+\paragraph{Parameter table.} Table~\ref{tab:co2params} gives the effects applied. The primary set is the original
+FACE table for wheat, rice, maize and soybean (\cotwoNPrimary\ crop--nutrient effects, \cotwoNPrimarySig\ significant).
+An extended variant adds \cotwoNExtended\ effects from other sources for chickpea, lentil and rapeseed. Full evidence,
+with every candidate and the reason for rejection, is in \file{docs/co2\_nutrient\_effects.csv}; the selection with
+reasons is \file{docs/co2\_effects\_used.csv}.
+
+\begin{table}[H]\centering\scriptsize
+\caption[CO$_2$ effects applied]{Elevated-CO$_2$ effects on the concentration in the edible part, as published. Primary
+set: Extended Data Table~1 of \citet{myers2014}. The lentil values are derived from table means in the author's thesis
+(wet and dry season are separate treatments, not a confidence interval); the published paper was read at abstract level.
+Signif.: significance as reported.}\label{tab:co2params}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_co2_params.tex}}
+\end{table}
+
+\paragraph{What is not estimated.} Table~\ref{tab:co2matrix} accounts for all \cotwoCellsTotal\ crop--nutrient
+combinations: \cotwoCellsPrimary\ in the primary set, \cotwoCellsExt\ in the extended variant only, \cotwoCellsRev\ reviewed
+but not used, and \cotwoCellsNE\ not estimated because no crop-specific evidence was found.
+\begin{itemize}
+\item \textbf{No transfer between species.} Field-pea effects are not applied to chickpea, lentil or bean, and soybean
+effects are not applied to groundnut or rapeseed. Common bean and groundnut have no usable effect for any counted
+nutrient. The only bean seed data are from a growth chamber at 800\,ppm; the two groundnut studies conflict.
+\item \textbf{Energy and fat are not estimated for any crop.} No source reports a change in food energy, and fat or oil
+data exist only for a few crops under single or conflicting studies.
+\item \textbf{Extracted oils are untouched.} No source quantifies an effect on the energy or fat of extracted oil, so
+seed concentration changes are never applied to the oil items.
+\item \textbf{Reviewed but not used:} chickpea zinc (one open-top-chamber study, rescaled by a compilation assuming
+linearity), rapeseed zinc (a value pooled over wheat, field pea and canola), and several ``no significant change, size
+not reported'' results (chickpea and groundnut iron, rapeseed iron). The last group is recorded as \emph{no
+detectable change}, not as zero.
+\end{itemize}
+
+\begin{table}[H]\centering\small
+\caption[CO$_2$ evidence coverage]{Evidence for CO$_2$ effects on concentration. \textbf{S}: significant effect in the
+primary set; \textbf{n.s.}: nonsignificant estimate in the primary set (applied with its interval); ext.: extended
+variant only; rev.: evidence reviewed but not used; n/e: not estimated (no crop-specific evidence).}\label{tab:co2matrix}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_co2_matrix.tex}}
+\end{table}
+
+\paragraph{Coverage of the supply.} Because only some crops and nutrients are covered, only part of each national
+supply has a CO$_2$ effect applied (Table~\ref{tab:co2cover}). In India the covered crops supply \cotwoIndCovProtein\% of
+protein, \cotwoIndCovZinc\% of zinc and \cotwoIndCovIron\% of iron, and none of the energy or fat. A full nine-crop CO$_2$
+result is therefore unavailable. In the scenarios below, foods without an effect are held unchanged. This is a
+\emph{scenario convention}, not evidence of no biological response.
+
+\begin{table}[H]\centering\small
+\caption[Supply covered by CO$_2$ effects]{Share of national supply to which a CO$_2$ effect is applied (left), and share
+supplied by study-crop foods for which no effect could be estimated, the nutrient having no evidence for that crop (right).
+Percent of the national total of the nutrient, 2021--23.}\label{tab:co2cover}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_co2_supplycov.tex}}
+\end{table}
+
+\subsection{Can the experiment represent the future scenario?}
+Not directly, so no scaling is done.
+\begin{itemize}
+\item The experiments contrast about 380 with about 550\,ppm. Under SSP2-4.5 the CO$_2$ level is 475, 507 and
+537\,ppm in 2040, 2050 and 2060 \citep{ipcc2021annex3,meinshausen2020}, below the experiments' 546--586\,ppm, while the
+2021--23 supply already reflects an observed global mean of about 417\,ppm (NOAA Global Monitoring Laboratory annual means, 2021--23). If the response were linear, the step from
+today's level to 2050 would be about half the experimental step. Linearity is assumed in some compilations
+\citep{terhaar2025}, but the primary sources give no dose--response: \citet{medek2017} found no reliable
+dose-dependent decrease in protein. A remark about the direction of possible overstatement is therefore all that can be
+said; nothing is calculated from it.
+\item The effect is applied once, as a step change, to the whole eligible national supply of each covered crop,
+domestic and imported, as measured in the edible part. Processing (milling, extraction) is not studied.
+\item The FACE sites are in Australia, Japan and the USA; none is in India or the other tropical panel countries.
+\end{itemize}
+Reference levels with sources are in \file{docs/co2\_reference\_levels.csv}.
+
+\subsection{Method}\label{sec:co2method}
+Three scenarios are kept separate, all on the 2021--23 supply.
+\begin{itemize}
+\item \textbf{A. Quantity (yield) effects alone:} the conditional climate yield changes of Section~\ref{sec:futurenut},
+losses only, applied to modelled crop--country pairs through $f=|\Delta Y|\,\text{SSR}^{*}$ (Eq.~\ref{eq:shock}). This is
+a domestic production shock.
+\item \textbf{B. Quality effects alone:} the concentration factor $q_{c,n}=1+p_{c,n}/100$ of Table~\ref{tab:co2params}
+applied to the whole national supply of the covered crop's primary product, domestic and imported, in every country.
+\item \textbf{C. Combined:} multiplicative accounting,
+\begin{equation}\label{eq:co2comb}
+S'_{c,n}=S_{c,n}\,\underbrace{(1-f_c)}_{\text{quantity left}}\;\underbrace{q_{c,n}}_{\text{concentration left}},
+\end{equation}
+never the sum of the two percentage changes. In India the sum of A and B for iron is \cotwoIndAddIron\% and the
+combined result is \cotwoIndCombIron\%. The two differ wherever both act on the same food (independent recomputation: check R15).
+\end{itemize}
+Scopes are not mixed silently: A acts on domestic production of modelled pairs only, B acts on all eligible supply, and
+C applies both to the same food item. Population growth, diet change, price and trade responses are not modelled.
+
+\paragraph{Reference period.} The yield change of A and C is the \emph{hybrid counterfactual}: modelled climate change
+from 1971--2000 to 2041--2060 applied to the 2021--23 supply. Because part of that change has already occurred, a
+present-relative variant (A$'$, C$'$) measures the modelled 2041--2060 loss against the observed 2001--2024 level. Over
+the 59 pairs the mean conditional yield change is \refMeanHybrid\% in the hybrid reference and \refMeanPresent\% in the
+present-relative one; the difference (\refMeanObserved\%, about \refShareOccurred\% of the hybrid change) is the part
+that the observed 2001--2024 climate already contains. Neither is a forecast of 2050 diets.
+
+\paragraph{Envelopes.} The published 95\% limits are used as sensitivity envelopes, with every covered effect set to its
+lower (or upper) limit at once. This is not a joint confidence interval: it assumes perfect correlation across crops and
+ignores all other uncertainty in the model. Effects without a published interval are held at their central value in
+the envelope.
+
+\paragraph{Summary measure.} Nutrient outcomes stay visible. The combined summary is the equal-weighted mean percent
+change of the three nutrients with evidence (protein, zinc and iron), the same equal-nutrient principle as MAR but
+over three nutrients because energy and fat are not estimated. MAR itself is also reported; it is computed over all five
+nutrients with energy and fat unchanged by convention, and its cap at 1 hides reductions that leave supply above the
+requirement.
+
+\subsection{Results}
+Table~\ref{tab:co2india} and Figure~\ref{fig:co2} give India, and Table~\ref{tab:co2countries} the 20 panel countries.
+
+\begin{table}[H]\centering\scriptsize
+\caption[India: yield, quality and combined effects]{India: change in national supply (\%) by scenario, with the
+sensitivity envelope [lower limit, upper limit] in brackets. A and A$'$: climate yield loss only; B: CO$_2$ quality only; C and
+C$'$: combined. ``Mean of three'' is the equal-weighted mean of protein, zinc and iron. Iron NAR is the adequacy ratio
+(baseline \cotwoIndIronNARzero).}\label{tab:co2india}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_co2_india.tex}}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{X03_co2_quality.pdf}
+\caption[CO$_2$ quality, yield and combined effects]{Left: India, change in national protein, zinc and iron supply under
+climate yield loss (A), CO$_2$ concentration change (B) and both (C); whiskers are the published 95\% limits applied
+together. Right: national zinc under the three scenarios for the 20 panel countries. Where A is zero, B and C coincide.}\label{fig:co2}
+\end{figure}
+
+\begin{itemize}
+\item \textbf{India.} The quality channel alone lowers protein by \cotwoIndQualProteinAbs\%, zinc by \cotwoIndQualZincAbs\% and
+iron by \cotwoIndQualIronAbs\%, which is \cotwoIndRatioProtein, \cotwoIndRatioZinc\ and \cotwoIndRatioIron\ times the climate
+yield effect (A). Combined, supply falls by \cotwoIndCombProteinAbs\% (protein), \cotwoIndCombZincAbs\% (zinc) and
+\cotwoIndCombIronAbs\% (iron); iron adequacy falls from \cotwoIndIronNARzero\ to \cotwoIndCombIronNAR\ and MAR by
+\cotwoIndCombMARAbs\ points (envelope \cotwoIndCombHighMARAbs\ to \cotwoIndCombLowMARAbs). Against the present-relative reference, the
+combined iron change is \cotwoIndCombPreIron\%.
+\item \textbf{Quality exposes risk that yield alone misses.} In \cotwoNZeroQtyQual\ of the \cotwoNCountries\ countries the
+climate scenario removes no modelled supply, yet the quality treatment lowers zinc by more than 1\%. In all
+\cotwoNQualGtQtyZinc\ countries the quality effect on zinc exceeds the climate yield effect, and for iron in
+\cotwoNQualGtQtyIron.
+\item \textbf{Exposure follows dependence on the covered staples.} Zinc falls most in \cotwoTopZincCountries\ under the
+combined scenario, countries with large wheat shares and, for Russia, a modelled wheat loss. This follows in part
+arithmetically, since B is the supply-weighted mean of the effects, and says nothing about causes. The world's zinc,
+iron and protein supply would fall by \cotwoWorldZincAbs, \cotwoWorldIronAbs\ and \cotwoWorldProteinAbs\% from quality alone.
+\item \textbf{MAR hides most of it.} MAR falls by more than 0.05 points in only \cotwoNMarDrop\ countries
+(\cotwoMarDropList), those where iron adequacy is already below 1. Zinc adequacy stays at or above \cotwoZincNARmin\ in every
+country after the combined scenario, because the supply exceeds the requirement. Zinc and protein reductions are real
+but are not shortfalls on this measure. No numbers of people with deficient intake are estimated, because that
+requires population and intake distributions that were not used.
+\item \textbf{Sensitivity.} Holding the three nonsignificant effects unchanged changes India's quality-only zinc to
+\cotwoIndSigOnlyZinc\% and protein to \cotwoIndSigOnlyProtein\%. The extended variant with wet- or dry-season lentil
+gives \cotwoIndExtWetZinc\% or \cotwoIndExtDryZinc\% for zinc in India; the dry-season lentil effect is several times the wet.
+\end{itemize}
+
+\begin{table}[H]\centering\scriptsize
+\caption[National zinc, iron and protein changes]{National changes (\%) in the 20 panel countries. A: climate yield
+loss only; B: CO$_2$ quality only; C: combined (hybrid reference, primary set). $\Delta$MAR in points.}\label{tab:co2countries}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_co2_countries.tex}}
+\end{table}
+
+\subsection{Comparison with published studies}
+Only conclusions and mechanisms are compared; our percentages are not set against theirs or against estimates of the
+people affected.
+\begin{itemize}
+\item \textbf{Agreement in direction.} \citet{myers2014} and \citet{smith2018} find lower zinc, iron and protein in
+C$_3$ staples under elevated CO$_2$ and conclude that diets relying on those staples are the most exposed;
+\citet{zhu2018} (rice) and \citet{loladze2014} (a meta-analysis) also report lower concentrations of protein or minerals
+in C$_3$ crops. Our results show the same direction and the same dependence on the covered staples. This is not
+independent validation: the effect sizes are \emph{their} inputs.
+\item \textbf{Crop and nutrient differences matter.} The effects are large and significant for wheat and rice, small
+for soybean protein, and imprecise for maize (four pairs, one site). A single ``C$_3$ grain'' factor would hide this,
+which is why group averages were not used.
+\item \textbf{Where we differ.} \citet{smith2018} model population risk from intake distributions at 550\,ppm in 2050 and
+fill missing crops with group averages; we estimate no populations, use no group averages, and show a supply-weighted
+change for covered crops only. Their 2050 CO$_2$ level exceeds the 507\,ppm of SSP2-4.5. Our national energy and fat
+are unchanged because no evidence supports a change.
+\item \textbf{Yield and quality compound.} Calories and yield alone would miss the quality channel, but the combined
+numbers also depend on the hybrid reference and on an experiment-based step that may overstate the SSP2-4.5 step.
+\end{itemize}
+
+\subsection{Limitations}
+Evidence for common bean and groundnut is absent, for energy and fat absent, and for chickpea, lentil and rapeseed
+thin; several sources are abstract-only. The response is assumed constant across cultivars, soils, nitrogen supply and
+tropical conditions, although rice zinc responses are modified by cultivar and nitrogen \citep{myers2014}. National
+nutrient supply is a mean, not intake. Elevated CO$_2$ would also raise yields of C$_3$ crops, which this extension does not
+include.

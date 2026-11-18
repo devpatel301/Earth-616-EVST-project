@@ -78,6 +78,7 @@ DATASETS = [  # folder, name, version / edition, provider + citation key, use
     ("naturalearth_admin1", "Natural Earth admin-1 states/provinces, 1:10m", "--", "Natural Earth (public domain)", "Telangana mask"),
     ("koppen", "K\\\"oppen--Geiger 1991--2020, 0.5\\textdegree", "Beck et al.\\ 2023", "\\citet{beck2018}", "check of our K\\\"oppen groups"),
     ("india", "Official India/Telangana/Hyderabad files: MoSPI HCES 2023--24, NSS 592 and 594, NFHS-5, CNNS, ICMR-NIN IFCT 2017, Telangana DES", "see Appendix~\\ref{app:indiasources}", "Section~\\ref{sec:india}", "Hyderabad and Telangana analysis"),
+    ("noaa_gml", "NOAA Global Monitoring Laboratory, globally averaged annual mean CO$_2$ (gml.noaa.gov/ccgg/trends)", "file created 9 Oct 2026; retrieved 18 Nov 2026", "NOAA GML (public data; no DOI verified)", "observed CO$_2$ 2021--23 (CO$_2$ extension)"),
 ]
 
 
@@ -91,6 +92,7 @@ def data_sources():
     write("tab_data_sources.tex", longtable("p{4.6cm}p{2.2cm}p{2.3cm}p{3.2cm}rrp{1.6cm}", ["Dataset", "Version", "Source", "Used for", "Files", "MB", "File date"], rows,
                                           "Raw inputs (from \\texttt{docs/DATA\\_MANIFEST.csv}, which lists every file with its SHA-256 checksum).", "tab:datasources"))
     mac("manifestFiles", len(m))
+    mac("manifestFilesAudit", int((m.folder != "noaa_gml").sum()))   # files listed at the 18 Nov audit; the NOAA CO2 file was added on 19 Nov
     mac("manifestGB", f"{m.bytes.sum() / 1e9:.1f}")
 
 
@@ -120,7 +122,7 @@ def ledger():
     add("Groundnut", "$T_{crit}$, $s_T$", f"{f(c['groundnut']['tcrit'], 1)}, {f(c['groundnut']['heat_slope'], 3)}", "\\citet{prasad2003peanut} abstract", "cv.\\ Georgia Green, sunlit chambers 32/22--44/34\\,\\si{\\celsius}, season-long, ambient CO$_2$", "seed yield ($-$14, $-$59, $-$90\\%)", "DERIVED fit (4 points); full text not read", "29.0/0.074 \\citep{boote2005}; +3\\,\\si{\\celsius}; slope $\\times$0.7")
     add("Groundnut", "$K_y$", f(c["groundnut"]["ky"]), "FAO-33 Table 24; FAO-66 Table 1", "--", "seasonal", "published", "--")
     add("Rapeseed-mustard", "$T_{crit}$", f(c["rapeseed"]["tcrit"], 1), "\\citet{morrison2002} abstract", "field, Ottawa, 3 years $\\times$ 3 sowing dates, 3 \\emph{Brassica} species incl.\\ \\emph{B.~juncea}", "accumulated daily $T_{\\max}$ above 29.5\\,\\si{\\celsius} at flowering; seed yield", "PROXY conversion to $T_{eff}$ with an assumed 12\\,\\si{\\celsius} diurnal range", "$\\pm$1--3\\,\\si{\\celsius}")
-    add("Rapeseed-mustard", "$s_T$", f(c["rapeseed"]["heat_slope"], 2), "borrowed: \\citet{deryng2014} spring-wheat span (10\\,\\si{\\celsius})", "--", "--", "PROXY (no published slope found)", "0.07, 0.18")
+    add("Rapeseed-mustard", "$s_T$", f(c["rapeseed"]["heat_slope"], 2), "borrowed: \\citet{deryng2014} spring-wheat span (10\\,\\si{\\celsius})", "--", "--", "PROXY: no published slope found; unsupported (Section~\ref{sec:parevidence})", "0.07, 0.18")
     add("Rapeseed-mustard", "$K_y$", f(c["rapeseed"]["ky"]), "FAO-56 Rev.1 Table 8.7 p.~279 \\citep{fao56rev1}", "no source stated by FAO; field 0.87 \\citep{istanbulluoglu2010}", "seasonal", "published, origin not traceable", "0.85, 0.95")
     for k in CROPS:
         add(LAB[k], "$K_c$ ini, mid, end; $\\bar K_c$", ", ".join(f(x) for x in c[k]["kc"]) + f"; {season_kc(k):.2f}", "FAO-56 Tables 11--12 \\citep{fao56}" + ("; stages: lentil arid row" if k == "chickpea" else "; stages: Rev.1 Table 6.11 GDD shares" if k == "rapeseed" else ""),
@@ -133,8 +135,8 @@ def ledger():
     add("All", "Energy, protein, fat requirement", "ADER; 10\\%, 15\\% of energy", "FAOSTAT food-security indicators; \\citet{who2003}", "country- and year-specific energy requirement", "population average (energy); lower bounds of goals", "published", "--")
     add("All", "Zn, Fe composition", "per FBS item", "USDA SR Legacy \\citep{usda2019}; \\texttt{code/fbs\\_usda\\_map.csv}", "raw, unprocessed form (whole grain; primary weight)", "mg/100 g", "mapping choice (overstates Zn, Fe for refined cereals, meat)", "--")
     write("tab_ledger.tex", longtable("p{1.5cm}p{1.6cm}p{1.6cm}p{2.8cm}p{3.0cm}p{2.3cm}p{2.0cm}p{1.6cm}",
-                                      ["Crop", "Parameter", "Value", "Source and location", "Experiment / conditions", "Metric and outcome", "Status", "Alternatives tested"], R,
-                                      "Parameter and source ledger. Values are read from \\texttt{code/config.py}. Status: published = value printed in the source; DERIVED = our arithmetic or fit on published values; PROXY = value borrowed from another crop, outcome or metric. Read levels and verbatim quotes: \\texttt{docs/literature\\_verification\\_new\\_crops.md}.", "tab:ledger"))
+                                      ["Crop", "Parameter", "Value", "Source and location", "Experiment / conditions", "Metric and outcome", "Status", "Exploratory perturbations run"], R,
+                                      "Parameter and source ledger. Values are read from \\texttt{code/config.py}. The last column lists perturbations we ran; they are exploratory, not literature-supported ranges (Section~\ref{sec:parevidence}). Status: published = value printed in the source; DERIVED = our arithmetic or fit on published values; PROXY = value borrowed from another crop, outcome or metric. Read levels and verbatim quotes: \\texttt{docs/literature\\_verification\\_new\\_crops.md}.", "tab:ledger"))
 
 
 def crop_mapping():

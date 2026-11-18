@@ -1,0 +1,127 @@
+\section{Extension: do published future-impact studies point the same way?}\label{sec:futurelit}
+\paragraph{Purpose.} Section~\ref{sec:checks} compared our results with \litN\ published findings for a few crops. This
+section asks, for \emph{every} one of the nine crops, what peer-reviewed future-impact research exists, what it
+concludes, and whether our conclusion on the same crop and place points the same way. Coverage is complete when every
+crop is accounted for, including crops for which no suitable study was found. It is not a score of accuracy.
+
+\subsection{Method}
+\begin{itemize}
+\item \textbf{Studies.} \litNRows\ study--crop rows from \litNStudies\ publications, searched for each crop with
+priority to panel countries and to the 2040s--2060s. \litNFull\ rows were read in full text or supplement and
+\litNAbstract\ at abstract level only. Each row records full citation, DOI, read level, locator, period, scenario,
+climate models, CO$_2$ and adaptation treatment, irrigation assumption, outcome measure, and a paraphrased conclusion
+(\file{docs/future\_literature\_sources.csv}; quotations in \file{docs/future\_literature\_sources.md}). Every DOI was
+resolved at Crossref.
+\item \textbf{Our side.} For the panel countries a study covers, the direction of our conditional yield change
+(literature damage accounting, with the present-relative variant and the empirical cross-check), the direction of the
+F4 change and whether heat or water drives it are computed from the saved results
+(\file{code/30\_future\_literature.py}). Where a study covers none of our panel countries, our whole panel is shown and
+flagged.
+\item \textbf{Comparison.} Directions, mechanisms and conclusions only. Yield percentages from different metrics,
+scenarios and periods are never set side by side. A verdict (consistent, partly consistent, different, not directly
+comparable) is a judgement that the direction and stated mechanism of the paper's conclusion do or do not match ours.
+The verdicts were assigned in this audit and have not been reviewed by teammates.
+\item \textbf{Differences are recorded, not forced.} Studies differ from our setup in region, period, scenario,
+climate models, irrigation, adaptation, CO$_2$ treatment and outcome. \litNCoTwoIncl\ of the \litNRows\ rows include
+CO$_2$ fertilisation (alone or with a no-CO$_2$ run) and \litNAdaptIncl\ include adaptation; our index includes
+neither.
+\item \textbf{Shared inputs.} Three rows come from \citet{deryng2014}, whose thresholds are our wheat, maize and soybean
+parameters, so agreement with them is not independent evidence. \citet{zhao2017} is used as a benchmark elsewhere
+(Section~\ref{sec:checks}).
+\end{itemize}
+
+\begin{table}[H]\centering\scriptsize
+\caption[Future-literature coverage by crop]{Coverage of future-impact literature by crop. ``Full / abstract'' counts
+rows by read level. Verdict columns: consistent / partly consistent / different / not directly comparable. The last
+column lists panel countries for which no verified future study was found.}\label{tab:litcoverage}
+\adjustbox{max width=\linewidth}{\input{nine_crop/generated/ext_lit_coverage.tex}}
+\end{table}
+
+Of the \litNPairs\ crop--country pairs of the panel, \litNPairsNoStudy\ have no verified future study at all. Counting
+the verdicts (\litNCons\ consistent, \litNPartly\ partly consistent, \litNDiff\ different, \litNNC\ not directly
+comparable) says only how the evidence is distributed; it does not measure the model's accuracy.
+
+\subsection{Crop by crop}
+\paragraph{Wheat.} Wheat has the strongest and most consistent support. \citet{zhao2017} find a negative temperature
+effect with every method, larger for India and Russia than for the USA and smallest for China. Our conditional yield
+change is negative in all four countries and also smallest in China. For India, \citet{nareshkumar2014wheat} project a
+6--23\% loss by 2050 even with CO$_2$ fertilisation, and \citet{chandran2023} find a 7--9\% loss from a shortened crop
+cycle; both agree with a heat-driven loss for India. \citet{asseng2015} give about $-6\%$ per $^\circ$C
+(abstract only). Two studies only partly agree. \citet{jagermeyr2021} project global wheat gains with CO$_2$
+fertilisation, losses in South Asian spring wheat and gains in the North China Plain and northern winter wheat: our
+losses for China and the USA conflict with that pattern. \citet{deryng2014} find the same loss as ours without CO$_2$
+but gains with it. In Russia the literature stresses temperature while our change is mainly water-driven, a mechanism
+difference noted earlier \citep{lobell2011}.
+
+\paragraph{Rice.} Rice is the weakest spot of our setup. \citet{zhao2017} find large losses for India (about
+$-6.6\%$ per $^\circ$C) but small averaged impacts for China and Bangladesh. Ours agrees for China and Bangladesh and
+gives about zero for India on the main route, because monthly flowering temperature rarely exceeds the 35\,$^\circ$C
+threshold; our empirical cross-check ($-11.9\%$) agrees with them. \citet{soora2013} project a 7\% loss for irrigated rice
+by 2050 and only a marginal loss for rainfed rice; irrigated area carries no water stress in our index, so we cannot
+reproduce the irrigated result. \citet{jagermeyr2021} and \citet{chandran2023} find gains with CO$_2$ fertilisation and
+a result spanning zero without it. A low rice score here therefore reflects what the model cannot see (hot days,
+irrigation) as much as low exposure.
+
+\paragraph{Maize.} Studies agree on losses \citep{zhao2017,jagermeyr2021,tigchelaar2018,zilli2020}. Our signs match
+for the USA, Brazil and Ukraine on the main route. For China and India the main route gives small gains, because our
+maize score is water-dominated and the future is wetter there, whereas the temperature-only studies show losses; our
+empirical cross-check matches them. \citet{tigchelaar2018} use the method closest to ours (delta change, no CO$_2$,
+no adaptation) and their country losses are mirrored by our empirical route in all five countries.
+\citet{jagermeyr2021} note that MRI-ESM2, our only climate model, gives the least pessimistic crop impacts of the
+models they used, so our losses are likely at the mild end of the range.
+
+\paragraph{Soybean.} The global signal is weak (confidence intervals include zero in \citealt{zhao2017}; an interquartile
+range from $-21$ to $+17\%$ in \citealt{jagermeyr2021}), with losses in the USA and gains in parts of China, which ours
+reproduces. For Indian soybean \citet{walikar2018} report small declines from a shorter crop duration, while ours is
+about zero to slightly positive, a difference we cannot attribute to a single cause. \citet{zilli2020} find Brazilian
+losses, concentrated in the northern Cerrado, where ours is near zero on the main route.
+
+\paragraph{Chickpea.} Only \citet{singh2014chickpea} and \citet{abera2026} offer future simulations, none for five of
+the seven panel countries. They find gains for Ethiopia, as ours does, and site-dependent changes in India that
+include CO$_2$ effects. Neither shows a uniform large loss from climate alone; our main route is near zero for India
+and our empirical route negative.
+
+\paragraph{Lentil.} \citet{qian2026} project Prairie lentil gains of about 20--28\% in the 2050s from CO$_2$ and
+warmth with adjusted planting dates (abstract only); ours is a small loss, a difference that coincides with the
+CO$_2$ and adaptation treatment but cannot be separated from other differences. For India, the West Bengal studies
+\citep{chandran2022,chandran2023} give losses of 12--31\% attributed to a shortened reproductive phase, where ours is
+small and water-driven. These come from one site and one research group.
+
+\paragraph{Common bean.} For Tanzania, suitability studies \citep{rippke2016,hummel2018} find beans the most exposed
+staple, from heat in the north-west and rainfall decline in the east, and our large Tanzanian loss with equal heat and
+water shares matches both direction and mechanism. For Brazil, \citet{antolin2021} project gains (with CO$_2$) where ours
+is a large heat-driven loss, and \citet{heinemann2017} stress drought frequency, a mechanism ours shows less clearly.
+No study covers the Asian beans that dominate the FAOSTAT item in India and Myanmar (Section~\ref{sec:parevidence}).
+
+\paragraph{Groundnut.} \citet{kadiyala2021} find gains where rainfall rises and losses where warming hastens maturity,
+a mechanism that matches our India result, a small gain from a wetter season. The West Bengal studies
+\citep{chandran2022,chandran2023} find losses of up to 48\% at one site; ours differs. For Nigeria,
+\citet{rippke2016} find limited transformation pressure, which ours does not contradict.
+
+\paragraph{Rapeseed-mustard.} Studies of Indian mustard \citep{nareshkumar2016mustard,boomiraj2010} find losses driven
+by maximum temperature, which matches our India result in direction and mechanism. This agreement cannot be read as
+support for our rapeseed parameters, because the heat slope is unsupported (Section~\ref{sec:parevidence}). For Canada,
+\citet{qian2019} find losses with CO$_2$ fixed and gains with CO$_2$; ours matches the first. The European study
+\citep{pullens2019} reports frost and drought risk types rather than yield and is not directly comparable.
+
+\subsection{What the comparison shows and what it cannot}
+\begin{itemize}
+\item \textbf{Supportive.} Direction and mechanism agree for wheat in India, bean in Tanzania, mustard in India and
+chickpea in Ethiopia, and the weak soybean signal is also seen elsewhere.
+\item \textbf{Challenging.} \litNChallenge\ rows report gains or mixed outcomes, mostly where CO$_2$ fertilisation or
+adaptation is included: Canadian lentil, Brazilian bean, wheat in China and the USA, rice in South Asia, and
+groundnut under one of two climate models. Where studies find losses and ours does not (Indian soybean and groundnut,
+Indian rice), the cause is more often missing mechanisms: season shortening, reproductive-phase damage, hot days and
+irrigation.
+\item \textbf{A low score can hide mechanisms.} Rice, soybean, lentil and groundnut scores are low partly because the
+index sees only monthly heat above a threshold and rainfed deficit. Low climate-explained yield variability
+\citep{ray2015} is a different outcome from low vulnerability and is not treated as evidence for it.
+\item \textbf{National averages hide winners and losers.} Several studies find opposite signs within one country
+(the North China Plain against South Asia, or Indian basins against each other); our values are national.
+\item \textbf{Limits.} Differences in CO$_2$, adaptation, models, scenarios and outcome measures coincide, so a
+disagreement cannot be assigned to one cause. \litNAbstract\ of the \litNRows\ rows are read at abstract level only,
+and the West Bengal rows come from one site. Agreement with a study that supplies our inputs is not independent validation. Leads that could not be used
+(Moura da Silva 2021 for Brazilian soybean, Boomiraj 2013, Singh 2014 groundnut) are listed in
+\file{docs/future\_literature\_sources.md}.
+\end{itemize}
+Full row-level comparison: Table~\ref{tab:litrows} in Appendix~\ref{app:ext}.

@@ -269,6 +269,8 @@ def main():
         lc_agree = lc.agreement.str.startswith("agree").sum()
         mac("litN", len(lc)); mac("litAgree", int(lc_agree)); mac("litDiffer", int(lc.agreement.str.startswith("differ").sum()))
         mac("litPartial", int(lc.agreement.str.startswith("partial").sum() + lc.agreement.str.startswith("sign").sum()))
+        mac("litOther", int(len(lc) - lc_agree - lc.agreement.str.startswith("differ").sum()
+                            - lc.agreement.str.startswith("partial").sum() - lc.agreement.str.startswith("sign").sum()))
 
     # ---- run comparison / worked example ----
     if os.path.exists(P("compare_crop_rank_runs.csv")):

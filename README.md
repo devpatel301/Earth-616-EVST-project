@@ -21,7 +21,10 @@ SSP2-4.5), plus the nutrient consequences of yield losses. The mid-evaluation (f
 | [docs/final_slides.pdf](docs/final_slides.pdf) | Final slide deck |
 | [docs/final_appendix.pdf](docs/final_appendix.pdf) | Short stand-alone appendix (equations, full tables); its content is also in the report |
 | [docs/END_EVAL_RESULTS_REGISTER.md](docs/END_EVAL_RESULTS_REGISTER.md) | Commitments C1–C10 → evidence, results and limitations register |
-| [docs/DECISION_REGISTER_END_EVAL.md](docs/DECISION_REGISTER_END_EVAL.md) | Every end-evaluation method/scope decision (E1–E19) with its reason and test |
+| `docs/co2_nutrient_effects.csv/.md`, `co2_effects_used.csv`, `co2_reference_levels.csv` | CO2 nutrient-quality evidence: every candidate effect with read level and locator; our selection with reasons; reference CO2 levels |
+| `docs/future_literature_sources.csv/.md`, `future_literature_assessment.csv` | 39 future-impact study rows (24 publications) covering all nine crops, with quotes, read level and our verdicts |
+| `docs/parameter_evidence_register.csv`, `parameter_evidence_audit.md` | Evidence register of every crop parameter used (status, applicability, replacement, treatment) and its audit |
+| [docs/DECISION_REGISTER_END_EVAL.md](docs/DECISION_REGISTER_END_EVAL.md) | Every end-evaluation method/scope decision (E1–E24) with its reason and test |
 | [docs/input_register.csv](docs/input_register.csv) / [.md](docs/input_register.md) | Nine-crop input register (items, panels, maps, calendars, parameters, mappings, proxies, sign-off) |
 | [docs/literature_verification_new_crops.md](docs/literature_verification_new_crops.md) | Source checks (quotes, pages, read level) for the five new crops' parameters; section 8 = follow-up checks of the 18 Nov 2026 audit |
 | [docs/literature_comparison_sources.md](docs/literature_comparison_sources.md) | Published findings used for the comparison with our results |
@@ -54,7 +57,7 @@ run comparisons → figures → India/Hyderabad → literature comparison → co
 (`25`) → LaTeX tables (`19`, `26`) → PDFs. A failing script, check or compile stops the run. The run is selected by the environment variable
 `CNVI_RUN` (`nine_crop` default, or `four_crop`).
 
-**Raw data** (≈3.4 GB, 74 files, not in git; listed with checksums in `docs/DATA_MANIFEST.csv`): WorldClim 2.1 monthly
+**Raw data** (≈3.4 GB, 75 files, not in git; listed with checksums in `docs/DATA_MANIFEST.csv`): WorldClim 2.1 monthly
 CRU-TS 4.09 (prec, tmax, tmin 1970–2024), WorldClim 1970–2000 normals, WorldClim CMIP6 MRI-ESM2-0 SSP2-4.5
 2041–2060, SPAM 2010, Sacks et al. 2010 calendars, FAOSTAT (production, food balances old and new, food
 security indicators, Supply Utilization Accounts), USDA FoodData Central SR Legacy, Natural Earth admin-0 and admin-1, the official India/Telangana survey files
@@ -94,6 +97,14 @@ numbers exactly. **Intermediate data** (`data/work`, ≈10 GB) are regenerated b
 | `25_parameter_fits.py` | Refits the derived new-crop heat thresholds/slopes from the published data and checks them against `config.py` |
 | `26_report_tables.py` | Report tables and macros: data sources, parameter ledger, crop mapping, worked examples, checks, audit, India shares |
 | `27_compare_rerun.py` | Audit tool (not in `run_all`): compares a fresh run file by file with a preserved copy of the previous outputs |
+| `ext_common.py` | Shared accounting of the research extensions (item-level supply, SUA removal from the parent FBS item, SSR*, diversity measures) |
+| `28_co2_quality.py` | Elevated-CO2 nutrient-concentration stress test: quantity, quality and combined (multiplicative), envelopes, coverage |
+| `29_diversity_losses.py` | National food-source diversity (Shannon, effective number, top share) and adequacy after crop losses, scenarios A-D |
+| `30_future_literature.py` | Future-impact literature coverage for all nine crops; our side computed from the saved results |
+| `31_parameter_evidence.py` | Evidence-screened view of the index (V0, V1, V2) from the parameter evidence register |
+| `32_extension_checks.py` | 37 synthetic and real checks of the extensions; stops the run on a failure |
+| `33_extension_tables.py` | Tables, macros and figures of the extensions for the report |
+| `run_extensions.ps1` | Reruns only 28-33 from the verified results (seconds, no climate processing) |
 
 ## LaTeX
 
@@ -101,6 +112,33 @@ The three end-evaluation documents (`docs/final_report.tex`, `final_slides.tex`,
 and use standard packages (`iftex` selects `inputenc`/`fontenc` under pdfLaTeX); they are compiled here with Tectonic.
 With pdfLaTeX run `pdflatex` / `bibtex` / `pdflatex` twice inside `docs/`. This pdfLaTeX route has **not** been run on
 this machine (no pdfLaTeX installed); only the Tectonic compile is tested.
+
+## Research extensions (19 Nov 2026)
+
+Four extensions were added after the 18 Nov audit; they only read the verified baseline results and change none of
+them. Checked with `git diff`: of the tracked files in `data/processed/`, only `literature_comparison.csv` changed (the
+text of the Ray et al. and Myers rows); every other baseline result is byte-identical, and the extensions add 17 new files.
+- **Parameter evidence** (report section "how well are the crop parameters supported"): 97-row register; the rice and
+  rapeseed heat slopes are unsupported, so their F4 is unavailable in the evidence-screened view; wheat stays first
+  among the seven crops with supported parameters. Existing robustness ranges are labelled exploratory perturbations.
+- **Future literature**: all nine crops accounted for (39 rows, 24 publications; gaps and failed leads listed).
+- **CO2 and nutrient quality**: an elevated-CO2 *experimental stress test* (not a 2050 forecast) with partial coverage:
+  12 primary crop-nutrient effects (Myers 2014 original FACE table); energy, fat, bean and groundnut are not estimated.
+- **Diversity after losses**: whole-food-supply Shannon diversity beside adequacy; losing part of a dominant staple can
+  raise the effective number of sources while total supply falls.
+
+Rerun alone: `powershell -ExecutionPolicy Bypass -File .\run_extensions.ps1` (from `code\`); they are also in
+`run_all.ps1`. **Not done / open:** teammate review of parameter statuses, CO2 evidence selection and literature
+verdicts; pdfLaTeX test; slides not updated (see below); CO2 evidence for bean, groundnut, energy and fat; a supported
+rice yield slope, any rapeseed heat slope, a *Vigna* parameter set.
+
+**Presentation statements that will need updating later (`docs/final_slides.tex`, not touched; it still compiles from
+the same macros):** the "Result 1: wheat is the most vulnerable crop" slide needs its condition (first in the full
+index, which uses proxies; first among the seven crops with supported parameters; rice and rapeseed not established);
+the literature slide's counts changed because the Ray et al. row was reclassified (7 of 12 "agree" instead of 8); the
+slide that says the CO2 nutrient effect is "shown only as an extra pathway" is superseded by the stress test (partial
+coverage, not a forecast); and any statement that the diversity of supply measures dietary quality. The slides do not
+present the new material (parameter audit, future-literature coverage, CO2 quality, diversity after losses).
 
 ## Reproduction status (18 Nov 2026)
 

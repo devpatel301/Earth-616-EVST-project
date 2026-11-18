@@ -38,7 +38,7 @@ and the generated LaTeX macros; none is typed by hand in the documents.
 
 | Conclusion | Survives | Evidence |
 |---|---|---|
-| Wheat is the most vulnerable crop | Yes | first in all but two of 46 robustness rankings of F4 (the exceptions are the empirical-sensitivity-only tests); first in ~92% of 2,000 random weightings |
+| Wheat is the most vulnerable crop | Yes, conditional on proxies (third audit: also first among the seven crops with supported parameters; rice and rapeseed not established) | first in all but two of 46 robustness rankings of F4 (the exceptions are the empirical-sensitivity-only tests); first in ~92% of 2,000 random weightings |
 | Order of positions 2-9 | No (moves with weighting and pulse parameters) | `index_robustness.csv` |
 | Vulnerability rises mainly through heat by 2041-2060 | Yes for the sum over pairs (~72 % heat); wheat in Russia is mainly water-driven, wheat in the USA and bean in Tanzania shared heat/water (earlier text said "Russia/USA water-driven": corrected 18 Nov) | `future_components.csv` |
 | Iron is the nutrient closest to shortfall | Yes under the main requirement; no under the 15%-bioavailability requirement | `adequacy.csv` |
@@ -51,7 +51,7 @@ and the generated LaTeX macros; none is typed by hand in the documents.
 2. Common-bean threshold (one Andean variety, chamber data, FAO "Beans, dry" includes tropical *Vigna* pulses in India and Myanmar) sets the heat reference for all crops.
 3. SPAM 2010 maps: Telangana's paddy area is about three times larger in 2023-24 state statistics.
 4. Pigeon pea (tur) and moong are major in Hyderabad's diet but outside the nine crops.
-5. One climate model, one scenario; no CO2 fertilisation or adaptation.
+5. One climate model, one scenario; no CO2 fertilisation or adaptation (a separate CO2 nutrient-quality stress test is in the third audit below).
 6. HCES and NSS describe state rural/urban households, not Hyderabad city; NFHS has a district fact sheet.
 7. Not verified in the sources: Prasad 2002/2003, Morrison and Stewart 2002 full texts; the origin of FAO-56 Rev.1's rapeseed K_y; see `docs/literature_verification_new_crops.md` section 6.
 8. Not done: the team rehearsal; reviewer sign-off; a test of the documents with `pdflatex` itself (see README). (The climate steps were re-run from raw inputs in the second audit.)
@@ -116,3 +116,32 @@ Unchanged by the re-run: every `index_*`, `future_components/crop/group`, `adequ
 - updating the slide deck to the report;
 - correcting reference [16] in the submitted literature review;
 - optional pdfLaTeX test.
+
+## Third audit: research extensions (parameter evidence, future literature, CO2 quality, diversity), 19 Nov 2026
+
+This section is new; the second audit above is kept as the record of 18 Nov 2026 and is not rewritten. The extensions
+read the verified baseline results and change none of them. Report: `docs/final_report.pdf` (new sections after the
+India/Hyderabad section; appendix "Research-extension evidence"). Decisions E20-E24 in `DECISION_REGISTER_END_EVAL.md`.
+
+**Baseline unchanged.** No number of the nine-crop index, the future change, the -10% shock or the adequacy tables
+changed. Text changes only: wheat's first place is now stated as conditional on proxies; the robustness ranges are
+labelled exploratory perturbations; the Ray et al. row of the literature comparison was reclassified (not directly
+comparable); the rice K_y source text in `config.py` and the ledger no longer implies an FAO value.
+
+| Extension | Implemented | Main result | Unresolved |
+|---|---|---|---|
+| 2 Parameter evidence | `31_parameter_evidence.py`, `docs/parameter_evidence_register.csv` (97 rows), `parameter_evidence_audit.md` | Published 38, derived 18, borrowed 13, assumption 27, unsupported 1 (rapeseed heat slope); rice heat slope (fertility) also unsupported as a yield slope. Evidence-screened view: rice and rapeseed unavailable; bean India and Myanmar flagged (Vigna). Wheat first in V0, V1 (7 crops) and V2 under both weightings. Heat is 0.02% (rice) and 1.4% (rapeseed) of present F4 but 55% of rapeseed's projected change. | No supported rice yield slope on T_eff; no Brassica slope; no Vigna set; Prasad 2002/2003 and Morrison and Stewart 2002 full texts; Baker-derived rice candidate not computed |
+| 1 Future literature | `30_future_literature.py`, `docs/future_literature_sources.csv/.md`, `future_literature_assessment.csv` | 39 rows, 24 publications, 26 read in full, 13 abstract only; all nine crops accounted for; verdicts 12 consistent, 21 partly, 5 different, 1 not comparable (a description of the evidence, not an accuracy score). 29 of 59 pairs have no verified study. Studies with CO2 fertilisation or adaptation find gains where we find losses (Canada lentil, Brazil bean). MRI-ESM2 described by one study as the least pessimistic model. | Verdicts not reviewed by teammates; Qian 2026 and Singh 2014 abstract only; no study for most Australian, Turkish, Russian, USA and Chinese pulse pairs |
+| 3 CO2 quality | `28_co2_quality.py`, `docs/co2_nutrient_effects.csv/.md`, `co2_effects_used.csv`, `co2_reference_levels.csv` | Stress test, not a forecast. 12 primary effects (Myers 2014 original FACE table; 9 significant). India: quality only protein -2.96%, zinc -3.85%, iron -2.24%; climate yield only -1.55, -1.72, -2.03; combined -4.45, -5.44, -4.20 (multiplicative); MAR -0.75 points. Zinc falls more from quality than from the climate yield channel in all 20 panel countries. MAR hides it (zinc adequacy stays at or above 1). | Energy, fat, bean, groundnut not estimated; chickpea, lentil, rapeseed thin or extended-only; no dose-response, so no scaling to SSP2-4.5 (507 ppm in 2050 vs 546-586 ppm in the experiments); FACE sites not in India |
+| 4 Diversity after losses | `29_diversity_losses.py` | Whole-supply Shannon over FBS items; SUA chickpea and lentil removed from the parent item. A loss raises the effective number of sources exactly when the item share exceeds 1/N_eff (predicts the sign in 142 of 142 single-item cases). India: wheat -10% lowers iron 2.95% and raises N_eff(iron) by 0.58; CO2+climate scenario iron -4.20%, N_eff +0.49. | Loss-only; no substitution, trade or household response; N_eff depends on the FBS classification |
+
+**Checks.** `32_extension_checks.py`: 37 of 37 pass (10 synthetic edge cases for accounting; real outputs against the
+established tables: baseline totals, no FBS/SUA double counting, non-negative supply, scenario A equals the existing
+-10% table, multiplicative quantity x quality by independent recomputation, ordered envelopes, missing parameters stay
+missing, reference periods, DOIs in `refs.bib`).
+
+**Human review tasks (not implementation):** teammate review of parameter statuses, the CO2 evidence selection and the
+literature verdicts; decision on whether to adopt any rice or rapeseed heat parameter once evidence exists; pdfLaTeX
+test; correct reference [16] of the submitted literature review (earlier item).
+
+**Presentation items (slides not touched):** see README, "Presentation statements that will need updating later".
